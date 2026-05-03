@@ -669,3 +669,25 @@ a {
     font-size: 20px;
   }
 }
+
+.form-message {
+  margin-top: 16px;
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.form-message--success {
+  background: #e8f7ee;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.form-message--error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}

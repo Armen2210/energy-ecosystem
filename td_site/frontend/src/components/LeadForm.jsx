@@ -1,6 +1,10 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 function LeadForm() {
+  const fileInputRef = useRef(null)
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formMessage, setFormMessage] = useState(null)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -14,6 +18,8 @@ function LeadForm() {
   const handleChange = (e) => {
     const { name, value, files } = e.target
 
+    setFormMessage(null)
+
     setFormData((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
@@ -23,6 +29,46 @@ function LeadForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (isSubmitting) {
+      return
+    }
+    /*
+      ОБЯЗАТЕЛЬНЫЕ ПОЛЯ
+    */
+
+    if (!formData.name.trim()) {
+      setFormMessage({ type: "error", text: "Укажите имя" })
+      return
+    }
+
+    if (!formData.phone.trim()) {
+      setFormMessage({ type: "error", text: "Укажите телефон" })
+      return
+    }
+
+    /*
+      ПРОВЕРКА EMAIL
+      Сейчас отключена.
+
+      Чтобы снова сделать email обязательным —
+      убери комментарии ниже.
+    */
+
+    /*
+    if (!formData.email.trim()) {
+      setFormMessage({ type: "error", text: "Укажите email" })
+      return
+    }
+
+    if (!formData.email.includes("@")) {
+      setFormMessage({ type: "error", text: "Укажите корректный email" })
+      return
+    }
+    */
+
+    setIsSubmitting(true)
+    setFormMessage(null)
+
     const data = new FormData()
 
     data.append("name", formData.name)
@@ -30,6 +76,7 @@ function LeadForm() {
     data.append("phone", formData.phone)
     data.append("email", formData.email)
     data.append("message", formData.message)
+    data.append("source_page", window.location.pathname)
 
     if (formData.file) {
       data.append("uploaded_file", formData.file)
@@ -41,24 +88,54 @@ function LeadForm() {
         body: data,
       })
 
+      if (response.status === 409) {
+        setFormMessage({
+          type: "error",
+          text: "Похожая заявка уже была отправлена недавно.",
+        })
+        return
+      }
+
       if (!response.ok) {
         throw new Error("Ошибка отправки")
       }
 
-      alert("Заявка успешно отправлена")
+
+
+      setFormData({
+        name: "",
+        company: "",
+        phone: "",
+        email: "",
+        message: "",
+        file: null,
+      })
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
+
+      setFormMessage({
+        type: "success",
+        text: "Заявка успешно отправлена. Мы свяжемся с вами.",
+      })
 
     } catch (error) {
       console.error(error)
-      alert("Ошибка при отправке формы")
+
+      setFormMessage({
+        type: "error",
+        text: "Ошибка при отправке формы. Попробуйте снова.",
+      })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
     <section className="lead-form">
       <div className="container">
-
         <div className="lead-form__box">
-
           <div className="lead-form__content">
             <h2 className="section__title">
               Получить предложение
@@ -71,13 +148,13 @@ function LeadForm() {
           </div>
 
           <form className="form" onSubmit={handleSubmit}>
-
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Ваше имя"
+              autoComplete="name"
             />
 
             <input
@@ -86,6 +163,7 @@ function LeadForm() {
               value={formData.company}
               onChange={handleChange}
               placeholder="Компания"
+              autoComplete="organization"
             />
 
             <input
@@ -94,6 +172,7 @@ function LeadForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Телефон"
+              autoComplete="tel"
             />
 
             <input
@@ -102,6 +181,7 @@ function LeadForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
+              autoComplete="email"
             />
 
             <textarea
@@ -113,6 +193,7 @@ function LeadForm() {
             ></textarea>
 
             <input
+              ref={fileInputRef}
               type="file"
               name="file"
               onChange={handleChange}
@@ -122,12 +203,17 @@ function LeadForm() {
             <button
               type="submit"
               className="btn btn--primary"
+              disabled={isSubmitting}
             >
-              Отправить заявку
+              {isSubmitting ? "Отправляем..." : "Отправить заявку"}
             </button>
 
+            {formMessage && (
+              <div className={`form-message form-message--${formMessage.type}`}>
+                {formMessage.text}
+              </div>
+            )}
           </form>
-
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ class Lead(models.Model):
     name = models.CharField(max_length=255)
     company = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
     message = models.TextField(blank=True)
 
     uploaded_file = models.FileField(
