@@ -117,7 +117,7 @@ function LeadForm() {
 
       setFormMessage({
         type: "success",
-        text: "Заявка успешно отправлена. Мы свяжемся с вами.",
+        text: "Спасибо! Мы получили вашу заявку. Мы свяжемся с вами в ближайшее время.",
       })
 
     } catch (error) {
@@ -191,6 +191,10 @@ function LeadForm() {
               onChange={handleChange}
               placeholder="Описание задачи"
             ></textarea>
+
+            <label className="form__file-label">
+              Прикрепите ТЗ / спецификацию (если есть)
+            </label>
 
             <input
               ref={fileInputRef}
