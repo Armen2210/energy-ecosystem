@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -28,7 +29,12 @@ def build_lead_email_message(lead):
     )
 
 
+from rest_framework.permissions import AllowAny
+
 class LeadCreateAPIView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     parser_classes = (
         MultiPartParser,
         FormParser,
