@@ -29,7 +29,7 @@ def build_lead_email_message(lead):
     )
 
 
-from rest_framework.permissions import AllowAny
+
 
 class LeadCreateAPIView(APIView):
     authentication_classes = []
