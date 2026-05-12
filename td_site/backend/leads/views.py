@@ -2,10 +2,11 @@ import logging
 from datetime import timedelta
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -28,7 +29,12 @@ def build_lead_email_message(lead):
     )
 
 
+
+
 class LeadCreateAPIView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     parser_classes = (
         MultiPartParser,
         FormParser,
@@ -72,13 +78,17 @@ class LeadCreateAPIView(APIView):
 
             logger.info("Lead created: id=%s, phone=%s", lead.id, lead.phone)
 
-            send_mail(
+            email = EmailMessage(
                 subject="Новая заявка с сайта ТД Энергоэффект",
-                message=build_lead_email_message(lead),
+                body=build_lead_email_message(lead),
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.MANAGER_EMAIL],
-                fail_silently=True,
+                to=[settings.MANAGER_EMAIL],
             )
+
+            if lead.uploaded_file:
+                email.attach_file(lead.uploaded_file.path)
+
+            email.send(fail_silently=True)
 
             return Response(
                 LeadSerializer(lead).data,
