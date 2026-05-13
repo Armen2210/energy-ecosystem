@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import logo from "../assets/logo.png"
 
 function Header() {
@@ -9,61 +9,70 @@ function Header() {
     setIsMenuOpen(false)
   }
 
+  const navLinkClass = ({ isActive }) =>
+    isActive ? "nav__link nav__link--active" : "nav__link"
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__inner">
-
-          <NavLink to="/" className="logo" onClick={closeMenu}>
+          <Link to="/" className="logo" onClick={closeMenu} aria-label="ТД Энергоэффект">
             <img src={logo} alt="ТД Энергоэффект" />
-          </NavLink>
+          </Link>
+
+          <nav className={isMenuOpen ? "nav nav--open" : "nav"} aria-label="Основная навигация">
+            <NavLink to="/directions" onClick={closeMenu} className={navLinkClass}>
+              Направления
+            </NavLink>
+
+            <NavLink to="/supply" onClick={closeMenu} className={navLinkClass}>
+              Решения
+            </NavLink>
+
+            <NavLink to="/cases" onClick={closeMenu} className={navLinkClass}>
+              Кейсы
+            </NavLink>
+
+            <NavLink to="/about" onClick={closeMenu} className={navLinkClass}>
+              О компании
+            </NavLink>
+
+            <NavLink to="/contacts" onClick={closeMenu} className={navLinkClass}>
+              Контакты
+            </NavLink>
+
+            <div className="nav__mobile-actions">
+              <a href="tel:+70000000000" className="header__phone">
+                +7 (000) 000-00-00
+              </a>
+
+              <NavLink to="/contacts" onClick={closeMenu} className="header__cta">
+                Обсудить проект
+              </NavLink>
+            </div>
+          </nav>
+
+          <div className="header__actions">
+            <a href="tel:+70000000000" className="header__phone">
+              +7 (938) 169-31-09
+            </a>
+
+            <NavLink to="/contacts" onClick={closeMenu} className="header__cta">
+              Обсудить проект
+            </NavLink>
+          </div>
 
           <button
             className="burger"
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={isMenuOpen}
           >
-            ☰
+            <span />
+            <span />
+            <span />
           </button>
-
-          <nav className={isMenuOpen ? "nav nav--open" : "nav"}>
-            <NavLink to="/" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              Главная
-            </NavLink>
-
-            <NavLink to="/about" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              О компании
-            </NavLink>
-
-            <NavLink to="/supply" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              Поставка
-            </NavLink>
-
-            <NavLink to="/directions" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              Направления
-            </NavLink>
-
-            <NavLink to="/cases" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              Кейсы
-            </NavLink>
-
-            <NavLink to="/contacts" onClick={closeMenu} className={({ isActive }) =>
-              isActive ? "nav__link nav__link--active" : "nav__link"
-            }>
-              Контакты
-            </NavLink>
-          </nav>
-
         </div>
       </div>
     </header>
