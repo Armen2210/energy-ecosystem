@@ -4,6 +4,8 @@ import Header from "../components/Header"
 import DirectionsBlock from "../components/DirectionsBlock"
 import WorkSteps from "../components/WorkSteps"
 import EcosystemSection from "../components/EcosystemSection"
+import CasesPreview from "../components/CasesPreview"
+import FaqSection from "../components/FaqSection"
 import LeadForm from "../components/LeadForm"
 import heroImage from "../assets/hero.png"
 
@@ -134,6 +136,10 @@ function Home() {
         <WorkSteps />
 
         <EcosystemSection />
+
+        <CasesPreview />
+
+        <FaqSection />
 
         <LeadForm />
       </main>

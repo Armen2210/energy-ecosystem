@@ -133,95 +133,112 @@ function LeadForm() {
   }
 
   return (
-    <section className="lead-form">
-      <div className="container">
-        <div className="lead-form__box">
-          <div className="lead-form__content">
-            <h2 className="section__title">
-              Получить предложение
-            </h2>
+      <section className="contact-section lead-form">
+        <div className="container">
+          <div className="contact-section__grid">
+            <div className="contact-section__content">
+              <p className="section__eyebrow">Финальный шаг</p>
 
-            <p className="lead-form__text">
-              Оставьте заявку и мы подготовим предложение
-              под ваш объект.
-            </p>
-          </div>
+              <h2 className="section__title">
+                Обсудим задачу вашего объекта
+              </h2>
 
-          <form className="form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Ваше имя"
-              autoComplete="name"
-            />
+              <p className="contact-section__text">
+                Поможем подобрать инженерное решение, обсудить проект и определить
+                дальнейшие шаги по реализации задачи.
+              </p>
 
-            <input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              placeholder="Компания"
-              autoComplete="organization"
-            />
-
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Телефон"
-              autoComplete="tel"
-            />
-
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email"
-              autoComplete="email"
-            />
-
-            <textarea
-              rows="5"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Описание задачи"
-            ></textarea>
-
-            <label className="form__file-label">
-              Прикрепите ТЗ / спецификацию (если есть)
-            </label>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              name="file"
-              onChange={handleChange}
-              className="file-input"
-            />
-
-            <button
-              type="submit"
-              className="btn btn--primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Отправляем..." : "Отправить заявку"}
-            </button>
-
-            {formMessage && (
-              <div className={`form-message form-message--${formMessage.type}`}>
-                {formMessage.text}
+              <div className="contact-section__contacts">
+                <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+                <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
+                <span>Ростов-на-Дону</span>
               </div>
-            )}
-          </form>
+            </div>
+
+            <form className="form contact-form" onSubmit={handleSubmit}>
+              <div className="contact-form__head">
+                <h3>Расскажите о задаче</h3>
+
+                <p>
+                  Достаточно кратко описать объект, задачу или приложить проект /
+                  спецификацию.
+                </p>
+              </div>
+
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Ваше имя"
+                autoComplete="name"
+              />
+
+              <input
+                type="text"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="Компания"
+                autoComplete="organization"
+              />
+
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Телефон"
+                autoComplete="tel"
+              />
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
+                autoComplete="email"
+              />
+
+              <textarea
+                rows="5"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Что требуется вашему объекту?"
+              ></textarea>
+
+              <label className="form__file-label">
+                Прикрепить проект / спецификацию
+              </label>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                name="file"
+                onChange={handleChange}
+                className="file-input"
+              />
+
+              <button
+                type="submit"
+                className="btn btn--primary"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Отправляем..." : "Обсудить проект"}
+              </button>
+
+              {formMessage && (
+                <div className={`form-message form-message--${formMessage.type}`}>
+                  {formMessage.text}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
 }
 
 export default LeadForm
