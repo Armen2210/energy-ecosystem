@@ -1,9 +1,15 @@
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 import LeadForm from "../components/LeadForm"
 
 function Contacts() {
   return (
     <>
+      <Seo
+          title="Контакты — ТД Энергоэффект"
+          description="Контакты ТД Энергоэффект: обсудить комплектацию инженерного объекта, подбор оборудования, проект или спецификацию."
+          path="/contacts"
+      />
       <Header />
 
       <main className="page contacts-page">

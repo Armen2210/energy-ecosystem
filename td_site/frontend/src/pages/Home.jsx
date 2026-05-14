@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 import DirectionsBlock from "../components/DirectionsBlock"
 import WorkSteps from "../components/WorkSteps"
 import EcosystemSection from "../components/EcosystemSection"
@@ -12,6 +13,11 @@ import heroImage from "../assets/hero.png"
 function Home() {
   return (
     <>
+      <Seo
+          title="ТД Энергоэффект — комплектация инженерных объектов"
+          description="Комплектация инженерных объектов, подбор оборудования, поставка инженерных решений и сопровождение проектов."
+          path="/"
+      />
       <Header />
 
       <main>

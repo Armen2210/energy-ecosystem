@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom"
 
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 
 function Directions() {
   return (
     <>
+      <Seo
+          title="Инженерные направления — ТД Энергоэффект"
+          description="Инженерные направления для комплектации объектов: насосное оборудование, КИПиА, арматура, автоматика, теплообменное оборудование и комплектующие."
+          path="/directions"
+      />
       <Header />
 
       <main className="page directions-page">

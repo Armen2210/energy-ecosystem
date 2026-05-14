@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 
 const cases = [
   {
@@ -32,6 +33,11 @@ const cases = [
 function Cases() {
   return (
     <>
+      <Seo
+          title="Кейсы и инженерные решения — ТД Энергоэффект"
+          description="Инженерные решения и примеры задач внутри экосистемы Энергоэффект: комплектация объектов, производственные решения и подбор оборудования."
+          path="/cases"
+      />
       <Header />
 
       <main className="page cases-page">

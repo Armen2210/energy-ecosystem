@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom"
 
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 
 function Supply() {
   return (
     <>
+      <Seo
+          title="Комплектация объектов — ТД Энергоэффект"
+          description="Комплектация инженерных объектов под задачу проекта: подбор оборудования, материалов, аналогов и организация поставки."
+          path="/supply"
+      />
       <Header />
 
       <main className="page supply-page">

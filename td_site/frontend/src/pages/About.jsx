@@ -1,8 +1,14 @@
 import Header from "../components/Header"
+import Seo from "../components/Seo"
 
 function About() {
   return (
     <>
+      <Seo
+          title="О компании — ТД Энергоэффект"
+          description="ТД Энергоэффект — точка входа в инженерную экосистему для комплектации объектов, подбора оборудования и маршрутизации задач."
+          path="/about"
+      />
       <Header />
 
       <main className="page about-page">

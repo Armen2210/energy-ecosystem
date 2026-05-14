@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /admin/
+Disallow: /admin-secret-123/
+
+Sitemap: https://td-energoeffect.ru/sitemap.xml
