@@ -149,7 +149,7 @@ function LeadForm() {
               </p>
 
               <div className="contact-section__contacts">
-                <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+                <a href="tel:+79381693109">+7 (938) 124-68-02</a>
                 <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
                 <span>Ростов-на-Дону</span>
               </div>

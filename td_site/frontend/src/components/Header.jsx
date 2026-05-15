@@ -42,8 +42,8 @@ function Header() {
             </NavLink>
 
             <div className="nav__mobile-actions">
-              <a href="tel:+7 (938) 169-31-09" className="header__phone">
-                +7 (938) 169-31-09
+              <a href="tel:+7 (938) 124-68-02" className="header__phone">
+                +7 (938) 124-68-02
               </a>
 
               <NavLink to="/contacts" onClick={closeMenu} className="header__cta">
@@ -53,8 +53,8 @@ function Header() {
           </nav>
 
           <div className="header__actions">
-            <a href="tel:+7 (938) 169-31-09" className="header__phone">
-              +7 (938) 169-31-09
+            <a href="tel:+7 (938) 124-68-02" className="header__phone">
+              +7 (938) 124-68-02
             </a>
 
             <NavLink to="/contacts" onClick={closeMenu} className="header__cta">

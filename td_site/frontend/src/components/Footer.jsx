@@ -53,7 +53,7 @@ function Footer() {
           <div className="footer__column footer__contacts">
             <h4>Контакты</h4>
 
-            <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+            <a href="tel:+79381693109">+7 (938) 124-68-02</a>
             <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
             <span>Ростов-на-Дону</span>
 
