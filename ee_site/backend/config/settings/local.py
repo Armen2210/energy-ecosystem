@@ -1,3 +1,6 @@
 from .base import *
 
 DEBUG = True
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_ROOT = BASE_DIR / "media"

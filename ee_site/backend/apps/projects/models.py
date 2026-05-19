@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from apps.companies.models import Company
+from apps.leads.models import Lead
 from apps.projects.constants import ProjectStatuses
 
 
@@ -28,6 +29,14 @@ class Project(models.Model):
 
     company = models.ForeignKey(
         Company,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="projects",
+    )
+
+    lead = models.ForeignKey(
+        Lead,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

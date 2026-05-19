@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "apps.companies",
     "apps.projects",
     "apps.activity_logs",
+    "apps.leads",
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,48 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {levelname} {name}: {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname}: {message}",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs" / "app.log",
+            "formatter": "verbose",
+            "encoding": "utf-8",
+        },
+    },
+
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
+
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}

@@ -1,0 +1,75 @@
+// =========================================================
+// SERVICE PAGE / СТРАНИЦА УСЛУГИ
+// Универсальная страница услуги компании.
+// Позже будет открываться по маршрутам:
+// /services/design, /services/construction-installation,
+// /services/commissioning
+// =========================================================
+
+import { useParams } from "react-router-dom";
+
+import AiSummary from "../../components/AiSummary";
+import LeadForm from "../../components/LeadForm";
+import SectionHeader from "../../components/SectionHeader";
+import { products } from "../../data/products";
+import { services } from "../../data/services";
+
+function ServicePage() {
+  const { slug } = useParams();
+  const service = services.find((item) => item.slug === slug);
+
+  if (!service) {
+    return (
+      <main>
+        <section className="section">
+          <div className="container">
+            <SectionHeader
+              eyebrow="Услуги"
+              title="Услуга не найдена"
+              description="Проверьте адрес страницы или вернитесь к списку услуг компании."
+            />
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main>
+      <section className="section">
+        <div className="container">
+          <SectionHeader
+            eyebrow={service.shortTitle}
+            title={service.title}
+            description={service.description}
+          />
+
+          <AiSummary
+            title={`${service.title}: кратко`}
+            items={[
+              "Услуга относится к инженерным объектам и системам.",
+              "Работы выполняются с учётом требований проекта, объекта и эксплуатации.",
+              "Для оценки задачи можно отправить заявку, ТЗ, проект или спецификацию.",
+            ]}
+          />
+        </div>
+      </section>
+
+      <section className="section section--contact">
+        <div className="container contact-grid">
+          <div>
+            <SectionHeader
+              eyebrow="Заявка"
+              title={`Обсудить услугу: ${service.shortTitle}`}
+              description="Оставьте контакты и приложите файл, если есть техническое задание, проект или спецификация."
+            />
+          </div>
+
+          <LeadForm products={products} services={services} />
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default ServicePage;
