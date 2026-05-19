@@ -16,9 +16,11 @@ import CasesPage from "./pages/CasesPage";
 import ContactsPage from "./pages/ContactsPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
+import ScrollToTop from "./components/ScrollToTop";
 import ServicePage from "./pages/ServicePage";
 import ServicesPage from "./pages/ServicesPage";
 import SolutionsPage from "./pages/SolutionsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 import "./App.css";
 
@@ -26,6 +28,8 @@ function App() {
   return (
     <div className="site">
       <Header navigation={navigation} />
+
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -36,6 +40,7 @@ function App() {
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/cases" element={<CasesPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Footer navigation={navigation} />

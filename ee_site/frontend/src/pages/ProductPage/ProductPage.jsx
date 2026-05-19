@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import AiSummary from "../../components/AiSummary";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
+import TrustBlock from "../../components/TrustBlock";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -52,6 +53,28 @@ function ProductPage() {
               "Для расчёта можно отправить заявку, ТЗ, проект или спецификацию.",
             ]}
           />
+
+          <TrustBlock
+              title="Что получает заказчик"
+              items={[
+                {
+                  title: "Решение под объект",
+                  description:
+                    "Подбор и производство выполняются с учётом параметров объекта, проекта и условий эксплуатации.",
+                },
+                {
+                  title: "Инженерная логика",
+                  description:
+                    "Смотрим не только на изделие, а на работу всей инженерной системы.",
+                },
+                {
+                  title: "Готовность к заявке",
+                  description:
+                    "Можно отправить ТЗ, проект или спецификацию для первичной оценки задачи.",
+                },
+              ]}
+          />
+
         </div>
       </section>
 

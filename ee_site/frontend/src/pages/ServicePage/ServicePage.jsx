@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import AiSummary from "../../components/AiSummary";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
+import TrustBlock from "../../components/TrustBlock";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -52,6 +53,27 @@ function ServicePage() {
               "Для оценки задачи можно отправить заявку, ТЗ, проект или спецификацию.",
             ]}
           />
+          <TrustBlock
+              title="Как мы подходим к работе"
+              items={[
+                {
+                  title: "От задачи объекта",
+                  description:
+                    "Сначала уточняем условия, исходные данные, ограничения и требования к результату.",
+                },
+                {
+                  title: "С учётом эксплуатации",
+                  description:
+                    "Решение должно быть не только выполнено, но и понятно обслуживаться после запуска.",
+                },
+                {
+                  title: "С привязкой к срокам",
+                  description:
+                    "Учитываем проектные, монтажные и организационные этапы, чтобы работа двигалась последовательно.",
+                },
+              ]}
+          />
+
         </div>
       </section>
 
