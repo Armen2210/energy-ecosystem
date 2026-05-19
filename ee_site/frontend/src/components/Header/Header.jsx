@@ -4,11 +4,13 @@
 // Навигация приходит из src/data/navigation.js.
 // =========================================================
 
+import { Link } from "react-router-dom";
+
 function Header({ navigation }) {
   return (
     <header className="header">
       <div className="container header__inner">
-        <div className="logo">
+        <Link className="logo" to="/">
           <div className="logo__mark">ЭЭ</div>
 
           <div>
@@ -17,7 +19,7 @@ function Header({ navigation }) {
               Инженерная производственная платформа
             </div>
           </div>
-        </div>
+        </Link>
 
         <nav className="nav">
           {navigation.map((item) => (
