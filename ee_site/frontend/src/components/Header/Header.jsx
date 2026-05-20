@@ -4,13 +4,37 @@
 // Навигация приходит из src/data/navigation.js.
 // =========================================================
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Header({ navigation }) {
+  const navigate = useNavigate();
+
+  function handleLogoClick(event) {
+    event.preventDefault();
+
+    const isHomePage = window.location.pathname === "/";
+
+    if (isHomePage) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+
+      window.history.replaceState(null, "", "/");
+
+      return;
+    }
+
+    setTimeout(() => {
+      navigate("/#summary");
+    }, 120);
+  }
+
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link className="logo" to="/">
+        <a className="logo" href="/#summary" onClick={handleLogoClick}>
           <div className="logo__mark">ЭЭ</div>
 
           <div>
@@ -19,7 +43,7 @@ function Header({ navigation }) {
               Инженерная производственная платформа
             </div>
           </div>
-        </Link>
+        </a>
 
         <nav className="nav">
           {navigation.map((item) => (

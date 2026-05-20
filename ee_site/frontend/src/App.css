@@ -11,18 +11,18 @@
 @import "./styles/layout.css";
 
 
-
-
 /* =========================================================
-   HEADER / ВЕРХНЕЕ МЕНЮ
-   Логотип, навигация и телефон.
+   HEADER / ШАПКА САЙТА
+   Липкая шапка: остаётся сверху при прокрутке,
+   но не ломает высоту страницы.
    ========================================================= */
 
 .header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: rgba(255, 255, 255, 0.88);
+  z-index: 1000;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(14px);
 }
@@ -417,11 +417,16 @@ h1 {
    Тёмный блок, который показывает инженерный подход компании.
    ========================================================= */
 
+/* =========================================================
+   ENGINEERING EXPERTISE / ИНЖЕНЕРНАЯ ЭКСПЕРТИЗА
+   Тёмно-синий инженерный блок: строгий, но не мрачный.
+   ========================================================= */
+
 .section--dark {
   color: #ffffff;
   background:
-    radial-gradient(circle at 78% 20%, rgba(249, 115, 22, 0.22), transparent 28%),
-    linear-gradient(135deg, #15171a 0%, #22262b 100%);
+    radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, #183b5a 0%, #244e70 48%, #1b3f5f 100%);
 }
 
 
@@ -682,6 +687,48 @@ h1 {
 }
 
 /* =========================================================
+   LEAD FORM STATUS / СТАТУС ОТПРАВКИ ФОРМЫ
+   Сообщения об успешной отправке или ошибке.
+   ========================================================= */
+
+.lead-form__status {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.lead-form__status--hiding {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.lead-form__status--success {
+  color: #166534;
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.lead-form__status--error {
+  color: #9a3412;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.lead-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
+
+/* =========================================================
    FOOTER / ПОДВАЛ САЙТА
    Нижний блок: позиционирование, навигация и контакты.
    ========================================================= */
@@ -689,12 +736,12 @@ h1 {
 .footer {
   padding: 42px 0;
   color: #ffffff;
-  background: var(--color-dark);
+  background: #0f2f4a;
 }
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 1fr;
+  grid-template-columns: 1.15fr 0.55fr 1fr 0.9fr;
   gap: 34px;
   align-items: start;
 }
@@ -727,6 +774,28 @@ h1 {
 }
 
 .footer__nav a:hover {
+  color: var(--color-red);
+}
+
+.footer__title {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.footer__ecosystem {
+  display: grid;
+  gap: 12px;
+}
+
+.footer__ecosystem a {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.footer__ecosystem a:hover {
   color: var(--color-red);
 }
 
@@ -800,76 +869,228 @@ h1 {
 }
 
 /* =========================================================
-   АДАПТИВ / МОБИЛЬНАЯ ВЕРСИЯ
-   Правила для экранов до 960px.
+   INFO LIST BLOCK / ИНФОРМАЦИОННЫЕ СПИСКИ
+   Используется на продуктовых страницах:
+   особенности решения, где применяется и т.д.
    ========================================================= */
 
+.info-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.info-list-block {
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.05);
+}
+
+.info-list-block h2 {
+  margin: 0 0 18px;
+  color: var(--color-text);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.info-list-block ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 22px;
+  color: var(--color-muted);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   MOBILE / АДАПТИВНАЯ ВЕРСИЯ
+   Правила для планшетов и мобильных экранов до 960px.
+   Цель:
+   - убрать горизонтальный сдвиг;
+   - сделать header липким;
+   - перевести сетки в одну колонку;
+   - адаптировать hero, карточки, формы и footer.
+   ========================================================= */
+
+
+
+
 @media (max-width: 960px) {
+  /* ------------------------------
+     BASE / БАЗОВАЯ КОМПОНОВКА
+     ------------------------------ */
+
+  .container {
+    width: min(100% - 32px, var(--container));
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  /* ------------------------------
+     HEADER / ШАПКА
+     ------------------------------ */
+
+
+
   .header__inner {
-    align-items: flex-start;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
     padding: 18px 0;
   }
 
-  .nav {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 14px;
+  .logo {
+    max-width: 100%;
   }
 
+  .logo__title {
+    font-size: 24px;
+  }
+
+  .logo__subtitle {
+    max-width: 280px;
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .nav {
+    display: flex;
+    gap: 18px;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header__phone {
+    font-size: 18px;
+  }
+
+  /* ------------------------------
+     HERO / ПЕРВЫЙ ЭКРАН
+     ------------------------------ */
+
   .hero {
-    padding: 48px 0 64px;
+    padding: 54px 0 64px;
   }
 
   .hero__grid {
     grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(42px, 13vw, 68px);
+    line-height: 0.98;
+    letter-spacing: -0.07em;
+  }
+
+  .hero__text {
+    max-width: 100%;
+    font-size: 20px;
+  }
+
+  .hero__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .hero__facts {
     grid-template-columns: 1fr;
   }
 
-  h1 {
-    font-size: clamp(38px, 12vw, 58px);
+  .hero__visual {
+    display: none;
   }
 
-  .product-grid {
+  /* ------------------------------
+     TYPOGRAPHY / ЗАГОЛОВКИ СЕКЦИЙ
+     ------------------------------ */
+
+  .section__head h2,
+  .ai-summary h2,
+  .trust-block h2,
+  .info-list-block h2 {
+    font-size: clamp(34px, 10vw, 48px);
+    line-height: 1;
+  }
+
+  .section__head p,
+  .ai-summary ul,
+  .info-list-block ul {
+    font-size: 18px;
+  }
+
+  /* ------------------------------
+     GRIDS / СЕТКИ
+     ------------------------------ */
+
+  .product-grid,
+  .services-grid,
+  .expertise-grid,
+  .process-item,
+  .cases-grid,
+  .contact-grid,
+  .lead-form__grid,
+  .footer__grid,
+  .trust-block__grid,
+  .info-list-grid {
     grid-template-columns: 1fr;
   }
 
-  .expertise-grid {
-    grid-template-columns: 1fr;
+  /* ------------------------------
+     CARDS / КАРТОЧКИ
+     ------------------------------ */
+
+  .product-card,
+  .service-card,
+  .case-card,
+  .expertise-card,
+  .trust-block,
+  .info-list-block,
+  .ai-summary,
+  .lead-form,
+  .contact-note {
+    width: 100%;
   }
 
-  .section {
-    padding: 56px 0;
+  /* ------------------------------
+     FORM / ФОРМА
+     ------------------------------ */
+
+  .lead-form {
+    padding: 22px;
   }
 
-    .process-item {
-    grid-template-columns: 1fr;
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    min-width: 0;
   }
 
-    .cases-grid {
-    grid-template-columns: 1fr;
+  .lead-form__consent {
+    align-items: flex-start;
   }
 
-    .services-grid {
-    grid-template-columns: 1fr;
-  }
+  /* ------------------------------
+     FOOTER / ПОДВАЛ
+     ------------------------------ */
 
-    .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lead-form__grid {
-    grid-template-columns: 1fr;
-  }
-
-      .footer__grid {
-    grid-template-columns: 1fr;
-  }
-
-    .trust-block__grid {
-    grid-template-columns: 1fr;
+  .footer__grid {
+    gap: 30px;
   }
 }

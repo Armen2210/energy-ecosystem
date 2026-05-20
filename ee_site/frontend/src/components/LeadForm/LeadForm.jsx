@@ -1,26 +1,112 @@
 // =========================================================
 // LEAD FORM / ФОРМА ЗАЯВКИ
 // MVP-форма заявки.
-// Позже подключим отправку в backend: POST /api/leads/
+// Отправляет данные в backend: POST /api/leads/
 // =========================================================
 
-function LeadForm({ products = [], services = [] }) {
+import { useState } from "react";
+
+import { createLead } from "../../api/leadsApi";
+
+function LeadForm({ products = [], services = [], initialTopic = "" }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isStatusHiding, setIsStatusHiding] = useState(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const selectedTopic = formData.get("description_topic");
+    const description = formData.get("description");
+    const consentAccepted = formData.get("consent");
+
+    if (!consentAccepted) {
+      setSubmitStatus("error");
+      setSubmitMessage("Подтвердите согласие на обработку персональных данных.");
+      return;
+    }
+
+    if (selectedTopic) {
+      formData.set(
+        "description",
+        `Интересующее направление: ${selectedTopic}\n\nОписание задачи:\n${
+          description || "Не указано"
+        }`,
+      );
+    }
+
+    formData.delete("description_topic");
+    formData.delete("consent");
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+    setIsStatusHiding(false);
+
+    try {
+      await createLead(formData);
+
+      form.reset();
+
+      setSubmitStatus("success");
+      setSubmitMessage(
+        "Заявка отправлена. Мы свяжемся с вами после обработки обращения.",
+      );
+
+      setTimeout(() => {
+        setIsStatusHiding(true);
+      }, 5000);
+
+      setTimeout(() => {
+        setSubmitStatus("idle");
+        setSubmitMessage("");
+        setIsStatusHiding(false);
+      }, 5600);
+    } catch (error) {
+      setSubmitStatus("error");
+      setSubmitMessage(
+        error.message ||
+          "Не удалось отправить заявку. Проверьте данные или попробуйте позже.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
-    <form className="lead-form">
+    <form className="lead-form" onSubmit={handleSubmit}>
       <div className="lead-form__grid">
         <label>
           Имя
-          <input type="text" name="name" placeholder="Как к вам обращаться" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Как к вам обращаться"
+            required
+          />
         </label>
 
         <label>
           Компания
-          <input type="text" name="company_name" placeholder="Название компании" />
+          <input
+            type="text"
+            name="company_name"
+            placeholder="Название компании"
+          />
         </label>
 
         <label>
           Телефон
-          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+7 (___) ___-__-__"
+            required
+          />
         </label>
 
         <label>
@@ -30,12 +116,12 @@ function LeadForm({ products = [], services = [] }) {
 
         <label>
           Интересующее направление
-          <select name="interest">
+          <select name="description_topic" defaultValue={initialTopic}>
             <option value="">Выберите направление</option>
 
             <optgroup label="Продукты">
               {products.map((product) => (
-                <option value={product.slug} key={product.slug}>
+                <option value={product.title} key={product.slug}>
                   {product.title}
                 </option>
               ))}
@@ -43,7 +129,7 @@ function LeadForm({ products = [], services = [] }) {
 
             <optgroup label="Услуги">
               {services.map((service) => (
-                <option value={service.slug} key={service.slug}>
+                <option value={service.title} key={service.slug}>
                   {service.title}
                 </option>
               ))}
@@ -66,6 +152,13 @@ function LeadForm({ products = [], services = [] }) {
         />
       </label>
 
+      <input type="hidden" name="source_system" value="ee_site" />
+      <input
+        type="hidden"
+        name="source_page"
+        value={`${window.location.pathname}${window.location.hash}`}
+      />
+
       <label className="lead-form__consent">
         <input type="checkbox" name="consent" />
         <span>
@@ -74,8 +167,22 @@ function LeadForm({ products = [], services = [] }) {
         </span>
       </label>
 
-      <button className="button button--primary" type="submit">
-        Отправить заявку
+      {submitMessage && (
+        <div
+          className={`lead-form__status lead-form__status--${submitStatus} ${
+            isStatusHiding ? "lead-form__status--hiding" : ""
+          }`}
+        >
+          {submitMessage}
+        </div>
+      )}
+
+      <button
+        className="button button--primary"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Отправляем..." : "Отправить заявку"}
       </button>
     </form>
   );

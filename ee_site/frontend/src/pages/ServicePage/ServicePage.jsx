@@ -9,6 +9,7 @@
 import { useParams } from "react-router-dom";
 
 import AiSummary from "../../components/AiSummary";
+import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
 import TrustBlock from "../../components/TrustBlock";
@@ -74,6 +75,11 @@ function ServicePage() {
               ]}
           />
 
+          <div className="info-list-grid">
+              <InfoListBlock title="Что входит в услугу" items={service.features} />
+              <InfoListBlock title="Для каких задач" items={service.useCases} />
+          </div>
+
         </div>
       </section>
 
@@ -87,7 +93,11 @@ function ServicePage() {
             />
           </div>
 
-          <LeadForm products={products} services={services} />
+          <LeadForm
+              products={products}
+              services={services}
+              initialTopic={service.title}
+          />
         </div>
       </section>
     </main>

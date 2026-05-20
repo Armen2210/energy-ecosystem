@@ -9,6 +9,7 @@
 import { useParams } from "react-router-dom";
 
 import AiSummary from "../../components/AiSummary";
+import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
 import TrustBlock from "../../components/TrustBlock";
@@ -75,6 +76,11 @@ function ProductPage() {
               ]}
           />
 
+          <div className="info-list-grid">
+              <InfoListBlock title="Особенности решения" items={product.features} />
+              <InfoListBlock title="Где применяется" items={product.useCases} />
+          </div>
+
         </div>
       </section>
 
@@ -88,7 +94,11 @@ function ProductPage() {
             />
           </div>
 
-          <LeadForm products={products} services={services} />
+          <LeadForm
+              products={products}
+              services={services}
+              initialTopic={product.title}
+          />
         </div>
       </section>
     </main>
