@@ -1,16 +1,112 @@
-# React + Vite
+# Frontend сайта ООО «Энергоэффект»
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend-часть MVP сайта ООО «Энергоэффект».
 
-Currently, two official plugins are available:
+Проект развивается как инженерная B2B-платформа: производственные решения, продуктовые направления, услуги, заявки, SEO-структура и задел под дальнейшее развитие экосистемы.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Технологии
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- React Router
+- CSS Modules не используются
+- Основные стили хранятся в обычных CSS-файлах
+- Backend API: Django + DRF
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Назначение проекта
+
+Frontend должен решать не только задачу «показать сайт», но и задачу B2B-продаж:
+
+- показать Энергоэффект как инженерную производственную платформу;
+- разделить продукты и услуги;
+- дать пользователю понятный путь к заявке;
+- подготовить структуру под SEO / GEO / AEO;
+- создать масштабируемую основу для будущего инженерного портала.
+
+---
+
+## Продуктовые направления
+
+Порядок продуктов фиксированный:
+
+1. Блочно-модульные котельные
+2. Блочные тепловые пункты
+3. Водопроводные насосные станции
+4. Пожарные насосные станции
+5. Шкафы управления и автоматизации
+
+Важно: в рамках проекта ЭЭ аббревиатура **ПНС** означает **пожарные насосные станции**.
+
+---
+
+## Услуги
+
+Услуги отделены от продуктов:
+
+1. Проектирование
+2. Строительно-монтажные работы
+3. Пусконаладка и ввод в эксплуатацию
+
+Это важно для:
+
+- SEO;
+- UX;
+- CRM-логики;
+- будущих фильтров;
+- AI-ready структуры.
+
+---
+
+## Структура проекта
+
+```text
+src/
+  api/
+    leadsApi.js
+
+  assets/
+    hero.jpg
+
+  components/
+    AiSummary/
+    Footer/
+    Header/
+    Hero/
+    InfoListBlock/
+    LeadForm/
+    ProcessSteps/
+    ProductCard/
+    ScrollToTop/
+    SectionHeader/
+    ServiceCard/
+    TrustBlock/
+
+  data/
+    navigation.js
+    products.js
+    services.js
+
+  pages/
+    AboutPage/
+    CasesPage/
+    ContactsPage/
+    HomePage/
+    NotFoundPage/
+    ProductPage/
+    ServicePage/
+    ServicesPage/
+    SolutionsPage/
+
+  styles/
+    variables.css
+    global.css
+    layout.css
+
+  App.css
+  App.jsx
+  index.css
+  main.jsx
