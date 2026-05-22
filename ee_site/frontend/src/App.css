@@ -40,6 +40,15 @@
   align-items: center;
   gap: 14px;
   min-width: 260px;
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease;
+}
+
+.logo--leaving {
+  transform: scale(0.985);
+  opacity: 0.82;
+  pointer-events: none;
 }
 
 .logo__mark {
@@ -101,14 +110,14 @@
    ========================================================= */
 
 .hero {
-  padding: 76px 0 88px;
+  padding: 42px 0 52px;
 }
 
 .hero__grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  align-items: center;
-  gap: 54px;
+  grid-template-columns: 0.92fr 1.08fr;
+  align-items: end;
+  gap: 52px;
 }
 
 .hero__content {
@@ -118,7 +127,7 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
   padding: 9px 13px;
   border: 1px solid rgba(249, 115, 22, 0.2);
   border-radius: 999px;
@@ -132,26 +141,26 @@
 
 h1 {
   margin: 0;
-  max-width: 760px;
+  max-width: 700px;
   color: var(--color-text);
-  font-size: clamp(42px, 6vw, 76px);
-  line-height: 0.95;
+  font-size: clamp(38px, 4.7vw, 62px);
+  line-height: 0.96;
   letter-spacing: -0.06em;
 }
 
 .hero__text {
-  max-width: 640px;
-  margin: 28px 0 0;
+  max-width: 600px;
+  margin: 18px 0 0;
   color: var(--color-muted);
-  font-size: 19px;
-  line-height: 1.55;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 34px;
+  margin-top: 22px;
 }
 
 /* =========================================================
@@ -203,28 +212,28 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin-top: 42px;
+  margin-top: 0;
 }
 
 .hero__facts div {
-  min-height: 104px;
-  padding: 18px;
+  min-height: 84px;
+  padding: 16px;
   border: 1px solid var(--color-border);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.82);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
 }
 
 .hero__facts strong {
   display: block;
-  margin-bottom: 8px;
-  font-size: 15px;
+  margin-bottom: 6px;
+  font-size: 14px;
   font-weight: 900;
 }
 
 .hero__facts span {
   display: block;
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.35;
 }
 
@@ -235,6 +244,10 @@ h1 {
 
 .hero__visual {
   position: relative;
+  display: grid;
+  align-self: end;
+  gap: 18px;
+  transform: none;
 }
 
 .hero__visual img {
@@ -242,8 +255,7 @@ h1 {
   z-index: 1;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  max-height: 560px;
+  height: clamp(460px, 48vh, 540px);
   object-fit: cover;
   border-radius: 34px;
   box-shadow: 0 28px 60px rgba(17, 17, 17, 0.18);
@@ -311,19 +323,36 @@ h1 {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
 }
 
 .product-card {
   position: relative;
-  min-height: 280px;
-  padding: 24px;
+  min-height: 250px;
+  padding: 22px;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  border-radius: 28px;
+  border-radius: 26px;
   background: rgba(255, 255, 255, 0.86);
   box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(249, 115, 22, 0.32);
+  box-shadow: 0 22px 52px rgba(17, 17, 17, 0.09);
+}
+
+.product-card--leaving {
+  transform: scale(0.985) translateY(2px);
+  opacity: 0.84;
+  pointer-events: none;
 }
 
 .product-card::after {
@@ -339,9 +368,9 @@ h1 {
 
 .product-card span {
   display: inline-flex;
-  margin-bottom: 54px;
+  margin-bottom: 42px;
   color: var(--color-red);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 900;
 }
 
@@ -350,7 +379,7 @@ h1 {
   z-index: 1;
   margin: 0;
   color: var(--color-text);
-  font-size: 23px;
+  font-size: 20px;
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
@@ -358,10 +387,10 @@ h1 {
 .product-card p {
   position: relative;
   z-index: 1;
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 /* =========================================================
@@ -387,6 +416,23 @@ h1 {
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82)),
     radial-gradient(circle at 90% 20%, rgba(249, 115, 22, 0.12), transparent 32%);
   box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(249, 115, 22, 0.32);
+  box-shadow: 0 22px 52px rgba(17, 17, 17, 0.09);
+}
+
+.service-card--leaving {
+  transform: scale(0.985) translateY(2px);
+  opacity: 0.84;
+  pointer-events: none;
 }
 
 .service-card span {
@@ -414,11 +460,6 @@ h1 {
 
 /* =========================================================
    ENGINEERING EXPERTISE / ИНЖЕНЕРНАЯ ЭКСПЕРТИЗА
-   Тёмный блок, который показывает инженерный подход компании.
-   ========================================================= */
-
-/* =========================================================
-   ENGINEERING EXPERTISE / ИНЖЕНЕРНАЯ ЭКСПЕРТИЗА
    Тёмно-синий инженерный блок: строгий, но не мрачный.
    ========================================================= */
 
@@ -428,10 +469,6 @@ h1 {
     radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.14), transparent 30%),
     linear-gradient(135deg, #183b5a 0%, #244e70 48%, #1b3f5f 100%);
 }
-
-
-
-
 
 .eyebrow--dark {
   color: #ffffff;
@@ -540,9 +577,9 @@ h1 {
 }
 
 .case-card {
-  min-height: 320px;
-  padding: 28px;
-  border-radius: 30px;
+  min-height: 260px;
+  padding: 24px;
+  border-radius: 28px;
   border: 1px solid var(--color-border);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.78)),
@@ -552,7 +589,7 @@ h1 {
 
 .case-card span {
   display: inline-flex;
-  margin-bottom: 82px;
+  margin-bottom: 52px;
   padding: 8px 12px;
   border-radius: 999px;
   color: var(--color-red);
@@ -564,7 +601,7 @@ h1 {
 .case-card h3 {
   margin: 0;
   color: var(--color-text);
-  font-size: 26px;
+  font-size: 23px;
   line-height: 1.08;
   letter-spacing: -0.04em;
 }
@@ -907,6 +944,12 @@ h1 {
   line-height: 1.45;
 }
 
+@media (max-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* =========================================================
    MOBILE / АДАПТИВНАЯ ВЕРСИЯ
    Правила для планшетов и мобильных экранов до 960px.
@@ -916,9 +959,6 @@ h1 {
    - перевести сетки в одну колонку;
    - адаптировать hero, карточки, формы и footer.
    ========================================================= */
-
-
-
 
 @media (max-width: 960px) {
   /* ------------------------------
@@ -938,36 +978,64 @@ h1 {
      ------------------------------ */
 
 
-
   .header__inner {
     display: grid;
     grid-template-columns: 1fr;
     gap: 18px;
     align-items: start;
+    min-width: 0;
     padding: 18px 0;
   }
 
   .logo {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
+  }
+
+  .logo__mark {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 16px;
+    flex: 0 0 56px;
   }
 
   .logo__title {
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
   }
 
   .logo__subtitle {
-    max-width: 280px;
-    font-size: 13px;
+    max-width: 260px;
+    margin-top: 6px;
+    font-size: 14px;
     line-height: 1.25;
   }
 
   .nav {
     display: flex;
+    justify-content: flex-start;
     gap: 18px;
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
-    padding-bottom: 4px;
+    overflow-y: hidden;
+    padding: 0 10px 6px 0;
     white-space: nowrap;
+    scroll-padding-right: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav a {
+    flex: 0 0 auto;
   }
 
   .nav::-webkit-scrollbar {

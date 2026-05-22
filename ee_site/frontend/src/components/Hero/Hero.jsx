@@ -30,6 +30,12 @@ function Hero({ image }) {
             </a>
           </div>
 
+
+        </div>
+
+        <div className="hero__visual">
+          <img src={image} alt="Инженерное оборудование Энергоэффект" />
+
           <div className="hero__facts">
             <div>
               <strong>БТП / БМК</strong>
@@ -44,10 +50,7 @@ function Hero({ image }) {
               <span>работа с проектами и комплектацией</span>
             </div>
           </div>
-        </div>
 
-        <div className="hero__visual">
-          <img src={image} alt="Инженерное оборудование Энергоэффект" />
         </div>
       </div>
     </section>

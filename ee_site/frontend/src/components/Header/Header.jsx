@@ -4,37 +4,53 @@
 // Навигация приходит из src/data/navigation.js.
 // =========================================================
 
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header({ navigation }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const timerRef = useRef(null);
+  const [isLogoLeaving, setIsLogoLeaving] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  }, []);
 
   function handleLogoClick(event) {
     event.preventDefault();
 
-    const isHomePage = window.location.pathname === "/";
+    setIsLogoLeaving(true);
 
-    if (isHomePage) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
+    timerRef.current = setTimeout(() => {
+      setIsLogoLeaving(false);
+
+      if (location.pathname === "/") {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+
+        return;
+      }
+
+      navigate("/", {
+        state: { entryScroll: "top-smooth" },
       });
-
-      window.history.replaceState(null, "", "/");
-
-      return;
-    }
-
-    setTimeout(() => {
-      navigate("/#summary");
-    }, 120);
+    }, 140);
   }
 
   return (
     <header className="header">
       <div className="container header__inner">
-        <a className="logo" href="/#summary" onClick={handleLogoClick}>
+        <a
+          className={`logo ${isLogoLeaving ? "logo--leaving" : ""}`}
+          href="/"
+          onClick={handleLogoClick}
+        >
           <div className="logo__mark">ЭЭ</div>
 
           <div>
