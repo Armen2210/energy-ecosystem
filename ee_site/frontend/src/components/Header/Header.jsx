@@ -5,7 +5,7 @@
 // =========================================================
 
 import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header({ navigation }) {
   const navigate = useNavigate();
@@ -83,9 +83,9 @@ function Header({ navigation }) {
 
         <nav className="nav">
           {navigation.map((item) => (
-            <a href={item.url} key={item.title}>
-              {item.title}
-            </a>
+              <Link to={item.url} key={item.title}>
+                {item.title}
+              </Link>
           ))}
         </nav>
 

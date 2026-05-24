@@ -25,9 +25,9 @@ function Footer({ navigation }) {
 
 
           {navigation.map((item) => (
-            <a href={item.url} key={item.title}>
+            <Link to={item.url} key={item.title}>
               {item.title}
-            </a>
+            </Link>
           ))}
         </nav>
 

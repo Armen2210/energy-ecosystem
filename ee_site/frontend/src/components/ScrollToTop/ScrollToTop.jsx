@@ -192,22 +192,17 @@ function ScrollToTop() {
     }
 
     if (hash) {
-      const targetElement = document.querySelector(hash);
+        const targetElement = document.querySelector(hash);
 
-      if (targetElement) {
-        const headerHeight = getHeaderHeight();
-        const elementTop =
-          targetElement.getBoundingClientRect().top + window.scrollY;
-
-        window.scrollTo({
-          top: Math.max(elementTop - headerHeight - 24, 0),
-          left: 0,
-          behavior: "smooth",
-        });
-      }
+        if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+        }
 
       return;
-    }
+ }
 
     window.scrollTo({
       top: 0,
