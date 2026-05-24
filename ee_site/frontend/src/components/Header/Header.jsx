@@ -27,7 +27,9 @@ function Header({ navigation }) {
       timerRef.current = setTimeout(() => {
         setIsLogoLeaving(false);
 
-        if (location.pathname === "/") {
+        const currentPath = location.pathname.replace(/\/$/, "") || "/";
+
+        if (currentPath === "/") {
           window.history.replaceState(null, "", "/");
 
           window.scrollTo({
@@ -39,7 +41,7 @@ function Header({ navigation }) {
           return;
         }
 
-        if (location.pathname.startsWith("/solutions/")) {
+        if (currentPath.startsWith("/solutions")) {
           navigate("/", {
             state: { entryScroll: "products-then-top" },
           });
@@ -47,19 +49,19 @@ function Header({ navigation }) {
           return;
         }
 
-        if (location.pathname.startsWith("/services/")) {
+        if (currentPath.startsWith("/services")) {
           navigate("/", {
             state: { entryScroll: "services-then-top" },
           });
 
           return;
-  }
+        }
 
         navigate("/", {
-          state: { entryScroll: "top-smooth" },
+          state: { entryScroll: "contacts-then-top" },
         });
       }, 140);
-    }
+  }
 
   return (
     <header className="header">
