@@ -28,6 +28,8 @@ function Header({ navigation }) {
         setIsLogoLeaving(false);
 
         if (location.pathname === "/") {
+          window.history.replaceState(null, "", "/");
+
           window.scrollTo({
             top: 0,
             left: 0,
