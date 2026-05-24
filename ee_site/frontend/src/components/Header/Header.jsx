@@ -20,28 +20,44 @@ function Header({ navigation }) {
   }, []);
 
   function handleLogoClick(event) {
-    event.preventDefault();
+      event.preventDefault();
 
-    setIsLogoLeaving(true);
+      setIsLogoLeaving(true);
 
-    timerRef.current = setTimeout(() => {
-      setIsLogoLeaving(false);
+      timerRef.current = setTimeout(() => {
+        setIsLogoLeaving(false);
 
-      if (location.pathname === "/") {
-        window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
-        });
+        if (location.pathname === "/") {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
 
-        return;
-      }
+          return;
+        }
 
-      navigate("/", {
-        state: { entryScroll: "top-smooth" },
-      });
-    }, 140);
+        if (location.pathname.startsWith("/solutions/")) {
+          navigate("/", {
+            state: { entryScroll: "products-then-top" },
+          });
+
+          return;
+        }
+
+        if (location.pathname.startsWith("/services/")) {
+          navigate("/", {
+            state: { entryScroll: "services-then-top" },
+          });
+
+          return;
   }
+
+        navigate("/", {
+          state: { entryScroll: "top-smooth" },
+        });
+      }, 140);
+    }
 
   return (
     <header className="header">

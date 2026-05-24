@@ -105,6 +105,80 @@ function ScrollToTop() {
       };
     }
 
+    if (state?.entryScroll === "products-then-top") {
+      disableGlobalSmoothScroll();
+
+      const productsSection = document.getElementById("products");
+
+      if (!productsSection) {
+        restoreGlobalSmoothScroll();
+
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+
+        return;
+      }
+
+      const headerHeight = getHeaderHeight();
+      const sectionTop =
+        productsSection.getBoundingClientRect().top + window.scrollY;
+
+      window.scrollTo({
+        top: Math.max(sectionTop - headerHeight - 24, 0),
+        left: 0,
+        behavior: "auto",
+      });
+
+      scrollTimer = setTimeout(() => {
+        animateScrollToTop(2200);
+      }, 180);
+
+      return () => {
+        clearTimeout(scrollTimer);
+        restoreGlobalSmoothScroll();
+      };
+    }
+
+    if (state?.entryScroll === "services-then-top") {
+      disableGlobalSmoothScroll();
+
+      const servicesSection = document.getElementById("services");
+
+      if (!servicesSection) {
+        restoreGlobalSmoothScroll();
+
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+
+        return;
+      }
+
+      const headerHeight = getHeaderHeight();
+      const sectionTop =
+        servicesSection.getBoundingClientRect().top + window.scrollY;
+
+      window.scrollTo({
+        top: Math.max(sectionTop - headerHeight - 24, 0),
+        left: 0,
+        behavior: "auto",
+      });
+
+      scrollTimer = setTimeout(() => {
+        animateScrollToTop(2200);
+      }, 180);
+
+      return () => {
+        clearTimeout(scrollTimer);
+        restoreGlobalSmoothScroll();
+      };
+    }
+
     if (state?.entryScroll === "top-smooth") {
       window.scrollTo({
         top: 0,

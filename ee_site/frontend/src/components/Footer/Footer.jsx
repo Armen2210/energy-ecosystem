@@ -31,22 +31,14 @@ function Footer({ navigation }) {
         <div className="footer__ecosystem">
           <div className="footer__title">Экосистема</div>
 
-          <a
-              href="/"
-              onClick={(event) => {
-                event.preventDefault();
 
-                window.history.replaceState(null, "", "/");
 
-                window.scrollTo({
-                  top: 0,
-                  left: 0,
-                  behavior: "smooth",
-                });
-              }}
-            >
-              Энергоэффект — производственные решения
-          </a>
+          <Link
+            to="/"
+            state={{ entryScroll: "top-smooth" }}
+          >
+            Энергоэффект — производственные решения
+          </Link>
 
           <a
             href="https://td-energoeffect.ru/"
