@@ -955,14 +955,16 @@ h1 {
    Правила для планшетов и мобильных экранов до 960px.
    Цель:
    - убрать горизонтальный сдвиг;
-   - сделать header липким;
+   - сделать header компактнее;
    - перевести сетки в одну колонку;
-   - адаптировать hero, карточки, формы и footer.
+   - адаптировать hero, карточки, формы и footer;
+   - сохранить desktop-версию, SEO/AI-ready и scroll-сценарии.
    ========================================================= */
 
 @media (max-width: 960px) {
   /* ------------------------------
      BASE / БАЗОВАЯ КОМПОНОВКА
+     Общие настройки контейнера и вертикальных отступов.
      ------------------------------ */
 
   .container {
@@ -970,27 +972,32 @@ h1 {
   }
 
   .section {
-    padding: 64px 0;
+    padding: 44px 0;
+  }
+
+  .section--summary {
+    padding: 28px 0 44px;
   }
 
   /* ------------------------------
      HEADER / ШАПКА
+     Компактная липкая шапка для mobile.
+     Навигация остаётся горизонтально прокручиваемой.
      ------------------------------ */
-
 
   .header__inner {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 10px;
     align-items: start;
     min-width: 0;
-    padding: 18px 0;
+    padding: 12px 0;
   }
 
   .logo {
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
     align-items: center;
     width: 100%;
     max-width: 100%;
@@ -998,37 +1005,39 @@ h1 {
   }
 
   .logo__mark {
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
-    border-radius: 16px;
-    flex: 0 0 56px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 14px;
+    flex: 0 0 44px;
   }
 
   .logo__title {
-    font-size: 22px;
+    font-size: 18px;
     line-height: 1;
     white-space: nowrap;
     letter-spacing: 0.01em;
   }
 
   .logo__subtitle {
-    max-width: 260px;
-    margin-top: 6px;
-    font-size: 14px;
+    max-width: 220px;
+    margin-top: 4px;
+    font-size: 12px;
     line-height: 1.25;
   }
 
   .nav {
     display: flex;
     justify-content: flex-start;
-    gap: 18px;
+    gap: 14px;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 10px 6px 0;
+    padding: 0 10px 4px 0;
+    color: #2c3137;
+    font-size: 13px;
     white-space: nowrap;
     scroll-padding-right: 10px;
     -webkit-overflow-scrolling: touch;
@@ -1043,32 +1052,35 @@ h1 {
   }
 
   .header__phone {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   /* ------------------------------
      HERO / ПЕРВЫЙ ЭКРАН
+     Уменьшаем высоту первого экрана,
+     скрываем desktop-изображение и выводим CTA выше.
      ------------------------------ */
 
   .hero {
-    padding: 54px 0 64px;
+    padding: 36px 0 44px;
   }
 
   .hero__grid {
     grid-template-columns: 1fr;
-    gap: 34px;
+    gap: 28px;
   }
 
   .hero h1 {
     max-width: 100%;
-    font-size: clamp(42px, 13vw, 68px);
-    line-height: 0.98;
-    letter-spacing: -0.07em;
+    font-size: clamp(34px, 10vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .hero__text {
     max-width: 100%;
-    font-size: 20px;
+    font-size: 16px;
+    line-height: 1.45;
   }
 
   .hero__actions {
@@ -1086,25 +1098,29 @@ h1 {
   }
 
   /* ------------------------------
-     TYPOGRAPHY / ЗАГОЛОВКИ СЕКЦИЙ
+     TYPOGRAPHY / ЗАГОЛОВКИ И ТЕКСТЫ
+     Уменьшаем крупную типографику только на mobile.
      ------------------------------ */
 
   .section__head h2,
   .ai-summary h2,
   .trust-block h2,
   .info-list-block h2 {
-    font-size: clamp(34px, 10vw, 48px);
-    line-height: 1;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.06;
   }
 
   .section__head p,
+  .hero__text,
   .ai-summary ul,
   .info-list-block ul {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.45;
   }
 
   /* ------------------------------
      GRIDS / СЕТКИ
+     Все основные сетки переводим в одну колонку.
      ------------------------------ */
 
   .product-grid,
@@ -1121,7 +1137,8 @@ h1 {
   }
 
   /* ------------------------------
-     CARDS / КАРТОЧКИ
+     COMMON CARDS / ОБЩИЕ КАРТОЧКИ
+     Защита от переполнения и выравнивание ширины.
      ------------------------------ */
 
   .product-card,
@@ -1137,28 +1154,550 @@ h1 {
   }
 
   /* ------------------------------
-     FORM / ФОРМА
+     PRODUCT & SERVICE CARDS / КАРТОЧКИ ПРОДУКТОВ И УСЛУГ
+     Делаем карточки компактнее, не меняя классы
+     и transition-сценарии.
+     ------------------------------ */
+
+  .product-card,
+  .service-card {
+    min-height: auto;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .product-card span,
+  .service-card span {
+    margin-bottom: 24px;
+  }
+
+  .product-card h3,
+  .service-card h3 {
+    font-size: 22px;
+  }
+
+  .product-card p,
+  .service-card p {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* ------------------------------
+     AI SUMMARY / КРАТКО О СТРАНИЦЕ
+     Блок сохраняем для AI-ready / GEO / AEO,
+     но уменьшаем визуальный вес на mobile.
+     ------------------------------ */
+
+  .ai-summary {
+    gap: 16px;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .ai-summary__label {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .ai-summary ul {
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* ------------------------------
+     TRUST & INFO BLOCKS / ДОВЕРИЕ И СПИСКИ
+     Уплотняем информационные блоки на страницах
+     продуктов и услуг без скрытия важных смыслов.
+     ------------------------------ */
+
+  .trust-block,
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .trust-block {
+    margin-top: 24px;
+  }
+
+  .trust-block__grid,
+  .info-list-grid {
+    gap: 14px;
+  }
+
+  .trust-block__item {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .trust-block__item h3 {
+    font-size: 18px;
+  }
+
+  .trust-block__item p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .info-list-block ul {
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* ------------------------------
+     EXPERTISE / PROCESS / CASES
+     Уплотняем дополнительные карточки главной страницы:
+     инженерная экспертиза, производственный процесс и кейсы.
+     ------------------------------ */
+
+  .expertise-card,
+  .case-card {
+    min-height: auto;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .expertise-card span,
+  .case-card span {
+    margin-bottom: 24px;
+  }
+
+  .expertise-card h3,
+  .case-card h3 {
+    font-size: 21px;
+    line-height: 1.1;
+  }
+
+  .expertise-card p,
+  .case-card p {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .process-item {
+    gap: 14px;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .process-item span {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+
+  .process-item h3 {
+    font-size: 22px;
+    line-height: 1.12;
+  }
+
+  .process-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* ------------------------------
+     CONTACT BLOCK / БЛОК ЗАЯВКИ
+     Уменьшаем расстояние между пояснением и формой.
+     Саму форму не скрываем.
+     ------------------------------ */
+
+  .contact-grid {
+    gap: 24px;
+  }
+
+  .contact-note {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .contact-note strong {
+    font-size: 15px;
+  }
+
+  .contact-note span {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* ------------------------------
+     LEAD FORM / ФОРМА ЗАЯВКИ
+     Делаем поля компактнее, сохраняя удобство
+     заполнения, отправку заявки и прикрепление файла.
      ------------------------------ */
 
   .lead-form {
-    padding: 22px;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .lead-form__grid {
+    gap: 12px;
+  }
+
+  .lead-form label {
+    gap: 6px;
+    font-size: 13px;
   }
 
   .lead-form input,
   .lead-form select,
   .lead-form textarea {
     min-width: 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .lead-form input::placeholder,
+  .lead-form textarea::placeholder {
+    color: #7a828c;
+    font-weight: 500;
+  }
+
+  .lead-form textarea {
+    min-height: 120px;
+  }
+
+  .lead-form__message {
+    margin-top: 12px;
   }
 
   .lead-form__consent {
     align-items: flex-start;
+    margin: 14px 0 18px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .lead-form .button {
+    width: 100%;
+    min-height: 50px;
   }
 
   /* ------------------------------
      FOOTER / ПОДВАЛ
+     Уменьшаем высоту и визуальный вес footer,
+     сохраняя навигацию, экосистему и контакты.
      ------------------------------ */
 
+  .footer {
+    padding: 32px 0;
+  }
+
   .footer__grid {
-    gap: 30px;
+    gap: 24px;
+  }
+
+  .footer__brand {
+    font-size: 22px;
+  }
+
+  .footer p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .footer__nav,
+  .footer__ecosystem,
+  .footer__contacts {
+    gap: 9px;
+  }
+
+  .footer__nav a,
+  .footer__ecosystem a {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .footer__contacts a {
+    font-size: 18px;
+  }
+
+  .footer__contacts span {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* =========================================================
+   TABLET / ПРОМЕЖУТОЧНЫЕ ЭКРАНЫ 641–960px
+   Дополнительная настройка Hero для планшетов:
+   mobile-логика уже включена, но первый экран не должен
+   выглядеть как растянутый телефон.
+   ========================================================= */
+
+@media (min-width: 641px) and (max-width: 960px) {
+  .hero__content {
+    max-width: 760px;
+  }
+
+  .hero h1 {
+    font-size: clamp(44px, 7vw, 56px);
+    line-height: 1;
+  }
+
+  .hero__text {
+    max-width: 760px;
+  }
+
+  .hero__actions {
+    max-width: 720px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE / УЗКИЕ МОБИЛЬНЫЕ ЭКРАНЫ ДО 640px
+   Дополнительная оптимизация для экранов 360–640px:
+   - ещё компактнее header;
+   - короче первый экран;
+   - меньше вертикальные отступы;
+   - компактнее карточки, AI Summary и форма заявки.
+   ========================================================= */
+
+@media (max-width: 640px) {
+  /* ------------------------------
+     HEADER / ШАПКА
+     Скрываем второстепенный подзаголовок логотипа,
+     чтобы шапка занимала меньше места на узких экранах.
+     ------------------------------ */
+
+  .logo__subtitle {
+    display: none;
+  }
+
+  .logo__title {
+    font-size: 17px;
+  }
+
+  .header__phone {
+    font-size: 15px;
+  }
+
+  /* ------------------------------
+     HERO / ПЕРВЫЙ ЭКРАН
+     Уменьшаем высоту первого экрана и размер текста,
+     чтобы CTA быстрее попадал в зону видимости.
+     ------------------------------ */
+
+  .hero {
+    padding: 30px 0 36px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .hero__text {
+    font-size: 15px;
+  }
+
+  /* ------------------------------
+     SECTIONS / ОБЩИЕ СЕКЦИИ
+     Сокращаем вертикальные отступы и заголовки,
+     чтобы мобильная версия не ощущалась растянутой.
+     ------------------------------ */
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .section__head h2,
+  .ai-summary h2,
+  .trust-block h2,
+  .info-list-block h2 {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .section__head p {
+    font-size: 15px;
+  }
+
+  /* ------------------------------
+     AI SUMMARY / КРАТКО О СТРАНИЦЕ
+     Блок сохраняем для AI-ready / GEO / AEO,
+     но уменьшаем визуальный вес на mobile.
+     ------------------------------ */
+
+  .section--summary {
+    padding: 24px 0 36px;
+  }
+
+  .ai-summary {
+    padding: 18px;
+  }
+
+  .ai-summary ul {
+    font-size: 14px;
+  }
+
+  /* ------------------------------
+     PRODUCT & SERVICE CARDS / КАРТОЧКИ
+     Уплотняем карточки продуктов и услуг,
+     не меняя классы и transition-сценарии.
+     ------------------------------ */
+
+  .product-card,
+  .service-card {
+    padding: 18px;
+  }
+
+  .product-card h3,
+  .service-card h3 {
+    font-size: 20px;
+  }
+
+  /* ------------------------------
+     TRUST & INFO BLOCKS / ДОВЕРИЕ И СПИСКИ
+     Уплотняем информационные блоки на страницах
+     продуктов и услуг без скрытия важных смыслов.
+     ------------------------------ */
+
+  .trust-block,
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .trust-block {
+    margin-top: 24px;
+  }
+
+  .trust-block__grid,
+  .info-list-grid {
+    gap: 14px;
+  }
+
+  .trust-block__item {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .trust-block__item h3 {
+    font-size: 18px;
+  }
+
+  .trust-block__item p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .info-list-block ul {
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* ------------------------------
+     CONTACT BLOCK / БЛОК ЗАЯВКИ
+     Уменьшаем расстояние между пояснением и формой.
+     Саму форму не скрываем.
+     ------------------------------ */
+
+  .contact-grid {
+    gap: 20px;
+  }
+
+  .contact-note {
+    padding: 16px;
+  }
+
+  /* ------------------------------
+     LEAD FORM / ФОРМА ЗАЯВКИ
+     Делаем поля и textarea компактнее,
+     сохраняем удобство нажатия и отправку файла.
+     ------------------------------ */
+
+  .lead-form {
+    padding: 18px;
+  }
+
+  .lead-form label {
+    font-size: 12px;
+  }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    padding: 11px 12px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .lead-form textarea {
+    min-height: 104px;
+  }
+
+  .lead-form__consent {
+    font-size: 11px;
+  }
+
+  /* ------------------------------
+     FOOTER / ПОДВАЛ
+     Уменьшаем высоту и визуальный вес footer
+     на узких мобильных экранах.
+     ------------------------------ */
+
+  .footer {
+    padding: 28px 0;
+  }
+
+  .footer__brand {
+    font-size: 20px;
+  }
+
+  .footer p {
+    max-width: 100%;
+  }
+
+    /* ------------------------------
+     TRUST & INFO BLOCKS / ДОВЕРИЕ И СПИСКИ
+     Дополнительно уплотняем блоки на узких экранах.
+     ------------------------------ */
+
+  .trust-block,
+  .info-list-block {
+    padding: 18px;
+  }
+
+  .trust-block__item {
+    padding: 16px;
+  }
+
+  .trust-block__item h3 {
+    font-size: 17px;
+  }
+
+  .trust-block__item p,
+  .info-list-block ul {
+    font-size: 14px;
+  }
+
+    /* ------------------------------
+     EXPERTISE / PROCESS / CASES
+     Дополнительное уплотнение карточек на экранах 360–640px.
+     ------------------------------ */
+
+  .expertise-card,
+  .case-card {
+    padding: 18px;
+  }
+
+  .expertise-card h3,
+  .case-card h3,
+  .process-item h3 {
+    font-size: 20px;
+  }
+
+  .process-item {
+    padding: 18px;
   }
 }
