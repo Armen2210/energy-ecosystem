@@ -5,6 +5,7 @@
 // =========================================================
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { createLead } from "../../api/leadsApi";
 
@@ -160,11 +161,14 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       />
 
       <label className="lead-form__consent">
-        <input type="checkbox" name="consent" />
-        <span>
-          Я согласен на обработку персональных данных и передачу информации для
-          подготовки ответа по заявке.
-        </span>
+          <input type="checkbox" name="consent" />
+          <span>
+            Я согласен на обработку персональных данных и передачу информации для
+            подготовки ответа по заявке.{" "}
+            <Link to="/privacy" target="_blank" rel="noreferrer">
+              Политика обработки персональных данных
+            </Link>
+          </span>
       </label>
 
       {submitMessage && (

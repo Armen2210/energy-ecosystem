@@ -1,7 +1,7 @@
 // =========================================================
 // FOOTER / ПОДВАЛ САЙТА
 // Нижний блок сайта: краткое позиционирование, навигация,
-// экосистема компаний и контакты.
+// экосистема компаний, контакты и юридические ссылки.
 // =========================================================
 
 import { Link } from "react-router-dom";
@@ -16,30 +16,35 @@ function Footer({ navigation }) {
             Инженерная производственная платформа: БМК, БТП, ВНС, ПНС,
             шкафы управления и услуги для инженерных объектов.
           </p>
+
+          <div className="footer__legal">
+            <span>© ООО «Энергоэффект»</span>
+            <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
+              Политика обработки персональных данных
+            </Link>
+          </div>
         </div>
 
         <nav className="footer__nav">
           <Link to="/about" state={{ entryScroll: "top-smooth" }}>
-              О компании
+            О компании
           </Link>
-
 
           {navigation.map((item) => (
             <Link to={item.url} key={item.title}>
               {item.title}
             </Link>
           ))}
+
+          <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
+            Политика
+          </Link>
         </nav>
 
         <div className="footer__ecosystem">
           <div className="footer__title">Экосистема</div>
 
-
-
-          <Link
-            to="/"
-            state={{ entryScroll: "top-smooth" }}
-          >
+          <Link to="/" state={{ entryScroll: "top-smooth" }}>
             Энергоэффект — производственные решения
           </Link>
 
@@ -62,6 +67,7 @@ function Footer({ navigation }) {
 
         <div className="footer__contacts">
           <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+          <a href="mailto:info@energoeffect.ru">info@energoeffect.ru</a>
           <span>
             Заявки на производство, проектирование, строительно-монтажные работы
             и пусконаладку

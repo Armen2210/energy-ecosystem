@@ -20,6 +20,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ServicePage from "./pages/ServicePage";
 import ServicesPage from "./pages/ServicesPage";
 import SolutionsPage from "./pages/SolutionsPage";
+import PrivacyPage from "./pages/PrivacyPage/PrivacyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import "./App.css";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/cases" element={<CasesPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
