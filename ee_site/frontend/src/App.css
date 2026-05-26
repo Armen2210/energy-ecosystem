@@ -629,7 +629,24 @@ h1 {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 42px;
-  align-items: start;
+  align-items: stretch;
+}
+
+/* =========================================================
+   CONTACT CONTENT / ЛЕВАЯ КОЛОНКА КОНТАКТНОГО БЛОКА
+   Используется в финальном CTA-блоке главной страницы.
+   Задача: держать контактные карточки ближе к нижней части
+   формы, чтобы блок выглядел собранно и сбалансированно.
+   ========================================================= */
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact-content .contact-note:first-of-type {
+  margin-top: auto;
 }
 
 .contact-note {
@@ -651,6 +668,27 @@ h1 {
   color: var(--color-muted);
   font-size: 15px;
   line-height: 1.45;
+}
+
+/* =========================================================
+   CONTACT NOTE LINKS / ССЫЛКИ В КОНТАКТНЫХ КАРТОЧКАХ
+   Используются на странице /contacts:
+   телефон и email должны быть визуально понятны как ссылки.
+   ========================================================= */
+
+.contact-note a {
+  color: var(--color-red);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-note a:hover {
+  color: var(--color-red-dark);
+}
+
+.contact-note--secondary {
+  margin-top: 14px;
 }
 
 .lead-form {
@@ -1451,6 +1489,14 @@ h1 {
     gap: 24px;
   }
 
+  .contact-content {
+    height: auto;
+  }
+
+  .contact-content .contact-note:first-of-type {
+    margin-top: 0;
+  }
+
   .contact-note {
     padding: 18px;
     border-radius: 20px;
@@ -1887,19 +1933,19 @@ h1 {
     font-size: 14px;
   }
 
-  /* ------------------------------
-     FOOTER / ПОДВАЛ
-     Уменьшаем высоту и визуальный вес footer
-     на узких мобильных экранах.
+    /* ------------------------------
+     FOOTER / ПОДВАЛ НА SMALL MOBILE
+     Дополнительно уплотняем footer на узких экранах.
+     Сохраняем все важные ссылки, но уменьшаем высоту блока.
      ------------------------------ */
 
   .footer {
-    padding: 28px 0;
+    padding: 22px 0;
   }
 
-    .footer__grid {
+  .footer__grid {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 18px;
   }
 
   .footer__grid > div:first-child,
@@ -1908,19 +1954,66 @@ h1 {
   }
 
   .footer__brand {
-    font-size: 20px;
+    font-size: 17px;
+    line-height: 1.1;
   }
 
   .footer p {
     max-width: 100%;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.35;
   }
 
-    .footer__legal {
+  .footer__legal {
+    gap: 5px;
+    margin-top: 10px;
     font-size: 12px;
+    line-height: 1.3;
   }
 
   .footer__legal a {
-    max-width: 220px;
+    max-width: 240px;
+    line-height: 1.3;
+  }
+
+  .footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 14px;
+  }
+
+  .footer__nav a {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .footer__ecosystem {
+    gap: 7px;
+  }
+
+  .footer__title {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .footer__ecosystem a {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .footer__contacts {
+    gap: 7px;
+  }
+
+  .footer__contacts a {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  .footer__contacts span {
+    max-width: 100%;
+    font-size: 12px;
+    line-height: 1.3;
   }
 
     /* ------------------------------

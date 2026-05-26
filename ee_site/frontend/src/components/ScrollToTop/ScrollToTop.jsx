@@ -47,10 +47,17 @@ function getSectionScrollTop(sectionId) {
     return 0;
   }
 
+  /*
+    SECTION SCROLL / ПРОКРУТКА К СЕКЦИИ
+    Скроллим к самой секции, но добавляем небольшой сдвиг вниз.
+    Это нужно, чтобы при переходе из навигации пользователь попадал
+    не “чуть раньше” блока, а видел начало нужного смыслового раздела.
+  */
   const headerHeight = getHeaderHeight();
   const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+  const visualOffset = 12;
 
-  return Math.max(sectionTop - headerHeight - 24, 0);
+  return Math.max(sectionTop - headerHeight + visualOffset, 0);
 }
 
 function animateScrollToTop(duration = 2200, onComplete) {
@@ -192,24 +199,34 @@ function ScrollToTop() {
     }
 
     if (hash) {
-        const targetElement = document.querySelector(hash);
+      /*
+        HASH SCROLL / ПРОКРУТКА К СЕКЦИЯМ ГЛАВНОЙ
+        Используем ручной расчёт позиции вместо scrollIntoView,
+        чтобы стабильно учитывать sticky-header и избежать ситуации,
+        когда адрес изменился, а прокрутка не произошла.
+      */
 
-        if (targetElement) {
-            targetElement.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-        }
+      const sectionId = hash.replace("#", "");
 
-      return;
- }
+      scrollTimer = setTimeout(() => {
+        window.scrollTo({
+          top: getSectionScrollTop(sectionId),
+          left: 0,
+          behavior: "smooth",
+        });
+      }, 80);
+
+      return () => {
+        clearTimeout(scrollTimer);
+      };
+    }
 
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "auto",
     });
-  }, [pathname, hash, state, navigate]);
+  }, [pathname, hash, state, navigate, location.key]);
 
   return null;
 }

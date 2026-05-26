@@ -14,6 +14,7 @@ import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
 import TrustBlock from "../../components/TrustBlock";
+import Seo from "../../components/Seo";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -115,7 +116,13 @@ function ServicePage() {
 
   return (
     <main>
-      <section className="section">
+      <Seo
+          title={`${service.title} — инженерные услуги | Энергоэффект`}
+          description={`${service.title}: работы для инженерных объектов с учётом требований проекта, условий объекта, эксплуатации и сроков. Можно отправить ТЗ, проект или спецификацию для первичной оценки.`}
+          path={`/services/${service.slug}`}
+      />
+
+       <section className="section">
         <div className="container">
           <SectionHeader
             eyebrow={service.shortTitle}

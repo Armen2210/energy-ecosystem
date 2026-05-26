@@ -4,7 +4,7 @@
 // Header, маршруты страниц и Footer.
 // =========================================================
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -13,7 +13,6 @@ import { navigation } from "./data/navigation";
 
 import AboutPage from "./pages/AboutPage";
 import CasesPage from "./pages/CasesPage";
-import ContactsPage from "./pages/ContactsPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import ScrollToTop from "./components/ScrollToTop";
@@ -40,7 +39,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/cases" element={<CasesPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/contacts" element={<Navigate to="/#contacts" replace />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

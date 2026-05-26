@@ -14,6 +14,7 @@ import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
 import SectionHeader from "../../components/SectionHeader";
 import TrustBlock from "../../components/TrustBlock";
+import Seo from "../../components/Seo";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -149,6 +150,8 @@ function ProductPage() {
   if (!product) {
     return (
       <main>
+
+
         <section className="section">
           <div className="container">
             <SectionHeader
@@ -166,6 +169,12 @@ function ProductPage() {
 
   return (
     <main>
+      <Seo
+          title={`${product.title} — производство и инженерное решение | Энергоэффект`}
+          description={`${product.title}: подбор и производство под требования объекта, проектные условия, эксплуатацию и сроки. Можно отправить ТЗ, проект или спецификацию для первичной оценки.`}
+          path={`/solutions/${product.slug}`}
+      />
+
       <section className="section">
         <div className="container">
           <SectionHeader

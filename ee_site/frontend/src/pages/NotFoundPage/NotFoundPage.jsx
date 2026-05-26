@@ -10,10 +10,17 @@
 import { Link } from "react-router-dom";
 
 import SectionHeader from "../../components/SectionHeader";
+import Seo from "../../components/Seo";
 
 function NotFoundPage() {
   return (
     <main>
+      <Seo
+        title="Страница не найдена — Энергоэффект"
+        description="Страница не найдена. Вернитесь на главную, перейдите к продукции или оставьте заявку на инженерное решение."
+        path="/404"
+      />
+
       <section className="section">
         <div className="container">
           <SectionHeader

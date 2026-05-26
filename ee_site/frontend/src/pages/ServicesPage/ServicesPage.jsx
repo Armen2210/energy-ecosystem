@@ -4,12 +4,20 @@
 // =========================================================
 
 import SectionHeader from "../../components/SectionHeader";
+import Seo from "../../components/Seo";
 import ServiceCard from "../../components/ServiceCard";
+
 import { services } from "../../data/services";
 
 function ServicesPage() {
   return (
     <main>
+      <Seo
+        title="Услуги Энергоэффект — проектирование, СМР и пусконаладка"
+        description="Инженерные услуги ООО «Энергоэффект»: проектирование инженерных объектов и сетей, строительно-монтажные работы, пусконаладка и ввод систем в эксплуатацию."
+        path="/services"
+      />
+
       <section className="section">
         <div className="container">
           <SectionHeader

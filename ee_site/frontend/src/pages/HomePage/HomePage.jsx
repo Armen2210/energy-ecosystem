@@ -14,6 +14,7 @@ import ProcessSteps from "../../components/ProcessSteps";
 import ProductCard from "../../components/ProductCard";
 import SectionHeader from "../../components/SectionHeader";
 import ServiceCard from "../../components/ServiceCard";
+import Seo from "../../components/Seo";
 
 import { products } from "../../data/products";
 import { services } from "../../data/services";
@@ -50,6 +51,12 @@ const productionSteps = [
 function HomePage() {
   return (
     <main>
+      <Seo
+        title="Энергоэффект — производство БМК, БТП, ВНС, ПНС и инженерные услуги"
+        description="ООО «Энергоэффект» проектирует и производит БМК, БТП, ВНС, ПНС, шкафы управления и выполняет проектирование, СМР и пусконаладку инженерных объектов."
+        path="/"
+      />
+
       <Hero image={heroImage} />
 
       {/* =========================================================
@@ -210,24 +217,55 @@ function HomePage() {
           MVP-блок для сбора заявок.
           ========================================================= */}
 
+      {/* =========================================================
+    CONTACTS / КОНТАКТЫ И ЗАЯВКА
+    Единый финальный CTA-блок главной страницы.
+    Сюда ведут пункты “Контакты” из header и footer.
+    Отдельную страницу контактов в пользовательском сценарии
+    не используем, чтобы не дробить путь клиента.
+    ========================================================= */}
+
       <section className="section section--contact" id="contacts">
-        <div className="container contact-grid">
-          <div>
-            <SectionHeader
-              eyebrow="Заявка"
-              title="Обсудим инженерную задачу вашего объекта"
-              description="Оставьте контакты, кратко опишите задачу и приложите файл, если есть техническое задание, проект или спецификация."
-            />
+          <div className="container contact-grid">
+            <div className="contact-content">
+              <SectionHeader
+                eyebrow="Контакты"
+                title="Обсудим инженерную задачу вашего объекта"
 
-            <div className="contact-note">
-              <strong>Что можно отправить:</strong>
-              <span>ТЗ, проект, спецификацию, опросный лист или краткое описание объекта.</span>
+              />
+
+              <div className="contact-note">
+                <strong>Как с нами связаться:</strong>
+
+                <span>
+                  Телефон:{" "}
+                  <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+                </span>
+
+                <span>
+                  Email:{" "}
+                  <a href="mailto:info@energoeffect.ru">
+                    info@energoeffect.ru
+                  </a>
+                </span>
+
+                <span>Режим работы: Пн–Пт, 08:00–17:00</span>
+
+                <span>Заявку через сайт можно отправить в любое время.</span>
+              </div>
+
+              <div className="contact-note contact-note--secondary">
+                <strong>Что можно отправить:</strong>
+                <span>
+                  ТЗ, проект, спецификацию, опросный лист, фото объекта или краткое
+                  описание задачи.
+                </span>
+              </div>
             </div>
-          </div>
 
-          <LeadForm products={products} services={services} />
-        </div>
-      </section>
+            <LeadForm products={products} services={services} />
+          </div>
+        </section>
     </main>
   );
 }

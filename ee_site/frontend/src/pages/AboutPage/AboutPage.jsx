@@ -4,11 +4,18 @@
 // =========================================================
 
 import SectionHeader from "../../components/SectionHeader";
+import Seo from "../../components/Seo";
 import TrustBlock from "../../components/TrustBlock";
 
 function AboutPage() {
   return (
     <main>
+      <Seo
+        title="О компании Энергоэффект — инженерная производственная платформа"
+        description="ООО «Энергоэффект» проектирует и производит инженерные системы для объектов: БМК, БТП, ВНС, ПНС, шкафы управления, проектирование, СМР и пусконаладка."
+        path="/about"
+      />
+
       <section className="section">
         <div className="container">
           <SectionHeader
