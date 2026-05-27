@@ -2341,3 +2341,108 @@ h1 {
     padding: 18px;
   }
 }
+
+/* =========================================================
+   FOOTER MOBILE COMPACT FIX / КОМПАКТНЫЙ FOOTER НА MOBILE
+   Исправляет footer без изменения Footer.jsx:
+   - защищает от горизонтального переполнения;
+   - на планшетах оставляет 2 колонки;
+   - на узких телефонах переводит footer в 1 колонку;
+   - уменьшает высоту подвала без удаления важных ссылок.
+   ========================================================= */
+
+.footer,
+.footer * {
+  min-width: 0;
+}
+
+.footer a,
+.footer span,
+.footer p {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Планшеты и широкие mobile: footer в 2 колонки */
+@media (min-width: 641px) and (max-width: 960px) {
+  .footer {
+    padding: 28px 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px 32px;
+  }
+
+  .footer__grid > div:first-child,
+  .footer__contacts {
+    grid-column: auto;
+  }
+
+  .footer p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .footer__brand {
+    font-size: 20px;
+  }
+
+  .footer__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__ecosystem a,
+  .footer__nav a {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .footer__contacts a {
+    font-size: 18px;
+  }
+
+  .footer__contacts span {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+}
+
+/* Узкие телефоны: footer в 1 колонку, но максимально компактный */
+@media (max-width: 640px) {
+  .footer {
+    padding: 22px 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer__brand {
+    font-size: 17px;
+  }
+
+  .footer p,
+  .footer__legal,
+  .footer__ecosystem a,
+  .footer__contacts span {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 14px;
+  }
+
+  .footer__nav a {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .footer__contacts a {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+}
