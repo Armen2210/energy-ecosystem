@@ -141,6 +141,10 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         <label>
           Файл
           <input type="file" name="attachment" />
+          <span className="lead-form__file-note">
+            Не прикрепляйте документы, содержащие персональные данные третьих
+            лиц, если у вас нет права на их передачу.
+          </span>
         </label>
       </div>
 
@@ -161,14 +165,14 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       />
 
       <label className="lead-form__consent">
-          <input type="checkbox" name="consent" />
-          <span>
-            Я согласен на обработку персональных данных и передачу информации для
-            подготовки ответа по заявке.{" "}
-            <Link to="/privacy" target="_blank" rel="noopener noreferrer">
-              Политика обработки персональных данных
-            </Link>
-          </span>
+        <input type="checkbox" name="consent" />
+        <span>
+          Я согласен на обработку персональных данных и передачу информации для
+          подготовки ответа по заявке.{" "}
+          <Link to="/privacy" target="_blank" rel="noopener noreferrer">
+            Политика обработки персональных данных
+          </Link>
+        </span>
       </label>
 
       {submitMessage && (
