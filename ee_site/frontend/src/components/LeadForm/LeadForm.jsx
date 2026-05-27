@@ -165,7 +165,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <span>
             Я согласен на обработку персональных данных и передачу информации для
             подготовки ответа по заявке.{" "}
-            <Link to="/privacy" target="_blank" rel="noreferrer">
+            <Link to="/privacy" target="_blank" rel="noopener noreferrer">
               Политика обработки персональных данных
             </Link>
           </span>

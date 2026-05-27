@@ -6,6 +6,7 @@
 
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import CookieBanner from "./components/CookieBanner";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
@@ -45,6 +46,7 @@ function App() {
       </Routes>
 
       <Footer navigation={navigation} />
+      <CookieBanner />
     </div>
   );
 }

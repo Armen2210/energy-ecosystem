@@ -918,6 +918,82 @@ h1 {
 }
 
 /* =========================================================
+   COOKIE BANNER / УВЕДОМЛЕНИЕ О COOKIES
+   Небольшой фиксированный баннер внизу экрана.
+   Не перекрывает основной сценарий, но даёт пользователю
+   понятное уведомление и ссылку на раздел cookies в политике.
+   ========================================================= */
+
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 1200;
+  padding: 0 18px;
+  pointer-events: none;
+}
+
+.cookie-banner__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding: 16px 18px;
+  border: 1px solid rgba(238, 120, 50, 0.24);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 22px 60px rgba(18, 39, 61, 0.16);
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+}
+
+.cookie-banner p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.cookie-banner__actions a {
+  color: var(--color-red);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner__actions button {
+  min-height: 42px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--color-red);
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.cookie-banner__actions button:hover {
+  transform: translateY(-1px);
+  background: var(--color-red-dark);
+}
+
+/* =========================================================
    FOOTER / ПОДВАЛ САЙТА
    Нижний блок: позиционирование, навигация и контакты.
    ========================================================= */
@@ -2100,6 +2176,43 @@ h1 {
   .privacy-page__details span {
     font-size: 13px;
     line-height: 1.4;
+  }
+
+    /* ------------------------------
+     COOKIE BANNER / COOKIES НА SMALL MOBILE
+     На узких экранах баннер становится вертикальным,
+     чтобы не ломать ширину страницы.
+     ------------------------------ */
+
+  .cookie-banner {
+    bottom: 12px;
+    padding: 0 12px;
+  }
+
+  .cookie-banner__content {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .cookie-banner p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .cookie-banner__actions {
+    justify-content: space-between;
+  }
+
+  .cookie-banner__actions button {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+
+  .cookie-banner__actions a {
+    font-size: 13px;
   }
 
     /* ------------------------------
