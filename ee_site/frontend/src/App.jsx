@@ -19,7 +19,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ServicePage from "./pages/ServicePage";
 import ServicesPage from "./pages/ServicesPage";
 import SolutionsPage from "./pages/SolutionsPage";
-import PrivacyPage from "./pages/PrivacyPage/PrivacyPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import "./App.css";
