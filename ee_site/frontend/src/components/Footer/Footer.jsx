@@ -18,10 +18,11 @@ function Footer({ navigation }) {
           </p>
 
           <div className="footer__legal">
-            <span>© ООО «Энергоэффект»</span>
-            <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
-              Политика обработки персональных данных
-            </Link>
+              <span>© ООО «Энергоэффект»</span>
+              <span>ИНН: 6161070112</span>
+              <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
+                Политика обработки персональных данных
+              </Link>
           </div>
         </div>
 

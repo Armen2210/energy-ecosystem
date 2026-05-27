@@ -642,18 +642,20 @@ h1 {
 .contact-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
+  gap: 18px;
 }
 
-.contact-content .contact-note:first-of-type {
-  margin-top: auto;
+.contact-content .section__head {
+  margin-bottom: 0;
 }
 
 .contact-note {
   display: grid;
   gap: 8px;
   max-width: 520px;
-  padding: 22px;
+  padding: 18px 20px;
   border: 1px solid var(--color-border);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.82);
@@ -688,7 +690,7 @@ h1 {
 }
 
 .contact-note--secondary {
-  margin-top: 14px;
+  margin-top: 0;
 }
 
 .lead-form {
@@ -1196,6 +1198,22 @@ h1 {
   color: var(--color-muted);
   font-size: 17px;
   line-height: 1.65;
+}
+
+.privacy-page__details {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 18px 20px;
+  border: 1px solid rgba(238, 120, 50, 0.2);
+  border-radius: 20px;
+  background: rgba(249, 115, 22, 0.04);
+}
+
+.privacy-page__details span {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.45;
 }
 
 /* =========================================================
@@ -2070,6 +2088,18 @@ h1 {
   .privacy-page__section p {
     font-size: 14px;
     line-height: 1.55;
+  }
+
+  .privacy-page__details {
+    gap: 7px;
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .privacy-page__details span {
+    font-size: 13px;
+    line-height: 1.4;
   }
 
     /* ------------------------------
