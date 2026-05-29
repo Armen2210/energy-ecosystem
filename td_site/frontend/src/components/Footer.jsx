@@ -28,6 +28,7 @@ function Footer() {
             <Link to="/cases">Кейсы</Link>
             <Link to="/about">О компании</Link>
             <Link to="/contacts">Контакты</Link>
+            <Link to="/privacy">Политика обработки данных</Link>
           </nav>
 
           <div className="footer__column">
@@ -65,6 +66,10 @@ function Footer() {
 
         <div className="footer__bottom">
           <span>© 2026 ТД Энергоэффект</span>
+
+          <Link to="/privacy">
+            Политика обработки персональных данных
+          </Link>
         </div>
       </div>
     </footer>
