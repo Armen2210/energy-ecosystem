@@ -69,6 +69,29 @@ function Contacts() {
                 </p>
               </article>
             </div>
+
+            <div className="page-grid page-grid--details">
+              <article className="info-card info-card--wide">
+                <h3>Реквизиты компании</h3>
+
+                <p>
+                  <strong>Полное наименование:</strong> укажите полное юридическое наименование
+                  <br />
+                  <strong>ИНН:</strong> укажите ИНН
+                  <br />
+                  <strong>ОГРН:</strong> укажите ОГРН
+                  <br />
+                  <strong>Юридический адрес:</strong> укажите юридический адрес
+                  <br />
+                  <strong>Фактический адрес:</strong> Ростов-на-Дону
+                  <br />
+                  <strong>Email:</strong> salestd@ee-don.ru
+                  <br />
+                  <strong>Телефон:</strong> +7 (938) 124-68-02
+                </p>
+              </article>
+            </div>
+
           </div>
         </section>
 

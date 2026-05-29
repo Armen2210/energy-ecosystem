@@ -7,6 +7,8 @@ import Supply from "./pages/Supply"
 import Directions from "./pages/Directions"
 import Cases from "./pages/Cases"
 import Contacts from "./pages/Contacts"
+import Privacy from "./pages/Privacy"
+import CookieBanner from "./components/CookieBanner"
 
 function App() {
   return (
@@ -26,9 +28,15 @@ function App() {
 
         <Route path="/contacts" element={<Contacts />} />
 
+        <Route path="/privacy" element={<Privacy />} />
+
+
+
       </Routes>
 
       <Footer />
+
+      <CookieBanner />
 
     </>
   )
