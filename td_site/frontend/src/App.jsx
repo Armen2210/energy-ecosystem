@@ -11,7 +11,7 @@
 
 import { Routes, Route } from "react-router-dom"
 
-import Home from "./pages/Home"
+import HomePage from "./pages/HomePage"
 import About from "./pages/About"
 import Supply from "./pages/Supply"
 import Directions from "./pages/Directions"
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/supply" element={<Supply />} />
         <Route path="/directions" element={<Directions />} />

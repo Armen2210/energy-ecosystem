@@ -1,23 +1,40 @@
+// =====================================================
+// HomePage сайта ТД «Энергоэффект»
+//
+// Главная посадочная страница сайта.
+//
+// Задачи:
+// - объяснить роль ТД в экосистеме;
+// - показать сценарии комплексной поставки;
+// - направить пользователя к заявке;
+// - дать доверие через кейсы, FAQ и процесс работы.
+//
+// Важно:
+// файл перенесён в папочную структуру pages/HomePage,
+// чтобы структура ТД постепенно стала ближе к архитектуре ЭЭ.
+// =====================================================
+
 import { Link } from "react-router-dom"
 
-import Header from "../components/Header"
-import Seo from "../components/Seo"
-import DirectionsBlock from "../components/DirectionsBlock"
-import WorkSteps from "../components/WorkSteps"
-import EcosystemSection from "../components/EcosystemSection"
-import CasesPreview from "../components/CasesPreview"
-import FaqSection from "../components/FaqSection"
-import LeadForm from "../components/LeadForm"
-import heroImage from "../assets/hero.png"
+import Header from "../../components/Header"
+import Seo from "../../components/Seo"
+import DirectionsBlock from "../../components/DirectionsBlock"
+import WorkSteps from "../../components/WorkSteps"
+import EcosystemSection from "../../components/EcosystemSection"
+import CasesPreview from "../../components/CasesPreview"
+import FaqSection from "../../components/FaqSection"
+import LeadForm from "../../components/LeadForm"
+import heroImage from "../../assets/hero.png"
 
-function Home() {
+function HomePage() {
   return (
     <>
       <Seo
-          title="ТД Энергоэффект — комплектация инженерных объектов"
-          description="Комплектация инженерных объектов, подбор оборудования, поставка инженерных решений и сопровождение проектов."
-          path="/"
+        title="ТД Энергоэффект — комплектация инженерных объектов"
+        description="Комплектация инженерных объектов, подбор оборудования, поставка инженерных решений и сопровождение проектов."
+        path="/"
       />
+
       <Header />
 
       <main>
@@ -44,7 +61,7 @@ function Home() {
                     Обсудить проект
                   </Link>
 
-                  <a href="tel:+79381693109" className="btn btn--secondary">
+                  <a href="tel:+79381246802" className="btn btn--secondary">
                     Позвонить менеджеру
                   </a>
                 </div>
@@ -137,8 +154,6 @@ function Home() {
           </div>
         </section>
 
-
-
         <WorkSteps />
 
         <EcosystemSection />
@@ -153,4 +168,4 @@ function Home() {
   )
 }
 
-export default Home
+export default HomePage
