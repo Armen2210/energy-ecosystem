@@ -1,4 +1,19 @@
+// =====================================================
+// DirectionsBlock сайта ТД «Энергоэффект»
+//
+// Блок маршрутизации внутри экосистемы.
+// Помогает пользователю выбрать правильный контур:
+// - ТД Энергоэффект;
+// - Энергоэффект;
+// - Теплоучет.
+//
+// Данные карточек вынесены в src/data/ecosystemRoutes.js,
+// чтобы компонент не содержал хардкод.
+// =====================================================
+
 import { Link } from "react-router-dom"
+
+import { ecosystemRoutes } from "../../data/ecosystemRoutes"
 
 function DirectionsBlock() {
   return (
@@ -7,9 +22,7 @@ function DirectionsBlock() {
         <div className="section__head">
           <p className="section__eyebrow">Маршрут внутри экосистемы</p>
 
-          <h2 className="section__title">
-            Что требуется вашему объекту?
-          </h2>
+          <h2 className="section__title">Что требуется вашему объекту?</h2>
 
           <p className="section__text">
             Поможем подобрать оптимальное решение внутри инженерной экосистемы
@@ -18,55 +31,43 @@ function DirectionsBlock() {
         </div>
 
         <div className="routing__grid">
-          <Link to="/contacts" className="routing-card routing-card--main">
-            <span className="routing-card__label">Основной сценарий</span>
+          {ecosystemRoutes.map((item) => {
+            const cardClassName = item.isMain
+              ? "routing-card routing-card--main"
+              : "routing-card"
 
-            <h3>Комплектация объектов</h3>
+            if (item.isExternal) {
+              return (
+                <a
+                  key={item.title}
+                  href={item.path}
+                  className={cardClassName}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="routing-card__label">{item.label}</span>
 
-            <p>
-              Подбор и поставка оборудования и материалов под задачи
-              инженерного проекта.
-            </p>
+                  <h3>{item.title}</h3>
 
-            <span className="routing-card__cta">
-              Обсудить проект
-            </span>
-          </Link>
+                  <p>{item.description}</p>
 
-          <Link to="/supply" className="routing-card">
-            <span className="routing-card__label">Производство</span>
+                  <span className="routing-card__cta">{item.cta}</span>
+                </a>
+              )
+            }
 
-            <h3>Производственные решения</h3>
+            return (
+              <Link key={item.title} to={item.path} className={cardClassName}>
+                <span className="routing-card__label">{item.label}</span>
 
-            <p>
-              БМК, БТП, ЦТП, ВНС и другие инженерные изделия собственного
-              производства.
-            </p>
+                <h3>{item.title}</h3>
 
-            <span className="routing-card__cta">
-              Перейти к решениям
-            </span>
-          </Link>
+                <p>{item.description}</p>
 
-          <a
-            href="https://teplouchet.com/"
-            className="routing-card"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="routing-card__label">Оборудование</span>
-
-            <h3>Оборудование и комплектующие</h3>
-
-            <p>
-              Насосы, КИПиА, арматура и инженерное оборудование для объектов
-              различной сложности.
-            </p>
-
-            <span className="routing-card__cta">
-              Перейти в каталог
-            </span>
-          </a>
+                <span className="routing-card__cta">{item.cta}</span>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>
