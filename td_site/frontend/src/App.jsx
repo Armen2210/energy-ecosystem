@@ -12,9 +12,9 @@
 import { Routes, Route } from "react-router-dom"
 
 import HomePage from "./pages/HomePage"
-import About from "./pages/About"
-import Supply from "./pages/Supply"
-import Directions from "./pages/Directions"
+import AboutPage from "./pages/AboutPage"
+import SupplyPage from "./pages/SupplyPage"
+import DirectionsPage from "./pages/DirectionsPage"
 import Cases from "./pages/Cases"
 import Contacts from "./pages/Contacts"
 import Privacy from "./pages/Privacy"
@@ -27,9 +27,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/supply" element={<Supply />} />
-        <Route path="/directions" element={<Directions />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/supply" element={<SupplyPage />} />
+        <Route path="/directions" element={<DirectionsPage />} />
         <Route path="/cases" element={<Cases />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/privacy" element={<Privacy />} />
