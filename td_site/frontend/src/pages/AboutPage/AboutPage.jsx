@@ -1,14 +1,34 @@
+// =====================================================
+// AboutPage сайта ТД «Энергоэффект»
+//
+// Страница объясняет роль ТД внутри инженерной экосистемы.
+//
+// Задачи страницы:
+// - показать, что ТД не просто поставщик;
+// - объяснить связь ТД, ЭЭ и Теплоучет;
+// - описать принцип работы от задачи объекта.
+//
+// Данные карточек вынесены в src/data/about.js.
+// =====================================================
+
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
 
-function About() {
+import {
+  aboutEcosystemCards,
+  aboutPrincipleCards,
+  aboutRoleCards,
+} from "../../data/about"
+
+function AboutPage() {
   return (
     <>
       <Seo
-          title="О компании — ТД Энергоэффект"
-          description="ТД Энергоэффект — точка входа в инженерную экосистему для комплектации объектов, подбора оборудования и маршрутизации задач."
-          path="/about"
+        title="О компании — ТД Энергоэффект"
+        description="ТД Энергоэффект — точка входа в инженерную экосистему для комплектации объектов, подбора оборудования и маршрутизации задач."
+        path="/about"
       />
+
       <Header />
 
       <main className="page about-page">
@@ -31,35 +51,12 @@ function About() {
         <section className="section">
           <div className="container">
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Не просто поставщик</h3>
-
-                <p>
-                  ТД Энергоэффект помогает не только купить оборудование, но и
-                  выстроить понятный маршрут: от задачи объекта к подбору,
-                  комплектации, поставке и взаимодействию с менеджером.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Связующее звено</h3>
-
-                <p>
-                  Если задаче требуется производственное решение — БМК, БТП,
-                  ЦТП, ВНС или ПНС — клиент может быть направлен в профильное
-                  направление экосистемы.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Комплектация объектов</h3>
-
-                <p>
-                  Работаем с задачами подбора оборудования, материалов,
-                  комплектующих и аналогов под требования проекта, сроки и
-                  особенности реализации.
-                </p>
-              </article>
+              {aboutRoleCards.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -80,32 +77,12 @@ function About() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>ТД Энергоэффект</h3>
-
-                <p>
-                  Комплектация инженерных объектов, подбор оборудования,
-                  организация поставок и первичное обсуждение задач проекта.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Энергоэффект</h3>
-
-                <p>
-                  Производственные решения: блочно-модульные котельные, блочные
-                  тепловые пункты, насосные станции и другие инженерные изделия.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Теплоучет</h3>
-
-                <p>
-                  Оборудование и комплектующие: насосы, КИПиА, арматура,
-                  автоматика и инженерное оборудование для объектов.
-                </p>
-              </article>
+              {aboutEcosystemCards.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -127,34 +104,12 @@ function About() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Работаем от задачи</h3>
-
-                <p>
-                  Клиент может обратиться с проектом, спецификацией, описанием
-                  объекта или предварительным запросом.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Помогаем выбрать маршрут</h3>
-
-                <p>
-                  Если нужна комплектация — обсуждаем проект. Если нужно
-                  производство — направляем к решениям Энергоэффект. Если нужны
-                  комплектующие — в каталог Теплоучет.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Развиваем направление</h3>
-
-                <p>
-                  Направление комплексной комплектации развивается постепенно.
-                  По мере появления реализованных проектов разделы сайта будут
-                  дополняться живыми примерами.
-                </p>
-              </article>
+              {aboutPrincipleCards.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -163,4 +118,4 @@ function About() {
   )
 }
 
-export default About
+export default AboutPage
