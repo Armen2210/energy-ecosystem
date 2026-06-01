@@ -1,3 +1,17 @@
+// =====================================================
+// EcosystemSection сайта ТД «Энергоэффект»
+//
+// Блок показывает соседние направления экосистемы:
+// - производственные решения;
+// - оборудование и комплектующие.
+//
+// Данные карточек вынесены в src/data/ecosystemSolutions.js.
+// =====================================================
+
+import { Link } from "react-router-dom"
+
+import { ecosystemSolutions } from "../../data/ecosystemSolutions"
+
 function EcosystemSection() {
   return (
     <section className="ecosystem section">
@@ -16,44 +30,39 @@ function EcosystemSection() {
         </div>
 
         <div className="ecosystem__grid">
-          <a href="/supply" className="ecosystem-card">
-            <span className="ecosystem-card__label">
-              Производственные решения
-            </span>
+          {ecosystemSolutions.map((item) => {
+            const content = (
+              <>
+                <span className="ecosystem-card__label">{item.label}</span>
 
-            <h3>БМК, БТП, ЦТП, ВНС и другие инженерные изделия</h3>
+                <h3>{item.title}</h3>
 
-            <p>
-              Собственное производственное направление экосистемы для задач
-              теплоснабжения, водоснабжения и инженерной инфраструктуры.
-            </p>
+                <p>{item.description}</p>
 
-            <span className="ecosystem-card__cta">
-              Перейти к решениям
-            </span>
-          </a>
+                <span className="ecosystem-card__cta">{item.cta}</span>
+              </>
+            )
 
-          <a
-            href="https://teplouchet.com/"
-            className="ecosystem-card"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="ecosystem-card__label">
-              Оборудование и комплектующие
-            </span>
+            if (item.isExternal) {
+              return (
+                <a
+                  key={item.title}
+                  href={item.path}
+                  className="ecosystem-card"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {content}
+                </a>
+              )
+            }
 
-            <h3>Насосы, КИПиА, арматура и инженерное оборудование</h3>
-
-            <p>
-              Каталог оборудования и комплектующих для инженерных объектов,
-              эксплуатации, ремонта и модернизации.
-            </p>
-
-            <span className="ecosystem-card__cta">
-              Перейти в каталог
-            </span>
-          </a>
+            return (
+              <Link key={item.title} to={item.path} className="ecosystem-card">
+                {content}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>
