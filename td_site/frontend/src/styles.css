@@ -1028,7 +1028,7 @@ a {
 }
 
 .hero__label {
-  color: #c81920;
+  color: #f97316;
 }
 
 .hero__trust {
@@ -1079,7 +1079,7 @@ a {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #c81920;
+  color: #f97316;
 }
 
 .section__text {
@@ -1198,7 +1198,7 @@ a {
 .routing-card__cta::after {
   content: "→";
 
-  color: #c81920;
+  color: #f97316;
 
   transition: transform var(--transition);
 }
@@ -1507,7 +1507,7 @@ a {
 
   font-size: 13px;
   font-weight: 800;
-  color: #c81920;
+  color: #f97316;
 }
 
 .expertise-card h3 {
@@ -1663,7 +1663,7 @@ a {
 
   font-size: 13px;
   font-weight: 800;
-  color: #c81920;
+  color: #f97316;
 }
 
 .process-card h3 {
@@ -1911,7 +1911,7 @@ a {
 .ecosystem-card__cta::after {
   content: "→";
 
-  color: #c81920;
+  color: #f97316;
 
   transition: transform var(--transition);
 }
@@ -2029,7 +2029,7 @@ a {
 
   font-size: 13px;
   font-weight: 800;
-  color: #c81920;
+  color: #f97316;
 }
 
 .case-preview-card h3 {
@@ -2209,7 +2209,7 @@ a {
   border-radius: 999px;
   border: 1px solid rgba(15, 47, 82, 0.1);
 
-  color: #c81920;
+  color: #f97316;
   font-size: 20px;
   font-weight: 800;
 
@@ -2338,7 +2338,7 @@ a {
 }
 
 .contact-section__contacts a:hover {
-  color: #c81920;
+  color: #f97316;
 }
 
 .contact-form {
@@ -2750,7 +2750,7 @@ a {
 
   font-size: 13px;
   font-weight: 800;
-  color: #c81920;
+  color: #f97316;
 }
 
 .case-detail-card__head h3 {
