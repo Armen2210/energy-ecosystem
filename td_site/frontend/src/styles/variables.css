@@ -11,45 +11,40 @@
    - тени;
    - переходы.
 
-   Цель:
-   постепенно убрать хаотичные значения из styles.css
-   и привести ТД к более системной frontend-архитектуре,
-   как на сайте ЭЭ.
+   Важно:
+   значения сейчас повторяют рабочие переменные из старого
+   src/styles.css, чтобы перенос CSS не менял внешний вид сайта.
    ===================================================== */
 
 :root {
   /* Brand colors */
-  --color-primary: #0f2f4a;
-  --color-accent: #f97316;
-  --color-accent-hover: #ea580c;
-
-  /* Background colors */
   --color-bg: #f4f6f8;
   --color-white: #ffffff;
-  --color-soft: #f8fafc;
+  --color-primary: #0f2f52;
+  --color-primary-hover: #17406d;
 
   /* Text colors */
-  --color-text: #111827;
-  --color-text-muted: #4b5563;
-  --color-text-light: #6b7280;
+  --color-text: #1f2937;
+  --color-text-light: #4b5563;
 
   /* Borders */
   --color-border: #d9e1e8;
 
-  /* Layout */
-  --container-width: 1180px;
-  --container-padding: 24px;
+  /* Shadows */
+  --shadow-card: 0 10px 30px rgba(15, 47, 82, 0.06);
 
   /* Radius */
-  --radius-sm: 12px;
-  --radius-md: 18px;
   --radius-lg: 28px;
-  --radius-pill: 999px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
 
-  /* Shadows */
-  --shadow-soft: 0 24px 70px rgba(15, 47, 74, 0.08);
-  --shadow-card: 0 18px 50px rgba(15, 47, 74, 0.1);
+  /* Layout */
+  --container-width: 1280px;
 
   /* Motion */
-  --transition: 0.22s ease;
+  --transition: 0.25s ease;
+
+  /* Ecosystem accent */
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
 }
