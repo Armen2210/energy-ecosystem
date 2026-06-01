@@ -1,16 +1,33 @@
+// =====================================================
+// SupplyPage сайта ТД «Энергоэффект»
+//
+// Страница комплектации инженерных объектов.
+//
+// Задачи страницы:
+// - объяснить роль ТД в комплектации объектов;
+// - показать, с какими задачами можно обратиться;
+// - объяснить процесс работы;
+// - направить пользователя к заявке.
+//
+// Данные карточек вынесены в src/data/supply.js.
+// =====================================================
+
 import { Link } from "react-router-dom"
 
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
 
-function Supply() {
+import { supplyProcessSteps, supplyTopics } from "../../data/supply"
+
+function SupplyPage() {
   return (
     <>
       <Seo
-          title="Комплектация объектов — ТД Энергоэффект"
-          description="Комплектация инженерных объектов под задачу проекта: подбор оборудования, материалов, аналогов и организация поставки."
-          path="/supply"
+        title="Комплектация объектов — ТД Энергоэффект"
+        description="Комплектация инженерных объектов под задачу проекта: подбор оборудования, материалов, аналогов и организация поставки."
+        path="/supply"
       />
+
       <Header />
 
       <main className="page supply-page">
@@ -47,33 +64,13 @@ function Supply() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Оборудование и материалы</h3>
+              {supplyTopics.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
 
-                <p>
-                  Помогаем подобрать оборудование, материалы и комплектующие под
-                  задачу проекта, спецификацию или описание объекта.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Подбор аналогов</h3>
-
-                <p>
-                  Если исходное оборудование недоступно по срокам, бюджету или
-                  поставке, можем предложить альтернативные варианты для
-                  обсуждения.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Нестандартные задачи</h3>
-
-                <p>
-                  Можно обратиться не только с готовой спецификацией, но и с
-                  общей задачей: поможем понять, какой маршрут решения подходит.
-                </p>
-              </article>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -94,32 +91,13 @@ function Supply() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>1. Получаем задачу</h3>
+              {supplyProcessSteps.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
 
-                <p>
-                  Вы присылаете описание объекта, проект, спецификацию или
-                  предварительный запрос.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>2. Подбираем решение</h3>
-
-                <p>
-                  Анализируем требования, состав оборудования, возможные
-                  ограничения и варианты поставки.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>3. Обсуждаем поставку</h3>
-
-                <p>
-                  Помогаем определить дальнейший маршрут: комплектация,
-                  производственное решение или переход к каталогу оборудования.
-                </p>
-              </article>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -147,4 +125,4 @@ function Supply() {
   )
 }
 
-export default Supply
+export default SupplyPage
