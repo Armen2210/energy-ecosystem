@@ -18,4 +18,5 @@
 
 @import "./variables.css";
 @import "./global.css";
+@import "./layout.css";
 @import "../styles.css";
