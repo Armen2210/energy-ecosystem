@@ -1,0 +1,55 @@
+/* =====================================================
+   TD SITE DESIGN TOKENS / VARIABLES
+
+   Базовые переменные сайта ТД «Энергоэффект».
+
+   Здесь хранятся:
+   - фирменные цвета;
+   - цвета текста и фона;
+   - контейнеры;
+   - скругления;
+   - тени;
+   - переходы.
+
+   Цель:
+   постепенно убрать хаотичные значения из styles.css
+   и привести ТД к более системной frontend-архитектуре,
+   как на сайте ЭЭ.
+   ===================================================== */
+
+:root {
+  /* Brand colors */
+  --color-primary: #0f2f4a;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+
+  /* Background colors */
+  --color-bg: #f4f6f8;
+  --color-white: #ffffff;
+  --color-soft: #f8fafc;
+
+  /* Text colors */
+  --color-text: #111827;
+  --color-text-muted: #4b5563;
+  --color-text-light: #6b7280;
+
+  /* Borders */
+  --color-border: #d9e1e8;
+
+  /* Layout */
+  --container-width: 1180px;
+  --container-padding: 24px;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 24px 70px rgba(15, 47, 74, 0.08);
+  --shadow-card: 0 18px 50px rgba(15, 47, 74, 0.1);
+
+  /* Motion */
+  --transition: 0.22s ease;
+}
