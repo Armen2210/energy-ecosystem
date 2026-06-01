@@ -1,4 +1,19 @@
+// =====================================================
+// Footer сайта ТД «Энергоэффект»
+//
+// Задачи Footer:
+// - дать короткое позиционирование ТД;
+// - показать навигацию;
+// - показать связь с экосистемой;
+// - оставить контакты и юридическую ссылку.
+//
+// Footer сделан компактнее, чтобы не перегружать страницу.
+// Навигация берётся из src/data/navigation.js.
+// =====================================================
+
 import { Link } from "react-router-dom"
+
+import { mainNavigation, serviceNavigation } from "../data/navigation"
 
 function Footer() {
   return (
@@ -6,55 +21,53 @@ function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div className="footer__brand">
-            <h3>Инженерная экосистема Энергоэффект</h3>
+            <h3>ТД Энергоэффект</h3>
 
             <p>
-              Комплектация объектов, производственные решения и инженерное
-              оборудование для проектов различной сложности.
+              Комплектация инженерных объектов, подбор оборудования и
+              сопровождение поставок для строительных и производственных задач.
             </p>
 
-            <p className="footer__summary">
-              ТД Энергоэффект помогает решать задачи комплектации инженерных
-              объектов, подбора оборудования и взаимодействия внутри инженерной
-              экосистемы Энергоэффект.
-            </p>
+            <div className="footer__legal">
+              <span>© 2026 ТД Энергоэффект</span>
+
+              {serviceNavigation.map((item) => (
+                <Link key={item.path} to={item.path}>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <nav className="footer__column" aria-label="Навигация в подвале">
             <h4>Навигация</h4>
 
-            <Link to="/directions">Направления</Link>
-            <Link to="/supply">Решения</Link>
-            <Link to="/cases">Кейсы</Link>
-            <Link to="/about">О компании</Link>
-            <Link to="/contacts">Контакты</Link>
-            <Link to="/privacy">Политика обработки данных</Link>
+            {mainNavigation.map((item) => (
+              <Link key={item.path} to={item.path}>
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="footer__column">
-              <h4>Экосистема</h4>
+            <h4>Экосистема</h4>
 
-              <Link to="/contacts">
-                ТД Энергоэффект — комплектация инженерных объектов
-              </Link>
+            <span>ТД Энергоэффект — комплектация инженерных объектов</span>
+            <span>Энергоэффект — производственные решения</span>
 
-              <Link to="/supply">
-                Энергоэффект — производственные решения
-              </Link>
-
-              <a
-                href="https://teplouchet.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Теплоучет — оборудование и комплектующие
-              </a>
+            <a
+              href="https://teplouchet.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Теплоучет — оборудование и комплектующие
+            </a>
           </div>
 
           <div className="footer__column footer__contacts">
             <h4>Контакты</h4>
 
-            <a href="tel:+79381693109">+7 (938) 124-68-02</a>
+            <a href="tel:+79381246802">+7 (938) 124-68-02</a>
             <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
             <span>Ростов-на-Дону</span>
 
@@ -62,14 +75,6 @@ function Footer() {
               Обсудить проект
             </Link>
           </div>
-        </div>
-
-        <div className="footer__bottom">
-          <span>© 2026 ТД Энергоэффект</span>
-
-          <Link to="/privacy">
-            Политика обработки персональных данных
-          </Link>
         </div>
       </div>
     </footer>
