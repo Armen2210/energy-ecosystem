@@ -13,7 +13,7 @@
 
 import { Link } from "react-router-dom"
 
-import { mainNavigation, serviceNavigation } from "../data/navigation"
+import { mainNavigation, serviceNavigation } from "../../data/navigation"
 
 function Footer() {
   return (
