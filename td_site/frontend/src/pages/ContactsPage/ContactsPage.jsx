@@ -1,15 +1,32 @@
+// =====================================================
+// ContactsPage сайта ТД «Энергоэффект»
+//
+// Страница контактов и формы обращения.
+//
+// Задачи страницы:
+// - дать основные контакты;
+// - объяснить, с какими исходными данными можно обратиться;
+// - показать реквизиты;
+// - вывести форму заявки.
+//
+// Данные карточек вынесены в src/data/contacts.js.
+// =====================================================
+
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
 import LeadForm from "../../components/LeadForm"
 
-function Contacts() {
+import { contactCards, contactRequestCards } from "../../data/contacts"
+
+function ContactsPage() {
   return (
     <>
       <Seo
-          title="Контакты — ТД Энергоэффект"
-          description="Контакты ТД Энергоэффект: обсудить комплектацию инженерного объекта, подбор оборудования, проект или спецификацию."
-          path="/contacts"
+        title="Контакты — ТД Энергоэффект"
+        description="Контакты ТД Энергоэффект: обсудить комплектацию инженерного объекта, подбор оборудования, проект или спецификацию."
+        path="/contacts"
       />
+
       <Header />
 
       <main className="page contacts-page">
@@ -45,29 +62,12 @@ function Contacts() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Телефон</h3>
-
-                <p>
-                  +7 (938) 124-68-02
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Email</h3>
-
-                <p>
-                  salestd@ee-don.ru
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Город</h3>
-
-                <p>
-                  Ростов-на-Дону
-                </p>
-              </article>
+              {contactCards.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
 
             <div className="page-grid page-grid--details">
@@ -91,7 +91,6 @@ function Contacts() {
                 </p>
               </article>
             </div>
-
           </div>
         </section>
 
@@ -111,32 +110,12 @@ function Contacts() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Проект или спецификация</h3>
-
-                <p>
-                  Можно приложить проектную документацию, спецификацию или
-                  перечень оборудования для предварительного обсуждения.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Описание объекта</h3>
-
-                <p>
-                  Укажите тип объекта, задачу, сроки, ограничения и что нужно
-                  получить в результате.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Предварительный запрос</h3>
-
-                <p>
-                  Если точный состав оборудования и материалов пока неизвестен, опишите
-                  задачу — поможем определить дальнейшие шаги.
-                </p>
-              </article>
+              {contactRequestCards.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -147,4 +126,4 @@ function Contacts() {
   )
 }
 
-export default Contacts
+export default ContactsPage
