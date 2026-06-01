@@ -1,6 +1,22 @@
+// =====================================================
+// Header сайта ТД «Энергоэффект»
+//
+// Отвечает за:
+// - логотип;
+// - основную навигацию;
+// - телефон;
+// - CTA;
+// - мобильное меню.
+//
+// Навигация берётся из src/data/navigation.js,
+// чтобы пункты меню не были захардкожены в компоненте.
+// =====================================================
+
 import { useState } from "react"
 import { NavLink, Link } from "react-router-dom"
+
 import logo from "../assets/logo.png"
+import { mainNavigation } from "../data/navigation"
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -16,33 +32,32 @@ function Header() {
     <header className="header">
       <div className="container">
         <div className="header__inner">
-          <Link to="/" className="logo" onClick={closeMenu} aria-label="ТД Энергоэффект">
+          <Link
+            to="/"
+            className="logo"
+            onClick={closeMenu}
+            aria-label="ТД Энергоэффект"
+          >
             <img src={logo} alt="ТД Энергоэффект" />
           </Link>
 
-          <nav className={isMenuOpen ? "nav nav--open" : "nav"} aria-label="Основная навигация">
-            <NavLink to="/directions" onClick={closeMenu} className={navLinkClass}>
-              Направления
-            </NavLink>
-
-            <NavLink to="/supply" onClick={closeMenu} className={navLinkClass}>
-              Решения
-            </NavLink>
-
-            <NavLink to="/cases" onClick={closeMenu} className={navLinkClass}>
-              Кейсы
-            </NavLink>
-
-            <NavLink to="/about" onClick={closeMenu} className={navLinkClass}>
-              О компании
-            </NavLink>
-
-            <NavLink to="/contacts" onClick={closeMenu} className={navLinkClass}>
-              Контакты
-            </NavLink>
+          <nav
+            className={isMenuOpen ? "nav nav--open" : "nav"}
+            aria-label="Основная навигация"
+          >
+            {mainNavigation.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                onClick={closeMenu}
+                className={navLinkClass}
+              >
+                {item.label}
+              </NavLink>
+            ))}
 
             <div className="nav__mobile-actions">
-              <a href="tel:+7 (938) 124-68-02" className="header__phone">
+              <a href="tel:+79381246802" className="header__phone">
                 +7 (938) 124-68-02
               </a>
 
@@ -53,7 +68,7 @@ function Header() {
           </nav>
 
           <div className="header__actions">
-            <a href="tel:+7 (938) 124-68-02" className="header__phone">
+            <a href="tel:+79381246802" className="header__phone">
               +7 (938) 124-68-02
             </a>
 
