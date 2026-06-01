@@ -1,7 +1,7 @@
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
 
-function Privacy() {
+function PrivacyPage() {
   return (
     <>
       <Seo
@@ -183,4 +183,4 @@ function Privacy() {
   )
 }
 
-export default Privacy
+export default PrivacyPage
