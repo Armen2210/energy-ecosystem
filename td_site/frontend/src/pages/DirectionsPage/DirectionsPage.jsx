@@ -1,16 +1,35 @@
+// =====================================================
+// DirectionsPage сайта ТД «Энергоэффект»
+//
+// Страница инженерных направлений для комплектации объектов.
+//
+// Задачи страницы:
+// - объяснить, с какими зонами комплектации работает ТД;
+// - показать, что клиент может обратиться не только с готовой спецификацией;
+// - направить пользователя к заявке.
+//
+// Данные карточек вынесены в src/data/directions.js.
+// =====================================================
+
 import { Link } from "react-router-dom"
 
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
 
-function Directions() {
+import {
+  directionAreas,
+  directionStartOptions,
+} from "../../data/directions"
+
+function DirectionsPage() {
   return (
     <>
       <Seo
-          title="Инженерные направления — ТД Энергоэффект"
-          description="Инженерные направления для комплектации объектов: насосное оборудование, КИПиА, арматура, автоматика, теплообменное оборудование и комплектующие."
-          path="/directions"
+        title="Инженерные направления — ТД Энергоэффект"
+        description="Инженерные направления для комплектации объектов: насосное оборудование, КИПиА, арматура, автоматика, теплообменное оборудование и комплектующие."
+        path="/directions"
       />
+
       <Header />
 
       <main className="page directions-page">
@@ -47,60 +66,13 @@ function Directions() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Насосное оборудование</h3>
+              {directionAreas.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
 
-                <p>
-                  Подбор насосов, насосных групп и комплектующих для систем
-                  отопления, водоснабжения, пожаротушения и технологических
-                  задач.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>КИПиА</h3>
-
-                <p>
-                  Контрольно-измерительные приборы, датчики, автоматика и
-                  элементы управления для инженерных систем объекта.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Трубопроводная арматура</h3>
-
-                <p>
-                  Запорная, регулирующая и защитная арматура под требования
-                  проекта, среды, давления и условий эксплуатации.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Теплообменное оборудование</h3>
-
-                <p>
-                  Решения для тепловых пунктов, систем отопления, ГВС и
-                  инженерной инфраструктуры объекта.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Автоматика</h3>
-
-                <p>
-                  Элементы управления инженерными системами, технологическими
-                  процессами и оборудованием объекта.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Комплектующие и материалы</h3>
-
-                <p>
-                  Дополнительные элементы, материалы и комплектующие, которые
-                  могут потребоваться для реализации инженерной задачи.
-                </p>
-              </article>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -122,32 +94,13 @@ function Directions() {
             </div>
 
             <div className="page-grid">
-              <article className="info-card">
-                <h3>Есть спецификация</h3>
+              {directionStartOptions.map((item) => (
+                <article className="info-card" key={item.title}>
+                  <h3>{item.title}</h3>
 
-                <p>
-                  Можно отправить перечень оборудования, материалов или
-                  комплектующих для предварительного обсуждения.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Есть задача объекта</h3>
-
-                <p>
-                  Можно описать объект, сроки, ограничения и ожидаемый результат
-                  — поможем понять, что требуется.
-                </p>
-              </article>
-
-              <article className="info-card">
-                <h3>Нужен маршрут внутри экосистемы</h3>
-
-                <p>
-                  Если задача относится к производственным решениям или каталогу
-                  оборудования, подскажем подходящее направление.
-                </p>
-              </article>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -175,4 +128,4 @@ function Directions() {
   )
 }
 
-export default Directions
+export default DirectionsPage
