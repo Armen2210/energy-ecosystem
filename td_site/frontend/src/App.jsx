@@ -15,9 +15,9 @@ import HomePage from "./pages/HomePage"
 import AboutPage from "./pages/AboutPage"
 import SupplyPage from "./pages/SupplyPage"
 import DirectionsPage from "./pages/DirectionsPage"
-import Cases from "./pages/Cases"
-import Contacts from "./pages/Contacts"
-import Privacy from "./pages/Privacy"
+import CasesPage from "./pages/CasesPage"
+import ContactsPage from "./pages/ContactsPage"
+import PrivacyPage from "./pages/PrivacyPage"
 
 import Footer from "./components/Footer"
 import CookieBanner from "./components/CookieBanner"
@@ -30,9 +30,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/supply" element={<SupplyPage />} />
         <Route path="/directions" element={<DirectionsPage />} />
-        <Route path="/cases" element={<Cases />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/cases" element={<CasesPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
       </Routes>
 
       <Footer />

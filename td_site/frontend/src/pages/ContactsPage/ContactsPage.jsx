@@ -1,6 +1,6 @@
-import Header from "../components/Header"
-import Seo from "../components/Seo"
-import LeadForm from "../components/LeadForm"
+import Header from "../../components/Header"
+import Seo from "../../components/Seo"
+import LeadForm from "../../components/LeadForm"
 
 function Contacts() {
   return (

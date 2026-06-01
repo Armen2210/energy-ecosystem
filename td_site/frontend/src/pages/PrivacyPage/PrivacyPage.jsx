@@ -1,5 +1,5 @@
-import Header from "../components/Header"
-import Seo from "../components/Seo"
+import Header from "../../components/Header"
+import Seo from "../../components/Seo"
 
 function Privacy() {
   return (
