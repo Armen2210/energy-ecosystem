@@ -2689,17 +2689,6 @@
   color: #111827;
 }
 
-/* FOOTER LEGAL LINK */
-
-.footer__bottom a {
-  color: rgba(255, 255, 255, 0.62);
-  transition: color var(--transition);
-}
-
-.footer__bottom a:hover {
-  color: #ffffff;
-}
-
 /* =====================================================
    FOOTER — COMPACT ECOSYSTEM VERSION
 
