@@ -638,12 +638,6 @@
   .form textarea {
     grid-column: span 1;
   }
-
-  .footer__top,
-  .footer__nav {
-    flex-direction: column;
-    gap: 32px;
-  }
 }
 
 @media (max-width: 520px) {
@@ -689,14 +683,6 @@
   .step-card {
     padding: 28px;
     border-radius: 24px;
-  }
-
-  .footer {
-    padding: 56px 0 32px;
-  }
-
-  .footer__title {
-    font-size: 20px;
   }
 }
 
