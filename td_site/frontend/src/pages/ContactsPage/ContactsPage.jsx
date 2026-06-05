@@ -72,23 +72,25 @@ function ContactsPage() {
 
             <div className="page-grid page-grid--details">
               <article className="info-card info-card--wide">
-                <h3>Реквизиты компании</h3>
+                  <h3>Реквизиты компании</h3>
 
-                <p>
-                  <strong>Полное наименование:</strong> укажите полное юридическое наименование
-                  <br />
-                  <strong>ИНН:</strong> укажите ИНН
-                  <br />
-                  <strong>ОГРН:</strong> укажите ОГРН
-                  <br />
-                  <strong>Юридический адрес:</strong> укажите юридический адрес
-                  <br />
-                  <strong>Фактический адрес:</strong> Ростов-на-Дону
-                  <br />
-                  <strong>Email:</strong> salestd@ee-don.ru
-                  <br />
-                  <strong>Телефон:</strong> +7 (938) 124-68-02
-                </p>
+                  <p>
+                    <strong>Полное наименование:</strong> ООО «ТОРГОВЫЙ ДОМ ЭНЕРГОЭФФЕКТ»
+                    <br />
+                    <strong>ИНН:</strong> 6161098301
+                    <br />
+                    <strong>КПП:</strong> 616101001
+                    <br />
+                    <strong>ОГРН:</strong> 1236100003490
+                    <br />
+                    <strong>Юридический адрес:</strong> 344113, Ростовская область,
+                    г.о. Город Ростов-на-Дону, г. Ростов-на-Дону, б-р Комарова,
+                    здание 28/2, офис 403-404А
+                    <br />
+                    <strong>Email:</strong> salestd@ee-don.ru
+                    <br />
+                    <strong>Телефон:</strong> +7 (938) 124-68-02
+                  </p>
               </article>
             </div>
           </div>

@@ -1,3 +1,20 @@
+// =====================================================
+// LeadForm сайта ТД «Энергоэффект»
+//
+// Финальный конверсионный блок главной страницы.
+//
+// Задачи:
+// - принять заявку на комплектацию инженерного объекта;
+// - дать пользователю подсказку, что можно отправить;
+// - показать контакты;
+// - сохранить юридически корректное согласие на обработку
+//   персональных данных.
+//
+// Важно:
+// форма остаётся рабочей и отправляет данные в backend:
+// POST /api/leads/
+// =====================================================
+
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -35,9 +52,9 @@ function LeadForm() {
       return
     }
 
-    /*
-      ОБЯЗАТЕЛЬНЫЕ ПОЛЯ
-    */
+    // =====================================================
+    // ОБЯЗАТЕЛЬНЫЕ ПОЛЯ
+    // =====================================================
 
     if (!formData.name.trim()) {
       setFormMessage({ type: "error", text: "Укажите имя" })
@@ -57,13 +74,13 @@ function LeadForm() {
       return
     }
 
-    /*
-      ПРОВЕРКА EMAIL
-      Сейчас отключена.
-
-      Чтобы снова сделать email обязательным —
-      убери комментарии ниже.
-    */
+    // =====================================================
+    // ПРОВЕРКА EMAIL
+    //
+    // Сейчас email не является обязательным.
+    // Если нужно снова сделать email обязательным —
+    // можно вернуть проверки ниже.
+    // =====================================================
 
     /*
     if (!formData.email.trim()) {
@@ -146,6 +163,10 @@ function LeadForm() {
     <section className="contact-section lead-form">
       <div className="container">
         <div className="contact-section__grid">
+          {/* =====================================================
+              ЛЕВАЯ КОЛОНКА
+              Подсказки, контакты и доверие перед отправкой формы.
+          ===================================================== */}
           <div className="contact-section__content">
             <p className="section__eyebrow">Финальный шаг</p>
 
@@ -154,17 +175,45 @@ function LeadForm() {
             </h2>
 
             <p className="contact-section__text">
-              Поможем подобрать инженерное решение, обсудить проект и определить
-              дальнейшие шаги по реализации задачи.
+              Опишите задачу, приложите проект или спецификацию — поможем
+              определить маршрут: комплектация, производственное решение или
+              подбор оборудования.
             </p>
 
-            <div className="contact-section__contacts">
-              <a href="tel:+79381246802">+7 (938) 124-68-02</a>
-              <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
-              <span>Ростов-на-Дону</span>
+            <div className="contact-section__cards">
+
+              <article className="contact-info-card">
+                <h3>Как с нами связаться</h3>
+
+                <div className="contact-section__contacts">
+                  <a href="tel:+79381246802">+7 (938) 124-68-02</a>
+                  <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
+                  <span>Ростов-на-Дону</span>
+                </div>
+              </article>
+
+              <article className="contact-info-card">
+                  <h3>Реквизиты компании</h3>
+
+                  <p>
+                    ООО «ТОРГОВЫЙ ДОМ ЭНЕРГОЭФФЕКТ»
+                    <br />
+                    <strong>ИНН:</strong> 6161098301
+                    <br />
+                    <strong>КПП:</strong> 616101001
+                    <br />
+                    <strong>ОГРН:</strong> 1236100003490
+                    <br />
+                    <strong>Юридический адрес:</strong> 344113, Ростовская область,
+                    г. Ростов-на-Дону, б-р Комарова, здание 28/2, офис 403-404А
+                  </p>
+              </article>
             </div>
           </div>
 
+          {/* =====================================================
+              ФОРМА ЗАЯВКИ
+          ===================================================== */}
           <form className="form contact-form" onSubmit={handleSubmit}>
             <div className="contact-form__head">
               <h3>Расскажите о задаче</h3>
@@ -247,7 +296,7 @@ function LeadForm() {
 
               <label htmlFor="personalDataConsent">
                 Я согласен на обработку персональных данных в соответствии с{" "}
-                <Link to="/privacy">
+                <Link to="/privacy" target="_blank" rel="noreferrer">
                   Политикой обработки персональных данных
                 </Link>
                 .
@@ -259,7 +308,7 @@ function LeadForm() {
               className="btn btn--primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Отправляем..." : "Обсудить проект"}
+              {isSubmitting ? "Отправляем..." : "Отправить заявку"}
             </button>
 
             {formMessage && (
