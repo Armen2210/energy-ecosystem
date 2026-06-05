@@ -55,6 +55,60 @@ function Footer() {
     }, 100)
   }
 
+  // =====================================================
+  // Навигация Footer по секциям главной страницы
+  //
+  // Если ссылка содержит hash (#directions, #solutions),
+  // скроллим к нужной секции на главной.
+  //
+  // Если пользователь находится на внутренней странице —
+  // сначала переходим на главную, затем скроллим к секции.
+  //
+  // Если ссылка ведёт на обычную страницу, например /about,
+  // выполняем обычный переход через navigate().
+  // =====================================================
+  const handleFooterNavigation = (event, path) => {
+    if (!path.includes("#")) {
+      event.preventDefault()
+      navigate(path)
+      return
+    }
+
+    event.preventDefault()
+
+    const sectionId = path.split("#")[1]
+
+    window.dispatchEvent(
+      new CustomEvent("td-section-change", {
+        detail: sectionId,
+      })
+    )
+
+    const scrollToSection = () => {
+      const targetSection = document.getElementById(sectionId)
+
+      if (!targetSection) {
+        return
+      }
+
+      targetSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+
+    if (location.pathname === "/") {
+      scrollToSection()
+      return
+    }
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      scrollToSection()
+    }, 100)
+  }
+
   return (
     <footer className="footer">
       <div className="container">
@@ -82,7 +136,11 @@ function Footer() {
             <h4>Навигация</h4>
 
             {mainNavigation.map((item) => (
-              <Link key={item.path} to={item.path}>
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={(event) => handleFooterNavigation(event, item.path)}
+              >
                 {item.label}
               </Link>
             ))}

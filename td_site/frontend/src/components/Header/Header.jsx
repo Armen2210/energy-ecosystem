@@ -12,7 +12,7 @@
 // чтобы пункты меню не были захардкожены в компоненте.
 // =====================================================
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom"
 
 import logo from "../../assets/logo.png"
@@ -20,12 +20,86 @@ import { mainNavigation } from "../../data/navigation"
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState(null)
 
   const navigate = useNavigate()
   const location = useLocation()
 
+    // =====================================================
+  // Синхронизация активного пункта Header
+  //
+  // Header может менять активный пункт сам, когда пользователь
+  // нажимает на верхнее меню.
+  //
+  // Но если пользователь нажимает навигацию в Footer,
+  // Footer отправляет событие td-section-change.
+  // Header принимает это событие и обновляет активный пункт.
+  // =====================================================
+  useEffect(() => {
+    const handleSectionChange = (event) => {
+      setActiveSection(event.detail)
+    }
+
+    window.addEventListener("td-section-change", handleSectionChange)
+
+    return () => {
+      window.removeEventListener("td-section-change", handleSectionChange)
+    }
+  }, [])
+
   const closeMenu = () => {
     setIsMenuOpen(false)
+  }
+
+    // =====================================================
+  // Навигация по секциям главной страницы
+  //
+  // Если пункт меню содержит hash (#directions, #solutions),
+  // не открываем отдельную страницу, а скроллим к нужной
+  // секции на главной.
+  //
+  // Если пользователь находится на внутренней странице —
+  // сначала переходим на главную, затем скроллим к секции.
+  // =====================================================
+  const handleMainNavigation = (event, path) => {
+    if (!path.includes("#")) {
+      event.preventDefault()
+      closeMenu()
+      setActiveSection(null)
+      navigate(path)
+      return
+    }
+
+    event.preventDefault()
+    closeMenu()
+
+    const sectionId = path.split("#")[1]
+
+    setActiveSection(sectionId)
+
+    const scrollToSection = () => {
+      const targetSection = document.getElementById(sectionId)
+
+      if (!targetSection) {
+        return
+      }
+
+      targetSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+
+    if (location.pathname === "/") {
+      scrollToSection()
+      return
+    }
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      scrollToSection()
+    }, 100)
   }
 
     // =====================================================
@@ -85,16 +159,39 @@ function Header() {
             className={isMenuOpen ? "nav nav--open" : "nav"}
             aria-label="Основная навигация"
           >
-            {mainNavigation.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                onClick={closeMenu}
-                className={navLinkClass}
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {mainNavigation.map((item) => {
+              const isSectionLink = item.path.includes("#")
+              const sectionId = isSectionLink ? item.path.split("#")[1] : null
+
+              if (isSectionLink) {
+                const sectionLinkClass =
+                  activeSection === sectionId && location.pathname === "/"
+                    ? "nav__link nav__link--active"
+                    : "nav__link"
+
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={(event) => handleMainNavigation(event, item.path)}
+                    className={sectionLinkClass}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              }
+
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={(event) => handleMainNavigation(event, item.path)}
+                  className={navLinkClass}
+                >
+                  {item.label}
+                </NavLink>
+              )
+            })}
 
             <div className="nav__mobile-actions">
               <a href="tel:+79381246802" className="header__phone">
