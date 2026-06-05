@@ -11,11 +11,50 @@
 // Навигация берётся из src/data/navigation.js.
 // =====================================================
 
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import { mainNavigation, serviceNavigation } from "../../data/navigation"
 
 function Footer() {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // =====================================================
+  // Переход к форме заявки
+  //
+  // CTA в Footer должен вести пользователя к форме на главной.
+  // Если пользователь уже на главной — плавно скроллим.
+  // Если пользователь на внутренней странице — сначала переходим
+  // на главную, затем скроллим к форме.
+  // =====================================================
+  const handleContactsNavigation = (event) => {
+    event.preventDefault()
+
+    const scrollToContacts = () => {
+      const contactsSection = document.getElementById("contacts")
+
+      if (!contactsSection) {
+        return
+      }
+
+      contactsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+
+    if (location.pathname === "/") {
+      scrollToContacts()
+      return
+    }
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      scrollToContacts()
+    }, 100)
+  }
+
   return (
     <footer className="footer">
       <div className="container">
@@ -71,9 +110,13 @@ function Footer() {
             <a href="mailto:salestd@ee-don.ru">salestd@ee-don.ru</a>
             <span>Ростов-на-Дону</span>
 
-            <Link to="/contacts" className="footer__cta">
+            <a
+              href="#contacts"
+              className="footer__cta"
+              onClick={handleContactsNavigation}
+            >
               Обсудить проект
-            </Link>
+            </a>
           </div>
         </div>
       </div>

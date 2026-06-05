@@ -12,7 +12,7 @@
 // Данные карточек вынесены в src/data/supply.js.
 // =====================================================
 
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
@@ -20,6 +20,33 @@ import Seo from "../../components/Seo"
 import { supplyProcessSteps, supplyTopics } from "../../data/supply"
 
 function SupplyPage() {
+  const navigate = useNavigate()
+
+  // =====================================================
+  // Переход к форме заявки на главной странице
+  //
+  // Страница /supply пока существует как отдельный маршрут,
+  // но основной сценарий заявки переносим на главную страницу.
+  // =====================================================
+  const handleContactsNavigation = (event) => {
+    event.preventDefault()
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      const contactsSection = document.getElementById("contacts")
+
+      if (!contactsSection) {
+        return
+      }
+
+      contactsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }, 100)
+  }
+
   return (
     <>
       <Seo
@@ -114,9 +141,13 @@ function SupplyPage() {
                 </p>
               </div>
 
-              <Link to="/contacts" className="btn btn--primary">
-                Обсудить проект
-              </Link>
+              <a
+                  href="#contacts"
+                  className="btn btn--primary"
+                  onClick={handleContactsNavigation}
+              >
+                  Обсудить проект
+              </a>
             </div>
           </div>
         </section>

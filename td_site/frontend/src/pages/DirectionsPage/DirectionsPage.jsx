@@ -11,7 +11,7 @@
 // Данные карточек вынесены в src/data/directions.js.
 // =====================================================
 
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import Header from "../../components/Header"
 import Seo from "../../components/Seo"
@@ -22,6 +22,33 @@ import {
 } from "../../data/directions"
 
 function DirectionsPage() {
+  const navigate = useNavigate()
+
+  // =====================================================
+  // Переход к форме заявки на главной странице
+  //
+  // Страница /directions пока существует как отдельный маршрут,
+  // но основной сценарий заявки переносим на главную страницу.
+  // =====================================================
+  const handleContactsNavigation = (event) => {
+    event.preventDefault()
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      const contactsSection = document.getElementById("contacts")
+
+      if (!contactsSection) {
+        return
+      }
+
+      contactsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }, 100)
+  }
+
   return (
     <>
       <Seo
@@ -117,9 +144,13 @@ function DirectionsPage() {
                 </p>
               </div>
 
-              <Link to="/contacts" className="btn btn--primary">
-                Обсудить проект
-              </Link>
+              <a
+                  href="#contacts"
+                  className="btn btn--primary"
+                  onClick={handleContactsNavigation}
+              >
+                  Обсудить проект
+              </a>
             </div>
           </div>
         </section>

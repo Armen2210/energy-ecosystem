@@ -13,7 +13,7 @@
 // =====================================================
 
 import { useState } from "react"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom"
 
 import logo from "../../assets/logo.png"
 import { mainNavigation } from "../../data/navigation"
@@ -21,8 +21,48 @@ import { mainNavigation } from "../../data/navigation"
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const navigate = useNavigate()
+  const location = useLocation()
+
   const closeMenu = () => {
     setIsMenuOpen(false)
+  }
+
+    // =====================================================
+  // Переход к форме заявки
+  //
+  // CTA в Header должен вести пользователя к форме на главной.
+  // Если пользователь уже на главной — плавно скроллим.
+  // Если пользователь на внутренней странице — сначала переходим
+  // на главную, затем скроллим к форме.
+  // =====================================================
+  const handleContactsNavigation = (event) => {
+    event.preventDefault()
+    closeMenu()
+
+    const scrollToContacts = () => {
+      const contactsSection = document.getElementById("contacts")
+
+      if (!contactsSection) {
+        return
+      }
+
+      contactsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+
+    if (location.pathname === "/") {
+      scrollToContacts()
+      return
+    }
+
+    navigate("/")
+
+    window.setTimeout(() => {
+      scrollToContacts()
+    }, 100)
   }
 
   const navLinkClass = ({ isActive }) =>
@@ -61,9 +101,9 @@ function Header() {
                 +7 (938) 124-68-02
               </a>
 
-              <NavLink to="/contacts" onClick={closeMenu} className="header__cta">
-                Обсудить проект
-              </NavLink>
+              <a href="#contacts" onClick={handleContactsNavigation} className="header__cta">
+                  Обсудить проект
+              </a>
             </div>
           </nav>
 
@@ -72,9 +112,9 @@ function Header() {
               +7 (938) 124-68-02
             </a>
 
-            <NavLink to="/contacts" onClick={closeMenu} className="header__cta">
+            <a href="#contacts" onClick={handleContactsNavigation} className="header__cta">
               Обсудить проект
-            </NavLink>
+            </a>
           </div>
 
           <button

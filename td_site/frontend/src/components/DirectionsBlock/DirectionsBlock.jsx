@@ -1,73 +1,82 @@
 // =====================================================
 // DirectionsBlock сайта ТД «Энергоэффект»
 //
-// Блок маршрутизации внутри экосистемы.
-// Помогает пользователю выбрать правильный контур:
-// - ТД Энергоэффект;
-// - Энергоэффект;
-// - Теплоучет.
+// Блок инженерных направлений на главной странице.
 //
-// Данные карточек вынесены в src/data/ecosystemRoutes.js,
-// чтобы компонент не содержал хардкод.
+// Задачи:
+// - кратко показать, с какими зонами комплектации работает ТД;
+// - объяснить, что клиент может обратиться не только
+//   с готовой спецификацией;
+// - заменить отдельную страницу /directions в коротком
+//   формате главной посадочной страницы.
+//
+// Данные карточек берутся из src/data/directions.js.
 // =====================================================
 
-import { Link } from "react-router-dom"
-
-import { ecosystemRoutes } from "../../data/ecosystemRoutes"
+import {
+  directionAreas,
+  directionStartOptions,
+} from "../../data/directions"
 
 function DirectionsBlock() {
   return (
-    <section className="routing section section--muted">
+    <section className="directions section section--muted" id="directions">
       <div className="container">
+        {/* =====================================================
+            ЗАГОЛОВОК БЛОКА
+        ===================================================== */}
         <div className="section__head">
-          <p className="section__eyebrow">Маршрут внутри экосистемы</p>
+          <p className="section__eyebrow">Направления</p>
 
-          <h2 className="section__title">Что требуется вашему объекту?</h2>
+          <h2 className="section__title">
+            Инженерные направления для комплектации объектов
+          </h2>
 
           <p className="section__text">
-            Поможем подобрать оптимальное решение внутри инженерной экосистемы
-            Энергоэффект.
+            Работаем с оборудованием и материалами не как с витриной товаров,
+            а как с частью задачи объекта: подбираем решения под проект,
+            эксплуатацию, модернизацию и сроки поставки.
           </p>
         </div>
 
-        <div className="routing__grid">
-          {ecosystemRoutes.map((item) => {
-            const cardClassName = item.isMain
-              ? "routing-card routing-card--main"
-              : "routing-card"
+        {/* =====================================================
+            ЗОНЫ КОМПЛЕКТАЦИИ
+        ===================================================== */}
+        <div className="page-grid">
+          {directionAreas.map((item) => (
+            <article className="info-card" key={item.title}>
+              <h3>{item.title}</h3>
 
-            if (item.isExternal) {
-              return (
-                <a
-                  key={item.title}
-                  href={item.path}
-                  className={cardClassName}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="routing-card__label">{item.label}</span>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
 
-                  <h3>{item.title}</h3>
+        {/* =====================================================
+            КАК МОЖНО НАЧАТЬ ОБСУЖДЕНИЕ
+        ===================================================== */}
+        <div className="section__head section__head--compact">
+          <p className="section__eyebrow">Как начать</p>
 
-                  <p>{item.description}</p>
+          <h2 className="section__title">
+            Не обязательно знать точный перечень оборудования
+          </h2>
 
-                  <span className="routing-card__cta">{item.cta}</span>
-                </a>
-              )
-            }
+          <p className="section__text">
+            Если есть проект, спецификация или только описание задачи — с этого
+            уже можно начать обсуждение. Мы поможем определить дальнейший
+            маршрут.
+          </p>
+        </div>
 
-            return (
-              <Link key={item.title} to={item.path} className={cardClassName}>
-                <span className="routing-card__label">{item.label}</span>
+        <div className="page-grid">
+          {directionStartOptions.map((item) => (
+            <article className="info-card" key={item.title}>
+              <h3>{item.title}</h3>
 
-                <h3>{item.title}</h3>
-
-                <p>{item.description}</p>
-
-                <span className="routing-card__cta">{item.cta}</span>
-              </Link>
-            )
-          })}
+              <p>{item.description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
