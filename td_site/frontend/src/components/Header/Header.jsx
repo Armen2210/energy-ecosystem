@@ -5,11 +5,15 @@
 // - логотип;
 // - основную навигацию;
 // - телефон;
-// - CTA;
-// - мобильное меню.
+// - CTA.
 //
 // Навигация берётся из src/data/navigation.js,
 // чтобы пункты меню не были захардкожены в компоненте.
+//
+// Важно:
+// мобильная версия работает без burger-меню.
+// Навигация остаётся видимой и горизонтально прокручиваемой,
+// как в логике сайта ЭЭ.
 // =====================================================
 
 import { useEffect, useState } from "react"
@@ -19,21 +23,18 @@ import logo from "../../assets/logo.png"
 import { mainNavigation } from "../../data/navigation"
 
 function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState(null)
 
   const navigate = useNavigate()
   const location = useLocation()
 
-    // =====================================================
+  // =====================================================
   // Синхронизация активного пункта Header
   //
-  // Header может менять активный пункт сам, когда пользователь
-  // нажимает на верхнее меню.
-  //
-  // Но если пользователь нажимает навигацию в Footer,
+  // Header меняет активный пункт при клике по верхнему меню.
+  // Если пользователь нажимает навигацию в Footer,
   // Footer отправляет событие td-section-change.
-  // Header принимает это событие и обновляет активный пункт.
+  // Header принимает событие и обновляет активный пункт.
   // =====================================================
   useEffect(() => {
     const handleSectionChange = (event) => {
@@ -47,31 +48,27 @@ function Header() {
     }
   }, [])
 
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
-
-    // =====================================================
+  // =====================================================
   // Навигация по секциям главной страницы
   //
   // Если пункт меню содержит hash (#directions, #solutions),
-  // не открываем отдельную страницу, а скроллим к нужной
-  // секции на главной.
+  // скроллим к нужной секции на главной.
   //
   // Если пользователь находится на внутренней странице —
   // сначала переходим на главную, затем скроллим к секции.
+  //
+  // Если ссылка ведёт на обычную страницу, например /about,
+  // выполняем переход через navigate().
   // =====================================================
   const handleMainNavigation = (event, path) => {
     if (!path.includes("#")) {
       event.preventDefault()
-      closeMenu()
       setActiveSection(null)
       navigate(path)
       return
     }
 
     event.preventDefault()
-    closeMenu()
 
     const sectionId = path.split("#")[1]
 
@@ -102,17 +99,18 @@ function Header() {
     }, 100)
   }
 
-    // =====================================================
+  // =====================================================
   // Переход к форме заявки
   //
-  // CTA в Header должен вести пользователя к форме на главной.
+  // CTA в Header ведёт пользователя к форме на главной.
   // Если пользователь уже на главной — плавно скроллим.
-  // Если пользователь на внутренней странице — сначала переходим
-  // на главную, затем скроллим к форме.
+  // Если пользователь на внутренней странице — сначала
+  // переходим на главную, затем скроллим к форме.
   // =====================================================
   const handleContactsNavigation = (event) => {
     event.preventDefault()
-    closeMenu()
+
+    setActiveSection("contacts")
 
     const scrollToContacts = () => {
       const contactsSection = document.getElementById("contacts")
@@ -149,16 +147,13 @@ function Header() {
           <Link
             to="/"
             className="logo"
-            onClick={closeMenu}
             aria-label="ТД Энергоэффект"
+            onClick={() => setActiveSection(null)}
           >
             <img src={logo} alt="ТД Энергоэффект" />
           </Link>
 
-          <nav
-            className={isMenuOpen ? "nav nav--open" : "nav"}
-            aria-label="Основная навигация"
-          >
+          <nav className="nav" aria-label="Основная навигация">
             {mainNavigation.map((item) => {
               const isSectionLink = item.path.includes("#")
               const sectionId = isSectionLink ? item.path.split("#")[1] : null
@@ -192,16 +187,6 @@ function Header() {
                 </NavLink>
               )
             })}
-
-            <div className="nav__mobile-actions">
-              <a href="tel:+79381246802" className="header__phone">
-                +7 (938) 124-68-02
-              </a>
-
-              <a href="#contacts" onClick={handleContactsNavigation} className="header__cta">
-                  Обсудить проект
-              </a>
-            </div>
           </nav>
 
           <div className="header__actions">
@@ -209,22 +194,14 @@ function Header() {
               +7 (938) 124-68-02
             </a>
 
-            <a href="#contacts" onClick={handleContactsNavigation} className="header__cta">
+            <a
+              href="#contacts"
+              onClick={handleContactsNavigation}
+              className="header__cta"
+            >
               Обсудить проект
             </a>
           </div>
-
-          <button
-            className="burger"
-            type="button"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
-            aria-expanded={isMenuOpen}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
         </div>
       </div>
     </header>
