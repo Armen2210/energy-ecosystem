@@ -19,7 +19,7 @@
 // =====================================================
 
 import { useEffect } from "react"
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom"
 
 import HomePage from "./pages/HomePage"
 import AboutPage from "./pages/AboutPage"
@@ -63,9 +63,39 @@ function LegacySectionRedirect({ sectionId }) {
   return null
 }
 
+// =====================================================
+// ScrollToTop
+//
+// Сбрасывает позицию прокрутки вверх при переходе
+// между отдельными страницами сайта.
+//
+// Нужно для сценариев:
+// - главная → /about;
+// - главная → /privacy;
+// - /privacy → /about.
+//
+// Якорные переходы по секциям главной обрабатываются отдельно
+// в Header, Footer и LegacySectionRedirect.
+// =====================================================
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    })
+  }, [pathname])
+
+  return null
+}
+
 function App() {
   return (
     <>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
