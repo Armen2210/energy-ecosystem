@@ -1,9 +1,14 @@
 // =====================================================
 // EcosystemSection сайта ТД «Энергоэффект»
 //
-// Блок показывает соседние направления экосистемы:
-// - производственные решения;
-// - оборудование и комплектующие.
+// Блок объясняет роли направлений внутри экосистемы:
+// - ТД Энергоэффект;
+// - Энергоэффект;
+// - Теплоучет.
+//
+// Задача блока:
+// помочь пользователю понять, куда относится его задача:
+// комплектация, производство или покупка оборудования.
 //
 // Данные карточек вынесены в src/data/ecosystemSolutions.js.
 // =====================================================
@@ -14,18 +19,19 @@ import { ecosystemSolutions } from "../../data/ecosystemSolutions"
 
 function EcosystemSection() {
   return (
-    <section className="ecosystem section">
+    <section className="ecosystem section" id="ecosystem">
       <div className="container">
         <div className="section__head">
           <p className="section__eyebrow">Инженерная экосистема</p>
 
           <h2 className="section__title">
-            Решения внутри экосистемы Энергоэффект
+            Три контура для разных инженерных задач
           </h2>
 
           <p className="section__text">
-            Производственные решения и инженерное оборудование для объектов
-            различной сложности внутри экосистемы Энергоэффект.
+            ТД Энергоэффект помогает определить правильный маршрут: комплектация
+            объекта, производственное решение завода или подбор оборудования в
+            каталоге.
           </p>
         </div>
 
@@ -42,6 +48,17 @@ function EcosystemSection() {
                 <span className="ecosystem-card__cta">{item.cta}</span>
               </>
             )
+
+            if (item.isCurrent || !item.path) {
+              return (
+                <article
+                  key={item.title}
+                  className="ecosystem-card ecosystem-card--current"
+                >
+                  {content}
+                </article>
+              )
+            }
 
             if (item.isExternal) {
               return (

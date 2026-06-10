@@ -1686,6 +1686,60 @@
   transform: translateX(4px);
 }
 
+/* ECOSYSTEM DESKTOP LAYOUT */
+
+@media (min-width: 901px) {
+  .ecosystem__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .ecosystem-card--current {
+    position: relative;
+    grid-column: 1 / -1;
+
+    min-height: 260px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+
+    overflow: hidden;
+  }
+
+  .ecosystem-card--current::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(249, 115, 22, 0.1) 0%,
+        rgba(249, 115, 22, 0.04) 34%,
+        rgba(255, 255, 255, 0) 35%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      radial-gradient(
+        circle at 50% 18%,
+        rgba(249, 115, 22, 0.09),
+        rgba(249, 115, 22, 0.025) 24%,
+        transparent 46%
+      );
+
+    pointer-events: none;
+  }
+
+  .ecosystem-card--current > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ecosystem-card--current h3,
+  .ecosystem-card--current p {
+    max-width: 760px;
+  }
+}
+
 /* ECOSYSTEM MOBILE */
 
 @media (max-width: 900px) {
