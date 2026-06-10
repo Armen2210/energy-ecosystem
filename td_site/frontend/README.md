@@ -1,16 +1,272 @@
-# React + Vite
+# ТД Энергоэффект — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend сайта ООО «ТД Энергоэффект».
 
-Currently, two official plugins are available:
+Сайт является частью инженерной экосистемы Энергоэффект и выполняет роль B2B-точки входа для задач комплектации инженерных объектов.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Назначение сайта
 
-## React Compiler
+Сайт помогает пользователю:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* понять, чем занимается ТД Энергоэффект;
+* выбрать направление инженерной комплектации;
+* разобраться, куда относится задача: ТД, Энергоэффект или Теплоучет;
+* отправить заявку, проект, спецификацию или описание задачи;
+* перейти к связанным направлениям экосистемы.
 
-## Expanding the ESLint configuration
+## Роль ТД в экосистеме
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ТД Энергоэффект — направление, отвечающее за комплектацию инженерных объектов, подбор оборудования, работу со спецификациями, аналогами и сопровождение поставок.
+
+Связанные направления:
+
+* **Энергоэффект** — производственные инженерные решения;
+* **Теплоучет** — каталог оборудования и комплектующих.
+
+## Технологии
+
+Проект построен на:
+
+* React;
+* Vite;
+* React Router;
+* CSS;
+* fetch API для отправки заявок в backend.
+
+## Основные страницы
+
+В проекте используются следующие маршруты:
+
+```txt
+/          — главная посадочная страница
+/about     — страница о компании
+/privacy   — политика обработки персональных данных
+```
+
+Старые маршруты сохранены как безопасные редиректы на секции главной:
+
+```txt
+/directions → главная + блок “Направления”
+/supply     → главная + блок “Решения”
+/cases      → главная + блок “Типовые задачи”
+/contacts   → главная + блок “Контакты”
+```
+
+## Структура главной страницы
+
+Главная страница является основным пользовательским маршрутом.
+
+Порядок блоков:
+
+1. Hero
+2. Направления
+3. Решения / процесс работы
+4. Инженерный подход
+5. Инженерная экосистема
+6. Типовые задачи
+7. FAQ
+8. Контакты / форма заявки
+9. Footer
+
+## Форма заявки
+
+Форма заявки находится в блоке контактов и отправляет данные в backend:
+
+```txt
+POST /api/leads/
+```
+
+Передаются поля:
+
+* имя;
+* компания;
+* телефон;
+* email;
+* сообщение;
+* прикреплённый файл;
+* источник заявки;
+* согласие на обработку персональных данных.
+
+Email сейчас не является обязательным полем.
+
+Обязательные поля:
+
+* имя;
+* телефон;
+* согласие на обработку персональных данных.
+
+## Работа с файлами
+
+Пользователь может прикрепить проект, спецификацию или другой файл к заявке.
+
+На frontend используется обычное поле загрузки файла.
+
+## Навигация
+
+Header и Footer ведут по секциям главной страницы.
+
+Отдельными страницами остаются:
+
+* `/about`;
+* `/privacy`.
+
+При переходе между отдельными страницами используется логика `ScrollToTop`, чтобы страница открывалась сверху.
+
+## Mobile
+
+Мобильная версия использует:
+
+* sticky header;
+* горизонтальную навигацию;
+* адаптивные карточки;
+* одноколоночную структуру блоков.
+
+После финальной проверки горизонтального скролла страницы нет.
+
+## Важные компоненты
+
+```txt
+src/components/Header
+src/components/Footer
+src/components/Hero
+src/components/DirectionsBlock
+src/components/WorkSteps
+src/components/ExpertiseSection
+src/components/EcosystemSection
+src/components/CasesPreview
+src/components/FaqSection
+src/components/LeadForm
+src/components/Seo
+src/components/CookieBanner
+```
+
+## Data-файлы
+
+Контент для повторяемых блоков вынесен в `src/data`.
+
+Актуальные data-файлы:
+
+```txt
+about.js
+casesPreview.js
+directions.js
+ecosystemSolutions.js
+faqItems.js
+navigation.js
+supply.js
+workSteps.js
+```
+
+Удалены устаревшие data-файлы:
+
+```txt
+cases.js
+contacts.js
+ecosystemRoutes.js
+```
+
+## Цвета и визуальная логика
+
+Основные цвета:
+
+```txt
+Оранжевый акцент: #f97316
+Тёмный футер:     #0f2f4a
+```
+
+Красный цвет в интерфейсе не используется как основной акцент.
+
+## Локальный запуск
+
+Установить зависимости:
+
+```bash
+npm install
+```
+
+Запустить dev-сервер:
+
+```bash
+npm run dev
+```
+
+Собрать проект:
+
+```bash
+npm run build
+```
+
+Проверить собранную версию:
+
+```bash
+npm run preview
+```
+
+## Проверка перед коммитом
+
+Перед коммитом нужно проверить:
+
+```txt
+npm run build
+```
+
+И вручную:
+
+```txt
+/          — открывается
+/about     — открывается сверху
+/privacy   — открывается сверху
+
+Header     — работает
+Footer     — работает
+CTA        — работают
+Mobile     — без горизонтального скролла
+Console    — без ошибок
+```
+
+Также проверить старые маршруты:
+
+```txt
+/directions
+/supply
+/cases
+/contacts
+```
+
+Они должны вести на соответствующие секции главной страницы.
+
+## Последний завершённый этап
+
+Завершена UX/структурная доработка frontend сайта ТД:
+
+* очищена главная страница;
+* уточнено позиционирование Hero;
+* переработаны типовые задачи;
+* упрощён FAQ;
+* переработан блок экосистемы;
+* проверена навигация;
+* проверена mobile-версия;
+* удалены неиспользуемые data-файлы;
+* удалены устаревшие CSS-классы;
+* добавлен сброс скролла при переходе на отдельные страницы;
+* подтверждена успешная сборка через `npm run build`.
+
+## Текущий статус
+
+Frontend сайта ТД Энергоэффект находится в стабильном состоянии после UX/структурной доработки.
+
+Основные проверки пройдены:
+
+```txt
+npm run build — успешно
+Главная — работает
+/about — работает
+/privacy — работает
+Header — работает
+Footer — работает
+CTA — работают
+Старые маршруты — работают
+Mobile — работает
+Горизонтального скролла нет
+Ошибок в консоли нет
+```
