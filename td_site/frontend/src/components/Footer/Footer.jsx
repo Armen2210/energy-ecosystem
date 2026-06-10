@@ -147,18 +147,25 @@ function Footer() {
           </nav>
 
           <div className="footer__column">
-            <h4>Экосистема</h4>
+              <h4>Экосистема</h4>
 
-            <span>ТД Энергоэффект — комплектация инженерных объектов</span>
-            <span>Энергоэффект — производственные решения</span>
+              <span>ТД Энергоэффект — комплектация инженерных объектов</span>
 
-            <a
-              href="https://teplouchet.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Теплоучет — оборудование и комплектующие
-            </a>
+              <a
+                href="https://www.energoeffekt-rostov.ru/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Энергоэффект — производственные решения
+              </a>
+
+              <a
+                href="https://teplouchet.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Теплоучет — оборудование и комплектующие
+              </a>
           </div>
 
           <div className="footer__column footer__contacts">
