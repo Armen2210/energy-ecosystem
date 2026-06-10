@@ -10,15 +10,33 @@
 // - заменить отдельную страницу /directions в коротком
 //   формате главной посадочной страницы.
 //
-// Данные карточек берутся из src/data/directions.js.
+// Важно:
+// блок не должен перегружать начало главной страницы.
+// Поэтому сценарии "Как начать" вынесены в компактный CTA,
+// а не отображаются отдельной сеткой карточек.
 // =====================================================
 
-import {
-  directionAreas,
-  directionStartOptions,
-} from "../../data/directions"
+import { directionAreas } from "../../data/directions"
 
 function DirectionsBlock() {
+  // =====================================================
+  // Скролл к форме заявки
+  // =====================================================
+  const scrollToContacts = (event) => {
+    event.preventDefault()
+
+    const contactsSection = document.getElementById("contacts")
+
+    if (!contactsSection) {
+      return
+    }
+
+    contactsSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+
   return (
     <section className="directions section section--muted" id="directions">
       <div className="container">
@@ -53,30 +71,26 @@ function DirectionsBlock() {
         </div>
 
         {/* =====================================================
-            КАК МОЖНО НАЧАТЬ ОБСУЖДЕНИЕ
+            КОМПАКТНЫЙ БЛОК "КАК НАЧАТЬ"
         ===================================================== */}
-        <div className="section__head section__head--compact">
-          <p className="section__eyebrow">Как начать</p>
+        <div className="process-cta">
+          <div>
+            <h3>Не обязательно знать точный перечень оборудования</h3>
 
-          <h2 className="section__title">
-            Не обязательно знать точный перечень оборудования
-          </h2>
+            <p>
+              Можно обратиться с проектом, спецификацией, перечнем оборудования
+              или просто описанием задачи объекта. Мы поможем определить
+              дальнейший маршрут.
+            </p>
+          </div>
 
-          <p className="section__text">
-            Если есть проект, спецификация или только описание задачи — с этого
-            уже можно начать обсуждение. Мы поможем определить дальнейший
-            маршрут.
-          </p>
-        </div>
-
-        <div className="page-grid">
-          {directionStartOptions.map((item) => (
-            <article className="info-card" key={item.title}>
-              <h3>{item.title}</h3>
-
-              <p>{item.description}</p>
-            </article>
-          ))}
+          <a
+            href="#contacts"
+            className="btn btn--primary"
+            onClick={scrollToContacts}
+          >
+            Обсудить задачу
+          </a>
         </div>
       </div>
     </section>
