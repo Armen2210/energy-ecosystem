@@ -18,6 +18,24 @@ import { supplyTopics } from "../../data/supply"
 import { workSteps } from "../../data/workSteps"
 
 function WorkSteps() {
+  // =====================================================
+  // Скролл к форме заявки
+  // =====================================================
+  const scrollToContacts = (event) => {
+    event.preventDefault()
+
+    const contactsSection = document.getElementById("contacts")
+
+    if (!contactsSection) {
+      return
+    }
+
+    contactsSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+
   return (
     <section className="process section section--muted" id="solutions">
       <div className="container">
@@ -91,8 +109,12 @@ function WorkSteps() {
             </p>
           </div>
 
-          <a href="#contacts" className="btn btn--primary">
-            Обсудить проект
+          <a
+              href="#contacts"
+              className="btn btn--primary"
+              onClick={scrollToContacts}
+          >
+              Обсудить проект
           </a>
         </div>
       </div>
