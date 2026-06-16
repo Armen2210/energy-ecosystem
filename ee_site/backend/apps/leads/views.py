@@ -1,8 +1,12 @@
 # =========================================================
 # LEADS VIEWS / API-ПРЕДСТАВЛЕНИЯ ЗАЯВОК
 # Публичный endpoint для отправки заявки с сайта.
-# CSRF отключён только для этой формы, так как заявка приходит
-# от неавторизованного пользователя через frontend.
+#
+# Особенности:
+# - CSRF отключён только для публичной формы заявки;
+# - заявка сохраняется в базе данных;
+# - после сохранения отправляется email-уведомление менеджеру;
+# - ошибка отправки email не ломает сохранение заявки.
 # =========================================================
 
 from django.utils.decorators import method_decorator
@@ -13,6 +17,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .email_notifications import send_lead_notification
 from .serializers import LeadSerializer
 
 
@@ -27,6 +32,12 @@ class LeadCreateAPIView(APIView):
 
         if serializer.is_valid():
             lead = serializer.save()
+
+            # Отправляем email-уведомление менеджеру.
+            # Функция сама обрабатывает ошибки, чтобы форма не ломалась,
+            # если SMTP временно недоступен или не настроен.
+            send_lead_notification(lead)
+
             return Response(
                 LeadSerializer(lead).data,
                 status=status.HTTP_201_CREATED,
