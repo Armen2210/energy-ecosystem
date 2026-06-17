@@ -115,7 +115,8 @@ src/
   App.jsx
   index.css
   main.jsx
-Data-файлы
+  
+## Data-файлы
 src/data/products.js
 
 Единый источник данных для продуктов.
