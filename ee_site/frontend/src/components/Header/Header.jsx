@@ -7,6 +7,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import energyLogo from "../../assets/energoeffect-logo-orange.svg";
+
 function Header({ navigation }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,15 +72,13 @@ function Header({ navigation }) {
           className={`logo ${isLogoLeaving ? "logo--leaving" : ""}`}
           href="/"
           onClick={handleLogoClick}
+          aria-label="Энергоэффект — перейти на главную страницу"
         >
-          <div className="logo__mark">ЭЭ</div>
-
-          <div>
-            <div className="logo__title">Энергоэффект</div>
-            <div className="logo__subtitle">
-              Инженерная производственная платформа
-            </div>
-          </div>
+          <img
+            className="logo__image"
+            src={energyLogo}
+            alt="Энергоэффект"
+          />
         </a>
 
         <nav className="nav">
