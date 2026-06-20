@@ -58,8 +58,7 @@ def send_lead_notification(lead):
         f"Система-источник: {lead.source_system or 'Не указана'}\n"
         f"Статус: {lead.get_status_display()}\n\n"
         "Описание заявки:\n"
-        f"{lead.description or 'Не указано'}\n\n"
-        "Заявка также сохранена в Django Admin."
+        f"{lead.description or 'Не указано'}"
     )
 
     try:
