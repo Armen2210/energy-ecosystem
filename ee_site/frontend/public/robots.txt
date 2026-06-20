@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://energoeffect.ru/sitemap.xml
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.energoeffekt-rostov.ru/sitemap.xml

@@ -11,7 +11,7 @@
 
 import { useEffect } from "react";
 
-const SITE_URL = "https://energoeffect.ru";
+const SITE_URL = "https://www.energoeffekt-rostov.ru";
 const DEFAULT_TITLE = "Энергоэффект — инженерная производственная платформа";
 const DEFAULT_DESCRIPTION =
   "Энергоэффект проектирует и производит БМК, БТП, ВНС, ПНС, шкафы управления и автоматизации, а также выполняет проектирование, СМР и пусконаладку инженерных объектов.";
