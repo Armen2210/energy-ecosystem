@@ -37,7 +37,7 @@ function ContactsPage() {
 
               <span>
                 Телефон:{" "}
-                <a href="tel:+79381693109">+78004440766</a>
+                <a href="tel:+78004440766">+7 800 444-07-66</a>
               </span>
 
               <span>

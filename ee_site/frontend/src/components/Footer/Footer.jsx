@@ -67,7 +67,7 @@ function Footer({ navigation }) {
         </div>
 
         <div className="footer__contacts">
-          <a href="tel:+79381693109">+78004440766</a>
+          <a href="tel:+78004440766">+7 800 444-07-66</a>
           <a href="mailto:sales@ee-don.ru">sales@ee-don.ru</a>
           <span>
             Заявки на производство, проектирование, строительно-монтажные работы
