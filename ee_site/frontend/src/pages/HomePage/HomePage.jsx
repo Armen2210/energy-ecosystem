@@ -243,13 +243,13 @@ function HomePage() {
 
                 <span>
                   Телефон:{" "}
-                  <a href="tel:+79381693109">+7 (938) 169-31-09</a>
+                  <a href="tel:+79381693109">+78004440766</a>
                 </span>
 
                 <span>
                   Email:{" "}
-                  <a href="mailto:info@energoeffect.ru">
-                    info@energoeffect.ru
+                  <a href="mailto:sales@ee-don.ru">
+                    sales@ee-don.ru
                   </a>
                 </span>
 

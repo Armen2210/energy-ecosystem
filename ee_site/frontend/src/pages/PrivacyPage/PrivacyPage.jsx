@@ -54,8 +54,8 @@ function PrivacyPage() {
                   Юридический адрес: 344113, Россия, Ростовская область,
                   г. Ростов-на-Дону, б-р Комарова, зд. 28/2, ком. 19
                 </span>
-                <span>Email: info@energoeffect.ru</span>
-                <span>Телефон: +7 (938) 169-31-09</span>
+                <span>Email: sales@ee-don.ru</span>
+                <span>Телефон: +78004440766</span>
               </div>
             </section>
 
@@ -204,7 +204,7 @@ function PrivacyPage() {
               <p>
                 По вопросам обработки персональных данных можно обратиться в ООО
                 «Энергоэффект» через контактные данные, указанные на сайте:
-                info@energoeffect.ru или +7 (938) 169-31-09.
+                sales@ee-don.ru или +78004440766.
               </p>
             </section>
           </div>

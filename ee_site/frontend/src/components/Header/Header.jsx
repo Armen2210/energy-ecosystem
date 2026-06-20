@@ -90,7 +90,7 @@ function Header({ navigation }) {
         </nav>
 
         <a className="header__phone" href="tel:+79381693109">
-          +7 (938) 169-31-09
+          +78004440766
         </a>
       </div>
     </header>
