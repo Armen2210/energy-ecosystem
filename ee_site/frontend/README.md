@@ -16,7 +16,7 @@ Frontend-часть production-сайта ООО «Энергоэффект».
 https://www.energoeffekt-rostov.ru
 ```
 
-Домен без `www` должен перенаправлять на основной адрес:
+Домен без `www` перенаправляет на основной адрес:
 
 ```text
 https://energoeffekt-rostov.ru → https://www.energoeffekt-rostov.ru
@@ -26,16 +26,90 @@ https://energoeffekt-rostov.ru → https://www.energoeffekt-rostov.ru
 
 * frontend открывается;
 * HTTPS работает;
+* домен с `www` открывается;
+* домен без `www` перенаправляет на основной адрес;
 * внутренние React-маршруты открываются;
+* прямые заходы на внутренние маршруты работают;
 * SPA fallback работает через nginx;
+* `/contacts` перенаправляет пользователя к контактному блоку главной страницы;
 * форма заявки отправляется;
-* заявка сохраняется в backend / PostgreSQL;
+* заявка сохраняется в backend / базе данных;
 * файл заявки загружается и сохраняется;
 * заявка отображается в Django Admin;
 * email-уведомление менеджеру отправляется;
 * email с вложением приходит;
 * cookie-баннер работает;
-* страница политики обработки персональных данных доступна.
+* страница политики обработки персональных данных доступна;
+* robots.txt доступен;
+* sitemap.xml доступен;
+* Яндекс Вебмастер подключён;
+* Google Search Console подключён.
+
+Production-проверки ЭЭ-5:
+
+```text
+/                                   ок
+/about                              ок
+/solutions                          ок
+/solutions/bmk                      ок
+/solutions/btp                      ок
+/solutions/vns                      ок
+/solutions/pns                      ок
+/solutions/automation-cabinets      ок
+/services                           ок
+/services/design                    ок
+/services/construction-installation ок
+/services/commissioning             ок
+/cases                              ок
+/contacts                           ок, redirect на /#contacts
+/privacy                            ок
+```
+
+Прямые заходы проверены:
+
+```text
+/solutions/bmk                      ок
+/services/design                    ок
+/privacy                            ок
+```
+
+Admin-проверка:
+
+```text
+Django Admin открывается
+заявки отображаются
+заявка без файла сохраняется
+заявка с файлом сохраняется
+source_page сохраняется
+source_system сохраняется
+```
+
+Email-проверка:
+
+```text
+письмо без файла приходит
+письмо с файлом приходит
+вложение в письме есть
+служебная фраза про Django Admin из письма удалена
+```
+
+Контактные данные production:
+
+```text
+Телефон: +7 800 444-07-66
+tel-ссылка: tel:+78004440766
+Email: sales@ee-don.ru
+```
+
+Состояние сервера после ЭЭ-5:
+
+```text
+git status — рабочая ветка main актуальна
+untracked — только ee_site/backend/.env.backup...
+ee_site_gunicorn.service — active (running)
+```
+
+Файл `.env.backup...` не добавляется в Git и не коммитится.
 
 ---
 
@@ -303,6 +377,19 @@ src/
 2. Как с нами связаться
 3. Реквизиты компании
 
+Контактные данные:
+
+```text
+Телефон: +7 800 444-07-66
+Email: sales@ee-don.ru
+```
+
+Телефон отображается в читаемом формате, а `tel`-ссылка сохраняется в техническом формате:
+
+```text
+tel:+78004440766
+```
+
 Карточка реквизитов содержит краткий вариант:
 
 ```text
@@ -356,10 +443,11 @@ POST /api/leads/
 * success/error состояния реализованы;
 * success-сообщение плавно исчезает;
 * файл заявки передаётся в backend;
-* заявка сохраняется в PostgreSQL;
+* заявка сохраняется в базе данных;
 * заявка отображается в Django Admin;
 * после сохранения заявки отправляется email-уведомление менеджеру;
 * вложение, если оно было прикреплено, приходит в письме;
+* служебная фраза про Django Admin из письма удалена;
 * есть согласие на обработку персональных данных;
 * ссылка на политику из формы открывается в новой вкладке, чтобы пользователь не потерял заполненную заявку;
 * для ссылки используется `rel="noopener noreferrer"`;
@@ -516,14 +604,52 @@ Nginx раздаёт frontend из:
 
 ---
 
+## Production backend / security cleanup
+
+Production backend работает через Gunicorn:
+
+```text
+ee_site_gunicorn.service
+```
+
+После ЭЭ-5 проверено:
+
+```text
+ee_site_gunicorn.service — active (running)
+```
+
+Production `.env` очищен от временных dev/IP-значений.
+
+Проверенные production-настройки:
+
+```text
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=energoeffekt-rostov.ru,www.energoeffekt-rostov.ru
+CSRF_TRUSTED_ORIGINS=https://energoeffekt-rostov.ru,https://www.energoeffekt-rostov.ru
+```
+
+Из production-настроек удалены:
+
+```text
+localhost
+127.0.0.1
+временные IP-адреса
+```
+
+Важно: `.env` и резервные копии `.env` не должны попадать в GitHub.
+
+---
+
 ## SEO foundation
 
-Добавлены базовые SEO-файлы и настройки:
+Добавлены и проверены базовые SEO-файлы и настройки:
 
 * `index.html`
 * `public/robots.txt`
 * `public/sitemap.xml`
 * `public/og-image.jpg`
+* `public/yandex_cd192b2d43f6e674.html`
+* `public/google6a7aad73ef6a2606.html`
 
 В `index.html` настроены:
 
@@ -531,7 +657,8 @@ Nginx раздаёт frontend из:
 * description;
 * canonical;
 * OpenGraph;
-* summary meta.
+* summary meta;
+* Organization JSON-LD.
 
 Проверка локально:
 
@@ -545,13 +672,40 @@ http://localhost:5173/sitemap.xml
 ```text
 https://www.energoeffekt-rostov.ru/robots.txt
 https://www.energoeffekt-rostov.ru/sitemap.xml
+https://www.energoeffekt-rostov.ru/og-image.jpg
 ```
 
-Важно: после выбора canonical-домена `www` нужно убедиться, что `canonical`, `sitemap.xml`, `robots.txt` и OpenGraph используют актуальный production-адрес:
+Canonical-домен:
 
 ```text
 https://www.energoeffekt-rostov.ru
 ```
+
+Проверено:
+
+```text
+robots.txt использует актуальный sitemap
+sitemap.xml использует актуальный www-домен
+canonical использует актуальный www-домен
+og:url использует актуальный www-домен
+og:image использует актуальный www-домен
+Organization JSON-LD найден
+Organization JSON-LD содержит name, url, telephone, email
+```
+
+robots.txt:
+
+```text
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.energoeffekt-rostov.ru/sitemap.xml
+```
+
+sitemap.xml содержит 14 индексируемых URL.
 
 ---
 
@@ -620,6 +774,102 @@ Elements → поиск application/ld+json → проверить "@type": "FAQ
 
 ---
 
+## Вебмастеры и индексация
+
+### Яндекс Вебмастер
+
+Сайт добавлен в Яндекс Вебмастер.
+
+Подтверждение прав выполнено через HTML-файл:
+
+```text
+public/yandex_cd192b2d43f6e674.html
+```
+
+Production-проверка файла:
+
+```text
+https://www.energoeffekt-rostov.ru/yandex_cd192b2d43f6e674.html
+```
+
+Статус sitemap в Яндекс Вебмастере:
+
+```text
+sitemap.xml — OK
+количество ссылок — 14
+```
+
+### Google Search Console
+
+Сайт добавлен в Google Search Console.
+
+Тип ресурса:
+
+```text
+URL prefix / Префикс URL
+```
+
+Подтверждение прав выполнено через HTML-файл:
+
+```text
+public/google6a7aad73ef6a2606.html
+```
+
+Production-проверка файла:
+
+```text
+https://www.energoeffekt-rostov.ru/google6a7aad73ef6a2606.html
+```
+
+Статус sitemap в Google Search Console:
+
+```text
+sitemap.xml — Успешно
+количество выявленных страниц — 14
+```
+
+Важно: файлы подтверждения Яндекс и Google нельзя удалять, иначе подтверждение прав может быть отменено.
+
+---
+
+## PageSpeed / Lighthouse
+
+В рамках ЭЭ-5 проведена базовая проверка PageSpeed / Lighthouse.
+
+Результаты:
+
+```text
+Home / Mobile:
+Performance — 92
+Accessibility — 90
+Best Practices — 100
+SEO — 100
+Agent — 1/3
+
+Home / Desktop:
+Performance — 99
+Accessibility — 93
+Best Practices — 100
+SEO — 100
+Agent — 1/3
+
+Product /solutions/bmk / Mobile:
+Performance — 88
+Accessibility — 90
+Best Practices — 100
+SEO — 100
+Agent — 1/3
+
+Product /solutions/bmk / Desktop:
+Performance — 100
+Accessibility — 93
+Best Practices — 100
+SEO — 100
+Agent — 1/3
+```
+
+---
+
 ## PrivacyPage
 
 Страница:
@@ -671,8 +921,8 @@ src/pages/PrivacyPage/PrivacyPage.jsx
 ИНН: 6161070112
 ОГРН: 1146193000480
 Юридический адрес: 344113, Россия, Ростовская область, г. Ростов-на-Дону, б-р Комарова, зд. 28/2, ком. 19
-Email: info@energoeffect.ru
-Телефон: +7 (938) 169-31-09
+Email: sales@ee-don.ru
+Телефон: +7 800 444-07-66
 ```
 
 ---
@@ -858,6 +1108,13 @@ Footer содержит:
 
 Полный юридический адрес и ОГРН в footer не добавляются, чтобы не перегружать подвал.
 
+Контакты в footer:
+
+```text
+Телефон: +7 800 444-07-66
+Email: sales@ee-don.ru
+```
+
 Экосистема:
 
 ```text
@@ -1009,27 +1266,46 @@ location / {
 
 ---
 
+## ЭЭ-5 — выполнено
+
+В рамках ЭЭ-5 завершено:
+
+1. Финальный smoke-test production-маршрутов.
+2. Проверка canonical URL под `www`.
+3. Проверка `robots.txt` и `sitemap.xml` под production-домен.
+4. Проверка OpenGraph после deploy.
+5. Проверка Organization JSON-LD.
+6. Подключение Яндекс Вебмастера.
+7. Подключение Google Search Console.
+8. Отправка sitemap.xml в Яндекс Вебмастер.
+9. Отправка sitemap.xml в Google Search Console.
+10. Проверка формы заявки.
+11. Проверка заявки с файлом.
+12. Проверка email-уведомлений.
+13. Проверка Django Admin.
+14. Security cleanup production `.env`.
+15. Проверка PageSpeed / Lighthouse.
+16. Проверка mobile-отображения 360 / 390 / 430 / 768 px.
+17. Проверка контактных данных.
+18. Проверка кликабельности телефона.
+19. Проверка статуса git и production-сервиса.
+
+---
+
 ## Следующие этапы
 
 Рекомендуется вынести в следующие ТЗ:
 
-1. Финальный smoke-test всех production-маршрутов.
-2. Проверка и актуализация canonical URL под `www`.
-3. Проверка `robots.txt` и `sitemap.xml` под production-домен.
-4. Подготовка и проверка финального `og-image.jpg`.
-5. Проверка OpenGraph после deploy.
-6. Добавление сайта в Яндекс Вебмастер.
-7. Добавление сайта в Google Search Console.
-8. Отправка sitemap на переобход.
-9. Оптимизация изображений.
-10. Проверка Core Web Vitals.
-11. Дальнейшее разделение CSS по компонентам.
-12. Подключение аналитики после согласования политики cookies.
-13. Подготовка юридического текста к финальной проверке юристом.
-14. Расширение контента продуктовых страниц.
-15. Расширение контента сервисных страниц.
-16. Добавление реальных кейсов.
-17. Подготовка следующих интеграций: CRM, аналитика, расширенные события формы заявки.
+1. Расширенная mobile-адаптация.
+2. Оптимизация изображений.
+3. Дальнейшая работа с Core Web Vitals.
+4. Дальнейшее разделение CSS по компонентам.
+5. Подключение аналитики после согласования политики cookies.
+6. Подготовка юридического текста к финальной проверке юристом.
+7. Расширение контента продуктовых страниц.
+8. Расширение контента сервисных страниц.
+9. Добавление реальных кейсов.
+10. Подготовка следующих интеграций: CRM, аналитика, расширенные события формы заявки.
 
 ---
 
