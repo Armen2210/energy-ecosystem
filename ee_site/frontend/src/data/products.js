@@ -4,11 +4,28 @@
 // страниц продуктов, формы заявки и будущей SEO-структуры.
 // =========================================================
 
+// =========================================================
+// DEFAULT PRODUCT THEME / БАЗОВАЯ ТЕМА ПРОДУКТОВ
+// На текущем этапе все продукты используют единую оранжевую
+// тему сайта. Структура заложена для будущей индивидуальной
+// цветовой настройки продуктовых страниц.
+// =========================================================
+
+const defaultProductTheme = {
+  accent: "#f97316",
+  accentSoft: "#fff3ea",
+  background: "#ffffff",
+  surface: "#fffaf6",
+  text: "#111827",
+};
+
 export const products = [
   {
     slug: "bmk",
     title: "Блочно-модульные котельные",
     shortTitle: "БМК",
+    switcherTitle: "БМК",
+    theme: { ...defaultProductTheme },
     description:
       "БМК под задачи теплоснабжения объектов с учётом мощности, сроков и условий эксплуатации.",
     url: "/solutions/bmk",
@@ -29,6 +46,8 @@ export const products = [
     slug: "btp",
     title: "Блочные тепловые пункты",
     shortTitle: "БТП",
+    switcherTitle: "БТП",
+    theme: { ...defaultProductTheme },
     description:
       "Проектирование и производство БТП для жилых, социальных, промышленных и коммерческих объектов.",
     url: "/solutions/btp",
@@ -49,6 +68,8 @@ export const products = [
     slug: "vns",
     title: "Водопроводные насосные станции",
     shortTitle: "ВНС",
+    switcherTitle: "ВНС",
+    theme: { ...defaultProductTheme },
     description:
       "ВНС для стабильного водоснабжения объектов различного назначения и уровня сложности.",
     url: "/solutions/vns",
@@ -69,6 +90,8 @@ export const products = [
     slug: "pns",
     title: "Пожарные насосные станции",
     shortTitle: "ПНС",
+    switcherTitle: "ПНС",
+    theme: { ...defaultProductTheme },
     description:
       "Вода под давлением тогда, когда это критически важно.",
     url: "/solutions/pns",
@@ -89,6 +112,8 @@ export const products = [
     slug: "automation-cabinets",
     title: "Шкафы управления и автоматизации",
     shortTitle: "Шкафы управления",
+    switcherTitle: "ШУиА",
+    theme: { ...defaultProductTheme },
     description:
       "Шкафы управления и автоматизации под задачи инженерных систем, оборудования и объектов.",
     url: "/solutions/automation-cabinets",

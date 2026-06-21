@@ -9,6 +9,7 @@
 import { useParams } from "react-router-dom";
 
 import AiSummary from "../../components/AiSummary";
+import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
@@ -176,12 +177,19 @@ function ProductPage() {
       />
 
       <section className="section">
-        <div className="container">
-          <SectionHeader
-            eyebrow={product.shortTitle}
-            title={product.title}
-            description={product.description}
-          />
+          <div className="container">
+            <EntitySwitcher
+              items={products}
+              currentSlug={product.slug}
+              basePath="/solutions"
+              variant="products"
+              ariaLabel="Переключатель продуктовых направлений"
+            />
+
+            <SectionHeader
+              title={product.title}
+              description={product.description}
+            />
 
           <AiSummary
             title={`${product.title}: кратко`}

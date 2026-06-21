@@ -4,11 +4,28 @@
 // страниц услуг, формы заявки и будущей SEO-структуры.
 // =========================================================
 
+// =========================================================
+// DEFAULT SERVICE THEME / БАЗОВАЯ ТЕМА УСЛУГ
+// На текущем этапе все услуги используют единую оранжевую
+// тему сайта. Структура заложена для будущей индивидуальной
+// цветовой настройки сервисных страниц.
+// =========================================================
+
+const defaultServiceTheme = {
+  accent: "#f97316",
+  accentSoft: "#fff3ea",
+  background: "#ffffff",
+  surface: "#fffaf6",
+  text: "#111827",
+};
+
 export const services = [
   {
     slug: "design",
     title: "Проектирование",
     shortTitle: "Проектирование",
+    switcherTitle: "Проектирование",
+    theme: { ...defaultServiceTheme },
     description:
       "Проектирование инженерных объектов и сетей с учётом требований объекта, нормативов и будущей эксплуатации.",
     url: "/services/design",
@@ -29,6 +46,8 @@ export const services = [
     slug: "construction-installation",
     title: "Строительно-монтажные работы",
     shortTitle: "СМР",
+    switcherTitle: "СМР",
+    theme: { ...defaultServiceTheme },
     description:
       "Монтаж котельных, тепловых пунктов, насосных станций и инженерных сетей на объекте.",
     url: "/services/construction-installation",
@@ -49,6 +68,8 @@ export const services = [
     slug: "commissioning",
     title: "Пусконаладка и ввод в эксплуатацию",
     shortTitle: "Пусконаладка",
+    switcherTitle: "ПНР",
+    theme: { ...defaultServiceTheme },
     description:
       "Проверка, настройка и запуск инженерных систем перед передачей в эксплуатацию.",
     url: "/services/commissioning",

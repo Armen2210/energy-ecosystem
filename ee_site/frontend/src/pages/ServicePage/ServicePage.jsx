@@ -9,6 +9,7 @@
 import { useParams } from "react-router-dom";
 
 import AiSummary from "../../components/AiSummary";
+import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 import InfoListBlock from "../../components/InfoListBlock";
 import LeadForm from "../../components/LeadForm";
@@ -123,12 +124,19 @@ function ServicePage() {
       />
 
        <section className="section">
-        <div className="container">
-          <SectionHeader
-            eyebrow={service.shortTitle}
-            title={service.title}
-            description={service.description}
-          />
+          <div className="container">
+            <EntitySwitcher
+              items={services}
+              currentSlug={service.slug}
+              basePath="/services"
+              variant="services"
+              ariaLabel="Переключатель услуг компании"
+            />
+
+            <SectionHeader
+              title={service.title}
+              description={service.description}
+            />
 
           <AiSummary
             title={`${service.title}: кратко`}
