@@ -74,7 +74,7 @@ export default function EntitySwitcher({
     });
   }
 
-  function scrollButtonIntoViewport(slug, itemIndex) {
+    function scrollButtonIntoViewport(slug, itemIndex) {
     const button = buttonRefs.current[slug];
     const viewport = button?.closest(".entity-switcher__viewport");
 
@@ -86,6 +86,12 @@ export default function EntitySwitcher({
     const isFirstItem = itemIndex <= 0;
     const isLastItem = itemIndex >= items.length - 1;
 
+    const buttonLeft = button.offsetLeft - safeOffset;
+    const buttonRight = button.offsetLeft + button.offsetWidth + safeOffset;
+
+    const visibleLeft = viewport.scrollLeft;
+    const visibleRight = visibleLeft + viewport.clientWidth;
+
     let targetLeft = viewport.scrollLeft;
 
     if (isFirstItem) {
@@ -96,11 +102,22 @@ export default function EntitySwitcher({
       // чтобы его правая граница не обрезалась.
       targetLeft =
         button.offsetLeft + button.offsetWidth - viewport.clientWidth + safeOffset;
-    } else {
-      // Средний элемент мягко ставим ближе к центру.
-      // Так пользователь видит соседние кнопки слева и справа.
+    } else if (variant === "services") {
+      // Центрирование нужно только для услуг:
+      // Проектирование / СМР / ПНР.
+      // Для продуктов это выглядит как лишний сдвиг.
       targetLeft =
         button.offsetLeft - (viewport.clientWidth - button.offsetWidth) / 2;
+    } else {
+      // Для продуктов не центрируем активную кнопку.
+      // Только мягко возвращаем её в видимую область, если она обрезалась.
+      if (buttonLeft < visibleLeft) {
+        targetLeft = Math.max(buttonLeft, 0);
+      } else if (buttonRight > visibleRight) {
+        targetLeft = buttonRight - viewport.clientWidth;
+      } else {
+        return;
+      }
     }
 
     viewport.scrollTo({
