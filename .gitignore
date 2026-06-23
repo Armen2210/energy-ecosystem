@@ -38,3 +38,6 @@ Thumbs.db
 # environments
 */backend/.venv/
 
+# Vite cache
+**/.vite/
+
