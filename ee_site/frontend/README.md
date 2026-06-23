@@ -792,6 +792,99 @@ localhost
 Важно: `.env` и резервные копии `.env` не должны попадать в GitHub.
 
 ---
+## Favicon / App icons
+
+В рамках production-настройки favicon подготовлен полный комплект иконок для браузеров, поисковой выдачи, iOS/Android и web app manifest.
+
+Файлы находятся в:
+
+```text
+public/
+```
+
+Используемые файлы:
+
+```text
+favicon.ico
+favicon.svg
+favicon-48x48.png
+favicon-120x120.png
+apple-touch-icon.png
+android-chrome-192x192.png
+android-chrome-512x512.png
+site.webmanifest
+```
+
+Назначение:
+
+* `favicon.ico` — fallback для браузеров, поисковиков и внешних сервисов;
+* `favicon.svg` — современный favicon для браузеров;
+* `favicon-48x48.png` — PNG-вариант для поисковиков и сервисов;
+* `favicon-120x120.png` — PNG-вариант, удобный для Яндекса и внешних сервисов;
+* `apple-touch-icon.png` — иконка для iOS;
+* `android-chrome-192x192.png` — иконка для Android / Chrome;
+* `android-chrome-512x512.png` — крупная иконка для Android / Chrome и manifest;
+* `site.webmanifest` — manifest-файл с базовыми app icon metadata.
+
+В `index.html` подключены:
+
+```html
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+<link rel="icon" type="image/png" sizes="120x120" href="/favicon-120x120.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#f97316" />
+```
+
+Production-проверка:
+
+```text
+/favicon.ico                  200 OK, image/x-icon
+/favicon.svg                  200 OK
+/favicon-48x48.png            200 OK
+/favicon-120x120.png          200 OK
+/apple-touch-icon.png         200 OK
+/android-chrome-192x192.png   200 OK
+/android-chrome-512x512.png   200 OK, image/png
+/site.webmanifest             200 OK, application/manifest+json
+```
+
+В DevTools проверено:
+
+```text
+Application → Manifest
+```
+
+Результат:
+
+* manifest подключён;
+* `name` и `short_name` отображаются;
+* `theme_color` отображается;
+* иконки `192x192` и `512x512` подтягиваются;
+* предупреждение о несоответствии размера `android-chrome-512x512.png` устранено.
+
+На production-сервере дополнительно добавлен MIME-тип для `.webmanifest` в nginx:
+
+```text
+/etc/nginx/mime.types
+```
+
+Добавленная строка:
+
+```nginx
+application/manifest+json             webmanifest;
+```
+
+Это нужно, чтобы `site.webmanifest` отдавался не как `application/octet-stream`, а как:
+
+```text
+application/manifest+json
+```
+
+Важно: изменение `/etc/nginx/mime.types` является серверной production-настройкой и не входит в Git-репозиторий проекта.
+
 
 ## SEO foundation
 
