@@ -1,15 +1,13 @@
 // =========================================================
 // AI SUMMARY / КРАТКОЕ ОПИСАНИЕ ДЛЯ ЛЮДЕЙ И ИИ
-// Блок помогает быстро понять смысл страницы:
-// пользователю, поисковику и AI-агенту.
+// Компактный AI-first блок:
+// title выводится в плашке, список сохраняет структуру страницы.
 // =========================================================
 
 function AiSummary({ title, items = [] }) {
   return (
-    <aside className="ai-summary" aria-label="Краткое содержание страницы">
-      <div className="ai-summary__label">Кратко о странице</div>
-
-      <h2>{title}</h2>
+    <aside className="ai-summary ai-summary--compact" aria-label="Краткое содержание страницы">
+      <div className="ai-summary__label">{title}</div>
 
       <ul>
         {items.map((item) => (
