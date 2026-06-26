@@ -123,8 +123,8 @@ function ServicePage() {
           path={`/services/${service.slug}`}
       />
 
-       <section className="section">
-          <div className="container">
+          <section className="section section--entity-page">
+           <div className="container">
             <EntitySwitcher
               items={services}
               currentSlug={service.slug}

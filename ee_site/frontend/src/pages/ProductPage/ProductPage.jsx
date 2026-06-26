@@ -176,7 +176,7 @@ function ProductPage() {
           path={`/solutions/${product.slug}`}
       />
 
-      <section className="section">
+         <section className="section section--entity-page">
           <div className="container">
             <EntitySwitcher
               items={products}
