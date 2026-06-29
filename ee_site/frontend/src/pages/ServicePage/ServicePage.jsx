@@ -139,13 +139,11 @@ function ServicePage() {
             />
 
           <AiSummary
-            title={`${service.title}: кратко`}
-            items={[
-              "Услуга относится к инженерным объектам и системам.",
-              "Работы выполняются с учётом требований проекта, объекта и эксплуатации.",
-              "Для оценки задачи можно отправить заявку, ТЗ, проект или спецификацию.",
-            ]}
+              title={service.aiSummary.title}
+              lead={service.aiSummary.lead}
+              items={service.aiSummary.items}
           />
+
           <TrustBlock
               title="Как мы подходим к работе"
               items={[

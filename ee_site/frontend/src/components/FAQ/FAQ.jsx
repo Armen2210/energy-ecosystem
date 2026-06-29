@@ -10,7 +10,9 @@
 // Важно:
 // - компонент визуально компактный;
 // - на главную страницу пока не подключаем;
-// - основной FAQ размещаем на страницах конкретных продуктов и услуг.
+// - основной FAQ размещаем на страницах конкретных продуктов и услуг;
+// - в FAQ используем шеврон, а не плюс, чтобы визуально отличать
+//   его от крупной продуктовой гармошки.
 // =========================================================
 
 function FAQ({ items = [] }) {
@@ -49,8 +51,12 @@ function FAQ({ items = [] }) {
       <div className="faq">
         {items.map((item) => (
           <details className="faq__item" key={item.question}>
-            <summary>{item.question}</summary>
-            <p>{item.answer}</p>
+            <summary className="faq__summary">
+              <span className="faq__question">{item.question}</span>
+              <span className="faq__chevron" aria-hidden="true" />
+            </summary>
+
+            <p className="faq__answer">{item.answer}</p>
           </details>
         ))}
       </div>
