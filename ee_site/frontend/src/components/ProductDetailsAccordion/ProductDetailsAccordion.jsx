@@ -7,6 +7,7 @@
 // Задачи:
 // - показать подробности продукта без перегруза страницы;
 // - первый блок раскрыт по умолчанию;
+// - состояние открытого блока хранится отдельно для каждого продукта;
 // - весь текст остаётся в DOM, чтобы контент был доступен
 //   пользователю, поисковым системам и AI-агентам;
 // - плюс остаётся плюсом, но при клике делает короткое вращение.
@@ -14,16 +15,35 @@
 
 import { useState } from "react";
 
-function ProductDetailsAccordion({ sections = [] }) {
-  const [openIndex, setOpenIndex] = useState(0);
+function ProductDetailsAccordion({ sections = [], stateKey = "default" }) {
+  const [openIndexByKey, setOpenIndexByKey] = useState({});
   const [spinningIndex, setSpinningIndex] = useState(null);
 
   if (!sections.length) {
     return null;
   }
 
+  const hasSavedState = Object.prototype.hasOwnProperty.call(
+    openIndexByKey,
+    stateKey
+  );
+
+  const openIndex = hasSavedState ? openIndexByKey[stateKey] : 0;
+
   const handleToggle = (index) => {
-    setOpenIndex((currentIndex) => (currentIndex === index ? null : index));
+    setOpenIndexByKey((currentState) => {
+      const hasCurrentState = Object.prototype.hasOwnProperty.call(
+        currentState,
+        stateKey
+      );
+
+      const currentIndex = hasCurrentState ? currentState[stateKey] : 0;
+
+      return {
+        ...currentState,
+        [stateKey]: currentIndex === index ? null : index,
+      };
+    });
 
     setSpinningIndex(index);
 
@@ -57,10 +77,10 @@ function ProductDetailsAccordion({ sections = [] }) {
               <span>{section.title}</span>
 
               <span
-                  className={`product-details-accordion__icon ${
-                    isSpinning ? "product-details-accordion__icon--spin" : ""
-                  }`}
-                  aria-hidden="true"
+                className={`product-details-accordion__icon ${
+                  isSpinning ? "product-details-accordion__icon--spin" : ""
+                }`}
+                aria-hidden="true"
               />
             </button>
 

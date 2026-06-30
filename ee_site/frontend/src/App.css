@@ -1025,6 +1025,7 @@ h1 {
 
    В FAQ используем шеврон, а не плюс, чтобы визуально
    отличить его от крупной продуктовой гармошки.
+   Раскрытие/закрытие выполняется плавно через panel.
    ========================================================= */
 
 .section-block {
@@ -1050,21 +1051,17 @@ h1 {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
-  cursor: pointer;
+  width: 100%;
   padding: 18px 20px;
+  border: 0;
   color: var(--color-text);
+  background: transparent;
+  font: inherit;
   font-size: 17px;
   font-weight: 900;
   line-height: 1.3;
-  list-style: none;
-}
-
-.faq__summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq__summary::marker {
-  content: "";
+  text-align: left;
+  cursor: pointer;
 }
 
 .faq__question {
@@ -1083,8 +1080,22 @@ h1 {
   flex: 0 0 auto;
 }
 
-.faq__item[open] .faq__chevron {
+.faq__item--open .faq__chevron {
   transform: rotate(-135deg);
+}
+
+.faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.faq__item--open .faq__panel {
+  grid-template-rows: 1fr;
+}
+
+.faq__content {
+  overflow: hidden;
 }
 
 .faq__answer {
@@ -1093,6 +1104,13 @@ h1 {
   color: var(--color-muted);
   font-size: 15px;
   line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__panel,
+  .faq__chevron {
+    transition: none;
+  }
 }
 
 /* =========================================================

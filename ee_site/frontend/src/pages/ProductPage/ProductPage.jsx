@@ -238,7 +238,10 @@ function ProductPage() {
           )}
 
           {product.detailSections?.length > 0 && (
-              <ProductDetailsAccordion sections={product.detailSections} />
+              <ProductDetailsAccordion
+                  sections={product.detailSections}
+                  stateKey={`product-details-${product.slug}`}
+              />
           )}
 
 
@@ -256,7 +259,7 @@ function ProductPage() {
                 description="Короткие ответы по расчёту, исходным данным и подготовке заявки."
               />
 
-              <FAQ items={productFaq} />
+              <FAQ items={productFaq} stateKey={`product-${product.slug}`} />
           </div>
 
         </div>

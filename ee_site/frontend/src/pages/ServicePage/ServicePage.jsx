@@ -183,7 +183,7 @@ function ServicePage() {
                 description="Короткие ответы по составу работ, исходным данным и подготовке заявки."
               />
 
-              <FAQ items={serviceFaq} />
+              <FAQ items={serviceFaq} stateKey={`service-${service.slug}`} />
           </div>
 
         </div>
