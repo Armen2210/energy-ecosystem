@@ -177,10 +177,12 @@ function ServicePage() {
                 ========================================================= */}
 
           <div className="section-block">
+              <h2 className="visually-hidden">
+                {`Частые вопросы: ${service.shortTitle}`}
+              </h2>
+
               <SectionHeader
-                eyebrow="Вопросы"
-                title={`Частые вопросы: ${service.shortTitle}`}
-                description="Короткие ответы по составу работ, исходным данным и подготовке заявки."
+                eyebrow={`Частые вопросы: ${service.shortTitle}`}
               />
 
               <FAQ items={serviceFaq} stateKey={`service-${service.slug}`} />
@@ -192,11 +194,14 @@ function ServicePage() {
       <section id="lead-form" className="section section--contact">
         <div className="container contact-grid">
           <div>
-            <SectionHeader
-              eyebrow="Заявка"
-              title={`Обсудить услугу: ${service.shortTitle}`}
-              description="Оставьте контакты и приложите файл, если есть техническое задание, проект или спецификация."
-            />
+              <h2 className="visually-hidden">
+                {`Обсудить услугу: ${service.shortTitle}`}
+              </h2>
+
+              <SectionHeader
+                eyebrow={`Обсудить услугу: ${service.shortTitle}`}
+                description="Оставьте контакты и приложите файл, если есть техническое задание, проект или спецификация."
+              />
           </div>
 
           <LeadForm

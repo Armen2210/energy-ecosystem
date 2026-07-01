@@ -10,6 +10,24 @@
 
 @import "./styles/layout.css";
 
+/* =========================================================
+   VISUALLY HIDDEN / ВИЗУАЛЬНО СКРЫТЫЙ ТЕКСТ
+   Нужен для скрытых заголовков, которые остаются доступными
+   для структуры страницы, screen readers и поисковых/AI-агентов.
+   ========================================================= */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
 
 /* =========================================================
    HEADER / ШАПКА САЙТА
@@ -1476,6 +1494,20 @@ h1 {
   line-height: 1.35;
 }
 
+.product-hero__brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.product-hero__brand img {
+  display: block;
+  width: auto;
+  max-width: 260px;
+  max-height: 74px;
+  object-fit: contain;
+}
+
 @media (max-width: 1280px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1726,6 +1758,15 @@ h1 {
 
   .hero__facts {
     grid-template-columns: 1fr;
+  }
+
+  .product-hero__brand {
+      margin-bottom: 14px;
+  }
+
+  .product-hero__brand img {
+      max-width: 220px;
+      max-height: 62px;
   }
 
   /* ------------------------------
@@ -2385,6 +2426,15 @@ h1 {
     margin-bottom: 22px;
   }
 
+  .product-hero__brand {
+      margin-bottom: 12px;
+  }
+
+  .product-hero__brand img {
+      max-width: 190px;
+      max-height: 54px;
+  }
+
   /* ------------------------------
      SECTIONS / ОБЩИЕ СЕКЦИИ
      Сокращаем вертикальные отступы и заголовки,
@@ -2865,9 +2915,16 @@ h1 {
   --entity-accent: var(--color-red);
   --entity-accent-soft: rgba(249, 115, 22, 0.08);
   --entity-text: var(--color-text);
+  --entity-sticky-top: 78px;
 
+  position: sticky;
+  top: var(--entity-sticky-top);
+  z-index: 900;
   width: 100%;
-  margin: 0 0 22px;
+  margin: -8px 0 18px;
+  padding: 8px 0 10px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
 }
 
 .entity-switcher__viewport {

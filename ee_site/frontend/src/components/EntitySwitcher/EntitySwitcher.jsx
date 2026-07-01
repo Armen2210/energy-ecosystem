@@ -47,6 +47,8 @@ export default function EntitySwitcher({
     transform: "translateX(0px)",
   });
 
+  const [stickyTop, setStickyTop] = useState(78);
+
   const currentIndex = useMemo(
     () => items.findIndex((item) => item.slug === currentSlug),
     [items, currentSlug],
@@ -55,10 +57,11 @@ export default function EntitySwitcher({
   const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
 
   const theme = currentItem?.theme || {};
-  const switcherStyle = {
+    const switcherStyle = {
     "--entity-accent": theme.accent || "#f97316",
     "--entity-accent-soft": theme.accentSoft || "#fff3ea",
     "--entity-text": theme.text || "#111827",
+    "--entity-sticky-top": `${stickyTop}px`,
   };
 
   function updateIndicatorBySlug(slug) {
@@ -125,6 +128,40 @@ export default function EntitySwitcher({
       behavior: getMotionSafeScrollBehavior(),
     });
   }
+
+     useEffect(() => {
+        if (typeof window === "undefined") {
+          return;
+        }
+
+        const header = document.querySelector(".header");
+
+        if (!header) {
+          return;
+        }
+
+        const updateStickyTop = () => {
+          const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+          setStickyTop(headerHeight);
+        };
+
+        updateStickyTop();
+
+        if ("ResizeObserver" in window) {
+          const resizeObserver = new ResizeObserver(updateStickyTop);
+          resizeObserver.observe(header);
+
+          return () => {
+            resizeObserver.disconnect();
+          };
+        }
+
+        window.addEventListener("resize", updateStickyTop);
+
+        return () => {
+          window.removeEventListener("resize", updateStickyTop);
+        };
+     }, []);
 
     useEffect(() => {
     updateIndicatorBySlug(currentSlug);
