@@ -245,7 +245,13 @@ function ProductPage() {
             ========================================================= */}
 
         {product.heroImage ? (
-          <section className="product-hero" aria-labelledby="product-hero-title">
+          <section
+              className={`product-hero ${
+                product.heroImageMode ? `product-hero--${product.heroImageMode}` : ""
+              }`}
+              aria-labelledby="product-hero-title"
+          >
+
             <div className="product-hero__visual">
               <img src={product.heroImage} alt={product.heroImageAlt} />
             </div>
