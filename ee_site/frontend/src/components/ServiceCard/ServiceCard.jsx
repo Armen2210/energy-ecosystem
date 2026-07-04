@@ -13,6 +13,10 @@ function ServiceCard({ service }) {
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
 
+  const title = service.cardTitle || service.title;
+  const description = service.cardDescription || service.description;
+
+
   useEffect(() => {
     return () => {
       clearTimeout(timerRef.current);
@@ -66,12 +70,10 @@ function ServiceCard({ service }) {
       )}
 
       <div className="service-card__body">
-        <span className="service-card__eyebrow">
-          {service.shortTitle || service.switcherTitle}
-        </span>
 
-        <h3>{service.cardTitle || service.title}</h3>
-        <p>{service.cardDescription || service.description}</p>
+
+        <h3>{title}</h3>
+        <p>{description}</p>
 
         <span className="service-card__cta">Подробнее</span>
       </div>

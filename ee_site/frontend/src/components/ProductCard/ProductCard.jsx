@@ -13,6 +13,10 @@ function ProductCard({ product }) {
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
 
+  const title = product.cardTitle || product.title;
+  const description = product.cardDescription || product.description;
+  const marker = product.shortTitle || product.switcherTitle;
+
   useEffect(() => {
     return () => {
       clearTimeout(timerRef.current);
@@ -49,7 +53,9 @@ function ProductCard({ product }) {
     <Link
       className={`product-card ${
         product.heroImage ? "product-card--has-image" : ""
-      } ${isLeaving ? "product-card--leaving" : ""}`}
+      } ${product.lineLogo ? "product-card--has-line-logo" : ""} ${
+        isLeaving ? "product-card--leaving" : ""
+      }`}
       to={product.url}
       state={{ entryScroll: "lead-card-then-top" }}
       onClick={handleClick}
@@ -66,12 +72,21 @@ function ProductCard({ product }) {
       )}
 
       <div className="product-card__body">
-        <span className="product-card__eyebrow">
-          {product.shortTitle || product.switcherTitle}
-        </span>
+        <div className="product-card__brand">
+          {product.lineLogo ? (
+            <img
+              className="product-card__line-logo"
+              src={product.lineLogo}
+              alt={product.lineLogoAlt || title}
+              loading="lazy"
+            />
+          ) : (
+            <span className="product-card__marker">{marker}</span>
+          )}
+        </div>
 
-        <h3>{product.cardTitle || product.title}</h3>
-        <p>{product.cardDescription || product.description}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
 
         <span className="product-card__cta">Подробнее</span>
       </div>
