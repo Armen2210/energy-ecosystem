@@ -1,6 +1,6 @@
 // =========================================================
 // PRODUCT CARD / КАРТОЧКА ПРОДУКТА
-// Универсальная карточка продуктового направления.
+// Универсальная кликабельная карточка продуктового направления.
 // Данные приходят из src/data/products.js.
 // Карточка ведёт на отдельную SEO-страницу продукта.
 // =========================================================
@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function ProductCard({ product, index }) {
+function ProductCard({ product }) {
   const navigate = useNavigate();
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
@@ -47,14 +47,34 @@ function ProductCard({ product, index }) {
 
   return (
     <Link
-      className={`product-card ${isLeaving ? "product-card--leaving" : ""}`}
+      className={`product-card ${
+        product.heroImage ? "product-card--has-image" : ""
+      } ${isLeaving ? "product-card--leaving" : ""}`}
       to={product.url}
       state={{ entryScroll: "lead-card-then-top" }}
       onClick={handleClick}
+      aria-label={`Перейти на страницу: ${product.title}`}
     >
-      <span>{String(index + 1).padStart(2, "0")}</span>
-      <h3>{product.title}</h3>
-      <p>{product.description}</p>
+      {product.heroImage && (
+        <div className="product-card__media">
+          <img
+            src={product.heroImage}
+            alt={product.heroImageAlt || product.title}
+            loading="lazy"
+          />
+        </div>
+      )}
+
+      <div className="product-card__body">
+        <span className="product-card__eyebrow">
+          {product.shortTitle || product.switcherTitle}
+        </span>
+
+        <h3>{product.cardTitle || product.title}</h3>
+        <p>{product.cardDescription || product.description}</p>
+
+        <span className="product-card__cta">Подробнее</span>
+      </div>
     </Link>
   );
 }

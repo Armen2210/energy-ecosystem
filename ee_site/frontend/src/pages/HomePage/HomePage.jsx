@@ -2,7 +2,7 @@
 // HOME PAGE / ГЛАВНАЯ СТРАНИЦА
 // Главная страница сайта ООО «Энергоэффект».
 // Собирает основные MVP-блоки: Hero, AI summary,
-// продукты, услуги, экспертиза, процесс, кейсы и заявку.
+// продукты, услуги, кейсы и заявку.
 // =========================================================
 
 import heroImage from "../../assets/hero.jpg";
@@ -10,7 +10,7 @@ import heroImage from "../../assets/hero.jpg";
 import AiSummary from "../../components/AiSummary";
 import Hero from "../../components/Hero";
 import LeadForm from "../../components/LeadForm";
-import ProcessSteps from "../../components/ProcessSteps";
+
 import ProductCard from "../../components/ProductCard";
 import SectionHeader from "../../components/SectionHeader";
 import ServiceCard from "../../components/ServiceCard";
@@ -19,34 +19,6 @@ import Seo from "../../components/Seo";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
-// =========================================================
-// ЭТАПЫ ПРОИЗВОДСТВЕННОГО ПРОЦЕССА
-// Пока храним на главной странице.
-// Позже можно вынести в src/data/processSteps.js.
-// =========================================================
-
-const productionSteps = [
-  {
-    title: "Исходные данные",
-    description:
-      "Фиксируем требования объекта, проектные условия, ограничения площадки и сроки.",
-  },
-  {
-    title: "Техническое решение",
-    description:
-      "Подбираем состав оборудования и формируем инженерную логику будущей системы.",
-  },
-  {
-    title: "Производство и сборка",
-    description:
-      "Собираем изделие с учётом требований проекта, эксплуатации и дальнейшего обслуживания.",
-  },
-  {
-    title: "Готовое решение",
-    description:
-      "Передаём заказчику не набор оборудования, а готовую инженерную систему под задачу объекта.",
-  },
-];
 
 function HomePage() {
   return (
@@ -96,14 +68,14 @@ function HomePage() {
       <section className="section" id="products">
         <div className="container">
           <SectionHeader
-            eyebrow="Продуктовые направления"
-            title="Инженерные решения под задачи объекта"
-            description="Мы не продаём отдельное оборудование ради оборудования. Мы собираем инженерную систему под требования проекта, площадки и эксплуатации."
+              eyebrow="Продуктовые направления"
+              title="Заводские инженерные системы под задачи объекта"
+              description="Производим котельные, тепловые пункты, насосные станции и шкафы управления. Подбираем оборудование под проект, параметры объекта и условия эксплуатации."
           />
 
           <div className="product-grid">
-            {products.map((product, index) => (
-              <ProductCard product={product} index={index} key={product.slug} />
+            {products.map((product) => (
+              <ProductCard product={product} key={product.slug} />
             ))}
           </div>
         </div>
@@ -117,71 +89,19 @@ function HomePage() {
       <section className="section" id="services">
         <div className="container">
           <SectionHeader
-            eyebrow="Услуги"
-            title="Работы вокруг инженерных объектов"
-            description="Помимо производства оборудования, Энергоэффект выполняет инженерные работы, которые помогают довести объект до результата."
+              eyebrow="Услуги"
+              title="Проектирование, монтаж и наладка инженерных систем"
+              description="Выполняем работы для котельных, тепловых пунктов, насосных станций, узлов учёта и инженерных сетей: от проектных решений до подготовки к эксплуатации."
           />
 
           <div className="services-grid">
-            {services.map((service, index) => (
-              <ServiceCard service={service} index={index} key={service.slug} />
+            {services.map((service) => (
+              <ServiceCard service={service} key={service.slug} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          EXPERTISE / ИНЖЕНЕРНАЯ ЭКСПЕРТИЗА
-          Тёмный блок, показывающий инженерный подход компании.
-          ========================================================= */}
-
-      <section className="section section--dark" id="expertise">
-        <div className="container expertise">
-          <SectionHeader
-            eyebrow="Инженерная экспертиза"
-            title="Сначала инженерная логика. Потом производство."
-            description="Мы смотрим на объект как на систему: исходные данные, ограничения площадки, требования проекта, сроки, эксплуатация и ответственность за результат."
-            theme="dark"
-          />
-
-          <div className="expertise-grid">
-            <article className="expertise-card">
-              <span>01</span>
-              <h3>Разбираем задачу объекта</h3>
-              <p>Уточняем условия, нагрузки, ограничения и требования к будущей системе.</p>
-            </article>
-
-            <article className="expertise-card">
-              <span>02</span>
-              <h3>Подбираем техническое решение</h3>
-              <p>Формируем решение не “по шаблону”, а под конкретную инженерную ситуацию.</p>
-            </article>
-
-            <article className="expertise-card">
-              <span>03</span>
-              <h3>Учитываем производство</h3>
-              <p>Сразу думаем о сборке, сроках, комплектации, монтаже и дальнейшей эксплуатации.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          PRODUCTION / ПРОИЗВОДСТВЕННЫЙ ПРОЦЕСС
-          MVP-блок процесса без отдельной сложной страницы.
-          ========================================================= */}
-
-      <section className="section" id="production">
-        <div className="container">
-          <SectionHeader
-            eyebrow="Производственный процесс"
-            title="От инженерной задачи до готового решения"
-            description="Производство строится вокруг понятного процесса: анализ задачи, техническое решение, комплектация, сборка и передача результата заказчику."
-          />
-
-          <ProcessSteps steps={productionSteps} />
-        </div>
-      </section>
 
       {/* =========================================================
           CASES / КЕЙСЫ

@@ -1,6 +1,6 @@
 // =========================================================
 // SERVICE CARD / КАРТОЧКА УСЛУГИ
-// Универсальная карточка услуги компании.
+// Универсальная кликабельная карточка услуги компании.
 // Данные приходят из src/data/services.js.
 // Карточка ведёт на отдельную SEO-страницу услуги.
 // =========================================================
@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function ServiceCard({ service, index }) {
+function ServiceCard({ service }) {
   const navigate = useNavigate();
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
@@ -47,14 +47,34 @@ function ServiceCard({ service, index }) {
 
   return (
     <Link
-      className={`service-card ${isLeaving ? "service-card--leaving" : ""}`}
+      className={`service-card ${
+        service.heroImage ? "service-card--has-image" : ""
+      } ${isLeaving ? "service-card--leaving" : ""}`}
       to={service.url}
       state={{ entryScroll: "lead-card-then-top" }}
       onClick={handleClick}
+      aria-label={`Перейти на страницу услуги: ${service.title}`}
     >
-      <span>{String(index + 1).padStart(2, "0")}</span>
-      <h3>{service.title}</h3>
-      <p>{service.description}</p>
+      {service.heroImage && (
+        <div className="service-card__media">
+          <img
+            src={service.heroImage}
+            alt={service.heroImageAlt || service.title}
+            loading="lazy"
+          />
+        </div>
+      )}
+
+      <div className="service-card__body">
+        <span className="service-card__eyebrow">
+          {service.shortTitle || service.switcherTitle}
+        </span>
+
+        <h3>{service.cardTitle || service.title}</h3>
+        <p>{service.cardDescription || service.description}</p>
+
+        <span className="service-card__cta">Подробнее</span>
+      </div>
     </Link>
   );
 }

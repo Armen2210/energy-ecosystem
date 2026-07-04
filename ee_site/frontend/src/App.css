@@ -3271,3 +3271,244 @@ h1 {
 .nav .nav__link--active:hover {
   color: var(--color-red);
 }
+
+/* =========================================================
+   HOME CLICKABLE CARDS / КЛИКАБЕЛЬНЫЕ КАРТОЧКИ ГЛАВНОЙ
+   Финальный override для карточек продуктов и услуг:
+   - убираем цифры 01 / 02 / 03;
+   - добавляем изображение;
+   - добавляем явный CTA "Подробнее →";
+   - делаем кликабельность очевидной.
+   ========================================================= */
+
+.product-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.services-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.product-card,
+.service-card {
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.product-card::after {
+  display: none;
+}
+
+.product-card:hover,
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(249, 115, 22, 0.42);
+  box-shadow: 0 26px 62px rgba(17, 17, 17, 0.12);
+}
+
+.product-card--leaving,
+.service-card--leaving {
+  transform: scale(0.985) translateY(2px);
+  opacity: 0.84;
+  pointer-events: none;
+}
+
+.product-card__media,
+.service-card__media {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(249, 115, 22, 0.08), transparent 42%),
+    #ffffff;
+}
+
+.product-card__media img,
+.service-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.28s ease;
+}
+
+.product-card:hover .product-card__media img,
+.service-card:hover .service-card__media img {
+  transform: scale(1.035);
+}
+
+.product-card__body,
+.service-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.product-card__eyebrow,
+.service-card__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 14px;
+  padding: 7px 10px;
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  border-radius: 999px;
+  color: var(--color-red);
+  background: rgba(249, 115, 22, 0.07);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.product-card h3,
+.service-card h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 20px;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.product-card p,
+.service-card p {
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.product-card__cta,
+.service-card__cta {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: auto 0 0;
+  padding-top: 18px;
+  color: var(--color-red);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.product-card:hover .product-card__cta,
+.service-card:hover .service-card__cta {
+  transform: translateX(4px);
+}
+
+@media (max-width: 960px) {
+  .product-grid,
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-card__media,
+  .service-card__media {
+    height: 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card,
+  .service-card {
+    border-radius: 24px;
+  }
+
+  .product-card__media,
+  .service-card__media {
+    height: 190px;
+  }
+
+  .product-card__body,
+  .service-card__body {
+    padding: 20px;
+  }
+
+  .product-card h3,
+  .service-card h3 {
+    font-size: 21px;
+  }
+}
+
+/* =========================================================
+   HOME CARD CTA / ТЕКСТОВАЯ ССЫЛКА В КАРТОЧКАХ ГЛАВНОЙ
+   Без плашки: усиливаем кликабельность цветом, стрелкой,
+   подчёркиванием и мягким hover-движением.
+   ========================================================= */
+
+.product-card__cta,
+.service-card__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: auto 0 0;
+  padding-top: 18px;
+  color: var(--color-red);
+  font-size: 14px;
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.product-card__cta::after,
+.service-card__cta::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 8px;
+  transform: translateX(0);
+  transition: transform 0.18s ease;
+}
+
+.product-card__cta::before,
+.service-card__cta::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.28;
+  transform: scaleX(0.72);
+  transform-origin: left;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.product-card:hover .product-card__cta::after,
+.service-card:hover .service-card__cta::after {
+  transform: translateX(5px);
+}
+
+.product-card:hover .product-card__cta::before,
+.service-card:hover .service-card__cta::before {
+  opacity: 0.55;
+  transform: scaleX(1);
+}

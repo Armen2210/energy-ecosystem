@@ -14,10 +14,6 @@ export const navigation = [
     url: "/#services",
   },
   {
-    title: "Решения",
-    url: "/#expertise",
-  },
-  {
     title: "Кейсы",
     url: "/#cases",
   },
