@@ -5,17 +5,17 @@
 // продукты, услуги, кейсы и заявку.
 // =========================================================
 
-import heroImage from "../../assets/hero.jpg";
+import { Link } from "react-router-dom";
 
+import heroImage from "../../assets/hero.jpg";
 import AiSummary from "../../components/AiSummary";
 import Hero from "../../components/Hero";
 import LeadForm from "../../components/LeadForm";
-
 import ProductCard from "../../components/ProductCard";
 import SectionHeader from "../../components/SectionHeader";
 import ServiceCard from "../../components/ServiceCard";
 import Seo from "../../components/Seo";
-
+import { featuredCases } from "../../data/cases";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -104,43 +104,37 @@ function HomePage() {
 
 
       {/* =========================================================
-          CASES / КЕЙСЫ
-          MVP-структура под будущие реальные проекты.
-          ========================================================= */}
+            CASES / РЕАЛИЗОВАННЫЕ ЗАДАЧИ
+            Короткая витрина доверия на главной.
+            Полная архитектура кейсов будет развиваться через:
+            /cases и будущие детальные страницы /cases/:slug.
+            ========================================================= */}
 
-      <section className="section" id="cases">
-        <div className="container">
-          <SectionHeader
-            eyebrow="Кейсы"
-            title="Решения для объектов, где важна инженерная ответственность"
-            description="Каждый проект начинается с задачи заказчика и заканчивается работающей инженерной системой, которую можно обслуживать, развивать и контролировать."
-          />
+        <section className="section" id="cases">
+          <div className="container">
+            <SectionHeader
+              eyebrow="Кейсы"
+              title="Реализованные задачи и инженерные решения"
+              description="Короткая витрина объектов и задач, где важны техническая ответственность, надёжность оборудования и понятный результат для заказчика."
+            />
 
-          <div className="cases-grid">
-            <article className="case-card">
-              <span>БТП</span>
-              <h3>Тепловой пункт для объекта капитального строительства</h3>
-              <p>
-                Подбор решения под параметры объекта, требования проекта и дальнейшую эксплуатацию.
-              </p>
-            </article>
+            <div className="cases-grid">
+              {featuredCases.map((caseItem) => (
+                <article className="case-card" key={caseItem.slug}>
+                  <span>{caseItem.type}</span>
+                  <h3>{caseItem.title}</h3>
+                  <p>{caseItem.previewDescription || caseItem.description}</p>
+                </article>
+              ))}
+            </div>
 
-            <article className="case-card">
-              <span>БМК</span>
-              <h3>Блочно-модульная котельная под задачу теплоснабжения</h3>
-              <p>
-                Производственное решение, рассчитанное на надёжность, сроки и понятную эксплуатацию.
-              </p>
-            </article>
-
-            <article className="case-card">
-              <span>ПНС</span>
-              <h3>Пожарная насосная станция для системы безопасности</h3>
-              <p>Вода под давлением тогда, когда это критически важно.</p>
-            </article>
+            <div className="cases-actions">
+              <Link className="cases-link" to="/cases">
+                Смотреть все кейсы
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
 
 

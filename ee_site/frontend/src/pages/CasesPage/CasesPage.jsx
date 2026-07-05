@@ -1,10 +1,16 @@
 // =========================================================
 // CASES PAGE / КЕЙСЫ
-// Страница будущих реализованных проектов.
+// Страница реализованных инженерных задач.
+// Пока работает как общий реестр кейсов без детальных страниц.
+// Данные берутся из src/data/cases.js.
 // =========================================================
+
+import { Link } from "react-router-dom";
 
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
+
+import { cases } from "../../data/cases";
 
 function CasesPage() {
   return (
@@ -20,8 +26,24 @@ function CasesPage() {
           <SectionHeader
             eyebrow="Кейсы"
             title="Реализованные инженерные решения"
-            description="Здесь будут собраны проекты, в которых Энергоэффект решал задачи теплоснабжения, водоснабжения, пожарной безопасности и автоматизации."
+            description="Здесь собраны задачи и направления, в которых ООО «Энергоэффект» разрабатывает, производит и сопровождает инженерные решения для объектов."
           />
+
+          <div className="cases-grid">
+            {cases.map((caseItem) => (
+              <article className="case-card" key={caseItem.slug}>
+                <span>{caseItem.type}</span>
+                <h3>{caseItem.title}</h3>
+                <p>{caseItem.previewDescription || caseItem.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="cases-actions">
+            <Link className="cases-link" to="/#contacts">
+              Обсудить похожую задачу
+            </Link>
+          </div>
         </div>
       </section>
     </main>
