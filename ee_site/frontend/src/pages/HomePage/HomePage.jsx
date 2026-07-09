@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import heroImage from "../../assets/hero.jpg";
 import AiSummary from "../../components/AiSummary";
+import CaseCard from "../../components/CaseCard";
 import Hero from "../../components/Hero";
 import LeadForm from "../../components/LeadForm";
 import ProductCard from "../../components/ProductCard";
@@ -120,11 +121,7 @@ function HomePage() {
 
             <div className="cases-grid">
               {featuredCases.map((caseItem) => (
-                <article className="case-card" key={caseItem.slug}>
-                  <span>{caseItem.type}</span>
-                  <h3>{caseItem.title}</h3>
-                  <p>{caseItem.previewDescription || caseItem.description}</p>
-                </article>
+                  <CaseCard caseItem={caseItem} key={caseItem.slug} />
               ))}
             </div>
 

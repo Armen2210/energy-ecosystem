@@ -7,6 +7,7 @@
 
 import { Link } from "react-router-dom";
 
+import CaseCard from "../../components/CaseCard";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
@@ -31,11 +32,7 @@ function CasesPage() {
 
           <div className="cases-grid">
             {cases.map((caseItem) => (
-              <article className="case-card" key={caseItem.slug}>
-                <span>{caseItem.type}</span>
-                <h3>{caseItem.title}</h3>
-                <p>{caseItem.previewDescription || caseItem.description}</p>
-              </article>
+              <CaseCard caseItem={caseItem} key={caseItem.slug} />
             ))}
           </div>
 
