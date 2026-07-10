@@ -4,7 +4,8 @@
 // - обычные страницы открываются сверху;
 // - hash-ссылки плавно ведут к секциям;
 // - product/service pages сначала открываются у карточки заявки,
-//   затем плавно поднимаются к началу страницы.
+//   затем плавно поднимаются к началу страницы;
+// - модальные кейсы не меняют позицию фоновой страницы.
 // =========================================================
 
 import { useLayoutEffect } from "react";
@@ -110,6 +111,42 @@ function ScrollToTop() {
       });
     }
 
+    /*
+      CASE MODAL / МОДАЛЬНЫЙ КЕЙС
+
+      Если кейс открыт поверх текущей страницы,
+      не меняем положение фоновой страницы.
+    */
+    if (state?.backgroundLocation) {
+      return;
+    }
+
+    /*
+      CASES DIRECT / ПРЯМОЙ ПЕРЕХОД К КЕЙСАМ
+
+      Используется при возврате со страницы /cases.
+      Главная открывается сразу в секции кейсов,
+      без заметной плавной прокрутки от Hero.
+    */
+    if (state?.entryScroll === "cases-direct") {
+      disableGlobalSmoothScroll();
+
+      /*
+        Прокручиваем страницу сразу внутри useLayoutEffect,
+        до того как браузер покажет пользователю первый кадр.
+        Благодаря этому Hero не должен мелькать перед секцией кейсов.
+      */
+      window.scrollTo({
+        top: getSectionScrollTop("cases"),
+        left: 0,
+        behavior: "auto",
+      });
+
+      restoreGlobalSmoothScroll();
+    
+      return;
+    }
+
     if (state?.entryScroll === "lead-card-then-top") {
       disableGlobalSmoothScroll();
 
@@ -205,7 +242,6 @@ function ScrollToTop() {
         чтобы стабильно учитывать sticky-header и избежать ситуации,
         когда адрес изменился, а прокрутка не произошла.
       */
-
       const sectionId = hash.replace("#", "");
 
       scrollTimer = setTimeout(() => {

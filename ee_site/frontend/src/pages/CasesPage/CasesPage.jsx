@@ -22,13 +22,28 @@ function CasesPage() {
         path="/cases"
       />
 
-      <section className="section">
-        <div className="container">
-          <SectionHeader
-            eyebrow="Кейсы"
-            title="Реализованные инженерные решения"
-            description="Здесь собраны задачи и направления, в которых ООО «Энергоэффект» разрабатывает, производит и сопровождает инженерные решения для объектов."
-          />
+      <section className="section cases-page">
+          <div className="container">
+            <div className="cases-page__navigation">
+              <Link
+                  className="cases-page__back-link"
+                  to="/#cases"
+                  state={{ entryScroll: "cases-direct" }}
+              >
+                  ← К кейсам на главной
+              </Link>
+
+              <span className="cases-page__breadcrumb">
+                Главная / Кейсы
+              </span>
+            </div>
+
+            <div className="cases-page__intro">
+              <SectionHeader
+                title="Реализованные инженерные решения"
+                description="Здесь собраны задачи и направления, в которых ООО «Энергоэффект» разрабатывает, производит и сопровождает инженерные решения для объектов."
+              />
+            </div>
 
           <div className="cases-grid">
             {cases.map((caseItem) => (

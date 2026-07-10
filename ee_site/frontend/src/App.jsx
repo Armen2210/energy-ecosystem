@@ -4,8 +4,14 @@
 // Header, маршруты страниц и Footer.
 // =========================================================
 
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
+import CaseModal from "./components/CaseModal";
 import CookieBanner from "./components/CookieBanner";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -14,6 +20,7 @@ import { navigation } from "./data/navigation";
 
 import AboutPage from "./pages/AboutPage";
 import CasesPage from "./pages/CasesPage";
+import CasePage from "./pages/CasePage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import ScrollToTop from "./components/ScrollToTop";
@@ -26,13 +33,16 @@ import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
 
 function App() {
+  const location = useLocation();
+
+  const backgroundLocation = location.state?.backgroundLocation;
   return (
     <div className="site">
       <Header navigation={navigation} />
 
       <ScrollToTop />
 
-      <Routes>
+      <Routes location={backgroundLocation || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/solutions" element={<SolutionsPage />} />
@@ -40,10 +50,17 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/cases" element={<CasesPage />} />
+        <Route path="/cases/:slug" element={<CasePage />} />
         <Route path="/contacts" element={<Navigate to="/#contacts" replace />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      {backgroundLocation && (
+        <Routes>
+          <Route path="/cases/:slug" element={<CaseModal />} />
+        </Routes>
+      )}
 
       <Footer navigation={navigation} />
       <CookieBanner />
