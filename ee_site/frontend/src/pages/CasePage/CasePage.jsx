@@ -90,7 +90,8 @@ function CasePage() {
                 <h2>Фотографии объекта</h2>
 
                 <p>
-                  Внешний вид котельной, мачта, газоходы и внутреннее оборудование.
+                  Фотографии изготовленного оборудования, выполненных работ
+                  и реализованного инженерного решения на объекте.
                 </p>
               </div>
 
@@ -110,6 +111,22 @@ function CasePage() {
                 ))}
               </div>
             </section>
+            <div className="case-page__actions">
+              <Link
+                className="button button--primary"
+                to="/#contacts"
+                state={{ entryScroll: "contacts-direct" }}
+              >
+                {caseItem.cta.buttonText}
+              </Link>
+
+              <Link
+                className="case-page__all-cases-link"
+                to="/cases"
+              >
+                Смотреть все кейсы
+              </Link>
+            </div>
           </div>
       </section>
     </main>

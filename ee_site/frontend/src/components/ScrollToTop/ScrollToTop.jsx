@@ -122,6 +122,45 @@ function ScrollToTop() {
     }
 
     /*
+    CASE RETURN / ВОЗВРАТ ИЗ МОДАЛЬНОГО КЕЙСА
+
+    Desktop:
+    возвращаем точную позицию страницы, на которой был открыт кейс.
+
+    Mobile:
+    центрируем просмотренную карточку, чтобы пользователь
+    сразу понимал, какой именно кейс он только что закрыл.
+  */
+  if (state?.caseReturn) {
+    disableGlobalSmoothScroll();
+
+    const { slug, scrollY } = state.caseReturn;
+    const isMobile = window.matchMedia("(max-width: 720px)").matches;
+
+    const openedCaseCard = document.querySelector(
+      `[data-case-slug="${slug}"]`
+    );
+
+    if (isMobile && openedCaseCard) {
+      openedCaseCard.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "nearest",
+      });
+    } else {
+      window.scrollTo({
+        top: scrollY || 0,
+        left: 0,
+        behavior: "auto",
+      });
+    }
+
+    restoreGlobalSmoothScroll();
+
+    return;
+  }
+
+    /*
       CASES DIRECT / ПРЯМОЙ ПЕРЕХОД К КЕЙСАМ
 
       Используется при возврате со страницы /cases.
@@ -144,6 +183,29 @@ function ScrollToTop() {
 
       restoreGlobalSmoothScroll();
     
+      return;
+    }
+
+    /*
+      CONTACTS DIRECT / ПРЯМОЙ ПЕРЕХОД К КОНТАКТАМ
+
+      Используется при переходе из модального кейса,
+      открытого поверх страницы /cases.
+
+      Позиция устанавливается до первого видимого кадра,
+      поэтому Hero не мелькает.
+    */
+    if (state?.entryScroll === "contacts-direct") {
+      disableGlobalSmoothScroll();
+
+      window.scrollTo({
+        top: getSectionScrollTop("contacts"),
+        left: 0,
+        behavior: "auto",
+      });
+
+      restoreGlobalSmoothScroll();
+
       return;
     }
 
