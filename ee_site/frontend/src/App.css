@@ -1249,6 +1249,163 @@ h1 {
   color: var(--color-red);
 }
 
+.case-page__view {
+  padding: 28px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: 0 24px 64px rgba(17, 17, 17, 0.08);
+}
+
+/* =========================================================
+   CASE PAGE VIEW — DIRECT PAGE
+   Компактная оболочка прямой страницы кейса.
+   ========================================================= */
+
+.case-page {
+  overflow-x: hidden;
+}
+
+.case-page__view {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.case-page__view .case-modal__gallery {
+  touch-action: pan-y;
+}
+
+@media (min-width: 961px) {
+  .case-page > .container {
+    width: min(1600px, calc(100% - 48px));
+    max-width: none;
+  }
+
+  .case-page {
+    padding-top: 26px;
+    padding-bottom: 28px;
+  }
+
+  .case-page__navigation {
+    max-width: 1380px;
+    margin: 0 auto 18px;
+  }
+
+  .case-page__view {
+    height: min(820px, calc(100vh - 190px));
+    min-height: 680px;
+    padding: 28px;
+    border-radius: 32px;
+  }
+
+  .case-page__view .case-modal__layout {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1.08fr)
+      minmax(540px, 0.92fr);
+    gap: 32px;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .case-page__view .case-modal__gallery-column {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 14px;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .case-page__view .case-modal__gallery {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .case-page__view .case-modal__gallery-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .case-page__view .case-modal__gallery-meta {
+    min-height: 30px;
+    margin: 0;
+  }
+
+  .case-page__view .case-modal__content {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .case-page__view .case-modal__topbar {
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding-right: 0;
+  }
+
+  .case-page__view .case-modal__meta {
+    flex-wrap: nowrap;
+    gap: 7px;
+  }
+
+  .case-page__view .case-modal__meta span,
+  .case-page__view .case-modal__top-cta {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .case-page__view .case-modal__content > h2 {
+    margin-top: 16px;
+    font-size: clamp(42px, 4vw, 62px);
+    line-height: 0.98;
+  }
+
+  .case-page__view .case-modal__lead {
+    margin-top: 13px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .case-page__view .case-modal__facts {
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .case-page__view .case-modal__facts > div {
+    padding: 16px;
+  }
+
+  .case-page__view .case-modal__text-block {
+    margin-top: 15px;
+  }
+
+  .case-page__view .case-modal__text-block h3 {
+    margin-bottom: 8px;
+  }
+
+  .case-page__view .case-modal__text-block p {
+    margin-bottom: 8px;
+  }
+
+  .case-page__view .case-modal__text-block ul {
+    gap: 6px;
+  }
+
+  .case-page__actions {
+    margin-top: 22px;
+  }
+}
+
 /* =========================================================
    CASES / РЕАЛИЗОВАННЫЕ ЗАДАЧИ
    Короткая витрина доверия на главной и страница /cases.
@@ -2574,6 +2731,24 @@ h1 {
 
   .case-page__all-cases-link {
     text-align: center;
+  }
+
+  .case-page__view {
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+    .case-page,
+  .case-page__view,
+  .case-page__view .case-modal__layout,
+  .case-page__view .case-modal__gallery-column,
+  .case-page__view .case-modal__gallery {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .case-page__view .case-modal__gallery {
+    touch-action: pan-y;
   }
 
   /* ------------------------------
