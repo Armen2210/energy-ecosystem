@@ -5081,7 +5081,7 @@ h1 {
 */
 
 .lead-form .button--primary {
-  border: 1px solid transparent;
+  border: 2px solid var(--color-text);
   appearance: none;
 }
 
@@ -5111,6 +5111,56 @@ h1 {
   font-weight: 650;
   line-height: 1.1;
   letter-spacing: 0.025em;
+}
+
+/* =========================================================
+   COMPACT CTA TYPOGRAPHY / НЕБОЛЬШИЕ ТЕКСТОВЫЕ CTA
+   Единая типографика для ссылок в карточках и кнопки кейса.
+   ========================================================= */
+
+/* Серая кнопка «Обсудить задачу» в карточке кейса */
+
+.case-modal__top-cta,
+.case-page__view .case-modal__top-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+/* «Подробнее» в продуктах и услугах,
+   «Подробнее о проекте» в карточках кейсов */
+
+.product-card .product-card__cta,
+.service-card .service-card__cta,
+.case-card .case-card__link {
+  margin-bottom: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* «Смотреть все кейсы» */
+
+.cases-link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+/* ENTITY SWITCHER TYPOGRAPHY / ПЕРЕКЛЮЧАТЕЛЬ ПРОДУКТОВ И УСЛУГ */
+
+.entity-switcher__item {
+  font-family: var(--font-body);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 /* =========================================================
