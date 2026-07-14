@@ -1120,116 +1120,6 @@ h1 {
   white-space: nowrap;
 }
 
-.case-page__hero {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
-  align-items: center;
-  gap: 42px;
-}
-
-.case-page__hero-content {
-  max-width: 720px;
-}
-
-.case-page__type {
-  display: inline-flex;
-  margin-bottom: 18px;
-  padding: 8px 12px;
-  border: 1px solid rgba(249, 115, 22, 0.2);
-  border-radius: 999px;
-  color: var(--color-red);
-  background: rgba(249, 115, 22, 0.06);
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.case-page__hero h1 {
-  max-width: 760px;
-  font-size: clamp(42px, 4.6vw, 68px);
-  line-height: 0.98;
-}
-
-.case-page__hero-content > p {
-  max-width: 680px;
-  margin: 20px 0 0;
-  color: var(--color-muted);
-  font-size: 19px;
-  line-height: 1.5;
-}
-
-.case-page__hero-media {
-  min-height: 520px;
-  overflow: hidden;
-  border: 1px solid rgba(17, 17, 17, 0.08);
-  border-radius: 32px;
-  background: #f7f7f7;
-  box-shadow: 0 24px 64px rgba(17, 17, 17, 0.1);
-}
-
-.case-page__hero-media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 520px;
-  object-fit: cover;
-  object-position: center;
-}
-
-.case-page__summary {
-  margin-top: 34px;
-}
-
-.case-page__content-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 22px;
-  margin-top: 28px;
-}
-
-.case-page__content-card {
-  padding: 28px;
-  border: 1px solid var(--color-border);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.05);
-}
-
-.case-page__content-card h2 {
-  margin: 0 0 18px;
-  color: var(--color-text);
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-}
-
-.case-page__content-card p {
-  margin: 0 0 14px;
-  color: var(--color-muted);
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-.case-page__content-card p:last-child {
-  margin-bottom: 0;
-}
-
-.case-page__content-card ul {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding-left: 22px;
-  color: var(--color-muted);
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.case-page__content-card li::marker {
-  color: var(--color-red);
-}
-
 .case-page__actions {
   display: flex;
   align-items: center;
@@ -1294,8 +1184,8 @@ h1 {
   }
 
   .case-page__view {
-    height: min(820px, calc(100vh - 190px));
-    min-height: 680px;
+    height: auto;
+    min-height: 0;
     padding: 28px;
     border-radius: 32px;
   }
@@ -1307,8 +1197,9 @@ h1 {
       minmax(540px, 0.92fr);
     gap: 32px;
     width: 100%;
-    height: 100%;
+    height: auto;
     min-height: 0;
+    align-items: start;
   }
 
   .case-page__view .case-modal__gallery-column {
@@ -1317,12 +1208,12 @@ h1 {
     gap: 14px;
     min-width: 0;
     min-height: 0;
-    height: 100%;
+    height: auto;
   }
 
   .case-page__view .case-modal__gallery {
     width: 100%;
-    height: 100%;
+    height: clamp(560px, 68vh, 720px);
     min-height: 0;
     overflow: hidden;
   }
@@ -1344,7 +1235,7 @@ h1 {
   .case-page__view .case-modal__content {
     min-width: 0;
     min-height: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .case-page__view .case-modal__topbar {
@@ -2656,67 +2547,6 @@ h1 {
     margin-bottom: 24px;
   }
 
-  .case-page__hero {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .case-page__hero-content {
-    max-width: 100%;
-  }
-
-  .case-page__hero h1 {
-    max-width: 100%;
-    font-size: clamp(36px, 8vw, 52px);
-    line-height: 1;
-  }
-
-  .case-page__hero-content > p {
-    max-width: 760px;
-    font-size: 17px;
-    line-height: 1.45;
-  }
-
-  .case-page__hero-media {
-    width: 100%;
-    min-height: 0;
-    height: clamp(380px, 78vw, 560px);
-    border-radius: 28px;
-  }
-
-  .case-page__hero-media img {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    object-fit: cover;
-    object-position: center;
-  }
-
-    .case-page__summary {
-    margin-top: 28px;
-  }
-
-  .case-page__content-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-top: 22px;
-  }
-
-  .case-page__content-card {
-    padding: 22px;
-    border-radius: 24px;
-  }
-
-  .case-page__content-card h2 {
-    font-size: clamp(26px, 7vw, 34px);
-  }
-
-  .case-page__content-card p,
-  .case-page__content-card ul {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
   .case-page__actions {
     flex-direction: column;
     align-items: stretch;
@@ -3411,17 +3241,17 @@ h1 {
      чтобы шапка занимала меньше места на узких экранах.
      ------------------------------ */
 
-  .logo__subtitle {
-    display: none;
-  }
+    .logo__subtitle {
+      display: none;
+    }
 
-  .logo__title {
-    font-size: 17px;
-  }
+    .logo__title {
+      font-size: 17px;
+    }
 
-  .header__phone {
-    font-size: 15px;
-  }
+    .header__phone {
+      font-size: 15px;
+    }
   }
 
   /* ------------------------------
@@ -4994,5 +4824,467 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .case-modal__gallery-image {
     animation: none;
+  }
+}
+
+/* =========================================================
+   TYPOGRAPHY OVERRIDES / КОНТРОЛЬНЫЙ СЛОЙ ТИПОГРАФИКИ
+   Финальные размеры и параметры ключевых заголовков.
+   Нужен для безопасной настройки поверх накопившихся правил.
+   Компоновку, изображения и размеры контейнеров не изменяет.
+   ========================================================= */
+
+/* HERO / ГЛАВНЫЙ ЗАГОЛОВОК */
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 2.65vw, 42px);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* SECTION HEADINGS / ЗАГОЛОВКИ ОСНОВНЫХ СЕКЦИЙ */
+
+.section__head h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 2.15vw, 35px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* PRODUCT AND SERVICE PAGE TITLES / H1 ВНУТРЕННИХ СТРАНИЦ */
+
+.product-hero__content h1,
+.section--entity-page .section__head h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 2.65vw, 40px);
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* PRODUCT ACCORDION / КРУПНЫЕ ПУНКТЫ ГАРМОШКИ */
+
+.product-details-accordion__button span:first-child {
+  font-family: var(--font-heading);
+  font-size: clamp(25px, 2.15vw, 34px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+/* FAQ / ВОПРОСЫ */
+
+.faq__summary {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+/* INTERFACE TYPOGRAPHY / КНОПКИ И МЕТКИ */
+
+.button {
+  font-family: var(--font-heading);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow,
+.ai-summary__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* AI SUMMARY / КРАТКО О СТРАНИЦЕ */
+
+.ai-summary__lead {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.ai-summary__item {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ai-summary__text strong {
+  font-weight: 700;
+}
+
+/* HEADER & ENTITY SWITCHER / НАВИГАЦИЯ И ПЕРЕКЛЮЧАТЕЛЬ */
+
+.nav {
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.header__phone {
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.entity-switcher__item {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.entity-switcher__item--active {
+  font-weight: 750;
+}
+
+/* FORM TYPOGRAPHY / ТИПОГРАФИКА ФОРМЫ */
+
+.lead-form label {
+  font-family: var(--font-body);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.lead-form input,
+.lead-form select,
+.lead-form textarea {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.lead-form input::placeholder,
+.lead-form textarea::placeholder {
+  font-weight: 400;
+  opacity: 0.82;
+}
+
+.lead-form__consent {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.lead-form__consent a {
+  font-weight: 650;
+}
+
+.lead-form__status {
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.lead-form .button {
+  font-family: var(--font-heading);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+/* CONTACT CARDS, CONSENT & FOOTER / ФИНАЛЬНАЯ ИЕРАРХИЯ */
+
+.contact-note strong {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.contact-note a {
+  font-weight: 650;
+}
+
+/*
+  Селектор специально усилен:
+  блок согласия одновременно является label,
+  поэтому обычный .lead-form__consent проигрывает .lead-form label.
+*/
+
+.lead-form label.lead-form__consent {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.lead-form label.lead-form__consent a {
+  font-weight: 650;
+}
+
+/* FOOTER */
+
+.footer {
+  font-family: var(--font-body);
+}
+
+.footer__brand {
+  font-family: var(--font-heading);
+  font-weight: 750;
+  letter-spacing: 0.01em;
+}
+
+.footer__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.footer__nav a,
+.footer__ecosystem a {
+  font-family: var(--font-body);
+  font-weight: 550;
+}
+
+.footer__legal {
+  font-weight: 400;
+}
+
+.footer__contacts a {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.footer__contacts span {
+  font-weight: 400;
+}
+
+/* FILE NOTE & SUBMIT BUTTON / ФАЙЛ И КНОПКА ОТПРАВКИ */
+
+.lead-form__file-note {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+/*
+  Убираем стандартную браузерную рамку,
+  но сохраняем заметный клавиатурный focus.
+*/
+
+.lead-form .button--primary {
+  border: 1px solid transparent;
+  appearance: none;
+}
+
+.lead-form .button--primary:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 3px;
+}
+
+/* CASE MODAL TYPOGRAPHY / ЗАГОЛОВОК КЕЙСА */
+
+.case-modal__content h2,
+.case-page__view .case-modal__content > h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 3vw, 48px);
+  font-weight: 750;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* CASE META PILLS / МЕТАДАННЫЕ КЕЙСА */
+
+.case-modal__meta span,
+.case-modal__type {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: 0.025em;
+}
+
+/* =========================================================
+   TYPOGRAPHY — MOBILE
+   На узких экранах уменьшаем доминирование заголовков,
+   сохраняя ясную иерархию.
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: clamp(31px, 8.2vw, 34px);
+    line-height: 1.07;
+    letter-spacing: -0.02em;
+  }
+
+  .section__head h2 {
+    font-size: clamp(27px, 7.4vw, 29px);
+    line-height: 1.11;
+    letter-spacing: -0.015em;
+  }
+
+  .product-hero__content h1,
+  .section--entity-page .section__head h1 {
+    font-size: clamp(27px, 7.2vw, 29px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .product-details-accordion__button span:first-child {
+    font-size: clamp(23px, 6.4vw, 26px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+  }
+
+  .faq__summary {
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+
+    .button {
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+  }
+
+  .ai-summary__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+  }
+
+  .ai-summary__lead {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.48;
+  }
+
+  .ai-summary__item {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .ai-summary__text strong {
+    font-weight: 700;
+  }
+
+    .lead-form label {
+    font-size: 13px;
+    font-weight: 650;
+  }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .lead-form__consent {
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.48;
+  }
+
+  .lead-form__consent a {
+    font-weight: 650;
+  }
+
+  .lead-form__status {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .lead-form .button {
+    font-size: 15px;
+    font-weight: 650;
+  }
+
+    .contact-note strong {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .contact-note a {
+    font-weight: 650;
+  }
+
+  .lead-form label.lead-form__consent {
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.48;
+  }
+
+  .lead-form label.lead-form__consent a {
+    font-weight: 650;
+  }
+
+  .footer__brand {
+    font-size: 20px;
+    font-weight: 750;
+  }
+
+  .footer__title {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .footer__nav a,
+  .footer__ecosystem a {
+    font-size: 14px;
+    font-weight: 550;
+    line-height: 1.4;
+  }
+
+  .footer__contacts a {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .footer__contacts span,
+  .footer p,
+  .footer__legal {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+    .lead-form__file-note {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .case-modal__content h2,
+  .case-page__view .case-modal__content > h2 {
+    font-size: clamp(29px, 8vw, 32px);
+    font-weight: 750;
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+  }
+
+  .case-modal__meta span,
+  .case-modal__type {
+    font-size: 10.5px;
+    font-weight: 650;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
   }
 }
