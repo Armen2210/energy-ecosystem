@@ -107,8 +107,11 @@
   justify-content: center;
   gap: 26px;
   color: #2c3137;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
 }
 
 .nav a {
@@ -121,8 +124,11 @@
 
 .header__phone {
   color: var(--color-dark);
+  font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
@@ -146,6 +152,15 @@
   max-width: 680px;
 }
 
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 2.65vw, 42px);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -155,10 +170,11 @@
   border-radius: 999px;
   color: var(--color-red);
   background: rgba(249, 115, 22, 0.06);
+  font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
 
 h1 {
@@ -197,14 +213,16 @@ h1 {
   min-height: 52px;
   padding: 0 22px;
   border-radius: 14px;
+  font-family: var(--font-heading);
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   transition:
     transform 0.2s ease,
     background 0.2s ease,
     border-color 0.2s ease;
 }
-
 .button:hover {
   transform: translateY(-2px);
 }
@@ -283,7 +301,19 @@ h1 {
   box-shadow: 0 28px 60px rgba(17, 17, 17, 0.18);
 }
 
+/* =========================================================
+   SECTION HEADINGS / ЗАГОЛОВКИ ОСНОВНЫХ СЕКЦИЙ
+   Общая типографика H2 в заголовках разделов сайта.
+   ========================================================= */
 
+.section__head h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 2.15vw, 35px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
 
 /* =========================================================
    AI SUMMARY / КРАТКО О СТРАНИЦЕ
@@ -328,20 +358,22 @@ h1 {
   border-radius: 999px;
   color: var(--color-red);
   background: rgba(249, 115, 22, 0.08);
+  font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
 }
 
 .ai-summary__lead {
   max-width: 920px;
   margin: 0;
   color: var(--color-text);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: -0.015em;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 
 .ai-summary__list {
@@ -358,8 +390,10 @@ h1 {
   gap: 10px;
   align-items: start;
   color: var(--color-muted);
+  font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.45;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .ai-summary__marker {
@@ -377,7 +411,7 @@ h1 {
 
 .ai-summary__text strong {
   color: var(--color-text);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* =========================================================
@@ -416,10 +450,11 @@ h1 {
 }
 
 .product-details-accordion__button span:first-child {
-  font-size: clamp(34px, 4.2vw, 58px);
-  font-weight: 650;
-  line-height: 1.05;
-  letter-spacing: -0.055em;
+  font-family: var(--font-heading);
+  font-size: clamp(25px, 2.15vw, 34px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
 }
 
 .product-details-accordion__icon {
@@ -782,9 +817,11 @@ h1 {
   border-radius: 999px;
   color: var(--color-red);
   background: rgba(249, 115, 22, 0.06);
+  font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
@@ -811,9 +848,11 @@ h1 {
   border-radius: 999px;
   color: #ffffff;
   background: #85898d;
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: 0;
   white-space: nowrap;
   cursor: pointer;
   box-shadow: none;
@@ -839,9 +878,12 @@ h1 {
 
 .case-modal__content h2 {
   margin: 0;
-  font-size: clamp(34px, 3.6vw, 56px);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 3vw, 48px);
+  font-weight: 750;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .case-modal__lead {
@@ -988,10 +1030,11 @@ h1 {
   border-radius: 999px;
   color: var(--color-red);
   background: rgba(249, 115, 22, 0.06);
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
@@ -1249,16 +1292,21 @@ h1 {
     gap: 7px;
   }
 
-  .case-page__view .case-modal__meta span,
-  .case-page__view .case-modal__top-cta {
+  .case-page__view .case-modal__meta span {
     padding: 7px 9px;
     font-size: 10px;
   }
 
+  .case-page__view .case-modal__top-cta {
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
   .case-page__view .case-modal__content > h2 {
     margin-top: 16px;
-    font-size: clamp(42px, 4vw, 62px);
-    line-height: 0.98;
+    font-size: clamp(36px, 3vw, 48px);
+    line-height: 1.03;
+    letter-spacing: -0.025em;
   }
 
   .case-page__view .case-modal__lead {
@@ -1474,11 +1522,15 @@ h1 {
   align-items: center;
   width: fit-content;
   margin-top: auto;
+  margin-bottom: 0;
   padding-top: 20px;
   color: var(--color-red);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 900;
-  line-height: 1;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .case-card__link::after {
@@ -1502,9 +1554,11 @@ h1 {
   display: inline-flex;
   align-items: center;
   color: var(--color-red);
+  font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 950;
-  line-height: 1;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: 0;
   text-decoration: none;
 }
 
@@ -1609,11 +1663,6 @@ h1 {
     width: 4px;
   }
 
-  .cases-page__intro .section__head h2 {
-    font-size: clamp(28px, 8.8vw, 36px);
-    line-height: 1.05;
-  }
-
   .cases-page__intro .section__head p {
     margin-top: 14px;
     font-size: 14px;
@@ -1670,8 +1719,11 @@ h1 {
 }
 
 .contact-note strong {
+  font-family: var(--font-heading);
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .contact-note span {
@@ -1688,7 +1740,7 @@ h1 {
 
 .contact-note a {
   color: var(--color-red);
-  font-weight: 800;
+  font-weight: 650;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1719,8 +1771,11 @@ h1 {
   display: grid;
   gap: 8px;
   color: var(--color-dark);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0;
 }
 
 .lead-form input,
@@ -1732,11 +1787,21 @@ h1 {
   padding: 14px 15px;
   color: var(--color-text);
   background: #ffffff;
+  font-family: var(--font-body);
   font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
   outline: none;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.lead-form input::placeholder,
+.lead-form textarea::placeholder {
+  font-weight: 400;
+  opacity: 0.82;
 }
 
 .lead-form input:focus,
@@ -1754,13 +1819,24 @@ h1 {
   resize: vertical;
 }
 
+.lead-form__file-note {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
 /* =========================================================
    LEAD FORM CONSENT / СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ
    Юридически важный блок формы.
    Делаем его читаемым, спокойным и удобным для mobile.
    ========================================================= */
 
-.lead-form__consent {
+.lead-form label.lead-form__consent {
   display: flex !important;
   grid-template-columns: none;
   align-items: flex-start;
@@ -1771,9 +1847,10 @@ h1 {
   border-radius: 16px;
   color: var(--color-muted);
   background: rgba(249, 115, 22, 0.04);
+  font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 500;
-  line-height: 1.45;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .lead-form__consent:hover {
@@ -1795,7 +1872,7 @@ h1 {
 
 .lead-form__consent a {
   color: var(--color-red);
-  font-weight: 800;
+  font-weight: 650;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1813,14 +1890,12 @@ h1 {
   margin: 0 0 18px;
   padding: 14px 16px;
   border-radius: 16px;
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 800;
-  line-height: 1.4;
+  font-weight: 600;
+  line-height: 1.45;
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s ease;
 }
 
 .lead-form__status--hiding {
@@ -1844,6 +1919,21 @@ h1 {
   cursor: not-allowed;
   opacity: 0.72;
   transform: none;
+}
+
+/*
+  Фиксируем фирменную чёрную рамку кнопки отправки
+  и сохраняем заметный клавиатурный focus.
+*/
+
+.lead-form .button--primary {
+  border: 2px solid var(--color-text);
+  appearance: none;
+}
+
+.lead-form .button--primary:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 3px;
 }
 
 /* =========================================================
@@ -1899,9 +1989,11 @@ h1 {
   color: var(--color-text);
   background: transparent;
   font: inherit;
-  font-size: 17px;
-  font-weight: 900;
-  line-height: 1.3;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0;
   text-align: left;
   cursor: pointer;
 }
@@ -2040,6 +2132,7 @@ h1 {
   padding: 42px 0;
   color: #ffffff;
   background: #0f2f4a;
+  font-family: var(--font-body);
 }
 
 .footer__grid {
@@ -2051,10 +2144,11 @@ h1 {
 
 .footer__brand {
   color: var(--color-red);
+  font-family: var(--font-heading);
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 750;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .footer p {
@@ -2078,6 +2172,7 @@ h1 {
   margin-top: 16px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 13px;
+  font-weight: 400;
   line-height: 1.4;
 }
 
@@ -2099,8 +2194,9 @@ h1 {
 
 .footer__nav a {
   color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 550;
 }
 
 .footer__nav a:hover {
@@ -2109,8 +2205,10 @@ h1 {
 
 .footer__title {
   color: #ffffff;
+  font-family: var(--font-heading);
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .footer__ecosystem {
@@ -2120,8 +2218,9 @@ h1 {
 
 .footer__ecosystem a {
   color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 550;
   line-height: 1.4;
 }
 
@@ -2136,13 +2235,16 @@ h1 {
 
 .footer__contacts a {
   color: #ffffff;
+  font-family: var(--font-heading);
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .footer__contacts span {
   color: rgba(255, 255, 255, 0.68);
   font-size: 15px;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -2254,6 +2356,15 @@ h1 {
 .section--entity-page .section__head h1,
 .section--entity-page .section__head h2 {
   max-width: 860px;
+}
+
+.section--entity-page .section__head h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 2.65vw, 40px);
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .section--entity-page .section__head p {
@@ -2375,9 +2486,12 @@ h1 {
 .product-hero__content h1 {
   margin: 0;
   color: var(--color-text);
-  font-size: clamp(38px, 4vw, 58px);
-  line-height: 1.02;
-  letter-spacing: -0.055em;
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 2.65vw, 40px);
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .product-hero__subtitle {
@@ -2783,12 +2897,6 @@ h1 {
   max-height: 320px;
 }
 
-.product-hero__content h1 {
-  font-size: clamp(30px, 7.6vw, 42px);
-  line-height: 1.05;
-  letter-spacing: -0.05em;
-}
-
 .product-hero__subtitle {
   margin-top: 12px;
   font-size: 17px;
@@ -2807,11 +2915,6 @@ h1 {
   .product-details-accordion__button {
     gap: 18px;
     padding: 26px 0;
-  }
-
-  .product-details-accordion__button span:first-child {
-    font-size: clamp(28px, 8vw, 42px);
-    line-height: 1.06;
   }
 
   .product-details-accordion__icon {
@@ -2837,7 +2940,6 @@ h1 {
      Уменьшаем крупную типографику только на mobile.
      ------------------------------ */
 
-  .section__head h2,
   .ai-summary h2,
   .info-list-block h2 {
     font-size: clamp(28px, 8vw, 40px);
@@ -2930,11 +3032,6 @@ h1 {
     letter-spacing: 0.06em;
   }
 
-  .ai-summary__lead {
-    font-size: 15px;
-    line-height: 1.4;
-  }
-
   .ai-summary__list {
     gap: 7px;
   }
@@ -2943,7 +3040,6 @@ h1 {
     grid-template-columns: 6px minmax(0, 1fr);
     gap: 9px;
     font-size: 14px;
-    line-height: 1.38;
   }
 
   .ai-summary__marker {
@@ -3052,13 +3148,13 @@ h1 {
     padding: 12px 14px;
     border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .lead-form input::placeholder,
   .lead-form textarea::placeholder {
     color: #7a828c;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .lead-form textarea {
@@ -3069,12 +3165,13 @@ h1 {
     margin-top: 12px;
   }
 
-  .lead-form__consent {
+  .lead-form label.lead-form__consent {
     gap: 10px;
     margin: 14px 0 18px;
     padding: 12px 14px;
     font-size: 12px;
-    line-height: 1.4;
+    font-weight: 400;
+    line-height: 1.5;
   }
 
   .lead-form .button {
@@ -3211,11 +3308,6 @@ h1 {
     max-width: 760px;
   }
 
-  .hero h1 {
-    font-size: clamp(44px, 7vw, 56px);
-    line-height: 1;
-  }
-
   .hero__text {
     max-width: 760px;
   }
@@ -3224,7 +3316,6 @@ h1 {
     max-width: 720px;
   }
 }
-
 /* =========================================================
    SMALL MOBILE / УЗКИЕ МОБИЛЬНЫЕ ЭКРАНЫ ДО 640px
    Дополнительная оптимизация для экранов 360–640px:
@@ -3254,6 +3345,13 @@ h1 {
     }
   }
 
+
+  .eyebrow {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+  }
+
   /* ------------------------------
      HERO / ПЕРВЫЙ ЭКРАН
      Уменьшаем высоту первого экрана и размер текста,
@@ -3265,7 +3363,9 @@ h1 {
   }
 
   .hero h1 {
-    font-size: clamp(32px, 10vw, 44px);
+    font-size: clamp(31px, 8.2vw, 34px);
+    line-height: 1.07;
+    letter-spacing: -0.02em;
   }
 
   .hero__text {
@@ -3301,11 +3401,6 @@ h1 {
   max-height: 260px;
 }
 
-.product-hero__content h1 {
-  font-size: clamp(28px, 7.6vw, 36px);
-  line-height: 1.06;
-}
-
 .product-hero__subtitle {
   margin-top: 10px;
   font-size: 15px;
@@ -3322,8 +3417,9 @@ h1 {
   }
 
   .product-details-accordion__button span:first-child {
-      font-size: clamp(22px, 6.8vw, 30px);
-      line-height: 1.08;
+    font-size: clamp(23px, 6.4vw, 26px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
   }
 
   .product-details-accordion__icon {
@@ -3387,11 +3483,16 @@ h1 {
     margin-bottom: 16px;
   }
 
-  .section__head h2,
   .ai-summary h2,
   .trust-block h2,
   .info-list-block h2 {
     font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .section__head h2 {
+    font-size: clamp(27px, 7.4vw, 29px);
+    line-height: 1.11;
+    letter-spacing: -0.015em;
   }
 
   .section__head p {
@@ -3415,14 +3516,17 @@ h1 {
 
   .ai-summary__label {
     max-width: 100%;
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 700;
     line-height: 1.15;
+    letter-spacing: 0.055em;
     white-space: normal;
   }
 
   .ai-summary__lead {
-    font-size: 14px;
-    line-height: 1.38;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.48;
   }
 
   .ai-summary__list {
@@ -3430,8 +3534,8 @@ h1 {
   }
 
   .ai-summary__item {
-    font-size: 13px;
-    line-height: 1.36;
+    font-size: 14px;
+    line-height: 1.45;
   }
 
   /* ------------------------------
@@ -3516,25 +3620,31 @@ h1 {
   }
 
   .lead-form label {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .lead-form input,
   .lead-form select,
   .lead-form textarea {
     padding: 11px 12px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
   }
 
   .lead-form textarea {
     min-height: 104px;
   }
 
-  .lead-form__consent {
+  .lead-form label.lead-form__consent {
     padding: 12px;
-    font-size: 12px;
-    line-height: 1.4;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.48;
+  }
+
+  .lead-form__status {
+    font-size: 13px;
+    font-weight: 600;
   }
 
   /* ------------------------------
@@ -3692,22 +3802,24 @@ h1 {
   }
 
   .footer__brand {
-    font-size: 17px;
+    font-size: 20px;
     line-height: 1.1;
   }
 
   .footer p {
     max-width: 100%;
     margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.35;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
   }
 
   .footer__legal {
     gap: 5px;
     margin-top: 10px;
-    font-size: 12px;
-    line-height: 1.3;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
   }
 
   .footer__legal a {
@@ -3721,8 +3833,8 @@ h1 {
   }
 
   .footer__nav a {
-    font-size: 13px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
   .footer__ecosystem {
@@ -3730,13 +3842,13 @@ h1 {
   }
 
   .footer__title {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.2;
   }
 
   .footer__ecosystem a {
-    font-size: 12px;
-    line-height: 1.3;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
   .footer__contacts {
@@ -3744,14 +3856,15 @@ h1 {
   }
 
   .footer__contacts a {
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.2;
   }
 
   .footer__contacts span {
     max-width: 100%;
-    font-size: 12px;
-    line-height: 1.3;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
   }
 
     /* ------------------------------
@@ -3895,10 +4008,11 @@ h1 {
   border-radius: 999px;
   background: transparent;
   color: var(--entity-text);
-  font-family: inherit;
+  font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 650;
   line-height: 1;
+  letter-spacing: 0;
   white-space: nowrap;
   cursor: pointer;
   transition:
@@ -3913,6 +4027,7 @@ h1 {
 
 .entity-switcher__item--active {
   color: var(--entity-accent);
+  font-weight: 750;
   cursor: default;
 }
 
@@ -4254,8 +4369,8 @@ h1 {
    подчёркиванием и мягким hover-движением.
    ========================================================= */
 
-.product-card__cta,
-.service-card__cta {
+.product-card .product-card__cta,
+.service-card .service-card__cta {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -4263,10 +4378,12 @@ h1 {
   margin: auto 0 0;
   padding-top: 18px;
   color: var(--color-red);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 950;
-  line-height: 1;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .product-card__cta::after,
@@ -4739,7 +4856,6 @@ h1 {
 
   .case-modal__meta span {
     padding: 7px 9px;
-    font-size: 10px;
   }
 
   .case-modal__topbar {
@@ -4749,12 +4865,6 @@ h1 {
 
   .case-modal__top-cta {
     display: none;
-  }
-
-  .case-modal__content h2 {
-    font-size: clamp(32px, 10vw, 44px);
-    line-height: 1;
-    letter-spacing: -0.045em;
   }
 
   .case-modal__lead {
@@ -4821,507 +4931,12 @@ h1 {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .case-modal__gallery-image {
-    animation: none;
-  }
-}
-
 /* =========================================================
-   TYPOGRAPHY OVERRIDES / КОНТРОЛЬНЫЙ СЛОЙ ТИПОГРАФИКИ
-   Финальные размеры и параметры ключевых заголовков.
-   Нужен для безопасной настройки поверх накопившихся правил.
-   Компоновку, изображения и размеры контейнеров не изменяет.
-   ========================================================= */
-
-/* HERO / ГЛАВНЫЙ ЗАГОЛОВОК */
-
-.hero h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(36px, 2.65vw, 42px);
-  font-weight: 750;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-
-/* SECTION HEADINGS / ЗАГОЛОВКИ ОСНОВНЫХ СЕКЦИЙ */
-
-.section__head h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(30px, 2.15vw, 35px);
-  font-weight: 750;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-/* PRODUCT AND SERVICE PAGE TITLES / H1 ВНУТРЕННИХ СТРАНИЦ */
-
-.product-hero__content h1,
-.section--entity-page .section__head h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(32px, 2.65vw, 40px);
-  font-weight: 750;
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-
-/* PRODUCT ACCORDION / КРУПНЫЕ ПУНКТЫ ГАРМОШКИ */
-
-.product-details-accordion__button span:first-child {
-  font-family: var(--font-heading);
-  font-size: clamp(25px, 2.15vw, 34px);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-}
-
-/* FAQ / ВОПРОСЫ */
-
-.faq__summary {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 650;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-
-/* INTERFACE TYPOGRAPHY / КНОПКИ И МЕТКИ */
-
-.button {
-  font-family: var(--font-heading);
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.eyebrow,
-.ai-summary__label {
-  font-family: var(--font-body);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-/* AI SUMMARY / КРАТКО О СТРАНИЦЕ */
-
-.ai-summary__lead {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0;
-}
-
-.ai-summary__item {
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.ai-summary__text strong {
-  font-weight: 700;
-}
-
-/* HEADER & ENTITY SWITCHER / НАВИГАЦИЯ И ПЕРЕКЛЮЧАТЕЛЬ */
-
-.nav {
-  font-family: var(--font-body);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.005em;
-}
-
-.header__phone {
-  font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.entity-switcher__item {
-  font-family: var(--font-body);
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-.entity-switcher__item--active {
-  font-weight: 750;
-}
-
-/* FORM TYPOGRAPHY / ТИПОГРАФИКА ФОРМЫ */
-
-.lead-form label {
-  font-family: var(--font-body);
-  font-weight: 650;
-  line-height: 1.35;
-  letter-spacing: 0;
-}
-
-.lead-form input,
-.lead-form select,
-.lead-form textarea {
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-
-.lead-form input::placeholder,
-.lead-form textarea::placeholder {
-  font-weight: 400;
-  opacity: 0.82;
-}
-
-.lead-form__consent {
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.lead-form__consent a {
-  font-weight: 650;
-}
-
-.lead-form__status {
-  font-family: var(--font-body);
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.lead-form .button {
-  font-family: var(--font-heading);
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-/* CONTACT CARDS, CONSENT & FOOTER / ФИНАЛЬНАЯ ИЕРАРХИЯ */
-
-.contact-note strong {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.contact-note a {
-  font-weight: 650;
-}
-
-/*
-  Селектор специально усилен:
-  блок согласия одновременно является label,
-  поэтому обычный .lead-form__consent проигрывает .lead-form label.
-*/
-
-.lead-form label.lead-form__consent {
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.lead-form label.lead-form__consent a {
-  font-weight: 650;
-}
-
-/* FOOTER */
-
-.footer {
-  font-family: var(--font-body);
-}
-
-.footer__brand {
-  font-family: var(--font-heading);
-  font-weight: 750;
-  letter-spacing: 0.01em;
-}
-
-.footer__title {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.footer__nav a,
-.footer__ecosystem a {
-  font-family: var(--font-body);
-  font-weight: 550;
-}
-
-.footer__legal {
-  font-weight: 400;
-}
-
-.footer__contacts a {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.footer__contacts span {
-  font-weight: 400;
-}
-
-/* FILE NOTE & SUBMIT BUTTON / ФАЙЛ И КНОПКА ОТПРАВКИ */
-
-.lead-form__file-note {
-  display: block;
-  margin-top: 2px;
-  color: var(--color-muted);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-
-/*
-  Убираем стандартную браузерную рамку,
-  но сохраняем заметный клавиатурный focus.
-*/
-
-.lead-form .button--primary {
-  border: 2px solid var(--color-text);
-  appearance: none;
-}
-
-.lead-form .button--primary:focus-visible {
-  outline: 3px solid rgba(249, 115, 22, 0.35);
-  outline-offset: 3px;
-}
-
-/* CASE MODAL TYPOGRAPHY / ЗАГОЛОВОК КЕЙСА */
-
-.case-modal__content h2,
-.case-page__view .case-modal__content > h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(36px, 3vw, 48px);
-  font-weight: 750;
-  line-height: 1.03;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-
-/* CASE META PILLS / МЕТАДАННЫЕ КЕЙСА */
-
-.case-modal__meta span,
-.case-modal__type {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 650;
-  line-height: 1.1;
-  letter-spacing: 0.025em;
-}
-
-/* =========================================================
-   COMPACT CTA TYPOGRAPHY / НЕБОЛЬШИЕ ТЕКСТОВЫЕ CTA
-   Единая типографика для ссылок в карточках и кнопки кейса.
-   ========================================================= */
-
-/* Серая кнопка «Обсудить задачу» в карточке кейса */
-
-.case-modal__top-cta,
-.case-page__view .case-modal__top-cta {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 650;
-  line-height: 1.15;
-  letter-spacing: 0;
-}
-
-/* «Подробнее» в продуктах и услугах,
-   «Подробнее о проекте» в карточках кейсов */
-
-.product-card .product-card__cta,
-.service-card .service-card__cta,
-.case-card .case-card__link {
-  margin-bottom: 0;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-/* «Смотреть все кейсы» */
-
-.cases-link {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: 0;
-}
-
-/* ENTITY SWITCHER TYPOGRAPHY / ПЕРЕКЛЮЧАТЕЛЬ ПРОДУКТОВ И УСЛУГ */
-
-.entity-switcher__item {
-  font-family: var(--font-body);
-  font-weight: 650;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
-/* =========================================================
-   TYPOGRAPHY — MOBILE
-   На узких экранах уменьшаем доминирование заголовков,
-   сохраняя ясную иерархию.
+   CASE MODAL TYPOGRAPHY — SMALL MOBILE
+   Финальные размеры заголовка и метаданных до 640px.
    ========================================================= */
 
 @media (max-width: 640px) {
-  .hero h1 {
-    font-size: clamp(31px, 8.2vw, 34px);
-    line-height: 1.07;
-    letter-spacing: -0.02em;
-  }
-
-  .section__head h2 {
-    font-size: clamp(27px, 7.4vw, 29px);
-    line-height: 1.11;
-    letter-spacing: -0.015em;
-  }
-
-  .product-hero__content h1,
-  .section--entity-page .section__head h1 {
-    font-size: clamp(27px, 7.2vw, 29px);
-    line-height: 1.1;
-    letter-spacing: -0.015em;
-  }
-
-  .product-details-accordion__button span:first-child {
-    font-size: clamp(23px, 6.4vw, 26px);
-    line-height: 1.14;
-    letter-spacing: -0.01em;
-  }
-
-  .faq__summary {
-    font-size: 15px;
-    font-weight: 650;
-    line-height: 1.4;
-    letter-spacing: 0;
-  }
-
-    .button {
-    font-size: 15px;
-    font-weight: 650;
-    letter-spacing: -0.01em;
-  }
-
-  .eyebrow {
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.055em;
-  }
-
-  .ai-summary__label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.055em;
-  }
-
-  .ai-summary__lead {
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.48;
-  }
-
-  .ai-summary__item {
-    font-size: 14px;
-    line-height: 1.45;
-  }
-
-  .ai-summary__text strong {
-    font-weight: 700;
-  }
-
-    .lead-form label {
-    font-size: 13px;
-    font-weight: 650;
-  }
-
-  .lead-form input,
-  .lead-form select,
-  .lead-form textarea {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .lead-form__consent {
-    font-size: 12.5px;
-    font-weight: 400;
-    line-height: 1.48;
-  }
-
-  .lead-form__consent a {
-    font-weight: 650;
-  }
-
-  .lead-form__status {
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .lead-form .button {
-    font-size: 15px;
-    font-weight: 650;
-  }
-
-    .contact-note strong {
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  .contact-note a {
-    font-weight: 650;
-  }
-
-  .lead-form label.lead-form__consent {
-    font-size: 12.5px;
-    font-weight: 400;
-    line-height: 1.48;
-  }
-
-  .lead-form label.lead-form__consent a {
-    font-weight: 650;
-  }
-
-  .footer__brand {
-    font-size: 20px;
-    font-weight: 750;
-  }
-
-  .footer__title {
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  .footer__nav a,
-  .footer__ecosystem a {
-    font-size: 14px;
-    font-weight: 550;
-    line-height: 1.4;
-  }
-
-  .footer__contacts a {
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  .footer__contacts span,
-  .footer p,
-  .footer__legal {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.45;
-  }
-
-    .lead-form__file-note {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
   .case-modal__content h2,
   .case-page__view .case-modal__content > h2 {
     font-size: clamp(29px, 8vw, 32px);
@@ -5338,3 +4953,10 @@ h1 {
     letter-spacing: 0.02em;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .case-modal__gallery-image {
+    animation: none;
+  }
+}
+
