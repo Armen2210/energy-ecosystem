@@ -780,13 +780,14 @@ h1 {
 }
 
 .case-modal__gallery-image {
-  animation: case-modal-image-enter 0.32s ease both;
+  animation: case-modal-image-enter 0.22s ease-out both;
+  transform-origin: center;
 }
 
 @keyframes case-modal-image-enter {
   from {
-    opacity: 0.35;
-    transform: scale(0.985);
+    opacity: 1;
+    transform: scale(1.012);
   }
 
   to {
@@ -826,15 +827,24 @@ h1 {
 }
 
 .case-modal__topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
-  padding-right: 82px;
+  padding-right: 32px;
 }
 
 .case-modal__topbar .case-modal__meta {
-  flex: 0 1 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
+}
+
+.case-modal__topbar .case-modal__meta span {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .case-modal__top-cta {
@@ -1282,7 +1292,6 @@ h1 {
   }
 
   .case-page__view .case-modal__topbar {
-    flex-wrap: nowrap;
     gap: 8px;
     padding-right: 0;
   }

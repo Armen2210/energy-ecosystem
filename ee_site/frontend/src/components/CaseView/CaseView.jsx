@@ -190,6 +190,8 @@ function CaseView({
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
+
+
             <img
               key={`${caseItem.slug}-${activeImageIndex}`}
               className="case-modal__gallery-image"
