@@ -4357,6 +4357,7 @@ h1 {
   .product-grid,
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .product-card,
