@@ -69,7 +69,6 @@ function HomePage() {
       <section className="section" id="products">
         <div className="container">
           <SectionHeader
-              eyebrow="Продуктовые направления"
               title="Заводские инженерные системы под задачи объекта"
               description="Производим котельные, тепловые пункты, насосные станции и шкафы управления. Подбираем оборудование под проект, параметры объекта и условия эксплуатации."
           />
@@ -90,7 +89,6 @@ function HomePage() {
       <section className="section" id="services">
         <div className="container">
           <SectionHeader
-              eyebrow="Услуги"
               title="Проектирование, монтаж и наладка инженерных систем"
               description="Выполняем работы для котельных, тепловых пунктов, насосных станций, узлов учёта и инженерных сетей: от проектных решений до подготовки к эксплуатации."
           />
@@ -114,7 +112,6 @@ function HomePage() {
         <section className="section" id="cases">
           <div className="container">
             <SectionHeader
-              eyebrow="Кейсы"
               title="Реализованные задачи и инженерные решения"
               description="Короткая витрина объектов и задач, где важны техническая ответственность, надёжность оборудования и понятный результат для заказчика."
             />
