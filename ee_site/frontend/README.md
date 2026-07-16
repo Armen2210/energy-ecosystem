@@ -120,11 +120,11 @@ npm run build — успешно
 После внедрения детальных кейсов дополнительно требуется проверять прямые маршруты:
 
 ```text
-/cases/bmk-fok-elista
-/cases/btp-alatyr-dairy-plant
-/cases/btp-anapa-luchi
-/cases/btp-derbent-magma
-/cases/btp-kamensky-plant
+/cases/bmk-sports-complex
+/cases/btp-food-production
+/cases/btp-hotel-complex
+/cases/btp-residential-complex
+/cases/btp-industrial-facility
 ```
 
 ---
@@ -243,11 +243,11 @@ src/
 
   assets/
     cases/
-      bmk-fok-elista/
-      btp-alatyr-dairy-plant/
-      btp-anapa-luchi/
-      btp-derbent-magma/
-      btp-kamensky-plant/
+      bmk-sports-complex/
+      btp-food-production/
+      btp-hotel-complex/
+      btp-residential-complex/
+      btp-industrial-facility/
 
     hero.jpg
     energoeffect-logo-orange.svg
@@ -600,31 +600,31 @@ src/assets/cases/
 
 ```text
 src/assets/cases/
-  bmk-fok-elista/
+  bmk-sports-complex/
     cover.jpg
     01.jpg
     02.jpg
     ...
 
-  btp-alatyr-dairy-plant/
+  btp-food-production/
     cover.jpg
     01.jpg
     02.jpg
     ...
 
-  btp-anapa-luchi/
+  btp-hotel-complex/
     cover.webp
     01.webp
     02.webp
     ...
 
-  btp-derbent-magma/
+  btp-residential-complex/
     cover.webp
     01.webp
     02.webp
     ...
 
-  btp-kamensky-plant/
+  btp-industrial-facility/
     cover.webp
     01.webp
     02.webp

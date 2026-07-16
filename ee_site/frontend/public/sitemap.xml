@@ -74,6 +74,31 @@
     <priority>0.7</priority>
   </url>
 
+    <url>
+    <loc>https://www.energoeffekt-rostov.ru/cases/bmk-sports-complex</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.energoeffekt-rostov.ru/cases/btp-food-production</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.energoeffekt-rostov.ru/cases/btp-hotel-complex</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.energoeffekt-rostov.ru/cases/btp-residential-complex</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.energoeffekt-rostov.ru/cases/btp-industrial-facility</loc>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://www.energoeffekt-rostov.ru/privacy</loc>
     <priority>0.4</priority>

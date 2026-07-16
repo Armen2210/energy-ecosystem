@@ -6,47 +6,47 @@
 // - будущих детальных страниц отдельных объектов.
 // =========================================================
 
-import bmkFokElistaCover from "../assets/cases/bmk-fok-elista/cover.jpg";
-import bmkFokElista01 from "../assets/cases/bmk-fok-elista/01.jpg";
-import bmkFokElista04 from "../assets/cases/bmk-fok-elista/04.jpg";
-import bmkFokElista05 from "../assets/cases/bmk-fok-elista/05.jpg";
-import bmkFokElista06 from "../assets/cases/bmk-fok-elista/06.jpg";
-import bmkFokElista07 from "../assets/cases/bmk-fok-elista/07.jpg";
-import bmkFokElista11 from "../assets/cases/bmk-fok-elista/11.jpg";
-import bmkFokElista12 from "../assets/cases/bmk-fok-elista/12.jpg";
-import bmkFokElista27 from "../assets/cases/bmk-fok-elista/27.jpg";
-import bmkFokElista29 from "../assets/cases/bmk-fok-elista/29.jpg";
-import bmkFokElista31 from "../assets/cases/bmk-fok-elista/31.jpg";
-import bmkFokElista33 from "../assets/cases/bmk-fok-elista/33.jpg";
+import bmkFokElistaCover from "../assets/cases/bmk-sports-complex/cover.jpg";
+import bmkFokElista01 from "../assets/cases/bmk-sports-complex/01.jpg";
+import bmkFokElista04 from "../assets/cases/bmk-sports-complex/04.jpg";
+import bmkFokElista05 from "../assets/cases/bmk-sports-complex/05.jpg";
+import bmkFokElista06 from "../assets/cases/bmk-sports-complex/06.jpg";
+import bmkFokElista07 from "../assets/cases/bmk-sports-complex/07.jpg";
+import bmkFokElista11 from "../assets/cases/bmk-sports-complex/11.jpg";
+import bmkFokElista12 from "../assets/cases/bmk-sports-complex/12.jpg";
+import bmkFokElista27 from "../assets/cases/bmk-sports-complex/27.jpg";
+import bmkFokElista29 from "../assets/cases/bmk-sports-complex/29.jpg";
+import bmkFokElista31 from "../assets/cases/bmk-sports-complex/31.jpg";
+import bmkFokElista33 from "../assets/cases/bmk-sports-complex/33.jpg";
 
-import btpAlatyrDairyPlantCover from "../assets/cases/btp-alatyr-dairy-plant/cover.jpg";
-import btpAlatyrDairyPlant01 from "../assets/cases/btp-alatyr-dairy-plant/01.jpg";
-import btpAlatyrDairyPlant02 from "../assets/cases/btp-alatyr-dairy-plant/02.jpg";
+import btpAlatyrDairyPlantCover from "../assets/cases/btp-food-production/cover.jpg";
+import btpAlatyrDairyPlant01 from "../assets/cases/btp-food-production/01.jpg";
+import btpAlatyrDairyPlant02 from "../assets/cases/btp-food-production/02.jpg";
 
-import btpAnapaLuchiCover from "../assets/cases/btp-anapa-luchi/cover.webp";
-import btpAnapaLuchi01 from "../assets/cases/btp-anapa-luchi/01.webp";
-import btpAnapaLuchi02 from "../assets/cases/btp-anapa-luchi/02.webp";
-import btpAnapaLuchi03 from "../assets/cases/btp-anapa-luchi/03.webp";
-import btpAnapaLuchi04 from "../assets/cases/btp-anapa-luchi/04.webp";
-import btpAnapaLuchi05 from "../assets/cases/btp-anapa-luchi/05.webp";
-import btpAnapaLuchi06 from "../assets/cases/btp-anapa-luchi/06.webp";
-import btpAnapaLuchi07 from "../assets/cases/btp-anapa-luchi/07.webp";
-import btpAnapaLuchi08 from "../assets/cases/btp-anapa-luchi/08.webp";
-import btpAnapaLuchi09 from "../assets/cases/btp-anapa-luchi/09.webp";
+import btpAnapaLuchiCover from "../assets/cases/btp-hotel-complex/cover.webp";
+import btpAnapaLuchi01 from "../assets/cases/btp-hotel-complex/01.webp";
+import btpAnapaLuchi02 from "../assets/cases/btp-hotel-complex/02.webp";
+import btpAnapaLuchi03 from "../assets/cases/btp-hotel-complex/03.webp";
+import btpAnapaLuchi04 from "../assets/cases/btp-hotel-complex/04.webp";
+import btpAnapaLuchi05 from "../assets/cases/btp-hotel-complex/05.webp";
+import btpAnapaLuchi06 from "../assets/cases/btp-hotel-complex/06.webp";
+import btpAnapaLuchi07 from "../assets/cases/btp-hotel-complex/07.webp";
+import btpAnapaLuchi08 from "../assets/cases/btp-hotel-complex/08.webp";
+import btpAnapaLuchi09 from "../assets/cases/btp-hotel-complex/09.webp";
 
-import btpDerbentMagmaCover from "../assets/cases/btp-derbent-magma/cover.webp";
-import btpDerbentMagma01 from "../assets/cases/btp-derbent-magma/01.webp";
-import btpDerbentMagma02 from "../assets/cases/btp-derbent-magma/02.webp";
-import btpDerbentMagma03 from "../assets/cases/btp-derbent-magma/03.webp";
-import btpDerbentMagma04 from "../assets/cases/btp-derbent-magma/04.webp";
-import btpDerbentMagma05 from "../assets/cases/btp-derbent-magma/05.webp";
-import btpDerbentMagma06 from "../assets/cases/btp-derbent-magma/06.webp";
-import btpDerbentMagma07 from "../assets/cases/btp-derbent-magma/07.webp";
-import btpDerbentMagma08 from "../assets/cases/btp-derbent-magma/08.webp";
+import btpDerbentMagmaCover from "../assets/cases/btp-residential-complex/cover.webp";
+import btpDerbentMagma01 from "../assets/cases/btp-residential-complex/01.webp";
+import btpDerbentMagma02 from "../assets/cases/btp-residential-complex/02.webp";
+import btpDerbentMagma03 from "../assets/cases/btp-residential-complex/03.webp";
+import btpDerbentMagma04 from "../assets/cases/btp-residential-complex/04.webp";
+import btpDerbentMagma05 from "../assets/cases/btp-residential-complex/05.webp";
+import btpDerbentMagma06 from "../assets/cases/btp-residential-complex/06.webp";
+import btpDerbentMagma07 from "../assets/cases/btp-residential-complex/07.webp";
+import btpDerbentMagma08 from "../assets/cases/btp-residential-complex/08.webp";
 
-import btpKamenskyPlantCover from "../assets/cases/btp-kamensky-plant/cover.webp";
-import btpKamenskyPlant01 from "../assets/cases/btp-kamensky-plant/01.webp";
-import btpKamenskyPlant02 from "../assets/cases/btp-kamensky-plant/02.webp";
+import btpKamenskyPlantCover from "../assets/cases/btp-industrial-facility/cover.webp";
+import btpKamenskyPlant01 from "../assets/cases/btp-industrial-facility/01.webp";
+import btpKamenskyPlant02 from "../assets/cases/btp-industrial-facility/02.webp";
 
 export const cases = [
     {
@@ -55,7 +55,7 @@ export const cases = [
     // Эти поля используются на главной и странице /cases.
     // =====================================================
 
-    slug: "bmk-fok-elista",
+    slug: "bmk-sports-complex",
     type: "БМК",
     title: "Блочно-модульная котельная для ФОК в Элисте",
     description:
@@ -66,7 +66,7 @@ export const cases = [
     coverImage: bmkFokElistaCover,
     coverImageAlt:
       "Блочно-модульная котельная для физкультурно-оздоровительного комплекса в Элисте",
-    url: "/cases/bmk-fok-elista",
+    url: "/cases/bmk-sports-complex",
     isFeatured: true,
 
     // Показывает, что для кейса можно открыть отдельную страницу.
@@ -272,7 +272,7 @@ export const cases = [
     // Чувашская Республика
     // =====================================================
 
-    slug: "btp-alatyr-dairy-plant",
+    slug: "btp-food-production",
     type: "БТП",
     title: "Блочный тепловой пункт для пищевого производства",
     description:
@@ -283,7 +283,7 @@ export const cases = [
     coverImage: btpAlatyrDairyPlantCover,
     coverImageAlt:
       "Блочный тепловой пункт для предприятия пищевой промышленности в Чувашской Республике",
-    url: "/cases/btp-alatyr-dairy-plant",
+    url: "/cases/btp-food-production",
     isFeatured: false,
     hasDetailPage: true,
 
@@ -442,7 +442,7 @@ export const cases = [
     // Краснодарский край
     // =====================================================
 
-    slug: "btp-anapa-luchi",
+    slug: "btp-hotel-complex",
     type: "БТП",
     title: "Блочный тепловой пункт для гостиничного комплекса",
     description:
@@ -453,7 +453,7 @@ export const cases = [
     coverImage: btpAnapaLuchiCover,
     coverImageAlt:
       "Блочный тепловой пункт для гостиничного комплекса",
-    url: "/cases/btp-anapa-luchi",
+    url: "/cases/btp-hotel-complex",
     isFeatured: true,
     hasDetailPage: true,
 
@@ -669,7 +669,7 @@ export const cases = [
     // Дербент, микрорайон «Южный»
     // =====================================================
 
-    slug: "btp-derbent-magma",
+    slug: "btp-residential-complex",
     type: "БТП",
     title: "Блочный тепловой пункт для жилого комплекса в Дербенте",
     description:
@@ -680,7 +680,7 @@ export const cases = [
     coverImage: btpDerbentMagmaCover,
     coverImageAlt:
       "Блочный тепловой пункт для жилого комплекса в Дербенте",
-    url: "/cases/btp-derbent-magma",
+    url: "/btp-residential-complex",
     isFeatured: true,
     hasDetailPage: true,
 
@@ -897,7 +897,7 @@ export const cases = [
     // Ростовская область
     // =====================================================
 
-    slug: "btp-kamensky-plant",
+    slug: "btp-industrial-facility",
     type: "БТП",
     title: "Пароводяной тепловой пункт для производственного объекта",
     description:
@@ -908,7 +908,7 @@ export const cases = [
     coverImage: btpKamenskyPlantCover,
     coverImageAlt:
       "Пароводяной блочный тепловой пункт для производственного объекта",
-    url: "/cases/btp-kamensky-plant",
+    url: "/cases/btp-industrial-facility",
     isFeatured: false,
     hasDetailPage: true,
 
