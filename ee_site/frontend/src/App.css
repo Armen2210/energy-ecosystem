@@ -4818,6 +4818,7 @@ h1 {
 @media (max-width: 640px) {
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .service-card {
@@ -4825,15 +4826,40 @@ h1 {
   }
 
   .service-card__media {
-    height: 205px;
+    height: 235px;
+  }
+
+  .service-card__media img {
+    object-fit: cover;
+    object-position: center;
   }
 
   .service-card__body {
-    padding: 22px;
+    padding: 12px 16px 12px;
   }
 
   .service-card h3 {
-    font-size: 22px;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .service-card p {
+    display: none;
+  }
+
+  .service-card .service-card__cta {
+    width: fit-content;
+    margin: 0;
+    padding-top: 10px;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .service-card .service-card__cta::before {
+    right: 0;
+    left: 0;
   }
 }
 
