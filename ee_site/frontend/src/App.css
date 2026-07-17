@@ -1628,6 +1628,7 @@ h1 {
 @media (max-width: 640px) {
   .cases-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .case-card {
@@ -1635,19 +1636,51 @@ h1 {
   }
 
   .case-card__media {
-    height: 205px;
+    height: 235px;
+  }
+
+  .case-card__media img {
+    object-fit: cover;
+    object-position: center;
   }
 
   .case-card__body {
-    padding: 22px;
+    padding: 12px 16px 12px;
   }
 
   .case-card span {
-    margin-bottom: 22px;
+    margin-bottom: 8px;
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: none;
   }
 
   .case-card h3 {
-    font-size: 21px;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .case-card p {
+    display: none;
+  }
+
+  .case-card .case-card__cta {
+    width: fit-content;
+    margin: 0;
+    padding-top: 10px;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .case-card .case-card__cta::before {
+    right: 0;
+    left: 0;
   }
 
     /* ------------------------------
