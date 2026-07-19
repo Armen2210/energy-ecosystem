@@ -1801,6 +1801,43 @@ h1 {
   color: var(--color-red-dark);
 }
 
+.contact-note__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.contact-note__chevron {
+  display: none;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  transition: transform 180ms ease;
+}
+
+.contact-note__panel {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.contact-note__content {
+  display: grid;
+  gap: 8px;
+  overflow: hidden;
+}
+
 .contact-note--secondary {
   margin-top: 0;
 }
@@ -2095,6 +2132,13 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .faq__panel,
   .faq__chevron {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-note__panel,
+  .contact-note__chevron {
     transition: none;
   }
 }
@@ -3162,6 +3206,45 @@ h1 {
   .contact-note {
     padding: 18px;
     border-radius: 20px;
+  }
+
+  .contact-note--collapsible {
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .contact-note--collapsible .contact-note__summary {
+    padding: 14px 18px;
+    cursor: pointer;
+  }
+
+  .contact-note--collapsible .contact-note__chevron {
+    display: inline-block;
+  }
+
+  .contact-note--open .contact-note__chevron {
+    transform: rotate(-135deg);
+  }
+
+  .contact-note--collapsible .contact-note__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms ease;
+  }
+
+  .contact-note--open .contact-note__panel {
+    grid-template-rows: 1fr;
+  }
+
+  .contact-note--collapsible .contact-note__content {
+    min-height: 0;
+    padding: 0 18px;
+    overflow: hidden;
+  }
+
+  .contact-note--open .contact-note__content {
+    padding-bottom: 16px;
   }
 
   .contact-note strong {

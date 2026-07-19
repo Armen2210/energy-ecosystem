@@ -7,6 +7,8 @@
 
 import { Link } from "react-router-dom";
 
+import { useState } from "react";
+
 import heroImage from "../../assets/hero.jpg";
 import AiSummary from "../../components/AiSummary";
 import CaseCard from "../../components/CaseCard";
@@ -22,6 +24,14 @@ import { services } from "../../data/services";
 
 
 function HomePage() {
+  const [openContactNotes, setOpenContactNotes] = useState({});
+
+  const toggleContactNote = (key) => {
+    setOpenContactNotes((current) => ({
+      ...current,
+      [key]: !current[key],
+    }));
+  };
   return (
     <main>
       <Seo
@@ -148,41 +158,91 @@ function HomePage() {
                 title="Обсудить задачу"
               />
 
-              <div className="contact-note contact-note--secondary">
-                <strong>Что можно отправить:</strong>
-                <span>
-                  ТЗ, проект, спецификацию, опросный лист, фото объекта или краткое
-                  описание задачи.
-                </span>
+              <div
+                className={`contact-note contact-note--secondary contact-note--collapsible ${
+                  openContactNotes.send ? "contact-note--open" : ""
+                }`}
+              >
+                <button
+                  className="contact-note__summary"
+                  type="button"
+                  aria-expanded={Boolean(openContactNotes.send)}
+                  onClick={() => toggleContactNote("send")}
+                >
+                  <strong>Что можно отправить:</strong>
+                  <span className="contact-note__chevron" aria-hidden="true" />
+                </button>
+
+                <div className="contact-note__panel">
+                  <div className="contact-note__content">
+                    <span>
+                      ТЗ, проект, спецификацию, опросный лист, фото объекта или краткое
+                      описание задачи.
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="contact-note">
-                <strong>Как с нами связаться:</strong>
+              <div
+                className={`contact-note contact-note--collapsible ${
+                  openContactNotes.contact ? "contact-note--open" : ""
+                }`}
+              >
+                <button
+                  className="contact-note__summary"
+                  type="button"
+                  aria-expanded={Boolean(openContactNotes.contact)}
+                  onClick={() => toggleContactNote("contact")}
+                >
+                  <strong>Как с нами связаться:</strong>
+                  <span className="contact-note__chevron" aria-hidden="true" />
+                </button>
 
-                <span>
-                  Телефон:{" "}
-                  <a href="tel:+78004440766">+7 800 444-07-66</a>
-                </span>
+                <div className="contact-note__panel">
+                  <div className="contact-note__content">
+                    <span>
+                      Телефон:{" "}
+                      <a href="tel:+78004440766">+7 800 444-07-66</a>
+                    </span>
 
-                <span>
-                  Email:{" "}
-                  <a href="mailto:sales@ee-don.ru">
-                    sales@ee-don.ru
-                  </a>
-                </span>
+                    <span>
+                      Email:{" "}
+                      <a href="mailto:sales@ee-don.ru">
+                        sales@ee-don.ru
+                      </a>
+                    </span>
 
-                <span>Режим работы: Пн–Пт, 08:00–17:00</span>
-                <span>Заявку через сайт можно отправить в любое время.</span>
+                    <span>Режим работы: Пн–Пт, 08:00–17:00</span>
+                    <span>Заявку через сайт можно отправить в любое время.</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="contact-note contact-note--secondary">
-                <strong>Реквизиты компании:</strong>
-                <span>ООО «ЭНЕРГОЭФФЕКТ»</span>
-                <span>ИНН: 6161070112</span>
-                <span>ОГРН: 1146193000480</span>
-                <span>
-                  Юр. адрес: Ростов-на-Дону, б-р Комарова, зд. 28/2, ком. 19
-                </span>
+              <div
+                className={`contact-note contact-note--secondary contact-note--collapsible ${
+                  openContactNotes.details ? "contact-note--open" : ""
+                }`}
+              >
+                <button
+                  className="contact-note__summary"
+                  type="button"
+                  aria-expanded={Boolean(openContactNotes.details)}
+                  onClick={() => toggleContactNote("details")}
+                >
+                  <strong>Реквизиты компании:</strong>
+                  <span className="contact-note__chevron" aria-hidden="true" />
+                </button>
+
+                <div className="contact-note__panel">
+                  <div className="contact-note__content">
+                    <span>ООО «ЭНЕРГОЭФФЕКТ»</span>
+                    <span>ИНН: 6161070112</span>
+                    <span>ОГРН: 1146193000480</span>
+                    <span>
+                      Юр. адрес: Ростов-на-Дону, б-р Комарова, зд. 28/2, ком. 19
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
