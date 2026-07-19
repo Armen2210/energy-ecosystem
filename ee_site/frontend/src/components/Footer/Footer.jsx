@@ -10,20 +10,12 @@ function Footer({ navigation }) {
   return (
     <footer className="footer">
       <div className="container footer__grid">
-        <div>
+        <div className="footer__about">
           <div className="footer__brand">Энергоэффект</div>
           <p>
-            Инженерная производственная платформа: БМК, БТП, ВНС, ПНС,
-            шкафы управления и услуги для инженерных объектов.
+            Более 12 лет производим котельные, тепловые пункты,
+            насосные станции и шкафы управления.
           </p>
-
-          <div className="footer__legal">
-              <span>© ООО «Энергоэффект»</span>
-              <span>ИНН: 6161070112</span>
-              <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
-                Политика обработки персональных данных
-              </Link>
-          </div>
         </div>
 
         <nav className="footer__nav">
@@ -36,10 +28,6 @@ function Footer({ navigation }) {
               {item.title}
             </Link>
           ))}
-
-          <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
-            Политика
-          </Link>
         </nav>
 
         <div className="footer__ecosystem">
@@ -56,23 +44,19 @@ function Footer({ navigation }) {
           >
             ТД Энергоэффект — комплектация инженерных объектов
           </a>
-
-          <a
-            href="https://teplouchet.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Теплоучет — оборудование и комплектующие
-          </a>
         </div>
 
         <div className="footer__contacts">
           <a href="tel:+78004440766">+7 800 444-07-66</a>
           <a href="mailto:sales@ee-don.ru">sales@ee-don.ru</a>
-          <span>
-            Заявки на производство, проектирование, строительно-монтажные работы
-            и пусконаладку
-          </span>
+        </div>
+
+        <div className="footer__legal">
+          <span>© ООО «Энергоэффект»</span>
+          <span>ИНН: 6161070112</span>
+          <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
+            Политика обработки персональных данных
+          </Link>
         </div>
       </div>
     </footer>
