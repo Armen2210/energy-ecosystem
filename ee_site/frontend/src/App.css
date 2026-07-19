@@ -3515,15 +3515,16 @@ h1 {
   .hero__facts {
     display: none;
   }
-
-  /* ------------------------------
-     PRODUCT HERO / ВЕРХ ПРОДУКТОВОЙ СТРАНИЦЫ
-     Дополнительное уплотнение на узких экранах.
-     ------------------------------ */
+/* ------------------------------
+   PRODUCT HERO / ВЕРХ ПРОДУКТОВОЙ СТРАНИЦЫ
+   Mobile-only уплотнение без потери визуального веса:
+   сохраняем крупное фото, но уменьшаем разрыв между
+   изображением, логотипом, H1 и описанием.
+   ------------------------------ */
 
 .product-hero {
-  gap: 18px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .product-hero__visual {
@@ -3536,10 +3537,32 @@ h1 {
   max-height: 260px;
 }
 
+.product-hero__content {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.product-hero__brand {
+  margin-bottom: 0;
+}
+
+.product-hero__brand img {
+  max-width: 138px;
+  max-height: 38px;
+}
+
+.product-hero__content h1 {
+  font-size: clamp(32px, 8.8vw, 38px);
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+}
+
 .product-hero__subtitle {
-  margin-top: 10px;
+  max-width: 100%;
+  margin-top: 0;
   font-size: 15px;
-  line-height: 1.4;
+  line-height: 1.36;
 }
 
   .product-details-accordion {
