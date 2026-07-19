@@ -3001,21 +3001,39 @@ h1 {
 
   /* ------------------------------
      PRODUCT DETAILS ACCORDION / ГАРМОШКА ДЕТАЛЕЙ ПРОДУКТА
-     На mobile уменьшаем крупную типографику и отступы.
+     На mobile делаем блок компактнее:
+     меньше вертикальный воздух, спокойнее плюс,
+     без изменения логики раскрытия.
      ------------------------------ */
 
   .product-details-accordion {
-    margin-top: 22px;
+    margin-top: 18px;
   }
 
   .product-details-accordion__button {
-    gap: 18px;
-    padding: 26px 0;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .product-details-accordion__button span:first-child {
+    font-size: clamp(22px, 6vw, 25px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
   }
 
   .product-details-accordion__icon {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .product-details-accordion__icon::before {
+    width: 20px;
+    height: 2px;
+  }
+
+  .product-details-accordion__icon::after {
+    width: 2px;
+    height: 20px;
   }
 
   .product-details-accordion__content {
@@ -3023,12 +3041,13 @@ h1 {
   }
 
   .product-details-accordion__content p {
-    font-size: 16px;
-    line-height: 1.55;
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.48;
   }
 
   .product-details-accordion__content p:last-child {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   /* ------------------------------
