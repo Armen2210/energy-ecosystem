@@ -680,7 +680,7 @@ export const cases = [
     coverImage: btpDerbentMagmaCover,
     coverImageAlt:
       "Блочный тепловой пункт для жилого комплекса в Дербенте",
-    url: "/btp-residential-complex",
+    url: "/cases/btp-residential-complex",
     isFeatured: true,
     hasDetailPage: true,
 
