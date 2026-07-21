@@ -2575,6 +2575,38 @@ h1 {
   max-width: 720px;
 }
 
+/* =========================================================
+   PRODUCT HERO DOCUMENT MODE / РЕЖИМ ЧЕРТЕЖЕЙ И ДОКУМЕНТОВ
+   Для технических схем, чертежей и проектной документации:
+   сохраняем пропорции изображения и не растягиваем его как фото.
+   ========================================================= */
+
+.product-hero--document {
+  grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: 42px;
+}
+
+.product-hero--document .product-hero__visual {
+  min-height: 0;
+  height: clamp(320px, 34vw, 460px);
+  padding: 14px;
+  background: #ffffff;
+}
+
+.product-hero--document .product-hero__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
+
+.product-hero--document .product-hero__content {
+  max-width: 720px;
+}
+
 .product-hero__content {
   max-width: 980px;
 }
@@ -2949,6 +2981,20 @@ h1 {
   }
 
   .product-hero--technical .product-hero__content {
+      max-width: 100%;
+  }
+
+    .product-hero--document {
+      grid-template-columns: 1fr;
+      gap: 22px;
+  }
+
+  .product-hero--document .product-hero__visual {
+      height: 320px;
+      padding: 12px;
+  }
+
+  .product-hero--document .product-hero__content {
       max-width: 100%;
   }
 
@@ -3653,9 +3699,9 @@ h1 {
 }
 
 .product-hero__content h1 {
-  font-size: clamp(32px, 8.8vw, 38px);
-  line-height: 1.07;
-  letter-spacing: -0.035em;
+  font-size: clamp(29px, 8vw, 35px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
 .product-hero__subtitle {
@@ -3721,6 +3767,22 @@ h1 {
 
   .product-hero--technical .product-hero__visual {
       height: 280px;
+  }
+
+  .product-hero--document {
+      gap: 18px;
+  }
+
+  .product-hero--document .product-hero__visual {
+      height: 250px;
+      padding: 8px;
+  }
+
+  .product-hero--document .product-hero__visual img {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: contain;
   }
 
   /* ------------------------------
@@ -4360,20 +4422,37 @@ h1 {
 }
 
 /* =========================================================
-   ENTITY SWITCHER SERVICES MOBILE / ВЫРАВНИВАНИЕ УСЛУГ НА MOBILE
-   На мобильной версии сохраняем одинаковую ширину кнопок,
-   но немного уменьшаем её, чтобы лента не была слишком длинной.
+   ENTITY SWITCHER SERVICES MOBILE / ПЕРЕКЛЮЧАТЕЛЬ УСЛУГ НА MOBILE
+   Для трёх коротких услуг делаем полноценный segmented control:
+   Проект / СМР / ПНР помещаются в одну строку.
    ========================================================= */
 
 @media (max-width: 960px) {
+  .entity-switcher--services .entity-switcher__list {
+    width: 100%;
+  }
+
   .entity-switcher--services .entity-switcher__item {
-    min-width: 150px;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
 
 @media (max-width: 640px) {
+  .entity-switcher--services .entity-switcher__list {
+    width: 100%;
+  }
+
   .entity-switcher--services .entity-switcher__item {
-    min-width: 146px;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 12px;
   }
 }
 
@@ -4397,13 +4476,18 @@ h1 {
     scroll-padding-right: 24px;
   }
 
-  .entity-switcher--services .entity-switcher__item {
-    box-sizing: border-box;
-    width: 136px;
-    min-width: 136px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
+    .entity-switcher--services .entity-switcher__list {
+      width: 100%;
+    }
+
+    .entity-switcher--services .entity-switcher__item {
+      box-sizing: border-box;
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
 }
 
 @media (max-width: 640px) {

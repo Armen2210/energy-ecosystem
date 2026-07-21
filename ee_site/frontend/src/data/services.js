@@ -29,10 +29,10 @@ export const services = [
   slug: "design",
   title: "Проектирование инженерных систем и объектов",
   shortTitle: "Проектирование",
-  switcherTitle: "Проектирование",
+  switcherTitle: "Проект",
   theme: { ...defaultServiceTheme },
   heroImage: serviceDesignHero,
-  heroImageMode: "technical",
+  heroImageMode: "document",
   heroImageAlt:
       "Проектная документация инженерного объекта с изометрическим видом трубопроводов",
   heroTitle: "Проектирование инженерных систем и объектов",
