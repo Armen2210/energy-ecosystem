@@ -3333,34 +3333,67 @@ h1 {
     min-height: 50px;
   }
 
-    /* ------------------------------
+/* ------------------------------
      FAQ / ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ
-     На mobile делаем блок компактнее,
-     чтобы не перегружать продуктовые страницы.
+     Mobile-only polish: делаем FAQ компактнее,
+     но сохраняем плавное раскрытие и читаемость.
      ------------------------------ */
 
   .section-block {
-    margin-top: 30px;
+    margin-top: 26px;
+  }
+
+  .section-block .section__head {
+    display: grid;
+    gap: 6px;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+
+  .section-block .section__head .eyebrow {
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 0;
+    justify-self: start;
+  }
+
+  .section-block .section__head h2:empty {
+    width: fit-content;
+    height: 2px;
+    margin: 0;
+    font-size: 0;
+    line-height: 0;
+  }
+
+  .section-block .section__head h2:empty::after {
+    margin-top: 0;
   }
 
   .faq {
-    gap: 10px;
-    margin-top: 18px;
+    gap: 9px;
+    margin-top: 10px;
   }
 
   .faq__item {
     border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(17, 17, 17, 0.035);
   }
 
-  .faq__item summary {
-    grid-template-columns: minmax(0, 1fr) 24px;
+  .faq__summary {
+    grid-template-columns: minmax(0, 1fr) 22px;
     gap: 12px;
-    padding: 16px;
-    font-size: 15px;
+    padding: 15px 16px;
+    font-size: 14px;
+    line-height: 1.35;
   }
 
-  .faq__item p {
-    padding: 0 16px 16px;
+  .faq__chevron {
+    width: 10px;
+    height: 10px;
+  }
+
+  .faq__answer {
+    padding: 0 16px 15px;
     font-size: 14px;
     line-height: 1.45;
   }
