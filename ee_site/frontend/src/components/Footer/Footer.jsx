@@ -18,6 +18,11 @@ function Footer({ navigation }) {
           </p>
         </div>
 
+        <div className="footer__contacts">
+          <a href="tel:+78004440766">+7 800 444-07-66</a>
+          <a href="mailto:sales@ee-don.ru">sales@ee-don.ru</a>
+        </div>
+
         <nav className="footer__nav">
           <Link to="/about" state={{ entryScroll: "top-smooth" }}>
             О компании
@@ -46,10 +51,7 @@ function Footer({ navigation }) {
           </a>
         </div>
 
-        <div className="footer__contacts">
-          <a href="tel:+78004440766">+7 800 444-07-66</a>
-          <a href="mailto:sales@ee-don.ru">sales@ee-don.ru</a>
-        </div>
+
 
         <div className="footer__legal">
           <span>© ООО «Энергоэффект»</span>
