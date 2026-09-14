@@ -138,14 +138,14 @@
    ========================================================= */
 
 .hero {
-  padding: 30px 0 36px;
+  padding: 30px 0 14px;
 }
 
 .hero__grid {
   display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
-  align-items: end;
-  gap: 52px;
+  grid-template-columns: 0.88fr 1.12fr;
+  align-items: center;
+  gap: 46px;
 }
 
 .hero__content {
@@ -153,12 +153,38 @@
 }
 
 .hero h1 {
+  display: grid;
+  gap: 7px;
   font-family: var(--font-heading);
-  font-size: clamp(31px, 8.2vw, 34px);
+  font-size: clamp(31px, 2.15vw, 34px);
   font-weight: 750;
   line-height: 1.07;
   letter-spacing: -0.02em;
-  text-wrap: balance;
+}
+
+.hero h1 span {
+  display: block;
+}
+
+.hero__title-accent {
+  position: relative;
+  width: fit-content;
+  margin-bottom: 4px;
+  padding-bottom: 12px;
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.hero__title-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-red);
 }
 
 .eyebrow {
@@ -188,7 +214,7 @@ h1 {
 
 .hero__text {
   max-width: 600px;
-  margin: 18px 0 0;
+  margin: 28px 0 0;
   color: var(--color-muted);
   font-size: 15px;
   line-height: 1.5;
@@ -196,8 +222,9 @@ h1 {
 
 .hero__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   margin-top: 22px;
 }
 
@@ -295,7 +322,7 @@ h1 {
   z-index: 1;
   display: block;
   width: 100%;
-  height: clamp(200px, 58vw, 280px);
+  height: clamp(400px, 31vw, 490px);
   object-fit: cover;
   border-radius: 22px;
   box-shadow: 0 28px 60px rgba(17, 17, 17, 0.18);
@@ -338,15 +365,15 @@ h1 {
    ========================================================= */
 
 .section--summary {
-  padding: 20px 0 28px;
+  padding: 0 0 32px;
 }
 
 .ai-summary {
   display: grid;
-  gap: 8px;
-  padding: 14px;
+  gap: 6px;
+  padding: 12px 16px;
   border: 1px solid rgba(249, 115, 22, 0.2);
-  border-radius: 18px;
+  border-radius: 20px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 243, 0.84)),
     radial-gradient(circle at 94% 12%, rgba(249, 115, 22, 0.1), transparent 30%);
@@ -377,19 +404,19 @@ h1 {
 }
 
 .ai-summary__lead {
-  max-width: 920px;
+  max-width: none;
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.42;
+  line-height: 1.4;
   letter-spacing: 0;
 }
 
 .ai-summary__list {
   display: grid;
-  gap: 5px;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -404,7 +431,7 @@ h1 {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.38;
+  line-height: 1.35;
 }
 
 .ai-summary__marker {

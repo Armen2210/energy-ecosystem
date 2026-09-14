@@ -10,7 +10,9 @@ function Hero({ image }) {
       <div className="container hero__grid">
         <div className="hero__content">
           <h1>
-            Завод современного инженерного оборудования
+            <span className="hero__title-accent">ЗАВОД</span>
+            <span>Современного</span>
+            <span>инженерного оборудования</span>
           </h1>
 
           <p className="hero__text">
