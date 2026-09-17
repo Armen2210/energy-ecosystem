@@ -10,6 +10,8 @@
 
 @import "./styles/layout.css";
 
+@import "./components/AiSummary/AiSummary.css";
+
 :root {
   --container-padding: 24px;
 }
@@ -376,103 +378,8 @@ h1 {
   background: var(--color-red);
 }
 
-/* =========================================================
-   AI SUMMARY / КРАТКО О СТРАНИЦЕ
-   AI-first блок: кратко объясняет содержание страницы
-   для пользователя, поисковых систем и AI-агентов.
-
-   Важно:
-   - блок является видимым HTML-контентом;
-   - не используем скрытый SEO-текст;
-   - содержание хранится в data-файлах или передаётся со страницы;
-   - компонент AiSummary.jsx отвечает только за отображение.
-   ========================================================= */
-
 .section--summary {
   padding: 0 0 32px;
-}
-
-.ai-summary {
-  position: relative;
-  display: grid;
-  gap: 6px;
-  padding: 12px 16px 18px;
-  border: 1px solid rgba(249, 115, 22, 0.14);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.58);
-  box-shadow: none;
-}
-
-.ai-summary__header {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-}
-
-.ai-summary__label {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  max-width: 100%;
-  padding: 7px 12px;
-  border-radius: 999px;
-  color: var(--color-red);
-  background: rgba(249, 115, 22, 0.08);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.055em;
-  white-space: normal;
-}
-
-.ai-summary__lead {
-  max-width: none;
-  margin: 0;
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-
-.ai-summary__list {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ai-summary__item {
-  display: grid;
-  grid-template-columns: 6px minmax(0, 1fr);
-  gap: 8px;
-  align-items: start;
-  color: var(--color-muted);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.35;
-}
-
-.ai-summary__marker {
-  width: 5px;
-  height: 5px;
-  margin-top: 7px;
-  border-radius: 50%;
-  background: var(--color-red);
-  opacity: 0.78;
-}
-
-.ai-summary__text {
-  min-width: 0;
-}
-
-.ai-summary__text strong {
-  color: var(--color-text);
-  font-weight: 700;
 }
 
 /* =========================================================
@@ -2552,10 +2459,6 @@ h1 {
   max-width: 820px;
 }
 
-.section--entity-page .ai-summary {
-  margin-top: 0;
-}
-
 /* =========================================================
    PRODUCT HERO / ВЕРХ ПРОДУКТОВОЙ СТРАНИЦЫ
    Используется для продуктовых страниц с отдельным визуалом:
@@ -3212,7 +3115,6 @@ h1 {
      Уменьшаем крупную типографику только на mobile.
      ------------------------------ */
 
-  .ai-summary h2,
   .info-list-block h2 {
     font-size: clamp(28px, 8vw, 40px);
     line-height: 1.06;
@@ -3249,7 +3151,6 @@ h1 {
   .service-card,
   .trust-block,
   .info-list-block,
-  .ai-summary,
   .lead-form,
   .contact-note {
     width: 100%;
@@ -3283,42 +3184,6 @@ h1 {
     margin-top: 12px;
     font-size: 14px;
     line-height: 1.45;
-  }
-
-  /* ------------------------------
-     AI SUMMARY / КРАТКО О СТРАНИЦЕ
-     На mobile блок остаётся заметным, но не занимает
-     лишнюю высоту и не конкурирует с основным контентом.
-     ------------------------------ */
-
-  .ai-summary {
-    gap: 8px;
-    padding: 14px;
-    border-radius: 18px;
-  }
-
-  .ai-summary__label {
-    padding: 6px 10px;
-    font-size: 10.5px;
-    line-height: 1.15;
-    letter-spacing: 0.06em;
-  }
-
-  .ai-summary__list {
-    gap: 5px;
-  }
-
-  .ai-summary__item {
-    grid-template-columns: 6px minmax(0, 1fr);
-    gap: 8px;
-    font-size: 13px;
-    line-height: 1.38;
-  }
-
-  .ai-summary__marker {
-    width: 5px;
-    height: 5px;
-    margin-top: 7px;
   }
 
   /* ------------------------------
@@ -3915,7 +3780,6 @@ h1 {
     margin-bottom: 16px;
   }
 
-  .ai-summary h2,
   .trust-block h2,
   .info-list-block h2 {
     font-size: clamp(26px, 8vw, 34px);
@@ -3937,51 +3801,8 @@ h1 {
     font-size: 15px;
   }
 
-  /* ------------------------------
-   AI SUMMARY / КРАТКО О СТРАНИЦЕ
-   Дополнительно уплотняем блок на узких экранах.
-   ------------------------------ */
-
   .section--summary {
     padding: 20px 0 28px;
-  }
-
-  .ai-summary {
-    gap: 8px;
-    padding: 14px;
-    border-radius: 18px;
-  }
-
-  .ai-summary__label {
-    max-width: 100%;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: 0.055em;
-    white-space: normal;
-  }
-
-  .ai-summary__lead {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.42;
-  }
-
-  .ai-summary__list {
-    gap: 5px;
-  }
-
-  .ai-summary__item {
-    grid-template-columns: 6px minmax(0, 1fr);
-    gap: 8px;
-    font-size: 13px;
-    line-height: 1.38;
-  }
-
-  .ai-summary__marker {
-    width: 5px;
-    height: 5px;
-    margin-top: 7px;
   }
 
   /* ------------------------------
@@ -5524,4 +5345,3 @@ h1 {
     animation: none;
   }
 }
-
