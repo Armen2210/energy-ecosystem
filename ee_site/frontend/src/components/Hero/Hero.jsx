@@ -16,8 +16,8 @@ function Hero({ image }) {
           </h1>
 
           <p className="hero__text">
-            Более 12 лет проектируем и производим блочные котельные, тепловые пункты,
-             насосные станции, шкафы управления и автоматизации
+            Более 12 лет проектируем и производим инженерное оборудование
+            под задачи конкретного объекта — от проекта до готового решения.
 
           </p>
 
@@ -25,8 +25,19 @@ function Hero({ image }) {
             <a className="button button--primary" href="#contacts">
               Обсудить проект
             </a>
-            <a className="button button--secondary" href="#products">
-              Смотреть направления
+
+            <a
+              className="button button--secondary hero__button--services"
+              href="#services"
+            >
+              Смотреть наши услуги
+            </a>
+
+            <a
+              className="button button--secondary hero__button--products"
+              href="#products"
+            >
+              Смотреть нашу продукцию
             </a>
           </div>
         </div>

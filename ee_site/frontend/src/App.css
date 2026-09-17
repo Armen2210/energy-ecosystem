@@ -228,6 +228,30 @@ h1 {
   margin-top: 22px;
 }
 
+.hero__actions .button.hero__button--services {
+  color: #ffffff;
+  background: #31506b;
+  border: 1px solid #31506b;
+}
+
+.hero__actions .button.hero__button--services:hover {
+  color: #ffffff;
+  background: #0f2f4a;
+  border-color: #0f2f4a;
+}
+
+.hero__actions .button.hero__button--products {
+  color: #0f2f4a;
+  background: #f1f3f4;
+  border: 1px solid #0f2f4a;
+}
+
+.hero__actions .button.hero__button--products:hover {
+  color: #0f2f4a;
+  background: #e2e6e9;
+  border-color: #0f2f4a;
+}
+
 /* =========================================================
    КНОПКИ
    Общие стили для CTA-кнопок.
@@ -369,15 +393,14 @@ h1 {
 }
 
 .ai-summary {
+  position: relative;
   display: grid;
   gap: 6px;
-  padding: 12px 16px;
-  border: 1px solid rgba(249, 115, 22, 0.2);
-  border-radius: 20px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 243, 0.84)),
-    radial-gradient(circle at 94% 12%, rgba(249, 115, 22, 0.1), transparent 30%);
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.055);
+  padding: 12px 16px 18px;
+  border: 1px solid rgba(249, 115, 22, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: none;
 }
 
 .ai-summary__header {
