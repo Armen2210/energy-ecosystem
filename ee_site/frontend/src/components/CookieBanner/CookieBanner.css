@@ -1,0 +1,108 @@
+/* =========================================================
+   COOKIEBANNER / COMPONENT STYLES
+   Extracted from App.css without changing declarations.
+   ========================================================= */
+
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  z-index: 1200;
+  padding: 0 12px;
+  pointer-events: none;
+}
+
+.cookie-banner__content {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding: 14px;
+  border: 1px solid rgba(238, 120, 50, 0.24);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 22px 60px rgba(18, 39, 61, 0.16);
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+}
+
+.cookie-banner p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.cookie-banner__actions a {
+  color: var(--color-red);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner__actions button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--color-red);
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.cookie-banner__actions button:hover {
+  transform: translateY(-1px);
+  background: var(--color-red-dark);
+}
+
+@media (max-width: 640px) {
+
+  .cookie-banner {
+    bottom: 12px;
+    padding: 0 12px;
+  }
+
+  .cookie-banner__content {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .cookie-banner p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .cookie-banner__actions {
+    justify-content: space-between;
+  }
+
+  .cookie-banner__actions button {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+
+  .cookie-banner__actions a {
+    font-size: 13px;
+  }
+}
