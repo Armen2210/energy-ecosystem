@@ -32,6 +32,8 @@
 
 @import "./components/SectionHeader/SectionHeader.css";
 
+@import "./components/Footer/Footer.css";
+
 :root {
   --container-padding: 24px;
 }
@@ -1600,154 +1602,6 @@ h1 {
    ========================================================= */
 
 /* =========================================================
-   FOOTER / ПОДВАЛ САЙТА
-   Нижний блок: позиционирование, навигация и контакты.
-   ========================================================= */
-
-.footer {
-  padding: 18px 0 20px;
-  color: #ffffff;
-  background: #0f2f4a;
-  font-family: var(--font-body);
-}
-
-.footer__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 13px;
-  align-items: start;
-}
-
-.footer__grid > div:first-child,
-.footer__contacts,
-.footer__legal {
-  grid-column: auto;
-}
-
-.footer__about {
-  order: 1;
-}
-
-.footer__brand {
-  color: var(--color-red);
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 750;
-  line-height: 1.08;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-}
-
-.footer p {
-  max-width: 100%;
-  margin: 6px 0 0;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 12.5px;
-  font-weight: 400;
-  line-height: 1.38;
-}
-
-/* =========================================================
-   FOOTER LEGAL / ЮРИДИЧЕСКИЙ БЛОК В ПОДВАЛЕ
-   Копирайт и ссылка на политику персональных данных.
-   Отдельный блок нужен, чтобы юридические ссылки не ломали
-   мобильную версию footer.
-   ========================================================= */
-
-.footer__legal {
-  display: grid;
-  order: 5;
-  gap: 4px;
-  margin-top: 0;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 12.5px;
-  font-weight: 400;
-  line-height: 1.35;
-}
-
-.footer__legal a {
-  width: fit-content;
-  max-width: 260px;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.25;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.footer__legal a:hover {
-  color: var(--color-red);
-}
-
-.footer__nav {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  order: 3;
-  gap: 6px 14px;
-}
-
-.footer__nav a {
-  color: rgba(255, 255, 255, 0.78);
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  font-weight: 550;
-  line-height: 1.3;
-}
-
-.footer__nav a:hover {
-  color: var(--color-red);
-}
-
-.footer__title {
-  color: #ffffff;
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-
-.footer__ecosystem {
-  display: grid;
-  order: 4;
-  gap: 6px;
-}
-
-.footer__ecosystem a {
-  color: rgba(255, 255, 255, 0.72);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 550;
-  line-height: 1.32;
-}
-
-.footer__ecosystem a:hover {
-  color: var(--color-red);
-}
-
-.footer__contacts {
-  display: grid;
-  order: 2;
-  gap: 5px;
-}
-
-.footer__contacts a {
-  color: #ffffff;
-  font-family: var(--font-heading);
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.16;
-  letter-spacing: -0.01em;
-}
-
-.footer__contacts span {
-  max-width: 520px;
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.35;
-}
-
-/* =========================================================
    TRUST BLOCK / БЛОК ДОВЕРИЯ
    Универсальный блок преимуществ для продуктовых и сервисных страниц.
    ========================================================= */
@@ -2425,7 +2279,6 @@ h1 {
   .services-grid,
   .contact-grid,
   .lead-form__grid,
-  .footer__grid,
   .trust-block__grid,
   .info-list-grid {
     grid-template-columns: 1fr;
@@ -2638,72 +2491,6 @@ h1 {
     width: 100%;
   }
 
-    /* ------------------------------
-     FOOTER / ПОДВАЛ
-     На планшетах и крупных mobile делаем footer компактнее:
-     бренд и контакты идут на всю ширину,
-     навигация и экосистема — в две колонки.
-     Это уменьшает высоту footer без удаления важных ссылок.
-     ------------------------------ */
-
-  .footer {
-    padding: 28px 0;
-  }
-
-  .footer__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px 28px;
-  }
-
-  .footer__grid > div:first-child,
-  .footer__contacts {
-    grid-column: 1 / -1;
-  }
-
-  .footer__brand {
-    font-size: 20px;
-  }
-
-  .footer p {
-    max-width: 620px;
-    margin-top: 8px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .footer__legal {
-    gap: 6px;
-    margin-top: 12px;
-    font-size: 13px;
-  }
-
-  .footer__legal a {
-    max-width: 320px;
-    line-height: 1.35;
-  }
-
-  .footer__nav,
-  .footer__ecosystem,
-  .footer__contacts {
-    gap: 8px;
-  }
-
-  .footer__nav a,
-  .footer__ecosystem a {
-    font-size: 14px;
-    line-height: 1.3;
-  }
-
-  .footer__contacts a {
-    font-size: 18px;
-  }
-
-  .footer__contacts span {
-    max-width: 520px;
-    font-size: 14px;
-    line-height: 1.35;
-  }
 }
 
 /* =========================================================
@@ -3055,94 +2842,6 @@ h1 {
      На узких экранах баннер становится вертикальным,
      чтобы не ломать ширину страницы.
      ------------------------------ */
-
-/* ------------------------------
-   FOOTER / ПОДВАЛ НА SMALL MOBILE
-   Дополнительно уплотняем footer на узких экранах.
-   Сохраняем все важные ссылки, но уменьшаем высоту блока.
-   ------------------------------ */
-
-  .footer {
-    padding: 18px 0 20px;
-  }
-
-  .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
-
-  .footer__grid > div:first-child,
-  .footer__contacts,
-  .footer__legal {
-    grid-column: auto;
-  }
-
-  .footer__about {
-    order: 1;
-  }
-
-  .footer__brand {
-    font-size: 18px;
-    line-height: 1.08;
-  }
-
-  .footer p {
-    max-width: 100%;
-    margin-top: 6px;
-    font-size: 12.5px;
-    font-weight: 400;
-    line-height: 1.38;
-  }
-
-  .footer__contacts {
-    order: 2;
-    gap: 5px;
-  }
-
-  .footer__contacts a {
-    font-size: 17px;
-    line-height: 1.16;
-  }
-
-  .footer__nav {
-    order: 3;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px 14px;
-  }
-
-  .footer__nav a {
-    font-size: 13.5px;
-    line-height: 1.3;
-  }
-
-  .footer__ecosystem {
-    order: 4;
-    gap: 6px;
-  }
-
-  .footer__title {
-    font-size: 14px;
-    line-height: 1.15;
-  }
-
-  .footer__ecosystem a {
-    font-size: 13px;
-    line-height: 1.32;
-  }
-
-  .footer__legal {
-    order: 5;
-    gap: 4px;
-    margin-top: 0;
-    font-size: 12.5px;
-    font-weight: 400;
-    line-height: 1.35;
-  }
-
-  .footer__legal a {
-    max-width: 260px;
-    line-height: 1.25;
-  }
 
     /* ------------------------------
      TRUST & INFO BLOCKS / ДОВЕРИЕ И СПИСКИ
