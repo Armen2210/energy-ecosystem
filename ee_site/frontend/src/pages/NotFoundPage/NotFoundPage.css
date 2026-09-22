@@ -1,0 +1,44 @@
+/* =========================================================
+   NOT FOUND PAGE / СТРАНИЦА 404
+   Стили для кнопок на странице ошибки.
+   Делаем переходы понятными, но не перегружаем страницу.
+   ========================================================= */
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.not-found-actions .button {
+  min-height: 50px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+@media (max-width: 960px) {
+  .not-found-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .not-found-actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .not-found-actions {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .not-found-actions .button {
+    min-height: 50px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+}

@@ -34,6 +34,8 @@
 
 @import "./components/Footer/Footer.css";
 
+@import "./pages/NotFoundPage/NotFoundPage.css";
+
 :root {
   --container-padding: 24px;
 }
@@ -1554,25 +1556,6 @@ h1 {
 }
 
 /* =========================================================
-   NOT FOUND PAGE / СТРАНИЦА 404
-   Стили для кнопок на странице ошибки.
-   Делаем переходы понятными, но не перегружаем страницу.
-   ========================================================= */
-
-.not-found-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.not-found-actions .button {
-  min-height: 50px;
-  padding: 0 18px;
-  font-size: 14px;
-}
-
-/* =========================================================
    FAQ / ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ
    Reusable-блок для продуктовых и сервисных страниц.
    Нужен для SEO, AEO/GEO и AI-ready структуры,
@@ -2474,23 +2457,6 @@ h1 {
     margin-top: 0;
   }
 
-    /* ------------------------------
-     NOT FOUND PAGE / 404
-     На mobile кнопки ставим в одну колонку,
-     чтобы они не ломали сетку и не выглядели случайно.
-     ------------------------------ */
-
-  .not-found-actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .not-found-actions .button {
-    width: 100%;
-  }
-
 }
 
 /* =========================================================
@@ -2738,23 +2704,6 @@ h1 {
 
   .contact-note {
     padding: 16px;
-  }
-
-  /* ------------------------------
-     NOT FOUND PAGE / 404
-     На mobile кнопки ставим в одну колонку,
-     чтобы они не ломали сетку и не выглядели случайно.
-     ------------------------------ */
-
-  .not-found-actions {
-    gap: 10px;
-    margin-top: 22px;
-  }
-
-  .not-found-actions .button {
-    min-height: 50px;
-    padding: 0 18px;
-    font-size: 14px;
   }
 
     /* ------------------------------
