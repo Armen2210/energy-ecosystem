@@ -12,6 +12,16 @@
 
 @import "./components/AiSummary/AiSummary.css";
 
+@import "./components/FAQ/FAQ.css";
+
+@import "./components/ProductDetailsAccordion/ProductDetailsAccordion.css";
+
+@import "./components/CookieBanner/CookieBanner.css";
+
+@import "./components/TrustBlock/TrustBlock.css";
+
+@import "./components/InfoListBlock/InfoListBlock.css";
+
 :root {
   --container-padding: 24px;
 }
@@ -391,121 +401,6 @@ h1 {
    Плюс рисуется CSS-линиями, а не текстовым символом,
    чтобы вращение было строго по центру без визуального смещения.
    ========================================================= */
-
-.product-details-accordion {
-  display: grid;
-  margin-top: 20px;
-  border-top: 1px solid rgba(17, 17, 17, 0.14);
-}
-
-.product-details-accordion__item {
-  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
-}
-
-.product-details-accordion__button {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px;
-  align-items: center;
-  width: 100%;
-  padding: 22px 0;
-  border: 0;
-  color: var(--color-text);
-  background: transparent;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.product-details-accordion__button span:first-child {
-  font-family: var(--font-heading);
-  font-size: clamp(23px, 6.4vw, 26px);
-  font-weight: 700;
-  line-height: 1.14;
-  letter-spacing: -0.01em;
-}
-
-.product-details-accordion__icon {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  flex: 0 0 auto;
-  transform-origin: 50% 50%;
-  will-change: transform;
-}
-
-.product-details-accordion__icon::before,
-.product-details-accordion__icon::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 999px;
-  background: var(--color-text);
-  transform: translate(-50%, -50%);
-}
-
-.product-details-accordion__icon::before {
-  width: 22px;
-  height: 2px;
-}
-
-.product-details-accordion__icon::after {
-  width: 2px;
-  height: 22px;
-}
-
-.product-details-accordion__icon--spin {
-  animation: productAccordionPlusSpin 240ms linear;
-}
-
-.product-details-accordion__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 320ms ease;
-}
-
-.product-details-accordion__item--open .product-details-accordion__panel {
-  grid-template-rows: 1fr;
-}
-
-.product-details-accordion__content {
-  max-width: 860px;
-  overflow: hidden;
-}
-
-.product-details-accordion__content p {
-  margin: 0 0 14px;
-  color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.product-details-accordion__content p:last-child {
-  margin-bottom: 22px;
-}
-
-@keyframes productAccordionPlusSpin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(720deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .product-details-accordion__panel {
-    transition: none;
-  }
-
-  .product-details-accordion__icon--spin {
-    animation: none;
-  }
-}
 
 /* =========================================================
    PRODUCT DIRECTIONS / ПРОДУКТОВЫЕ НАПРАВЛЕНИЯ
@@ -2021,89 +1916,6 @@ h1 {
   margin-top: 42px;
 }
 
-.faq {
-  display: grid;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.faq__item {
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 14px 34px rgba(17, 17, 17, 0.04);
-  overflow: hidden;
-}
-
-.faq__summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: center;
-  width: 100%;
-  padding: 18px 20px;
-  border: 0;
-  color: var(--color-text);
-  background: transparent;
-  font: inherit;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 650;
-  line-height: 1.4;
-  letter-spacing: 0;
-  text-align: left;
-  cursor: pointer;
-}
-
-.faq__question {
-  min-width: 0;
-}
-
-.faq__chevron {
-  display: inline-block;
-  width: 11px;
-  height: 11px;
-  border-right: 2px solid var(--color-red);
-  border-bottom: 2px solid var(--color-red);
-  transform: rotate(45deg);
-  transform-origin: 50% 50%;
-  transition: transform 180ms ease;
-  flex: 0 0 auto;
-}
-
-.faq__item--open .faq__chevron {
-  transform: rotate(-135deg);
-}
-
-.faq__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 300ms ease;
-}
-
-.faq__item--open .faq__panel {
-  grid-template-rows: 1fr;
-}
-
-.faq__content {
-  overflow: hidden;
-}
-
-.faq__answer {
-  margin: 0;
-  padding: 0 20px 18px;
-  color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.55;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .faq__panel,
-  .faq__chevron {
-    transition: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .contact-note__panel,
   .contact-note__chevron {
@@ -2117,76 +1929,6 @@ h1 {
    Не перекрывает основной сценарий, но даёт пользователю
    понятное уведомление и ссылку на раздел cookies в политике.
    ========================================================= */
-
-.cookie-banner {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 12px;
-  z-index: 1200;
-  padding: 0 12px;
-  pointer-events: none;
-}
-
-.cookie-banner__content {
-  display: grid;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: min(100%, 1040px);
-  margin: 0 auto;
-  padding: 14px;
-  border: 1px solid rgba(238, 120, 50, 0.24);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 22px 60px rgba(18, 39, 61, 0.16);
-  backdrop-filter: blur(14px);
-  pointer-events: auto;
-}
-
-.cookie-banner p {
-  max-width: 720px;
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.cookie-banner__actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex: 0 0 auto;
-}
-
-.cookie-banner__actions a {
-  color: var(--color-red);
-  font-size: 13px;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.cookie-banner__actions button {
-  min-height: 40px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 12px;
-  color: #ffffff;
-  background: var(--color-red);
-  font-size: 13px;
-  font-weight: 900;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-}
-
-.cookie-banner__actions button:hover {
-  transform: translateY(-1px);
-  background: var(--color-red-dark);
-}
 
 /* =========================================================
    FOOTER / ПОДВАЛ САЙТА
@@ -2341,53 +2083,6 @@ h1 {
    Универсальный блок преимуществ для продуктовых и сервисных страниц.
    ========================================================= */
 
-.trust-block {
-  margin-top: 24px;
-  padding: 18px;
-  border: 1px solid var(--color-border);
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at 88% 18%, rgba(249, 115, 22, 0.12), transparent 30%),
-    rgba(255, 255, 255, 0.9);
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
-}
-
-.trust-block h2 {
-  margin: 0 0 22px;
-  color: var(--color-text);
-  font-size: clamp(26px, 8vw, 34px);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-}
-
-.trust-block__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.trust-block__item {
-  padding: 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.78);
-}
-
-.trust-block__item h3 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 17px;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-}
-
-.trust-block__item p {
-  margin: 12px 0 0;
-  color: var(--color-muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
 /* =========================================================
    INFO LIST BLOCK / ИНФОРМАЦИОННЫЕ СПИСКИ
    Используется на продуктовых страницах:
@@ -2399,32 +2094,6 @@ h1 {
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   margin-top: 34px;
-}
-
-.info-list-block {
-  padding: 28px;
-  border: 1px solid var(--color-border);
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.05);
-}
-
-.info-list-block h2 {
-  margin: 0 0 18px;
-  color: var(--color-text);
-  font-size: clamp(26px, 3vw, 38px);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-}
-
-.info-list-block ul {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-  padding-left: 22px;
-  color: var(--color-muted);
-  font-size: 17px;
-  line-height: 1.45;
 }
 
 /* =========================================================
@@ -3066,59 +2735,10 @@ h1 {
      без изменения логики раскрытия.
      ------------------------------ */
 
-  .product-details-accordion {
-    margin-top: 18px;
-  }
-
-  .product-details-accordion__button {
-    gap: 12px;
-    padding: 20px 0;
-  }
-
-  .product-details-accordion__button span:first-child {
-    font-size: clamp(22px, 6vw, 25px);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
-  }
-
-  .product-details-accordion__icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .product-details-accordion__icon::before {
-    width: 20px;
-    height: 2px;
-  }
-
-  .product-details-accordion__icon::after {
-    width: 2px;
-    height: 20px;
-  }
-
-  .product-details-accordion__content {
-    max-width: 100%;
-  }
-
-  .product-details-accordion__content p {
-    margin-bottom: 12px;
-    font-size: 15px;
-    line-height: 1.48;
-  }
-
-  .product-details-accordion__content p:last-child {
-    margin-bottom: 20px;
-  }
-
   /* ------------------------------
      TYPOGRAPHY / ЗАГОЛОВКИ И ТЕКСТЫ
      Уменьшаем крупную типографику только на mobile.
      ------------------------------ */
-
-  .info-list-block h2 {
-    font-size: clamp(28px, 8vw, 40px);
-    line-height: 1.06;
-  }
 
   .section__head p,
   .hero__text,
@@ -3198,33 +2818,9 @@ h1 {
     border-radius: 24px;
   }
 
-  .trust-block {
-    margin-top: 24px;
-  }
-
   .trust-block__grid,
   .info-list-grid {
     gap: 14px;
-  }
-
-  .trust-block__item {
-    padding: 18px;
-    border-radius: 20px;
-  }
-
-  .trust-block__item h3 {
-    font-size: 18px;
-  }
-
-  .trust-block__item p {
-    font-size: 14px;
-    line-height: 1.45;
-  }
-
-  .info-list-block ul {
-    gap: 8px;
-    font-size: 15px;
-    line-height: 1.4;
   }
 
   /* ------------------------------
@@ -3390,35 +2986,6 @@ h1 {
 
   .section-block .section__head h2:empty::after {
     margin-top: 0;
-  }
-
-  .faq {
-    gap: 9px;
-    margin-top: 10px;
-  }
-
-  .faq__item {
-    border-radius: 18px;
-    box-shadow: 0 10px 24px rgba(17, 17, 17, 0.035);
-  }
-
-  .faq__summary {
-    grid-template-columns: minmax(0, 1fr) 22px;
-    gap: 12px;
-    padding: 15px 16px;
-    font-size: 14px;
-    line-height: 1.35;
-  }
-
-  .faq__chevron {
-    width: 10px;
-    height: 10px;
-  }
-
-  .faq__answer {
-    padding: 0 16px 15px;
-    font-size: 14px;
-    line-height: 1.45;
   }
 
   /* ------------------------------
@@ -3688,35 +3255,6 @@ h1 {
   line-height: 1.36;
 }
 
-  .product-details-accordion {
-    margin-top: 20px;
-  }
-
-  .product-details-accordion__button {
-    gap: 14px;
-    padding: 22px 0;
-  }
-
-  .product-details-accordion__button span:first-child {
-    font-size: clamp(23px, 6.4vw, 26px);
-    line-height: 1.14;
-    letter-spacing: -0.01em;
-  }
-
-  .product-details-accordion__icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .product-details-accordion__content p {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .product-details-accordion__content p:last-child {
-    margin-bottom: 22px;
-  }
-
   .product-hero__brand {
       margin-bottom: 12px;
   }
@@ -3817,33 +3355,9 @@ h1 {
     border-radius: 24px;
   }
 
-  .trust-block {
-    margin-top: 24px;
-  }
-
   .trust-block__grid,
   .info-list-grid {
     gap: 14px;
-  }
-
-  .trust-block__item {
-    padding: 18px;
-    border-radius: 20px;
-  }
-
-  .trust-block__item h3 {
-    font-size: 18px;
-  }
-
-  .trust-block__item p {
-    font-size: 14px;
-    line-height: 1.45;
-  }
-
-  .info-list-block ul {
-    gap: 8px;
-    font-size: 15px;
-    line-height: 1.4;
   }
 
   /* ------------------------------
@@ -4001,37 +3515,6 @@ h1 {
      чтобы не ломать ширину страницы.
      ------------------------------ */
 
-  .cookie-banner {
-    bottom: 12px;
-    padding: 0 12px;
-  }
-
-  .cookie-banner__content {
-    display: grid;
-    gap: 12px;
-    padding: 14px;
-    border-radius: 18px;
-  }
-
-  .cookie-banner p {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .cookie-banner__actions {
-    justify-content: space-between;
-  }
-
-  .cookie-banner__actions button {
-    min-height: 40px;
-    padding: 0 16px;
-    font-size: 13px;
-  }
-
-  .cookie-banner__actions a {
-    font-size: 13px;
-  }
-
 /* ------------------------------
    FOOTER / ПОДВАЛ НА SMALL MOBILE
    Дополнительно уплотняем footer на узких экранах.
@@ -4128,14 +3611,6 @@ h1 {
   .trust-block,
   .info-list-block {
     padding: 18px;
-  }
-
-  .trust-block__item {
-    padding: 16px;
-  }
-
-  .trust-block__item h3 {
-    font-size: 17px;
   }
 
   .trust-block__item p,

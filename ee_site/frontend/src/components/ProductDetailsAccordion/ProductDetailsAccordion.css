@@ -1,0 +1,198 @@
+/* =========================================================
+   PRODUCTDETAILSACCORDION / COMPONENT STYLES
+   Extracted from App.css without changing declarations.
+   ========================================================= */
+
+.product-details-accordion {
+  display: grid;
+  margin-top: 20px;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.product-details-accordion__item {
+  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.product-details-accordion__button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  padding: 22px 0;
+  border: 0;
+  color: var(--color-text);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.product-details-accordion__button span:first-child {
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 6.4vw, 26px);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+.product-details-accordion__icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.product-details-accordion__icon::before,
+.product-details-accordion__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 999px;
+  background: var(--color-text);
+  transform: translate(-50%, -50%);
+}
+
+.product-details-accordion__icon::before {
+  width: 22px;
+  height: 2px;
+}
+
+.product-details-accordion__icon::after {
+  width: 2px;
+  height: 22px;
+}
+
+.product-details-accordion__icon--spin {
+  animation: productAccordionPlusSpin 240ms linear;
+}
+
+.product-details-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms ease;
+}
+
+.product-details-accordion__item--open .product-details-accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.product-details-accordion__content {
+  max-width: 860px;
+  overflow: hidden;
+}
+
+.product-details-accordion__content p {
+  margin: 0 0 14px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.product-details-accordion__content p:last-child {
+  margin-bottom: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-details-accordion__panel {
+    transition: none;
+  }
+
+  .product-details-accordion__icon--spin {
+    animation: none;
+  }
+}
+
+@media (max-width: 960px) {
+
+  .product-details-accordion {
+    margin-top: 18px;
+  }
+
+  .product-details-accordion__button {
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .product-details-accordion__button span:first-child {
+    font-size: clamp(22px, 6vw, 25px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  .product-details-accordion__icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .product-details-accordion__icon::before {
+    width: 20px;
+    height: 2px;
+  }
+
+  .product-details-accordion__icon::after {
+    width: 2px;
+    height: 20px;
+  }
+
+  .product-details-accordion__content {
+    max-width: 100%;
+  }
+
+  .product-details-accordion__content p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.48;
+  }
+
+  .product-details-accordion__content p:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .product-details-accordion {
+    margin-top: 20px;
+  }
+
+  .product-details-accordion__button {
+    gap: 14px;
+    padding: 22px 0;
+  }
+
+  .product-details-accordion__button span:first-child {
+    font-size: clamp(23px, 6.4vw, 26px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+  }
+
+  .product-details-accordion__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .product-details-accordion__content p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .product-details-accordion__content p:last-child {
+    margin-bottom: 22px;
+  }
+}
+
+@keyframes productAccordionPlusSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(720deg);
+  }
+}
