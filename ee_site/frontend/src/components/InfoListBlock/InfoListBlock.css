@@ -51,3 +51,40 @@
     line-height: 1.4;
   }
 }
+
+@media (max-width: 960px) {
+
+  .info-list-block ul {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .info-list-block {
+    width: 100%;
+  }
+
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .info-list-block h2 {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .info-list-block {
+    padding: 18px;
+  }
+
+  .info-list-block ul {
+    font-size: 14px;
+  }
+}
