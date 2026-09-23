@@ -61,6 +61,13 @@
   background: var(--color-red);
 }
 
+@media (max-width: 960px) {
+  .section__head p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+}
+
 @media (max-width: 640px) {
   .eyebrow {
     font-size: 11.5px;
