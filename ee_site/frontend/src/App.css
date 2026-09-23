@@ -471,7 +471,6 @@ h1 {
      Уменьшаем крупную типографику только на mobile.
      ------------------------------ */
 
-  .section__head p,
   .info-list-block ul {
     font-size: 15px;
     line-height: 1.45;
