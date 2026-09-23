@@ -10,6 +10,8 @@
 
 @import "./styles/layout.css";
 
+@import "./styles/grids.css";
+
 @import "./components/AiSummary/AiSummary.css";
 
 @import "./components/FAQ/FAQ.css";
@@ -388,23 +390,11 @@ h1 {
    Карточки БТП, БМК, ВНС, ПНС.
    ========================================================= */
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-}
-
 /* =========================================================
    SERVICES / УСЛУГИ
    Отдельный блок услуг компании.
    Важно: продукты и услуги не смешиваем.
    ========================================================= */
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
 
 /* =========================================================
    CASE MODAL / МОДАЛЬНОЕ ОКНО КЕЙСА
@@ -1156,12 +1146,6 @@ h1 {
   max-width: 760px;
 }
 
-.cases-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
 .case-card {
   display: flex;
   flex-direction: column;
@@ -1331,21 +1315,12 @@ h1 {
 }
 
 @media (max-width: 960px) {
-  .cases-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .case-card__media {
     height: 200px;
   }
 }
 
 @media (max-width: 640px) {
-  .cases-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
   .case-card {
     border-radius: 24px;
   }
@@ -1517,12 +1492,6 @@ h1 {
    Для технических схем, чертежей и проектной документации:
    сохраняем пропорции изображения и не растягиваем его как фото.
    ========================================================= */
-
-@media (max-width: 1280px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 
 /* =========================================================
    PRIVACY PAGE / СТРАНИЦА ПОЛИТИКИ
@@ -1798,8 +1767,6 @@ h1 {
      Все основные сетки переводим в одну колонку.
      ------------------------------ */
 
-  .product-grid,
-  .services-grid,
   .lead-form__grid,
   .trust-block__grid,
   .info-list-grid {
@@ -2101,31 +2068,6 @@ h1 {
    - делаем кликабельность очевидной.
    ========================================================= */
 
-.product-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-}
-
-.services-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-@media (max-width: 960px) {
-  .product-grid,
-  .services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .product-grid,
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
 /* =========================================================
    HOME CARD CTA / ТЕКСТОВАЯ ССЫЛКА В КАРТОЧКАХ ГЛАВНОЙ
    Без плашки: усиливаем кликабельность цветом, стрелкой,
@@ -2149,24 +2091,6 @@ h1 {
    - маркер услуги находится в текстовой части;
    - карточки услуг визуально спокойнее карточек продукции.
    ========================================================= */
-
-.services-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-@media (max-width: 960px) {
-  .services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
 
 /* =========================================================
    CASE MODAL — MOBILE
