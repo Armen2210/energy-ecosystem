@@ -85,10 +85,6 @@
   font-weight: 700;
 }
 
-.section--entity-page .ai-summary {
-  margin-top: 0;
-}
-
 @media (max-width: 960px) {
   .ai-summary {
     width: 100%;
