@@ -1,0 +1,185 @@
+/* =========================================================
+   HEADER / ШАПКА САЙТА
+   Липкая шапка: остаётся сверху при прокрутке,
+   но не ломает высоту страницы.
+   ========================================================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(14px);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 78px;
+  gap: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 260px;
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease;
+}
+
+.logo--leaving {
+  transform: scale(0.985);
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  color: #2c3137;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.nav a {
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--color-red);
+}
+
+.header__phone {
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .header__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: start;
+    min-width: 0;
+    padding: 10px 0;
+  }
+
+  .logo {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: flex-start;
+    gap: 13px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 10px 2px 0;
+    color: #2c3137;
+    font-size: 13px;
+    white-space: nowrap;
+    scroll-padding-right: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav a {
+    flex: 0 0 auto;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header__phone {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header__phone {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   HEADER LOGO SVG / НОВЫЙ SVG-ЛОГОТИП В HEADER
+   Новый логотип подключается как изображение внутри старой
+   ссылки .logo. Логика клика и scroll-переходов сохраняется
+   в Header.jsx через onClick={handleLogoClick}.
+   ========================================================= */
+
+.header .logo {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.header .logo__image {
+  display: block;
+  width: auto;
+  height: 54px;
+  max-width: 360px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   HEADER LOGO SVG MOBILE / ЛОГОТИП В HEADER НА MOBILE
+   Уменьшаем высоту логотипа, чтобы он не ломал мобильный header.
+   ========================================================= */
+
+@media (max-width: 960px) {
+  .header .logo__image {
+    height: 42px;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header .logo__image {
+    height: 38px;
+    max-width: 240px;
+  }
+}
+
+/* =========================================================
+   ACTIVE NAV LINK / АКТИВНЫЙ ПУНКТ ОСНОВНОЙ НАВИГАЦИИ
+   Используется и на desktop, и на mobile.
+   Подсвечивает текущий раздел сайта или текущую секцию главной.
+   ========================================================= */
+
+.nav .nav__link {
+  transition: color 160ms ease;
+}
+
+.nav .nav__link--active {
+  color: var(--color-red);
+}
+
+.nav .nav__link--active:hover {
+  color: var(--color-red);
+}
