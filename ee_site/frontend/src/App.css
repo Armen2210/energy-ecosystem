@@ -477,7 +477,6 @@ h1 {
      ------------------------------ */
 
   .lead-form__grid,
-  .trust-block__grid,
   .info-list-grid {
     grid-template-columns: 1fr;
   }
@@ -487,7 +486,6 @@ h1 {
      Защита от переполнения и выравнивание ширины.
      ------------------------------ */
 
-  .trust-block,
   .lead-form {
     width: 100%;
   }
@@ -504,12 +502,6 @@ h1 {
      продуктов и услуг без скрытия важных смыслов.
      ------------------------------ */
 
-  .trust-block {
-    padding: 20px;
-    border-radius: 24px;
-  }
-
-  .trust-block__grid,
   .info-list-grid {
     gap: 14px;
   }
@@ -590,10 +582,6 @@ h1 {
     padding: 30px 0;
   }
 
-  .trust-block h2 {
-    font-size: clamp(26px, 8vw, 34px);
-  }
-
   .section--summary {
     padding: 20px 0 28px;
   }
@@ -604,12 +592,6 @@ h1 {
      продуктов и услуг без скрытия важных смыслов.
      ------------------------------ */
 
-  .trust-block {
-    padding: 20px;
-    border-radius: 24px;
-  }
-
-  .trust-block__grid,
   .info-list-grid {
     gap: 14px;
   }
@@ -654,13 +636,6 @@ h1 {
      Дополнительно уплотняем блоки на узких экранах.
      ------------------------------ */
 
-  .trust-block {
-    padding: 18px;
-  }
-
-  .trust-block__item p {
-    font-size: 14px;
-  }
 }  
 
 
