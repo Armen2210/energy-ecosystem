@@ -1,0 +1,110 @@
+/* =========================================================
+   CASES PAGE INTRO / ВЕРХ СТРАНИЦЫ КЕЙСОВ
+   Отделяет страницу /cases от одноимённого блока на главной
+   и помогает пользователю понять, где он находится.
+   ========================================================= */
+
+.cases-page__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cases-page__back-link {
+  color: var(--color-text);
+  font-weight: 800;
+  transition: color 0.18s ease;
+}
+
+.cases-page__back-link:hover {
+  color: var(--color-red);
+}
+
+.cases-page__breadcrumb {
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.cases-page__intro {
+  position: relative;
+  max-width: 900px;
+  margin-bottom: 34px;
+  padding: 26px 30px 26px 34px;
+  border: 1px solid rgba(249, 115, 22, 0.14);
+  border-radius: 26px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(255, 248, 243, 0.72)
+    );
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.04);
+}
+
+.cases-page__intro::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 0;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--color-red);
+}
+
+.cases-page__intro .section__head {
+  margin-bottom: 0;
+}
+
+.cases-page__intro .section__head h2 {
+  max-width: 760px;
+}
+
+.cases-page__intro .section__head p {
+  max-width: 760px;
+}
+
+@media (max-width: 640px) {
+  /* ------------------------------
+     CASES PAGE / СТРАНИЦА КЕЙСОВ
+     Уплотняем вводный блок на узких экранах,
+     чтобы первый объект быстрее попадал в зону видимости.
+     ------------------------------ */
+
+  .cases-page__navigation {
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+
+  .cases-page__back-link {
+    white-space: nowrap;
+  }
+
+  .cases-page__breadcrumb {
+    font-size: 12px;
+  }
+
+  .cases-page__intro {
+    margin-bottom: 28px;
+    padding: 22px 20px 22px 28px;
+    border-radius: 22px;
+  }
+
+  .cases-page__intro::before {
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+  }
+
+  .cases-page__intro .section__head p {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.48;
+  }
+}
