@@ -143,6 +143,11 @@
     line-height: 1.45;
   }
 
+  .hero__text {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
   .hero__actions {
     display: grid;
     grid-template-columns: 1fr;
