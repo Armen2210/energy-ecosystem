@@ -116,6 +116,9 @@
 }
 
 @media (max-width: 960px) {
+  .section--summary {
+    padding: 28px 0 34px;
+  }
 
   .contact-grid {
     grid-template-columns: 1fr;
@@ -192,6 +195,9 @@
 }
 
 @media (max-width: 640px) {
+  .section--summary {
+    padding: 20px 0 28px;
+  }
 
   .contact-grid {
     gap: 20px;
