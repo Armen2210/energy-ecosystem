@@ -27,3 +27,19 @@
 .section {
   padding: 30px 0;
 }
+
+@media (max-width: 960px) {
+  .container {
+    width: min(100% - 32px, var(--container));
+  }
+
+  .section {
+    padding: 30px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 30px 0;
+  }
+}
