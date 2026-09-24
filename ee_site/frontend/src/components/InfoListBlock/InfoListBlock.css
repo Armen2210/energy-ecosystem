@@ -1,0 +1,90 @@
+/* =========================================================
+   INFOLISTBLOCK / COMPONENT STYLES
+   Extracted from App.css without changing declarations.
+   ========================================================= */
+
+.info-list-block {
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.05);
+}
+
+.info-list-block h2 {
+  margin: 0 0 18px;
+  color: var(--color-text);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.info-list-block ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 22px;
+  color: var(--color-muted);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+@media (max-width: 960px) {
+
+  .info-list-block h2 {
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.06;
+  }
+
+  .info-list-block ul {
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .info-list-block ul {
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 960px) {
+
+  .info-list-block ul {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .info-list-block {
+    width: 100%;
+  }
+
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .info-list-block h2 {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .info-list-block {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .info-list-block {
+    padding: 18px;
+  }
+
+  .info-list-block ul {
+    font-size: 14px;
+  }
+}

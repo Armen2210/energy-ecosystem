@@ -1,0 +1,276 @@
+.lead-form {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22px 54px rgba(17, 17, 17, 0.08);
+}
+
+.lead-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.lead-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.lead-form input,
+.lead-form select,
+.lead-form textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 11px 12px;
+  color: var(--color-text);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.lead-form textarea {
+  min-height: 104px;
+}
+
+.lead-form input::placeholder,
+.lead-form textarea::placeholder {
+  font-weight: 400;
+  opacity: 0.82;
+}
+
+.lead-form input:focus,
+.lead-form select:focus,
+.lead-form textarea:focus {
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+.lead-form__message {
+  margin-top: 16px;
+}
+
+.lead-form__message textarea {
+  resize: vertical;
+}
+
+.lead-form__file-note {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+/* =========================================================
+   LEAD FORM CONSENT / СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ
+   Юридически важный блок формы.
+   Делаем его читаемым, спокойным и удобным для mobile.
+   ========================================================= */
+
+.lead-form label.lead-form__consent {
+  display: flex !important;
+  grid-template-columns: none;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 18px 0 22px;
+  padding: 12px;
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  border-radius: 16px;
+  color: var(--color-muted);
+  background: rgba(249, 115, 22, 0.04);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.lead-form__consent:hover {
+  border-color: rgba(249, 115, 22, 0.32);
+  background: rgba(249, 115, 22, 0.06);
+}
+
+.lead-form__consent input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--color-red);
+}
+
+.lead-form__consent span {
+  display: block;
+}
+
+.lead-form__consent a {
+  color: var(--color-red);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lead-form__consent a:hover {
+  color: var(--color-red-dark);
+}
+
+/* =========================================================
+   LEAD FORM STATUS / СТАТУС ОТПРАВКИ ФОРМЫ
+   Сообщения об успешной отправке или ошибке.
+   ========================================================= */
+
+.lead-form__status {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lead-form__status--hiding {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.lead-form__status--success {
+  color: #166534;
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.lead-form__status--error {
+  color: #9a3412;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.lead-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
+
+/*
+  Фиксируем фирменную чёрную рамку кнопки отправки
+  и сохраняем заметный клавиатурный focus.
+*/
+
+.lead-form .button--primary {
+  border: 2px solid var(--color-text);
+  appearance: none;
+}
+
+.lead-form .button--primary:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 3px;
+}
+
+@media (max-width: 960px) {
+  .lead-form {
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .lead-form__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .lead-form label {
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    min-width: 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .lead-form input::placeholder,
+  .lead-form textarea::placeholder {
+    color: #7a828c;
+    font-weight: 400;
+  }
+
+  .lead-form textarea {
+    min-height: 120px;
+  }
+
+  .lead-form__message {
+    margin-top: 12px;
+  }
+
+  .lead-form label.lead-form__consent {
+    gap: 10px;
+    margin: 14px 0 18px;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .lead-form .button {
+    width: 100%;
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lead-form {
+    padding: 18px;
+  }
+
+  .lead-form label {
+    font-size: 13px;
+  }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    padding: 11px 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .lead-form textarea {
+    min-height: 104px;
+  }
+
+  .lead-form label.lead-form__consent {
+    padding: 12px;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.48;
+  }
+
+  .lead-form__status {
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
