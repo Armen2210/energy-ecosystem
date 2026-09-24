@@ -187,11 +187,13 @@
 
 @media (max-width: 960px) {
   .lead-form {
+    width: 100%;
     padding: 20px;
     border-radius: 24px;
   }
 
   .lead-form__grid {
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
