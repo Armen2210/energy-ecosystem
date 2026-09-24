@@ -17,3 +17,7 @@
   --color-dark: #15171a;
   --container: 1180px;
 }
+
+:root {
+  --container-padding: 24px;
+}
