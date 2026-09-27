@@ -1,111 +1,41 @@
 /* =========================================================
-   PRODUCTCARD / КАРТОЧКА ПРОДУКТА
-   Компонентные стили карточки, перенесённые из App.css.
+   PRODUCT CARD / КАРТОЧКА ПРОДУКТА
+
+   Универсальная карточка продуктового направления.
+
+   Важно:
+   - базовые стили используются на всех разрешениях;
+   - mobile/tablet сохраняют существующую компоновку;
+   - специальная компактная витрина главной включается
+     только на desktop > 960px через .product-grid--home.
+   ========================================================= */
+
+
+/* =========================================================
+   BASE / БАЗОВАЯ КАРТОЧКА
    ========================================================= */
 
 .product-card {
   position: relative;
-  min-height: 250px;
-  padding: 22px;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
-  transition:
-    transform 0.16s ease,
-    opacity 0.16s ease,
-    box-shadow 0.16s ease,
-    border-color 0.16s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(249, 115, 22, 0.32);
-  box-shadow: 0 22px 52px rgba(17, 17, 17, 0.09);
-}
-
-.product-card--leaving {
-  transform: scale(0.985) translateY(2px);
-  opacity: 0.84;
-  pointer-events: none;
-}
-
-.product-card::after {
-  content: "";
-  position: absolute;
-  right: -44px;
-  bottom: -44px;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: rgba(249, 115, 22, 0.1);
-}
-
-.product-card span {
-  display: inline-flex;
-  margin-bottom: 42px;
-  color: var(--color-red);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.product-card h3 {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  color: var(--color-text);
-  font-size: 20px;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-}
-
-.product-card p {
-  position: relative;
-  z-index: 1;
-  margin: 16px 0 0;
-  color: var(--color-muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-@media (max-width: 960px) {
-
-  .product-card {
-    width: 100%;
-  }
-
-  .product-card {
-    min-height: auto;
-    padding: 20px;
-    border-radius: 22px;
-  }
-
-  .product-card span {
-    margin-bottom: 24px;
-  }
-
-  .product-card h3 {
-    font-size: 22px;
-  }
-
-  .product-card p {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 1.45;
-  }
-}
-
-.product-card {
   display: flex;
   flex-direction: column;
-  min-height: auto;
+  min-height: 100%;
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 28px;
   color: inherit;
-  background: rgba(255, 255, 255, 0.92);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 255, 255, 0.9)
+    ),
+    radial-gradient(
+      circle at 90% 12%,
+      rgba(249, 115, 22, 0.1),
+      transparent 34%
+    );
   box-shadow: 0 18px 44px rgba(17, 17, 17, 0.06);
   text-decoration: none;
   cursor: pointer;
@@ -132,13 +62,23 @@
   pointer-events: none;
 }
 
+
+/* =========================================================
+   MEDIA / ИЗОБРАЖЕНИЕ
+   ========================================================= */
+
 .product-card__media {
   position: relative;
-  height: 150px;
+  height: 172px;
   overflow: hidden;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
   background:
-    radial-gradient(circle at 50% 45%, rgba(249, 115, 22, 0.08), transparent 42%),
-    #ffffff;
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(249, 115, 22, 0.08),
+      transparent 46%
+    ),
+    linear-gradient(180deg, #ffffff, #f7f7f7);
 }
 
 .product-card__media img {
@@ -151,8 +91,13 @@
 }
 
 .product-card:hover .product-card__media img {
-  transform: scale(1.035);
+  transform: scale(1.04);
 }
+
+
+/* =========================================================
+   BODY / ИНФОРМАЦИОННАЯ ЧАСТЬ
+   ========================================================= */
 
 .product-card__body {
   display: flex;
@@ -161,22 +106,45 @@
   padding: 20px;
 }
 
-.product-card__eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  margin: 0 0 14px;
-  padding: 7px 10px;
-  border: 1px solid rgba(249, 115, 22, 0.18);
-  border-radius: 999px;
-  color: var(--color-red);
-  background: rgba(249, 115, 22, 0.07);
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.04em;
+
+/* =========================================================
+   BRAND / ЛОГОТИП ИЛИ МАРКЕР
+   ========================================================= */
+
+.product-card__brand {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin-bottom: 16px;
 }
 
+.product-card__line-logo {
+  display: block;
+  max-width: 148px;
+  max-height: 34px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.product-card__marker {
+  display: inline-flex;
+  color: var(--color-red);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+
+/* =========================================================
+   TITLE / DESCRIPTION
+   ========================================================= */
+
 .product-card h3 {
+  position: relative;
+  z-index: 1;
   margin: 0;
   color: var(--color-text);
   font-size: 20px;
@@ -185,54 +153,17 @@
 }
 
 .product-card p {
+  position: relative;
+  z-index: 1;
   margin: 12px 0 0;
   color: var(--color-muted);
   font-size: 14px;
   line-height: 1.45;
 }
 
-.product-card__cta {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  margin: auto 0 0;
-  padding-top: 18px;
-  color: var(--color-red);
-  font-size: 14px;
-  font-weight: 900;
-  line-height: 1;
-  transition: transform 0.18s ease;
-}
-
-.product-card:hover .product-card__cta {
-  transform: translateX(4px);
-}
-
-@media (max-width: 960px) {
-
-  .product-card__media {
-    height: 160px;
-  }
-}
-
-@media (max-width: 640px) {
-
-  .product-card {
-    border-radius: 24px;
-  }
-
-  .product-card__media {
-    height: 190px;
-  }
-
-  .product-card__body {
-    padding: 20px;
-  }
-
-  .product-card h3 {
-    font-size: 21px;
-  }
-}
+/* =========================================================
+   CTA / ПОДРОБНЕЕ
+   ========================================================= */
 
 .product-card .product-card__cta {
   position: relative;
@@ -284,129 +215,17 @@
   transform: scaleX(1);
 }
 
-.product-card {
-  min-height: 100%;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9)),
-    radial-gradient(circle at 90% 12%, rgba(249, 115, 22, 0.1), transparent 34%);
-}
 
-.product-card__media {
-  height: 172px;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
-  background:
-    radial-gradient(circle at 50% 42%, rgba(249, 115, 22, 0.08), transparent 46%),
-    linear-gradient(180deg, #ffffff, #f7f7f7);
-}
-
-.product-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.product-card__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.product-card__brand {
-  display: flex;
-  align-items: center;
-  min-height: 34px;
-  margin-bottom: 16px;
-}
-
-.product-card__line-logo {
-  display: block;
-  max-width: 148px;
-  max-height: 34px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.product-card__marker {
-  display: inline-flex;
-  color: var(--color-red);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-.product-card h3 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 20px;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-}
-
-.product-card p {
-  margin: 12px 0 0;
-  color: var(--color-muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.product-card__cta {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  margin: auto 0 0;
-  padding-top: 18px;
-  color: var(--color-red);
-  font-size: 14px;
-  font-weight: 950;
-  line-height: 1;
-  letter-spacing: 0.01em;
-}
-
-.product-card__cta::after {
-  content: "→";
-  display: inline-block;
-  margin-left: 8px;
-  transform: translateX(0);
-  transition: transform 0.18s ease;
-}
-
-.product-card__cta::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: -5px;
-  left: 0;
-  height: 2px;
-  border-radius: 999px;
-  background: currentColor;
-  opacity: 0.28;
-  transform: scaleX(0.72);
-  transform-origin: left;
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
-}
-
-.product-card:hover .product-card__media img {
-  transform: scale(1.04);
-}
-
-.product-card:hover .product-card__cta::after {
-  transform: translateX(5px);
-}
-
-.product-card:hover .product-card__cta::before {
-  opacity: 0.55;
-  transform: scaleX(1);
-}
+/* =========================================================
+   TABLET / NARROW
+   Существующая логика сохраняется.
+   ========================================================= */
 
 @media (max-width: 960px) {
+  .product-card {
+    width: 100%;
+  }
+
   .product-card__media {
     height: 180px;
   }
@@ -416,11 +235,25 @@
   }
 }
 
+
+/* =========================================================
+   MOBILE
+   Существующая компактная подпись под изображением.
+   ========================================================= */
+
 @media (max-width: 640px) {
+  .product-card {
+    border-radius: 24px;
+  }
+
   .product-card__media {
     height: 235px;
     background:
-      radial-gradient(circle at 50% 42%, rgba(249, 115, 22, 0.08), transparent 46%),
+      radial-gradient(
+        circle at 50% 42%,
+        rgba(249, 115, 22, 0.08),
+        transparent 46%
+      ),
       linear-gradient(180deg, #ffffff, #f7f7f7);
   }
 
@@ -438,7 +271,7 @@
     column-gap: 8px;
     row-gap: 6px;
     align-items: start;
-    padding: 12px 16px 12px;
+    padding: 12px 16px;
   }
 
   .product-card__brand {
@@ -494,5 +327,180 @@
   .product-card .product-card__cta::before {
     right: 0;
     left: 0;
+  }
+}
+
+
+/* =========================================================
+   HOME PRODUCTS / DESKTOP
+   Компактная продуктовая витрина главной.
+
+   Сохраняем композицию:
+   - БМК: 7/12;
+   - БТП: 5/12;
+   - ВНС / ПНС / ШУиА: по 4/12.
+
+   Цели:
+   - уменьшить общую высоту блока;
+   - снизить конкуренцию с Hero;
+   - изображение ≈ 85% визуального объёма карточки;
+   - информационная зона ≈ 15%;
+   - одинаковый принцип построения всех пяти карточек.
+   ========================================================= */
+
+@media (min-width: 961px) {
+  .product-grid--home .product-card {
+    min-height: 0;
+    border-radius: 20px;
+  }
+
+  /*
+    На главной desktop описание продукта не выводим.
+    Подробная информация остаётся на продуктовой странице.
+  */
+  .product-grid--home .product-card p {
+    display: none;
+  }
+
+
+  /* ---------------------------------------------------------
+     ОБЩАЯ ПРОПОРЦИЯ
+
+     Верхний ряд:
+     240 px media + компактная информационная полоса.
+
+     Нижний ряд:
+     175 px media + такая же по характеру полоса.
+
+     Визуально во всех карточках сохраняем близкое
+     соотношение 85 / 15.
+     --------------------------------------------------------- */
+
+  .product-grid--home .product-card__media {
+    height: 240px;
+    min-height: 0;
+  }
+
+  .product-grid--home .product-card__body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand title cta";
+    gap: 10px;
+    align-items: center;
+    min-height: 50px;
+    padding: 9px 15px;
+  }
+
+
+  /* ---------------------------------------------------------
+     BRAND
+     --------------------------------------------------------- */
+
+  .product-grid--home .product-card__brand {
+    grid-area: brand;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .product-grid--home .product-card__line-logo {
+    display: block;
+    width: auto;
+    max-width: 92px;
+    max-height: 22px;
+  }
+
+  .product-grid--home .product-card__marker {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1;
+  }
+
+
+  /* ---------------------------------------------------------
+     TITLE
+     --------------------------------------------------------- */
+
+  .product-grid--home .product-card h3 {
+    grid-area: title;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+
+  /* ---------------------------------------------------------
+     CTA
+     --------------------------------------------------------- */
+
+  .product-grid--home .product-card .product-card__cta {
+    grid-area: cta;
+    justify-self: end;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+  .product-grid--home .product-card__cta::before {
+    bottom: -4px;
+  }
+
+
+  /* ---------------------------------------------------------
+     БМК / БТП
+     Первый ряд.
+     Одинаковая высота — различие создаётся шириной 7/12 и 5/12.
+     --------------------------------------------------------- */
+
+  .product-grid--home > :nth-child(1) .product-card__media,
+  .product-grid--home > :nth-child(2) .product-card__media {
+    height: 240px;
+  }
+
+
+  /* ---------------------------------------------------------
+     ВНС / ПНС / ШУиА
+     Второй ряд компактнее, но с той же внутренней логикой.
+     --------------------------------------------------------- */
+
+  .product-grid--home > :nth-child(3) .product-card__media,
+  .product-grid--home > :nth-child(4) .product-card__media,
+  .product-grid--home > :nth-child(5) .product-card__media {
+    height: 175px;
+  }
+
+  .product-grid--home > :nth-child(3) .product-card__body,
+  .product-grid--home > :nth-child(4) .product-card__body,
+  .product-grid--home > :nth-child(5) .product-card__body {
+    min-height: 46px;
+    padding: 8px 13px;
+    gap: 8px;
+  }
+
+  .product-grid--home > :nth-child(3) .product-card__line-logo,
+  .product-grid--home > :nth-child(4) .product-card__line-logo,
+  .product-grid--home > :nth-child(5) .product-card__line-logo {
+    max-width: 78px;
+    max-height: 18px;
+  }
+
+  .product-grid--home > :nth-child(3) .product-card__marker,
+  .product-grid--home > :nth-child(4) .product-card__marker,
+  .product-grid--home > :nth-child(5) .product-card__marker {
+    font-size: 10.5px;
+  }
+
+  .product-grid--home > :nth-child(3) h3,
+  .product-grid--home > :nth-child(4) h3,
+  .product-grid--home > :nth-child(5) h3 {
+    font-size: 13.5px;
+  }
+
+  .product-grid--home > :nth-child(3) .product-card .product-card__cta,
+  .product-grid--home > :nth-child(4) .product-card .product-card__cta,
+  .product-grid--home > :nth-child(5) .product-card .product-card__cta {
+    font-size: 10px;
   }
 }

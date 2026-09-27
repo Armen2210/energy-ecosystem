@@ -28,6 +28,14 @@
   padding: 30px 0;
 }
 
+@media (min-width: 961px) {
+  .section--products,
+  .section--services {
+    padding-top: 42px;
+    padding-bottom: 24px;
+  }
+}
+
 @media (max-width: 960px) {
   .container {
     width: min(100% - 32px, var(--container));

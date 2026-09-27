@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" fill="none">
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1.5 6.5 4 1 6.5" stroke="#3B5870" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <g stroke="#3B5870" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+    <!-- Functional signal route -->
+    <path d="M615 274H744V214H884" stroke-width="1.1" marker-end="url(#arrow)"/>
+    <path d="M962 214H1080V156H1192" stroke-width="1.1" marker-end="url(#arrow)"/>
+    <path d="M1268 156H1390V248H1512" stroke-width="1.1" marker-end="url(#arrow)"/>
+    <path d="M1512 248H1578" stroke-width="1.1"/>
+
+    <!-- Input control point -->
+    <circle cx="596" cy="274" r="19" stroke-width="1.05"/>
+    <circle cx="596" cy="274" r="4" stroke-width="0.9"/>
+    <path d="M577 274H548M596 255V238M596 293V311" stroke-width="0.8"/>
+
+    <!-- Sensor block -->
+    <rect x="884" y="173" width="78" height="82" rx="2" stroke-width="1.05"/>
+    <circle cx="923" cy="214" r="22" stroke-width="0.95"/>
+    <path d="M923 214 936 201M906 214h5M923 197v5M940 214h-5" stroke-width="0.9"/>
+    <circle cx="923" cy="214" r="2.5" fill="#3B5870" stroke="none"/>
+    <path d="M899 255v18h48v-18" stroke-width="0.8"/>
+
+    <!-- Controller block -->
+    <rect x="1192" y="112" width="76" height="88" rx="2" stroke-width="1.05"/>
+    <path d="M1207 180V157l12 7 12-27 12 17 10-18" stroke-width="0.95"/>
+    <path d="M1207 127h46M1207 188h46" stroke-width="0.75"/>
+    <circle cx="1212" cy="121" r="2.5" fill="#3B5870" stroke="none"/>
+    <circle cx="1248" cy="121" r="2.5" fill="#3B5870" stroke="none"/>
+
+    <!-- Main regulating instrument, deliberately cropped -->
+    <circle cx="1512" cy="248" r="151" stroke-width="1.15"/>
+    <circle cx="1512" cy="248" r="126" stroke-width="0.85"/>
+    <circle cx="1512" cy="248" r="84" stroke-width="0.8"/>
+    <circle cx="1512" cy="248" r="8" stroke-width="1"/>
+    <path d="M1512 248 1564 186" stroke-width="1.15"/>
+    <path d="M1487 248h50M1512 223v50" stroke-width="0.7"/>
+
+    <!-- Scale ticks -->
+    <path d="M1386 248h15M1395 202l14 5M1422 163l12 10M1462 137l5 14M1512 122v15M1562 137l-5 14" stroke-width="0.95"/>
+    <path d="M1409 225l9 2M1415 185l8 4M1440 151l6 7M1482 130l2 9M1538 130l-2 9M1582 151l-6 7" stroke-width="0.75"/>
+
+    <!-- Feedback loop -->
+    <path d="M1512 399v42H1050V304H923v-31" stroke-width="0.95" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+    <circle cx="1390" cy="441" r="4" fill="#3B5870" stroke="none"/>
+    <circle cx="1050" cy="366" r="4" fill="#3B5870" stroke="none"/>
+
+    <!-- Secondary monitoring branch -->
+    <path d="M1080 214v88h116" stroke-width="0.9"/>
+    <circle cx="1080" cy="214" r="4" fill="#3B5870" stroke="none"/>
+    <rect x="1196" y="280" width="100" height="44" rx="2" stroke-width="0.9"/>
+    <path d="M1210 310h17l9-18 12 22 10-10h24" stroke-width="0.85"/>
+
+    <!-- Reference axes and construction arcs -->
+    <path d="M812 88v288M760 214h366" stroke-width="0.7" stroke-dasharray="12 9 2 9"/>
+    <circle cx="812" cy="214" r="4" fill="#3B5870" stroke="none"/>
+    <path d="M716 104h192M716 96v16M908 96v16" stroke-width="0.75"/>
+    <path d="M716 104 724 100M716 104l8 4M908 104l-8-4M908 104l-8 4" stroke-width="0.75"/>
+    <path d="M1327 77a203 203 0 0 1 260-6" stroke-width="0.75" stroke-dasharray="10 8"/>
+
+    <!-- Mounting and test points -->
+    <path d="M690 356h82l16-16h46M690 348v16M834 332v16" stroke-width="0.8"/>
+    <circle cx="716" cy="356" r="7" stroke-width="0.85"/>
+    <circle cx="756" cy="356" r="7" stroke-width="0.85"/>
+    <path d="M716 349v14M709 356h14M756 349v14M749 356h14" stroke-width="0.7"/>
+    <path d="M1326 360h95M1326 352v16M1421 352v16" stroke-width="0.75"/>
+    <path d="M1326 360 1334 356M1326 360l8 4M1421 360l-8-4M1421 360l-8 4" stroke-width="0.75"/>
+
+    <!-- Sparse edge fragments for natural crop -->
+    <path d="M1568 77h32M1576 69v16M1588 69v16" stroke-width="0.75"/>
+    <path d="M1548 463h52M1560 455v16M1580 455v16" stroke-width="0.75"/>
+  </g>
+</svg>

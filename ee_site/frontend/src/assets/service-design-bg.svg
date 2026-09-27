@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" fill="none" shape-rendering="geometricPrecision" aria-hidden="true">
+  <defs>
+    <marker id="dim-arrow" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M7 1L1 4L7 7" fill="none" stroke="#3B5870" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <!-- Единый фрагмент сборочного чертежа. Слева сохранена зона под текст. -->
+  <g stroke="#3B5870" vector-effect="non-scaling-stroke">
+    <!-- Главный инженерный узел: крупная окружность намеренно частично кадрируется -->
+    <g stroke-width="1.15">
+      <circle cx="1325" cy="252" r="246"/>
+      <circle cx="1325" cy="252" r="222"/>
+      <circle cx="1325" cy="252" r="164"/>
+      <circle cx="1325" cy="252" r="26"/>
+      <path d="M1307 234L1343 270M1343 234L1307 270"/>
+    </g>
+
+    <!-- Монтажные точки по окружности связывают графику в единую систему -->
+    <g stroke-width="1">
+      <circle cx="1325" cy="88" r="7"/>
+      <circle cx="1441" cy="136" r="7"/>
+      <circle cx="1489" cy="252" r="7"/>
+      <circle cx="1441" cy="368" r="7"/>
+      <circle cx="1325" cy="416" r="7"/>
+      <circle cx="1209" cy="368" r="7"/>
+      <circle cx="1161" cy="252" r="7"/>
+      <circle cx="1209" cy="136" r="7"/>
+      <path d="M1317 88H1333M1325 80V96M1433 136H1449M1441 128V144"/>
+      <path d="M1481 252H1497M1489 244V260M1433 368H1449M1441 360V376"/>
+      <path d="M1317 416H1333M1325 408V424M1201 368H1217M1209 360V376"/>
+      <path d="M1153 252H1169M1161 244V260M1201 136H1217M1209 128V144"/>
+    </g>
+
+    <!-- Главные оси проходят сквозь узел, как на рабочем листе -->
+    <g stroke-width="0.8" stroke-dasharray="15 9 3 9">
+      <path d="M515 252H1595"/>
+      <path d="M1325 -20V520"/>
+    </g>
+
+    <!-- Конструктивные диагонали и привязки -->
+    <g stroke-width="0.9">
+      <path d="M875 438L1548 50"/>
+      <path d="M995 82L1518 384"/>
+      <path d="M1161 252L1080 171H900"/>
+      <path d="M1209 368L1100 428H820"/>
+      <circle cx="900" cy="171" r="5"/>
+      <circle cx="820" cy="428" r="5"/>
+      <path d="M890 171H910M900 161V181M810 428H830M820 418V438"/>
+    </g>
+
+    <!-- Размерный каркас над узлом -->
+    <g stroke-width="0.9">
+      <path d="M760 106V68M1325 68V88"/>
+      <path d="M768 80H1317" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+      <path d="M1090 116V148M1489 116V244"/>
+      <path d="M1098 128H1481" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+      <path d="M1040 136H1070M1040 136V226"/>
+      <path d="M1018 226H1062" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+    </g>
+
+    <!-- Размерный каркас внутри и снизу: линии не образуют отдельные иконки -->
+    <g stroke-width="0.85">
+      <path d="M1115 206H1299M1115 206V332M1115 332H1209"/>
+      <path d="M1144 214V324" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+      <path d="M1268 278H1518M1268 278V402M1518 278V402"/>
+      <path d="M1280 388H1506" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+      <path d="M925 386V420M1325 424V454"/>
+      <path d="M933 408H1317" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)"/>
+    </g>
+
+    <!-- Микроотметки и пересечения, подобные деталям на циферблате -->
+    <g stroke-width="0.75">
+      <path d="M1038 128H1052M1045 121V135M1108 206H1122M1115 199V213"/>
+      <path d="M1261 278H1275M1268 271V285M918 408H932M925 401V415"/>
+      <circle cx="1045" cy="128" r="3"/>
+      <circle cx="1115" cy="206" r="3"/>
+      <circle cx="1268" cy="278" r="3"/>
+      <circle cx="925" cy="408" r="3"/>
+      <path d="M730 150H790M730 150V210"/>
+      <path d="M1540 24H1582V66M1582 434V476H1540"/>
+    </g>
+  </g>
+</svg>

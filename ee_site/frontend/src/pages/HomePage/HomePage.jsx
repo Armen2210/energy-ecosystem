@@ -76,14 +76,14 @@ function HomePage() {
           Карточки строятся из src/data/products.js.
           ========================================================= */}
 
-      <section className="section" id="products">
+      <section className="section section--products" id="products">
         <div className="container">
           <SectionHeader
-              title="Заводские инженерные системы под задачи объекта"
-              description="Производим котельные, тепловые пункты, насосные станции и шкафы управления. Подбираем оборудование под проект, параметры объекта и условия эксплуатации."
+              title="Продукция завода"
+              description="Блочно-модульные котельные, тепловые пункты, насосные станции и шкафы управления — проектируем и производим под Ваши задачи."
           />
 
-          <div className="product-grid">
+          <div className="product-grid product-grid--home">
             {products.map((product) => (
               <ProductCard product={product} key={product.slug} />
             ))}
@@ -96,14 +96,14 @@ function HomePage() {
           Услуги отделены от продуктовых направлений.
           ========================================================= */}
 
-      <section className="section" id="services">
+      <section className="section section--services" id="services">
         <div className="container">
           <SectionHeader
-              title="Проектирование, монтаж и наладка инженерных систем"
+              title="Наши услуги"
               description="Выполняем работы для котельных, тепловых пунктов, насосных станций, узлов учёта и инженерных сетей: от проектных решений до подготовки к эксплуатации."
           />
 
-          <div className="services-grid">
+          <div className="services-grid services-grid--home">
             {services.map((service) => (
               <ServiceCard service={service} key={service.slug} />
             ))}
