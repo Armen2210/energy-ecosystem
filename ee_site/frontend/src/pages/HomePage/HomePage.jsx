@@ -18,7 +18,10 @@ import ProductCard from "../../components/ProductCard";
 import SectionHeader from "../../components/SectionHeader";
 import ServiceCard from "../../components/ServiceCard";
 import Seo from "../../components/Seo";
-import { featuredCases } from "../../data/cases";
+import {
+  featuredCases,
+  homeDesktopCases,
+} from "../../data/cases";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -119,16 +122,28 @@ function HomePage() {
             /cases и будущие детальные страницы /cases/:slug.
             ========================================================= */}
 
-        <section className="section" id="cases">
+        <section className="section section--cases" id="cases">
           <div className="container">
             <SectionHeader
-              title="Реализованные задачи и инженерные решения"
-              description="Короткая витрина объектов и задач, где важны техническая ответственность, надёжность оборудования и понятный результат для заказчика."
+              title="Наши кейсы"
+              description="Реализованные объекты и инженерные задачи — от производства оборудования до монтажа и ввода систем в эксплуатацию."
             />
 
-            <div className="cases-grid">
+            <div className="cases-grid cases-grid--home cases-grid--home-desktop">
+              {homeDesktopCases.map((caseItem) => (
+                <CaseCard
+                  caseItem={caseItem}
+                  key={caseItem.slug}
+                />
+              ))}
+            </div>
+
+            <div className="cases-grid cases-grid--home-mobile">
               {featuredCases.map((caseItem) => (
-                  <CaseCard caseItem={caseItem} key={caseItem.slug} />
+                <CaseCard
+                  caseItem={caseItem}
+                  key={caseItem.slug}
+                />
               ))}
             </div>
 

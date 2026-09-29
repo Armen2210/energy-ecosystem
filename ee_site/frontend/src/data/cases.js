@@ -1070,3 +1070,22 @@ export const cases = [
 ];
 
 export const featuredCases = cases.filter((caseItem) => caseItem.isFeatured);
+
+// =========================================================
+// HOME DESKTOP CASES / КЕЙСЫ ГЛАВНОЙ НА DESKTOP
+//
+// Отдельный набор для desktop-композиции главной страницы.
+// Не влияет на featuredCases, mobile/tablet и страницу /cases.
+// =========================================================
+
+const homeDesktopCaseSlugs = [
+  "bmk-sports-complex",
+  "btp-hotel-complex",
+  "btp-residential-complex",
+  "btp-food-production",
+  "btp-industrial-facility",
+];
+
+export const homeDesktopCases = homeDesktopCaseSlugs
+  .map((slug) => cases.find((caseItem) => caseItem.slug === slug))
+  .filter(Boolean);
