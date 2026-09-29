@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 /* =========================================================
    ENTITY SWITCHER / ПЕРЕКЛЮЧАТЕЛЬ ПРОДУКТОВ И УСЛУГ
+
    Универсальный компонент для внутренних страниц:
    - продукты переключаются только между продуктами;
    - услуги переключаются только между услугами;
    - направление перехода передаётся в location.state;
-   - активная оболочка плавно перемещается к выбранному элементу.
+   - на desktop активная оболочка перемещается вертикально;
+   - на tablet/mobile активная оболочка перемещается горизонтально.
    ========================================================= */
 
 const SWITCH_DELAY_MS = 180;
@@ -44,10 +46,12 @@ export default function EntitySwitcher({
 
   const [indicatorStyle, setIndicatorStyle] = useState({
     width: 0,
+    height: "auto",
     transform: "translateX(0px)",
   });
 
   const [stickyTop, setStickyTop] = useState(78);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const currentIndex = useMemo(
     () => items.findIndex((item) => item.slug === currentSlug),
@@ -57,12 +61,25 @@ export default function EntitySwitcher({
   const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
 
   const theme = currentItem?.theme || {};
-    const switcherStyle = {
+
+  const switcherStyle = {
     "--entity-accent": theme.accent || "#f97316",
     "--entity-accent-soft": theme.accentSoft || "#fff3ea",
     "--entity-text": theme.text || "#111827",
     "--entity-sticky-top": `${stickyTop}px`,
   };
+
+  /* =========================================================
+     INDICATOR / АКТИВНАЯ ОБОЛОЧКА
+
+     Desktop:
+     - рассчитываем высоту активной кнопки;
+     - перемещаем оболочку по вертикальной оси.
+
+     Tablet/mobile:
+     - рассчитываем ширину активной кнопки;
+     - перемещаем оболочку по горизонтальной оси.
+     ========================================================= */
 
   function updateIndicatorBySlug(slug) {
     const button = buttonRefs.current[slug];
@@ -71,13 +88,41 @@ export default function EntitySwitcher({
       return;
     }
 
+    if (isDesktop) {
+      setIndicatorStyle({
+        width: "auto",
+        height: button.offsetHeight,
+        transform: `translateY(${button.offsetTop}px)`,
+      });
+
+      return;
+    }
+
     setIndicatorStyle({
       width: button.offsetWidth,
+      height: "auto",
       transform: `translateX(${button.offsetLeft}px)`,
     });
   }
 
-    function scrollButtonIntoViewport(slug, itemIndex) {
+  /* =========================================================
+     MOBILE SCROLL / ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ЛЕНТЫ
+
+     На desktop прокрутка не требуется, так как переключатель
+     становится вертикальным.
+
+     На tablet/mobile сохраняем прежнюю механику:
+     - первый элемент показываем от начала;
+     - последний полностью выводим в видимую область;
+     - услуги можно центрировать;
+     - продукты сдвигаются только при необходимости.
+     ========================================================= */
+
+  function scrollButtonIntoViewport(slug, itemIndex) {
+    if (isDesktop) {
+      return;
+    }
+
     const button = buttonRefs.current[slug];
     const viewport = button?.closest(".entity-switcher__viewport");
 
@@ -90,7 +135,8 @@ export default function EntitySwitcher({
     const isLastItem = itemIndex >= items.length - 1;
 
     const buttonLeft = button.offsetLeft - safeOffset;
-    const buttonRight = button.offsetLeft + button.offsetWidth + safeOffset;
+    const buttonRight =
+      button.offsetLeft + button.offsetWidth + safeOffset;
 
     const visibleLeft = viewport.scrollLeft;
     const visibleRight = visibleLeft + viewport.clientWidth;
@@ -98,22 +144,18 @@ export default function EntitySwitcher({
     let targetLeft = viewport.scrollLeft;
 
     if (isFirstItem) {
-      // Первый элемент показываем от начала ленты.
       targetLeft = 0;
     } else if (isLastItem) {
-      // Последний элемент показываем полностью справа,
-      // чтобы его правая граница не обрезалась.
       targetLeft =
-        button.offsetLeft + button.offsetWidth - viewport.clientWidth + safeOffset;
+        button.offsetLeft +
+        button.offsetWidth -
+        viewport.clientWidth +
+        safeOffset;
     } else if (variant === "services") {
-      // Центрирование нужно только для услуг:
-      // Проектирование / СМР / ПНР.
-      // Для продуктов это выглядит как лишний сдвиг.
       targetLeft =
-        button.offsetLeft - (viewport.clientWidth - button.offsetWidth) / 2;
+        button.offsetLeft -
+        (viewport.clientWidth - button.offsetWidth) / 2;
     } else {
-      // Для продуктов не центрируем активную кнопку.
-      // Только мягко возвращаем её в видимую область, если она обрезалась.
       if (buttonLeft < visibleLeft) {
         targetLeft = Math.max(buttonLeft, 0);
       } else if (buttonRight > visibleRight) {
@@ -129,41 +171,93 @@ export default function EntitySwitcher({
     });
   }
 
-     useEffect(() => {
-        if (typeof window === "undefined") {
-          return;
-        }
+  /* =========================================================
+     STICKY TOP / ВЫСОТА HEADER
 
-        const header = document.querySelector(".header");
+     Рассчитываем реальную высоту sticky-header.
+     Если высота header изменяется, например из-за responsive,
+     положение переключателя автоматически обновляется.
+     ========================================================= */
 
-        if (!header) {
-          return;
-        }
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
 
-        const updateStickyTop = () => {
-          const headerHeight = Math.ceil(header.getBoundingClientRect().height);
-          setStickyTop(headerHeight);
-        };
+    const header = document.querySelector(".header");
 
-        updateStickyTop();
+    if (!header) {
+      return undefined;
+    }
 
-        if ("ResizeObserver" in window) {
-          const resizeObserver = new ResizeObserver(updateStickyTop);
-          resizeObserver.observe(header);
+    const updateStickyTop = () => {
+      const headerHeight = Math.ceil(
+        header.getBoundingClientRect().height,
+      );
 
-          return () => {
-            resizeObserver.disconnect();
-          };
-        }
+      setStickyTop(headerHeight);
+    };
 
-        window.addEventListener("resize", updateStickyTop);
+    updateStickyTop();
 
-        return () => {
-          window.removeEventListener("resize", updateStickyTop);
-        };
-     }, []);
+    if ("ResizeObserver" in window) {
+      const resizeObserver = new ResizeObserver(updateStickyTop);
 
-    useEffect(() => {
+      resizeObserver.observe(header);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+
+    window.addEventListener("resize", updateStickyTop);
+
+    return () => {
+      window.removeEventListener("resize", updateStickyTop);
+    };
+  }, []);
+
+  /* =========================================================
+     RESPONSIVE MODE / DESKTOP И MOBILE
+
+     961px и выше:
+     - вертикальный desktop-переключатель.
+
+     960px и ниже:
+     - существующая горизонтальная лента.
+     ========================================================= */
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia("(min-width: 961px)");
+
+    const updateDesktopMode = () => {
+      setIsDesktop(mediaQuery.matches);
+    };
+
+    updateDesktopMode();
+
+    mediaQuery.addEventListener("change", updateDesktopMode);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateDesktopMode);
+    };
+  }, []);
+
+  /* =========================================================
+     INDICATOR SYNC / СИНХРОНИЗАЦИЯ АКТИВНОЙ ОБОЛОЧКИ
+
+     Пересчитываем положение:
+     - при смене текущего элемента;
+     - при изменении набора элементов;
+     - при переходе между desktop и mobile;
+     - при изменении размеров окна.
+     ========================================================= */
+
+  useEffect(() => {
     updateIndicatorBySlug(currentSlug);
 
     scrollButtonIntoViewport(currentSlug, currentIndex);
@@ -177,7 +271,11 @@ export default function EntitySwitcher({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [currentSlug, items]);
+  }, [currentSlug, items, isDesktop]);
+
+  /* =========================================================
+     SWITCH / ПЕРЕКЛЮЧЕНИЕ МЕЖДУ СТРАНИЦАМИ
+     ========================================================= */
 
   function handleSwitch(nextItem, nextIndex) {
     if (!nextItem || nextItem.slug === currentSlug) {
@@ -222,7 +320,10 @@ export default function EntitySwitcher({
 
           {items.map((item, index) => {
             const isActive = item.slug === currentSlug;
-            const label = item.switcherTitle || item.shortTitle || item.title;
+            const label =
+              item.switcherTitle ||
+              item.shortTitle ||
+              item.title;
 
             return (
               <button

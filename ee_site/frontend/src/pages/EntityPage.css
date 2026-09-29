@@ -12,6 +12,47 @@
   padding-top: 26px;
 }
 
+/* =========================================================
+   ENTITY PAGE LAYOUT / ОСНОВНАЯ КОМПОНОВКА ВНУТРЕННИХ СТРАНИЦ
+
+   Структура разделяет переключатель направлений и основной
+   контент. На mobile пока сохраняется обычный вертикальный поток.
+   Desktop-колонка переключателя будет включена отдельным этапом.
+   ========================================================= */
+
+/* =========================================================
+   ENTITY PAGE LAYOUT / ОСНОВНАЯ КОМПОНОВКА ВНУТРЕННИХ СТРАНИЦ
+
+   На desktop переключатель получает отдельную левую колонку.
+   Основной контент остаётся в собственной широкой области.
+
+   На tablet/mobile layout возвращается к обычному потоку,
+   чтобы сохранить текущую горизонтальную ленту переключателя.
+   ========================================================= */
+
+.entity-page__layout {
+  position: relative;
+  display: block;
+}
+
+.entity-page__rail,
+.entity-page__content {
+  min-width: 0;
+}
+
+@media (min-width: 961px) {
+  .entity-page__rail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    right: calc(100% + 10px);
+    width: 118px;
+
+    z-index: 20;
+  }
+}
+
 .section--entity-page .section__head {
   margin-bottom: 16px;
 }
@@ -135,6 +176,16 @@
   height: 250px;
   padding: 8px;
   background: #ffffff;
+}
+
+/* =========================================================
+   SERVICE DESIGN HERO / ПРОЕКТИРОВАНИЕ
+   Выравниваем высоту hero с остальными страницами услуг,
+   сохраняя contain для технического чертежа.
+   ========================================================= */
+
+.product-hero--service-design .product-hero__visual {
+  height: 360px;
 }
 
 .product-hero--document .product-hero__visual img {
@@ -443,5 +494,18 @@
 
   .section--entity-page .section__head {
     margin-bottom: 16px;
+  }
+}
+
+/* =========================================================
+   ENTITY SWITCHER MOBILE STICKY CONTEXT
+   На mobile убираем отдельную коробку rail, чтобы sticky-
+   переключатель работал в пределах всей основной entity-page
+   и останавливался перед следующей секцией.
+   ========================================================= */
+
+@media (max-width: 960px) {
+  .entity-page__rail {
+    display: contents;
   }
 }

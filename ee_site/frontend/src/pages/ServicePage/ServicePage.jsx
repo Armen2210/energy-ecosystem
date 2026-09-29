@@ -158,18 +158,23 @@ function ServicePage() {
       />
 
           <section className="section section--entity-page">
-           <div className="container">
-            <EntitySwitcher
-              items={services}
-              currentSlug={service.slug}
-              basePath="/services"
-              variant="services"
-              ariaLabel="Переключатель услуг компании"
-            />
+              <div className="container">
+                <div className="entity-page__layout">
+                  <aside className="entity-page__rail">
+                    <EntitySwitcher
+                      items={services}
+                      currentSlug={service.slug}
+                      basePath="/services"
+                      variant="services"
+                      ariaLabel="Переключатель услуг компании"
+                    />
+                  </aside>
+
+                  <div className="entity-page__content">
 
             {service.heroImage ? (
               <section
-                className={`product-hero ${
+                className={`product-hero product-hero--service-${service.slug} ${
                   service.heroImageMode ? `product-hero--${service.heroImageMode}` : ""
                 }`}
                 aria-labelledby="service-hero-title"
@@ -230,7 +235,8 @@ function ServicePage() {
 
               <FAQ items={serviceFaq} stateKey={`service-${service.slug}`} />
           </div>
-
+          </div>
+         </div>
         </div>
       </section>
 

@@ -8,6 +8,7 @@
 import { Link } from "react-router-dom";
 
 import CaseCard from "../../components/CaseCard";
+import PageNavigation from "../../components/PageNavigation";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
@@ -24,19 +25,20 @@ function CasesPage() {
 
       <section className="section cases-page">
           <div className="container">
-            <div className="cases-page__navigation">
-              <Link
-                  className="cases-page__back-link"
-                  to="/#cases"
-                  state={{ entryScroll: "cases-direct" }}
-              >
-                  ← К объектам на главной
-              </Link>
-
-              <span className="cases-page__breadcrumb">
-                Главная / Объекты
-              </span>
-            </div>
+            <PageNavigation
+              backLabel="К объектам на главной"
+              backTo="/#cases"
+              backState={{ entryScroll: "cases-direct" }}
+              breadcrumbItems={[
+                {
+                  label: "Главная",
+                  to: "/",
+                },
+                {
+                  label: "Объекты",
+                },
+              ]}
+            />
 
             <div className="cases-page__intro">
               <SectionHeader

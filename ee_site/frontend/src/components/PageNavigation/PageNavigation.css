@@ -1,0 +1,136 @@
+/* =========================================================
+   PAGE NAVIGATION / НАВИГАЦИЯ ВНУТРЕННИХ СТРАНИЦ
+
+   Единый блок для:
+   - возврата к родительскому разделу;
+   - хлебных крошек;
+   - desktop и mobile внутренних страниц.
+   ========================================================= */
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.page-navigation__back {
+  flex: 0 0 auto;
+
+  color: var(--color-dark);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  text-decoration: none;
+
+  transition: color 160ms ease;
+}
+
+.page-navigation__back:hover {
+  color: var(--color-red);
+}
+
+.page-navigation__breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0;
+
+  min-width: 0;
+
+  color: var(--color-muted);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+
+  text-align: right;
+}
+
+.page-navigation__breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.page-navigation__separator {
+  margin: 0 6px;
+
+  color: rgba(17, 17, 17, 0.34);
+}
+
+.page-navigation__breadcrumb-link {
+  color: var(--color-muted);
+  text-decoration: none;
+
+  transition: color 160ms ease;
+}
+
+.page-navigation__breadcrumb-link:hover {
+  color: var(--color-red);
+}
+
+.page-navigation__breadcrumb-label,
+.page-navigation__current {
+  color: var(--color-muted);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .page-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+  }
+
+  .page-navigation__back {
+    flex: 0 1 auto;
+    width: auto;
+
+    font-size: 13px;
+    line-height: 1.25;
+
+    white-space: nowrap;
+  }
+
+  .page-navigation__breadcrumb {
+    flex: 0 0 auto;
+
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+
+    font-size: 12px;
+    line-height: 1.25;
+
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .page-navigation__breadcrumb--deep
+      .page-navigation__breadcrumb-item:last-child {
+      display: none;
+  }
+
+  .page-navigation__separator {
+    margin: 0 5px;
+  }
+
+  .page-navigation__breadcrumb-item:last-child {
+    display: none;
+  }
+}

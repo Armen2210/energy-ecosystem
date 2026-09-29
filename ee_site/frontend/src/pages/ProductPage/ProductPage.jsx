@@ -13,6 +13,7 @@ import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 
 import LeadForm from "../../components/LeadForm";
+import PageNavigation from "../../components/PageNavigation";
 import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
 
@@ -229,13 +230,36 @@ function ProductPage() {
 
          <section className="section section--entity-page">
           <div className="container">
-            <EntitySwitcher
-              items={products}
-              currentSlug={product.slug}
-              basePath="/solutions"
-              variant="products"
-              ariaLabel="Переключатель продуктовых направлений"
+            <PageNavigation
+              backLabel="К продукции на главной"
+              backTo="/#products"
+              breadcrumbItems={[
+                {
+                  label: "Главная",
+                  to: "/",
+                },
+                {
+                  label: "Продукция",
+                  to: "/#products",
+                },
+                {
+                  label: product.shortTitle || product.title,
+                },
+              ]}
             />
+
+            <div className="entity-page__layout">
+              <aside className="entity-page__rail">
+                <EntitySwitcher
+                  items={products}
+                  currentSlug={product.slug}
+                  basePath="/solutions"
+                  variant="products"
+                  ariaLabel="Переключатель продуктовых направлений"
+                />
+              </aside>
+
+              <div className="entity-page__content">
 
         {/* =========================================================
             PRODUCT HERO / ВЕРХ ПРОДУКТОВОЙ СТРАНИЦЫ
@@ -319,6 +343,8 @@ function ProductPage() {
               <FAQ items={productFaq} stateKey={`product-${product.slug}`} />
           </div>
 
+          </div>
+         </div>
         </div>
       </section>
 
