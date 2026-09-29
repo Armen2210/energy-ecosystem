@@ -69,6 +69,53 @@
   white-space: nowrap;
 }
 
+
+/* =========================================================
+   HEADER LOGO / ЛОГОТИП И ЗНАК "12 ЛЕТ"
+   Основной логотип и юбилейный знак находятся внутри
+   общей кликабельной ссылки .logo.
+
+   Оба SVG используют одинаковую высоту, поэтому визуально
+   выравниваются по верхнему и нижнему краю.
+   ========================================================= */
+
+.header .logo {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.logo__group {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.header .logo__image {
+  display: block;
+  width: auto;
+  height: 54px;
+  max-width: 360px;
+  object-fit: contain;
+}
+
+.header .logo__anniversary {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: 44px;
+  object-fit: contain;
+  opacity: 0.82;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE HEADER
+   ========================================================= */
+
 @media (max-width: 960px) {
   .header__inner {
     display: grid;
@@ -79,14 +126,24 @@
     padding: 10px 0;
   }
 
-  .logo {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 10px;
-    align-items: center;
+  .header .logo {
     width: 100%;
     max-width: 100%;
     min-width: 0;
+  }
+
+  .logo__group {
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .header .logo__image {
+    height: 42px;
+    max-width: 280px;
+  }
+
+  .header .logo__anniversary {
+    height: 34px;
   }
 
   .nav {
@@ -119,52 +176,30 @@
   }
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 640px) {
+  .logo__group {
+    gap: 7px;
+  }
+
+  .header .logo__image {
+    height: 38px;
+    max-width: 240px;
+  }
+
+  .header .logo__anniversary {
+    height: 30px;
+  }
+
   .header__phone {
     font-size: 15px;
   }
 }
 
-/* =========================================================
-   HEADER LOGO SVG / НОВЫЙ SVG-ЛОГОТИП В HEADER
-   Новый логотип подключается как изображение внутри старой
-   ссылки .logo. Логика клика и scroll-переходов сохраняется
-   в Header.jsx через onClick={handleLogoClick}.
-   ========================================================= */
-
-.header .logo {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-  text-decoration: none;
-}
-
-.header .logo__image {
-  display: block;
-  width: auto;
-  height: 54px;
-  max-width: 360px;
-  object-fit: contain;
-}
-
-/* =========================================================
-   HEADER LOGO SVG MOBILE / ЛОГОТИП В HEADER НА MOBILE
-   Уменьшаем высоту логотипа, чтобы он не ломал мобильный header.
-   ========================================================= */
-
-@media (max-width: 960px) {
-  .header .logo__image {
-    height: 42px;
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 640px) {
-  .header .logo__image {
-    height: 38px;
-    max-width: 240px;
-  }
-}
 
 /* =========================================================
    ACTIVE NAV LINK / АКТИВНЫЙ ПУНКТ ОСНОВНОЙ НАВИГАЦИИ

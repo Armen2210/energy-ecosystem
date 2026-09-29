@@ -32,6 +32,7 @@ export const products = [
 {
     slug: "bmk",
     title: "Блочно-модульные котельные",
+    formTitle: "Блочно-модульные котельные",
     shortTitle: "БМК",
     switcherTitle: "БМК",
     theme: { ...defaultProductTheme },
@@ -122,6 +123,7 @@ export const products = [
 {
   slug: "btp",
   title: "Блочные тепловые пункты «Энерголайн»",
+  formTitle: "Блочные тепловые пункты",
   shortTitle: "БТП",
   switcherTitle: "БТП",
   theme: { ...defaultProductTheme },
@@ -215,6 +217,7 @@ export const products = [
 {
   slug: "vns",
   title: "Водопроводные насосные станции «Акварус»",
+  formTitle: "Водопроводные насосные станции",
   shortTitle: "ВНС",
   switcherTitle: "ВНС",
   theme: { ...defaultProductTheme },
@@ -307,6 +310,7 @@ export const products = [
 {
   slug: "pns",
   title: "Пожарные насосные станции",
+  formTitle: "Пожарные насосные станции",
   shortTitle: "ПНС",
   switcherTitle: "ПНС",
   theme: { ...defaultProductTheme },
@@ -397,6 +401,7 @@ export const products = [
 {
   slug: "automation-cabinets",
   title: "Шкафы управления и автоматизации",
+  formTitle: "Шкафы управления и автоматизации",
   shortTitle: "ШУиА",
   switcherTitle: "ШУиА",
   theme: { ...defaultProductTheme },

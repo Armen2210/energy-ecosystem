@@ -125,7 +125,7 @@ function HomePage() {
         <section className="section section--cases" id="cases">
           <div className="container">
             <SectionHeader
-              title="Наши кейсы"
+              title="Наши объекты"
               description="Реализованные объекты и инженерные задачи — от производства оборудования до монтажа и ввода систем в эксплуатацию."
             />
 
@@ -149,7 +149,7 @@ function HomePage() {
 
             <div className="cases-actions">
               <Link className="cases-link" to="/cases">
-                Смотреть все кейсы
+                Смотреть все объекты
               </Link>
             </div>
           </div>

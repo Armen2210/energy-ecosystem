@@ -250,7 +250,7 @@ function ServicePage() {
           <LeadForm
               products={products}
               services={services}
-              initialTopic={service.title}
+              initialTopic={service.cardTitle || service.title}
           />
         </div>
       </section>

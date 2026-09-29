@@ -49,11 +49,11 @@ function CasePage() {
         <div className="container">
           <div className="case-page__navigation">
             <Link className="case-page__back-link" to="/cases">
-              ← Все кейсы
+              ← Все объекты
             </Link>
 
             <span className="case-page__breadcrumb">
-              Главная / Кейсы / {caseItem.type}
+              Главная / Объекты / {caseItem.type}
             </span>
           </div>
 
@@ -70,7 +70,7 @@ function CasePage() {
               className="case-page__all-cases-link"
               to="/cases"
             >
-              Смотреть все кейсы
+              Смотреть все объекты
             </Link>
           </div>
         </div>

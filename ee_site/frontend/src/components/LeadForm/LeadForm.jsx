@@ -4,16 +4,37 @@
 // Отправляет данные в backend: POST /api/leads/
 // =========================================================
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { createLead } from "../../api/leadsApi";
 
+import TopicSelect from "../TopicSelect";
+
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
+  const [selectedTopic, setSelectedTopic] = useState(initialTopic);
+  const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle");
   const [submitMessage, setSubmitMessage] = useState("");
   const [isStatusHiding, setIsStatusHiding] = useState(false);
+  useEffect(() => {
+    setSelectedTopic(initialTopic);
+  }, [initialTopic]);
+
+  function handleFileChange(event) {
+    const file = event.target.files?.[0] || null;
+    setSelectedFile(file);
+  }
+
+  function handleRemoveFile() {
+    setSelectedFile(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,7 +42,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const selectedTopic = formData.get("description_topic");
+    const submittedTopic = formData.get("description_topic");
     const description = formData.get("description");
     const consentAccepted = formData.get("consent");
 
@@ -31,10 +52,10 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       return;
     }
 
-    if (selectedTopic) {
+    if (submittedTopic) {
       formData.set(
         "description",
-        `Интересующее направление: ${selectedTopic}\n\nОписание задачи:\n${
+        `Интересующее направление: ${submittedTopic}\n\nОписание задачи:\n${
           description || "Не указано"
         }`,
       );
@@ -52,6 +73,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       await createLead(formData);
 
       form.reset();
+      setSelectedTopic(initialTopic);
+      setSelectedFile(null);
 
       setSubmitStatus("success");
       setSubmitMessage(
@@ -117,35 +140,69 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
         <label>
           Интересующее направление
-          <select name="description_topic" defaultValue={initialTopic}>
-            <option value="">Выберите направление</option>
 
-            <optgroup label="Продукты">
-              {products.map((product) => (
-                <option value={product.title} key={product.slug}>
-                  {product.title}
-                </option>
-              ))}
-            </optgroup>
-
-            <optgroup label="Услуги">
-              {services.map((service) => (
-                <option value={service.title} key={service.slug}>
-                  {service.title}
-                </option>
-              ))}
-            </optgroup>
-          </select>
+          <TopicSelect
+            products={products}
+            services={services}
+            value={selectedTopic}
+            onChange={setSelectedTopic}
+          />
         </label>
 
-        <label>
-          Файл
-          <input type="file" name="attachment" />
+        <div className="lead-form__file-field">
+          <span className="lead-form__file-label">
+            Файл
+          </span>
+
+          <input
+            ref={fileInputRef}
+            className="lead-form__file-input"
+            type="file"
+            name="attachment"
+            onChange={handleFileChange}
+          />
+
+          {!selectedFile ? (
+            <button
+              className="lead-form__file-picker"
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <span className="lead-form__file-picker-icon" aria-hidden="true">
+                +
+              </span>
+
+              <span>Прикрепить файл</span>
+            </button>
+          ) : (
+            <div className="lead-form__file-item">
+              <div className="lead-form__file-info">
+                <span className="lead-form__file-name">
+                  {selectedFile.name}
+                </span>
+
+                <span className="lead-form__file-size">
+                  {(selectedFile.size / 1024 / 1024).toFixed(2)} МБ
+                </span>
+              </div>
+
+              <button
+                className="lead-form__file-remove"
+                type="button"
+                onClick={handleRemoveFile}
+                aria-label={`Удалить файл ${selectedFile.name}`}
+                title="Удалить файл"
+              >
+                ×
+              </button>
+            </div>
+          )}
+
           <span className="lead-form__file-note">
             Не прикрепляйте документы, содержащие персональные данные третьих
             лиц, если у вас нет права на их передачу.
           </span>
-        </label>
+        </div>
       </div>
 
       <label className="lead-form__message">

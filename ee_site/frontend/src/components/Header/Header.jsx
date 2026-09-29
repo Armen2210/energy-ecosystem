@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import energyLogo from "../../assets/energoeffect-logo-orange.svg";
+import anniversaryLogo from "../../assets/12-years.svg";
 
 // =========================================================
 // NAV HELPERS / ПОМОЩНИКИ ДЛЯ АКТИВНОГО ПУНКТА МЕНЮ
@@ -186,11 +187,19 @@ function Header({ navigation }) {
           onClick={handleLogoClick}
           aria-label="Энергоэффект — перейти на главную страницу"
         >
-          <img
-            className="logo__image"
-            src={energyLogo}
-            alt="Энергоэффект"
-          />
+          <span className="logo__group">
+            <img
+              className="logo__image"
+              src={energyLogo}
+              alt="Энергоэффект"
+            />
+
+            <img
+              className="logo__anniversary"
+              src={anniversaryLogo}
+              alt="12 лет"
+            />
+          </span>
         </a>
 
         <nav className="nav" aria-label="Основная навигация">
