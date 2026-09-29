@@ -4,6 +4,7 @@
 // Визуально оформлена в стиле остальных страниц сайта.
 // =========================================================
 
+import PageNavigation from "../../components/PageNavigation";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
@@ -18,6 +19,20 @@ function PrivacyPage() {
 
       <section className="section">
         <div className="container">
+          <PageNavigation
+            backLabel="На главную"
+            backTo="/"
+            breadcrumbItems={[
+              {
+                label: "Главная",
+                to: "/",
+              },
+              {
+                label: "Правовая информация",
+              },
+            ]}
+          />
+
           <SectionHeader
             eyebrow="Правовая информация"
             title="Политика обработки персональных данных"

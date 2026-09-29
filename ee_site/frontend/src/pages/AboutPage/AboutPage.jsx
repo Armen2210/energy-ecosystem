@@ -3,6 +3,7 @@
 // Страница о производственной и инженерной роли компании.
 // =========================================================
 
+import PageNavigation from "../../components/PageNavigation";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 import TrustBlock from "../../components/TrustBlock";
@@ -17,12 +18,26 @@ function AboutPage() {
       />
 
       <section className="section">
-        <div className="container">
-          <SectionHeader
-            eyebrow="О компании"
-            title="Энергоэффект — инженерная производственная платформа"
-            description="Компания проектирует и производит инженерные системы для объектов, где важны надёжность, сроки, эксплуатация и ответственность за результат."
-          />
+          <div className="container">
+            <PageNavigation
+              backLabel="На главную"
+              backTo="/"
+              breadcrumbItems={[
+                {
+                  label: "Главная",
+                  to: "/",
+                },
+                {
+                  label: "О компании",
+                },
+              ]}
+            />
+
+            <SectionHeader
+              eyebrow="О компании"
+              title="Энергоэффект — инженерная производственная платформа"
+              description="Компания проектирует и производит инженерные системы для объектов, где важны надёжность, сроки, эксплуатация и ответственность за результат."
+      />
 
           <TrustBlock
               title="На чём строится подход Энергоэффект"

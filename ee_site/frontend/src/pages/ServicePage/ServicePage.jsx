@@ -12,6 +12,7 @@ import AiSummary from "../../components/AiSummary";
 import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 import LeadForm from "../../components/LeadForm";
+import PageNavigation from "../../components/PageNavigation";
 import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
@@ -159,6 +160,24 @@ function ServicePage() {
 
           <section className="section section--entity-page">
               <div className="container">
+                <PageNavigation
+                  backLabel="К услугам на главной"
+                  backTo="/#services"
+                  breadcrumbItems={[
+                    {
+                      label: "Главная",
+                      to: "/",
+                    },
+                    {
+                      label: "Услуги",
+                      to: "/#services",
+                    },
+                    {
+                      label: service.cardTitle || service.shortTitle || service.title,
+                    },
+                  ]}
+                />
+
                 <div className="entity-page__layout">
                   <aside className="entity-page__rail">
                     <EntitySwitcher
