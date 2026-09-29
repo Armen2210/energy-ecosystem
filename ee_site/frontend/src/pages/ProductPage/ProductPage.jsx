@@ -233,6 +233,7 @@ function ProductPage() {
             <PageNavigation
               backLabel="К продукции на главной"
               backTo="/#products"
+              backState={{ entryScroll: "products-direct" }}
               breadcrumbItems={[
                 {
                   label: "Главная",

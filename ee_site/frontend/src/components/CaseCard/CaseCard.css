@@ -161,6 +161,46 @@
 }
 
 /* =========================================================
+   CASES PAGE CARDS / DESKTOP
+   Компактная компоновка внутренней страницы объектов.
+
+   Задача:
+   - сохранить акцент на изображении;
+   - уменьшить общую высоту карточки;
+   - уместить первый ряд карточек в рабочую область экрана;
+   - не затрагивать главную, tablet и mobile.
+   ========================================================= */
+
+@media (min-width: 961px) {
+  .cases-grid--page .case-card__media {
+    height: 215px;
+  }
+
+  .cases-grid--page .case-card__body {
+    padding: 16px 20px 18px;
+  }
+
+  .cases-grid--page .case-card span {
+    margin-bottom: 14px;
+  }
+
+  .cases-grid--page .case-card h3 {
+    font-size: 20px;
+    line-height: 1.06;
+  }
+
+  .cases-grid--page .case-card p {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .cases-grid--page .case-card__link {
+    padding-top: 14px;
+  }
+}
+
+/* =========================================================
    HOME CASES / DESKTOP
    На главной кейсы превращаются в компактную фотогалерею.
 
@@ -181,6 +221,23 @@
     border: 0;
     border-radius: 22px;
     background: #17191c;
+  }
+  .cases-grid--home .case-card::after {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+
+    border: 1px solid transparent;
+    border-radius: inherit;
+
+    pointer-events: none;
+
+    transition: border-color 0.2s ease;
+  }
+
+  .cases-grid--home .case-card--interactive:hover::after {
+    border-color: rgba(249, 115, 22, 0.82);
   }
 
   .cases-grid--home .case-card__media {
@@ -271,7 +328,6 @@
 
   .cases-grid--home .case-card--interactive:hover {
     transform: translateY(-3px);
-    border-color: transparent;
     box-shadow: 0 22px 48px rgba(17, 17, 17, 0.16);
   }
 

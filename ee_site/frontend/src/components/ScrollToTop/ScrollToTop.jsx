@@ -168,23 +168,65 @@ function ScrollToTop() {
       без заметной плавной прокрутки от Hero.
     */
     if (state?.entryScroll === "cases-direct") {
-      disableGlobalSmoothScroll();
+  disableGlobalSmoothScroll();
 
-      /*
-        Прокручиваем страницу сразу внутри useLayoutEffect,
-        до того как браузер покажет пользователю первый кадр.
-        Благодаря этому Hero не должен мелькать перед секцией кейсов.
-      */
-      window.scrollTo({
-        top: getSectionScrollTop("cases"),
-        left: 0,
-        behavior: "auto",
-      });
+  /*
+    Прокручиваем страницу сразу внутри useLayoutEffect,
+    до того как браузер покажет пользователю первый кадр.
+    Благодаря этому Hero не должен мелькать перед секцией кейсов.
+  */
+  window.scrollTo({
+    top: getSectionScrollTop("cases"),
+    left: 0,
+    behavior: "auto",
+  });
 
-      restoreGlobalSmoothScroll();
-    
-      return;
-    }
+  restoreGlobalSmoothScroll();
+
+  return;
+}
+
+/*
+  PRODUCTS DIRECT / ПРЯМОЙ ПЕРЕХОД К ПРОДУКЦИИ
+
+  Используется при возврате со страницы продукта.
+  Главная сразу открывается в секции продукции,
+  без прокрутки от Hero.
+*/
+  if (state?.entryScroll === "products-direct") {
+    disableGlobalSmoothScroll();
+
+    window.scrollTo({
+      top: getSectionScrollTop("products"),
+      left: 0,
+      behavior: "auto",
+    });
+
+    restoreGlobalSmoothScroll();
+
+    return;
+  }
+
+  /*
+    SERVICES DIRECT / ПРЯМОЙ ПЕРЕХОД К УСЛУГАМ
+
+    Используется при возврате со страницы услуги.
+    Главная сразу открывается в секции услуг,
+    без прокрутки от Hero.
+  */
+  if (state?.entryScroll === "services-direct") {
+    disableGlobalSmoothScroll();
+
+    window.scrollTo({
+      top: getSectionScrollTop("services"),
+      left: 0,
+      behavior: "auto",
+    });
+
+    restoreGlobalSmoothScroll();
+
+    return;
+  }
 
     /*
       CONTACTS DIRECT / ПРЯМОЙ ПЕРЕХОД К КОНТАКТАМ

@@ -47,7 +47,7 @@ function CasesPage() {
               />
             </div>
 
-          <div className="cases-grid">
+          <div className="cases-grid cases-grid--page">
             {cases.map((caseItem) => (
               <CaseCard caseItem={caseItem} key={caseItem.slug} />
             ))}

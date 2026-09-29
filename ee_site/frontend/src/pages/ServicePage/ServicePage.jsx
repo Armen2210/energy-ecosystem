@@ -163,6 +163,7 @@ function ServicePage() {
                 <PageNavigation
                   backLabel="К услугам на главной"
                   backTo="/#services"
+                  backState={{ entryScroll: "services-direct" }}
                   breadcrumbItems={[
                     {
                       label: "Главная",

@@ -139,6 +139,84 @@
   line-height: 1.35;
 }
 
+/* =========================================================
+   FOOTER / DESKTOP
+   Три равных смысловых столбца:
+   1. Компания + контакты + юридическая информация
+   2. Навигация
+   3. Экосистема
+
+   Tablet/mobile не затрагиваются.
+   ========================================================= */
+
+@media (min-width: 961px) {
+  .footer {
+    padding: 28px 0 30px;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "about nav ecosystem"
+      "contacts nav ecosystem"
+      "legal nav ecosystem";
+    column-gap: 64px;
+    row-gap: 14px;
+    align-items: start;
+  }
+
+  .footer__about {
+    grid-area: about;
+  }
+
+  .footer__contacts {
+    grid-area: contacts;
+    align-self: start;
+  }
+
+  .footer__legal {
+    grid-area: legal;
+    align-self: start;
+    margin-top: 4px;
+  }
+
+  .footer__nav {
+    grid-area: nav;
+    grid-template-columns: 1fr;
+    align-self: start;
+    gap: 10px;
+    padding-top: 31px;
+  }
+
+  .footer__ecosystem {
+    grid-area: ecosystem;
+    align-self: start;
+    gap: 10px;
+    padding-top: 31px;
+  }
+
+  .footer__about,
+  .footer__contacts,
+  .footer__legal,
+  .footer__nav,
+  .footer__ecosystem {
+    min-width: 0;
+  }
+
+  .footer p {
+    max-width: 420px;
+  }
+
+  .footer__legal a {
+    max-width: 100%;
+  }
+
+  .footer__ecosystem a {
+    max-width: 420px;
+  }
+}
+
 @media (max-width: 960px) {
 
   .footer__grid {
