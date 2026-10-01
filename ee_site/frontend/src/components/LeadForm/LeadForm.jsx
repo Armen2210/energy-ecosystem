@@ -7,14 +7,29 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { createLead } from "../../api/leadsApi";
+import {
+  createLead,
+  createSubmissionSignature,
+  submissionForSignature,
+} from "../../api/leadsApi";
+import {
+  LEAD_FILE_LIMITS,
+  appendSelectedFiles,
+  formatFileSize,
+  setLeadAttachments,
+} from "../../api/leadFiles";
 
 import TopicSelect from "../TopicSelect";
 
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
   const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const submissionRef = useRef(null);
+  const isSubmittingRef = useRef(false);
+  const statusHideTimerRef = useRef(null);
+  const statusResetTimerRef = useRef(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [fileError, setFileError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle");
   const [submitMessage, setSubmitMessage] = useState("");
@@ -23,21 +38,42 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     setSelectedTopic(initialTopic);
   }, [initialTopic]);
 
-  function handleFileChange(event) {
-    const file = event.target.files?.[0] || null;
-    setSelectedFile(file);
+  useEffect(
+    () => () => {
+      window.clearTimeout(statusHideTimerRef.current);
+      window.clearTimeout(statusResetTimerRef.current);
+    },
+    [],
+  );
+
+  function clearStatusTimers() {
+    window.clearTimeout(statusHideTimerRef.current);
+    window.clearTimeout(statusResetTimerRef.current);
+    statusHideTimerRef.current = null;
+    statusResetTimerRef.current = null;
   }
 
-  function handleRemoveFile() {
-    setSelectedFile(null);
+  function handleFileChange(event) {
+    const result = appendSelectedFiles(selectedFiles, event.target.files || []);
+    setSelectedFiles(result.files);
+    setFileError(result.error);
+    event.target.value = "";
+  }
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+  function handleRemoveFile(fileId) {
+    setSelectedFiles((files) => files.filter(({ id }) => id !== fileId));
+    setFileError("");
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (isSubmittingRef.current) {
+      return;
+    }
+
+    clearStatusTimers();
+    setIsStatusHiding(false);
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -63,46 +99,64 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
     formData.delete("description_topic");
     formData.delete("consent");
+    setLeadAttachments(formData, selectedFiles);
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setSubmitStatus("idle");
     setSubmitMessage("");
-    setIsStatusHiding(false);
 
     try {
+      const submissionSignature = await createSubmissionSignature(formData);
+      submissionRef.current = submissionForSignature(
+        submissionRef.current,
+        submissionSignature,
+        () => crypto.randomUUID(),
+      );
+      formData.set("submission_id", submissionRef.current.id);
+
       await createLead(formData);
+      submissionRef.current = null;
 
       form.reset();
       setSelectedTopic(initialTopic);
-      setSelectedFile(null);
+      setSelectedFiles([]);
+      setFileError("");
 
       setSubmitStatus("success");
       setSubmitMessage(
         "Заявка отправлена. Мы свяжемся с вами после обработки обращения.",
       );
 
-      setTimeout(() => {
+      statusHideTimerRef.current = window.setTimeout(() => {
+        statusHideTimerRef.current = null;
         setIsStatusHiding(true);
       }, 5000);
 
-      setTimeout(() => {
+      statusResetTimerRef.current = window.setTimeout(() => {
+        statusResetTimerRef.current = null;
         setSubmitStatus("idle");
         setSubmitMessage("");
         setIsStatusHiding(false);
       }, 5600);
     } catch (error) {
+      if (error.status === 409) {
+        submissionRef.current = null;
+      }
       setSubmitStatus("error");
       setSubmitMessage(
         error.message ||
           "Не удалось отправить заявку. Проверьте данные или попробуйте позже.",
       );
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   }
 
   return (
     <form className="lead-form" onSubmit={handleSubmit}>
+      <fieldset className="lead-form__fieldset" disabled={isSubmitting}>
       <div className="lead-form__grid">
         <label>
           Имя
@@ -146,56 +200,77 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
             services={services}
             value={selectedTopic}
             onChange={setSelectedTopic}
+            disabled={isSubmitting}
           />
         </label>
 
         <div className="lead-form__file-field">
           <span className="lead-form__file-label">
-            Файл
+            Документы
           </span>
 
           <input
             ref={fileInputRef}
             className="lead-form__file-input"
             type="file"
-            name="attachment"
+            name="attachments"
+            multiple
             onChange={handleFileChange}
           />
 
-          {!selectedFile ? (
-            <button
-              className="lead-form__file-picker"
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <span className="lead-form__file-picker-icon" aria-hidden="true">
-                +
-              </span>
+          <button
+            className="lead-form__file-picker"
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <span className="lead-form__file-picker-icon" aria-hidden="true">
+              +
+            </span>
 
-              <span>Прикрепить файл</span>
-            </button>
-          ) : (
-            <div className="lead-form__file-item">
-              <div className="lead-form__file-info">
-                <span className="lead-form__file-name">
-                  {selectedFile.name}
-                </span>
+            <span>Добавить документы</span>
+          </button>
 
-                <span className="lead-form__file-size">
-                  {(selectedFile.size / 1024 / 1024).toFixed(2)} МБ
-                </span>
-              </div>
+          {selectedFiles.length > 0 && (
+            <div className="lead-form__file-list" aria-label="Выбранные документы">
+              {selectedFiles.map(({ id, file }) => (
+                <div className="lead-form__file-item" key={id}>
+                  <div className="lead-form__file-info">
+                    <span className="lead-form__file-name">{file.name}</span>
+                    <span className="lead-form__file-size">
+                      {formatFileSize(file.size)}
+                    </span>
+                  </div>
 
-              <button
-                className="lead-form__file-remove"
-                type="button"
-                onClick={handleRemoveFile}
-                aria-label={`Удалить файл ${selectedFile.name}`}
-                title="Удалить файл"
-              >
-                ×
-              </button>
+                  <button
+                    className="lead-form__file-remove"
+                    type="button"
+                    onClick={() => handleRemoveFile(id)}
+                    aria-label={`Удалить файл ${file.name}`}
+                    title="Удалить файл"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
             </div>
+          )}
+
+          <span className="lead-form__file-summary">
+            Выбрано: {selectedFiles.length} из {LEAD_FILE_LIMITS.maxFiles}; общий
+            размер: {formatFileSize(
+              selectedFiles.reduce((sum, { file }) => sum + file.size, 0),
+            )}.
+          </span>
+
+          <span className="lead-form__file-limits">
+            До 10 файлов, каждый до 10 МиБ, суммарно до 25 МиБ. Пустые файлы не
+            принимаются.
+          </span>
+
+          {fileError && (
+            <span className="lead-form__file-error" role="alert">
+              {fileError}
+            </span>
           )}
 
           <span className="lead-form__file-note">
@@ -237,6 +312,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           className={`lead-form__status lead-form__status--${submitStatus} ${
             isStatusHiding ? "lead-form__status--hiding" : ""
           }`}
+          role="status"
+          aria-live="polite"
         >
           {submitMessage}
         </div>
@@ -249,6 +326,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       >
         {isSubmitting ? "Отправляем..." : "Отправить заявку"}
       </button>
+      </fieldset>
     </form>
   );
 }

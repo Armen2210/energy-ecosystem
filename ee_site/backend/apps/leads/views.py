@@ -11,13 +11,14 @@
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError as DjangoValidationError
 
 from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .email_notifications import send_lead_notification
+from .lead_creation import SubmissionConflict, create_lead
 from .serializers import LeadSerializer
 
 
@@ -31,12 +32,27 @@ class LeadCreateAPIView(APIView):
         serializer = LeadSerializer(data=request.data)
 
         if serializer.is_valid():
-            lead = serializer.save()
+            try:
+                lead, created = create_lead(
+                    serializer.validated_data,
+                    request.FILES.getlist("attachments"),
+                )
+            except DjangoValidationError as exc:
+                return Response(exc.message_dict, status=status.HTTP_400_BAD_REQUEST)
+            except SubmissionConflict:
+                return Response(
+                    {
+                        "detail": "submission_id уже использован для других данных.",
+                        "code": "submission_conflict",
+                    },
+                    status=status.HTTP_409_CONFLICT,
+                )
 
-            # Отправляем email-уведомление менеджеру.
-            # Функция сама обрабатывает ошибки, чтобы форма не ломалась,
-            # если SMTP временно недоступен или не настроен.
-            send_lead_notification(lead)
+            if not created:
+                return Response(
+                    {"id": lead.id, "duplicate": True},
+                    status=status.HTTP_200_OK,
+                )
 
             return Response(
                 LeadSerializer(lead).data,
