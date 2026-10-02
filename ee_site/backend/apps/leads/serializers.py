@@ -4,6 +4,12 @@ from .models import Lead
 
 
 class LeadSerializer(serializers.ModelSerializer):
+    submission_id = serializers.UUIDField(
+        required=False,
+        allow_null=True,
+        write_only=True,
+    )
+
     class Meta:
         model = Lead
         fields = (
@@ -17,6 +23,7 @@ class LeadSerializer(serializers.ModelSerializer):
             "source_system",
             "status",
             "attachment",
+            "submission_id",
             "created_at",
             "updated_at",
         )

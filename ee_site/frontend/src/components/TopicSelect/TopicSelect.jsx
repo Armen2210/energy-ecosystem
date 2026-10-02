@@ -18,6 +18,7 @@ function TopicSelect({
   services = [],
   value = "",
   onChange,
+  disabled = false,
 }) {
   const rootRef = useRef(null);
   const buttonRef = useRef(null);
@@ -63,7 +64,15 @@ function TopicSelect({
     };
   }, []);
 
+  useEffect(() => {
+    if (!disabled) return undefined;
+    const closeTimer = window.setTimeout(() => setIsOpen(false), 0);
+    return () => window.clearTimeout(closeTimer);
+  }, [disabled]);
+
   function handleKeyDown(event) {
+    if (disabled) return;
+
     if (event.key === "Escape") {
       setIsOpen(false);
       buttonRef.current?.focus();
@@ -79,6 +88,7 @@ function TopicSelect({
   }
 
   function handleSelect(optionValue) {
+    if (disabled) return;
     onChange(optionValue);
     setIsOpen(false);
     buttonRef.current?.focus();
@@ -96,8 +106,11 @@ function TopicSelect({
         className="topic-select__button"
         type="button"
         aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen && !disabled}
+        disabled={disabled}
+        onClick={() => {
+          if (!disabled) setIsOpen((current) => !current);
+        }}
         onKeyDown={handleKeyDown}
       >
         <span className="topic-select__value">
@@ -110,7 +123,7 @@ function TopicSelect({
         />
       </button>
 
-      {isOpen && (
+      {isOpen && !disabled && (
         <div
           className="topic-select__menu"
           role="listbox"
@@ -174,6 +187,7 @@ function TopicSelect({
         type="hidden"
         name="description_topic"
         value={value}
+        disabled={disabled}
       />
     </div>
   );

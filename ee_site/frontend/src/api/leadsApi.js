@@ -1,51 +1,106 @@
-// =========================================================
-// LEADS API / API ДЛЯ ЗАЯВОК
-// Отвечает за отправку формы заявки на backend.
-//
-// Backend endpoint:
-// POST /api/leads/
-// =========================================================
+const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+export class LeadApiError extends Error {
+  constructor(message, { status = null, indeterminate = false } = {}) {
+    super(message);
+    this.name = "LeadApiError";
+    this.status = status;
+    this.indeterminate = indeterminate;
+  }
+}
 
 function getReadableApiError(errorData) {
-  if (!errorData) {
-    return "Не удалось отправить заявку.";
+  if (!errorData) return "Не удалось отправить заявку.";
+  if (typeof errorData === "string") return errorData;
+  if (errorData.detail) return errorData.detail;
+
+  return (
+    Object.entries(errorData)
+      .map(([field, messages]) => {
+        const text = Array.isArray(messages) ? messages.join(", ") : String(messages);
+        return `${field}: ${text}`;
+      })
+      .join("; ") || "Не удалось отправить заявку."
+  );
+}
+
+async function readJson(response) {
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) return null;
+  return response.json().catch(() => null);
+}
+
+function isConfirmedSuccess(response, data) {
+  if (!data || !(typeof data.id === "number" || typeof data.id === "string")) {
+    return false;
   }
-
-  if (typeof errorData === "string") {
-    return errorData;
-  }
-
-  if (errorData.detail) {
-    return errorData.detail;
-  }
-
-  const fieldErrors = Object.entries(errorData)
-    .map(([field, messages]) => {
-      const messageText = Array.isArray(messages)
-        ? messages.join(", ")
-        : String(messages);
-
-      return `${field}: ${messageText}`;
-    })
-    .join("; ");
-
-  return fieldErrors || "Не удалось отправить заявку.";
+  if (response.status === 201) return true;
+  return response.status === 200 && data.duplicate === true;
 }
 
 export async function createLead(formData) {
-  const response = await fetch(`${API_BASE_URL}/api/leads/`, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
-    const message = getReadableApiError(errorData);
-
-    throw new Error(message);
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}/api/leads/`, {
+      method: "POST",
+      body: formData,
+    });
+  } catch {
+    throw new LeadApiError(
+      "Ответ сервера не получен. Данные сохранены в форме. Попробуйте отправить её ещё раз",
+      { indeterminate: true },
+    );
   }
 
-  return response.json();
+  const data = await readJson(response);
+  if (!response.ok) {
+    if (response.status === 413) {
+      throw new LeadApiError(
+        "Сервер отклонил файлы из-за размера запроса. Уменьшите количество или размер файлов.",
+        { status: response.status },
+      );
+    }
+    throw new LeadApiError(getReadableApiError(data), { status: response.status });
+  }
+  if (!isConfirmedSuccess(response, data)) {
+    throw new LeadApiError(
+      "Сервер не подтвердил сохранение заявки. Повторите отправку.",
+      { status: response.status, indeterminate: true },
+    );
+  }
+  return data;
+}
+
+async function sha256Hex(value) {
+  const digest = await crypto.subtle.digest("SHA-256", value);
+  return Array.from(new Uint8Array(digest), (byte) =>
+    byte.toString(16).padStart(2, "0"),
+  ).join("");
+}
+
+export async function createSubmissionSignature(formData) {
+  const fields = [];
+  for (const [name, value] of formData.entries()) {
+    if (name === "submission_id") continue;
+    if (value instanceof File) {
+      fields.push([
+        name,
+        {
+          name: value.name,
+          size: value.size,
+          type: value.type,
+          sha256: await sha256Hex(await value.arrayBuffer()),
+        },
+      ]);
+    } else {
+      fields.push([name, String(value)]);
+    }
+  }
+  fields.sort(([left], [right]) => left.localeCompare(right));
+  return sha256Hex(new TextEncoder().encode(JSON.stringify(fields)));
+}
+
+export function submissionForSignature(previous, signature, randomUUID) {
+  if (previous?.signature === signature) return previous;
+  return { signature, id: randomUUID() };
 }

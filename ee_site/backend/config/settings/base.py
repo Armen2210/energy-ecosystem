@@ -1,11 +1,25 @@
-
-from dotenv import load_dotenv
-from pathlib import Path
+import math
 import os
+from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-load_dotenv(BASE_DIR / ".env")
+if os.getenv("_EE_SKIP_DOTENV") != "1":
+    load_dotenv(BASE_DIR / ".env")
+
+
+def positive_int_from_env(name, default):
+    raw_value = os.getenv(name, str(default))
+    try:
+        value = int(raw_value)
+    except (TypeError, ValueError) as exc:
+        raise ImproperlyConfigured(f"{name} must be a positive integer.") from exc
+    if value <= 0:
+        raise ImproperlyConfigured(f"{name} must be a positive integer.")
+    return value
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -135,6 +149,17 @@ AUTH_USER_MODEL = "users.User"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+LEAD_PRIVATE_ATTACHMENT_ROOT = Path(
+    os.getenv("LEAD_PRIVATE_ATTACHMENT_ROOT", BASE_DIR / "private_uploads")
+)
+LEAD_MAX_FILES = positive_int_from_env("LEAD_MAX_FILES", 10)
+LEAD_MAX_FILE_SIZE = positive_int_from_env("LEAD_MAX_FILE_SIZE", 10 * 1024 * 1024)
+LEAD_MAX_TOTAL_FILE_SIZE = positive_int_from_env(
+    "LEAD_MAX_TOTAL_FILE_SIZE", 25 * 1024 * 1024
+)
+LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE = positive_int_from_env(
+    "LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE", 10 * 1024 * 1024
+)
 
 # =========================================================
 # EMAIL / НАСТРОЙКИ ПОЧТОВЫХ УВЕДОМЛЕНИЙ
@@ -149,6 +174,27 @@ EMAIL_BACKEND = os.getenv(
 
 EMAIL_HOST = os.getenv("EMAIL_HOST", "")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+
+
+def positive_finite_float_from_env(name, default):
+    raw_value = os.getenv(name, str(default))
+
+    try:
+        value = float(raw_value)
+    except (TypeError, ValueError) as exc:
+        raise ImproperlyConfigured(
+            f"{name} must be a positive finite number of seconds."
+        ) from exc
+
+    if not math.isfinite(value) or value <= 0:
+        raise ImproperlyConfigured(
+            f"{name} must be a positive finite number of seconds."
+        )
+
+    return value
+
+
+EMAIL_TIMEOUT = positive_finite_float_from_env("EMAIL_TIMEOUT", 10)
 
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
 EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "False") == "True"
@@ -191,22 +237,16 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "simple",
         },
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs" / "app.log",
-            "formatter": "verbose",
-            "encoding": "utf-8",
-        },
     },
 
     "root": {
-        "handlers": ["console", "file"],
+        "handlers": ["console"],
         "level": "INFO",
     },
 
     "loggers": {
         "django": {
-            "handlers": ["console", "file"],
+            "handlers": ["console"],
             "level": "INFO",
             "propagate": False,
         },
