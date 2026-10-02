@@ -13,17 +13,16 @@ import {
   submissionForSignature,
 } from "../../api/leadsApi";
 import {
-  LEAD_FILE_LIMITS,
   appendSelectedFiles,
-  formatFileSize,
   setLeadAttachments,
 } from "../../api/leadFiles";
 
 import TopicSelect from "../TopicSelect";
 
+import FileSelect from "../FileSelect";
+
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
-  const fileInputRef = useRef(null);
   const submissionRef = useRef(null);
   const isSubmittingRef = useRef(false);
   const statusHideTimerRef = useRef(null);
@@ -53,11 +52,14 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     statusResetTimerRef.current = null;
   }
 
-  function handleFileChange(event) {
-    const result = appendSelectedFiles(selectedFiles, event.target.files || []);
+  function handleAddFiles(addedFiles) {
+    const result = appendSelectedFiles(
+      selectedFiles,
+      addedFiles,
+    );
+
     setSelectedFiles(result.files);
     setFileError(result.error);
-    event.target.value = "";
   }
 
   function handleRemoveFile(fileId) {
@@ -192,7 +194,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <input type="email" name="email" placeholder="name@company.ru" />
         </label>
 
-        <label>
+        <label className="lead-form__topic-field">
           Интересующее направление
 
           <TopicSelect
@@ -209,73 +211,25 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
             Документы
           </span>
 
-          <input
-            ref={fileInputRef}
-            className="lead-form__file-input"
-            type="file"
-            name="attachments"
-            multiple
-            onChange={handleFileChange}
+          <FileSelect
+            files={selectedFiles}
+            onAddFiles={handleAddFiles}
+            onRemoveFile={handleRemoveFile}
+            disabled={isSubmitting}
           />
 
-          <button
-            className="lead-form__file-picker"
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <span className="lead-form__file-picker-icon" aria-hidden="true">
-              +
-            </span>
-
-            <span>Добавить документы</span>
-          </button>
-
-          {selectedFiles.length > 0 && (
-            <div className="lead-form__file-list" aria-label="Выбранные документы">
-              {selectedFiles.map(({ id, file }) => (
-                <div className="lead-form__file-item" key={id}>
-                  <div className="lead-form__file-info">
-                    <span className="lead-form__file-name">{file.name}</span>
-                    <span className="lead-form__file-size">
-                      {formatFileSize(file.size)}
-                    </span>
-                  </div>
-
-                  <button
-                    className="lead-form__file-remove"
-                    type="button"
-                    onClick={() => handleRemoveFile(id)}
-                    aria-label={`Удалить файл ${file.name}`}
-                    title="Удалить файл"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <span className="lead-form__file-summary">
-            Выбрано: {selectedFiles.length} из {LEAD_FILE_LIMITS.maxFiles}; общий
-            размер: {formatFileSize(
-              selectedFiles.reduce((sum, { file }) => sum + file.size, 0),
-            )}.
-          </span>
-
-          <span className="lead-form__file-limits">
-            До 10 файлов, каждый до 10 МиБ, суммарно до 25 МиБ. Пустые файлы не
-            принимаются.
-          </span>
-
           {fileError && (
-            <span className="lead-form__file-error" role="alert">
+            <span
+              className="lead-form__file-error"
+              role="alert"
+            >
               {fileError}
             </span>
           )}
 
           <span className="lead-form__file-note">
-            Не прикрепляйте документы, содержащие персональные данные третьих
-            лиц, если у вас нет права на их передачу.
+            Не прикрепляйте документы, содержащие персональные данные
+            третьих лиц, если у вас нет права на их передачу.
           </span>
         </div>
       </div>
