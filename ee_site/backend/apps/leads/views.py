@@ -55,7 +55,7 @@ class LeadCreateAPIView(APIView):
                 )
 
             return Response(
-                LeadSerializer(lead).data,
+                {"id": lead.id},
                 status=status.HTTP_201_CREATED,
             )
 
