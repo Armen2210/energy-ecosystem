@@ -17,6 +17,7 @@ NOTIFICATION_RETRY_LIMIT = 5
 
 class LeadAttachmentInline(admin.TabularInline):
     model = LeadAttachment
+    fk_name = "lead"
     extra = 0
     can_delete = False
     fields = ("original_name", "size", "created_at", "download_link")
@@ -60,6 +61,7 @@ class LeadAdmin(admin.ModelAdmin):
         "description",
     )
     readonly_fields = (
+        "legacy_attachment_state",
         "created_at",
         "notification_status",
         "notification_attempts",
@@ -70,9 +72,25 @@ class LeadAdmin(admin.ModelAdmin):
         "submission_fingerprint",
         "updated_at",
     )
+    fields = (
+        "name", "company_name", "phone", "email", "description",
+        "source_page", "source_system", "status", "legacy_attachment_state",
+        "notification_status", "notification_attempts",
+        "notification_last_attempt_at", "notification_sent_at",
+        "notification_last_error_code", "submission_id",
+        "submission_fingerprint", "created_at", "updated_at",
+    )
     ordering = (
         "-created_at",
     )
+
+    @admin.display(description="Историческое вложение")
+    def legacy_attachment_state(self, lead):
+        if not lead or not lead.pk or not lead.attachment:
+            return "Отсутствует"
+        if LeadAttachment.objects.filter(legacy_source=lead).exists():
+            return "Проверенная приватная копия показана ниже"
+        return "Ожидает переноса; публичная ссылка скрыта"
 
     def get_urls(self):
         custom_urls = [

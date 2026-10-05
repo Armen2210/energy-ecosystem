@@ -165,6 +165,20 @@ class LeadAttachment(models.Model):
     )
     original_name = models.CharField(max_length=255, verbose_name="Исходное имя")
     size = models.PositiveBigIntegerField(verbose_name="Размер")
+    legacy_source = models.OneToOneField(
+        Lead,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="legacy_attachment_copy",
+        verbose_name="Источник в старом поле",
+    )
+    sha256 = models.CharField(
+        max_length=64,
+        blank=True,
+        editable=False,
+        verbose_name="SHA-256",
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
 
     class Meta:
