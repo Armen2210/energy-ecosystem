@@ -44,20 +44,7 @@ from apps.leads.lead_creation import FINGERPRINT_FIELDS, _cleanup_files, create_
 from config.settings.base import positive_finite_float_from_env, positive_int_from_env
 
 
-PUBLIC_RESPONSE_FIELDS = {
-    "id",
-    "name",
-    "company_name",
-    "phone",
-    "email",
-    "description",
-    "source_page",
-    "source_system",
-    "status",
-    "attachment",
-    "created_at",
-    "updated_at",
-}
+PUBLIC_RESPONSE_FIELDS = {"id"}
 
 
 class LeadTestMixin:
@@ -116,7 +103,7 @@ class LeadCreateAPITests(LeadTestMixin, APITestCase):
         send.assert_called_once_with(fail_silently=False)
 
     @patch("apps.leads.email_notifications.EmailMessage.send", return_value=1)
-    def test_creates_lead_with_file_in_temporary_storage(self, send):
+    def test_legacy_file_is_created_as_private_attachment(self, send):
         content = b"synthetic lead attachment\n"
         attachment = SimpleUploadedFile(
             "request.txt",
@@ -133,8 +120,17 @@ class LeadCreateAPITests(LeadTestMixin, APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         lead = Lead.objects.get()
-        attachment_path = Path(lead.attachment.path)
-        self.assertTrue(attachment_path.is_relative_to(self.temporary_media.name))
+        self.assertFalse(lead.attachment)
+        self.assertEqual(lead.attachments.count(), 1)
+        private_attachment = lead.attachments.get()
+        self.assertEqual(private_attachment.original_name, "request.txt")
+        self.assertEqual(private_attachment.size, len(content))
+        attachment_path = Path(private_attachment.file.path)
+        self.assertTrue(
+            attachment_path.is_relative_to(
+                Path(self.temporary_media.name) / "private"
+            )
+        )
         self.assertEqual(attachment_path.read_bytes(), content)
         self.assertEqual(lead.notification_status, Lead.NotificationStatus.SENT)
 
@@ -298,7 +294,10 @@ class LeadIdempotencyTests(LeadTestMixin, APITestCase):
 
         self.assertEqual(first.status_code, status.HTTP_201_CREATED)
         self.assertEqual(duplicate.status_code, status.HTTP_200_OK)
+        self.assertEqual(first.data.keys(), {"id"})
+        self.assertEqual(duplicate.data, {"id": first.data["id"], "duplicate": True})
         self.assertEqual(Lead.objects.count(), 1)
+        self.assertEqual(LeadAttachment.objects.count(), 1)
         files = [path for path in Path(self.temporary_media.name).rglob("*") if path.is_file()]
         self.assertEqual(len(files), 1)
         schedule.assert_called_once()
@@ -348,13 +347,20 @@ class LeadIdempotencyTests(LeadTestMixin, APITestCase):
                 separators=(",", ":"),
             ).encode("utf-8")
         ).hexdigest()
-        self.create_lead(
+        historical_lead = self.create_lead(
             submission_id=submission_id,
             submission_fingerprint=old_fingerprint,
             attachment=SimpleUploadedFile("legacy.txt", content),
         )
+        historical_name = historical_lead.attachment.name
+        historical_path = Path(historical_lead.attachment.path)
+        files_before = {
+            path.relative_to(self.temporary_media.name)
+            for path in Path(self.temporary_media.name).rglob("*")
+            if path.is_file()
+        }
 
-        response = self.client.post(
+        duplicate = self.client.post(
             self.endpoint,
             self.valid_payload(
                 submission_id=str(submission_id),
@@ -362,10 +368,34 @@ class LeadIdempotencyTests(LeadTestMixin, APITestCase):
             ),
             format="multipart",
         )
+        conflict = self.client.post(
+            self.endpoint,
+            self.valid_payload(
+                submission_id=str(submission_id),
+                attachment=SimpleUploadedFile("legacy.txt", b"changed content"),
+            ),
+            format="multipart",
+        )
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(response.data["duplicate"])
+        self.assertEqual(duplicate.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            duplicate.data,
+            {"id": historical_lead.id, "duplicate": True},
+        )
+        self.assertEqual(conflict.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(conflict.data["code"], "submission_conflict")
         self.assertEqual(Lead.objects.count(), 1)
+        self.assertFalse(LeadAttachment.objects.exists())
+        historical_lead.refresh_from_db()
+        self.assertEqual(historical_lead.attachment.name, historical_name)
+        self.assertEqual(historical_lead.submission_fingerprint, old_fingerprint)
+        self.assertEqual(historical_path.read_bytes(), content)
+        files_after = {
+            path.relative_to(self.temporary_media.name)
+            for path in Path(self.temporary_media.name).rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(files_after, files_before)
         schedule.assert_not_called()
 
     @patch("apps.leads.lead_creation.schedule_lead_notification")
@@ -532,6 +562,55 @@ class LeadIdempotencyTests(LeadTestMixin, APITestCase):
         self.assertFalse(LeadAttachment.objects.exists())
         private_root = Path(self.temporary_media.name) / "private"
         self.assertFalse(any(path.is_file() for path in private_root.rglob("*")))
+
+    @patch("apps.leads.lead_creation.schedule_lead_notification")
+    def test_legacy_attachment_record_error_rolls_back_and_cleans_file(
+        self,
+        schedule,
+    ):
+        with tempfile.TemporaryDirectory() as media_root:
+            private_root = Path(media_root) / "private"
+            with override_settings(
+                MEDIA_ROOT=media_root,
+                LEAD_PRIVATE_ATTACHMENT_ROOT=private_root,
+            ):
+                saved_private_paths = []
+
+                def fail_after_file_write(attachment, *args, **kwargs):
+                    stored_path = Path(attachment.file.path)
+                    self.assertTrue(stored_path.is_file())
+                    self.assertTrue(stored_path.is_relative_to(private_root))
+                    saved_private_paths.append(stored_path)
+                    raise DatabaseError("synthetic attachment row failure")
+
+                with patch.object(
+                    LeadAttachment,
+                    "save",
+                    autospec=True,
+                    side_effect=fail_after_file_write,
+                ):
+                    with self.assertRaises(DatabaseError):
+                        create_lead(
+                            self.valid_payload(
+                                attachment=SimpleUploadedFile(
+                                    "legacy-cleanup.txt",
+                                    b"private content",
+                                )
+                            )
+                        )
+
+            self.assertFalse(Lead.objects.exists())
+            self.assertFalse(LeadAttachment.objects.exists())
+            self.assertEqual(len(saved_private_paths), 1)
+            self.assertFalse(saved_private_paths[0].exists())
+            self.assertFalse(any(path.is_file() for path in private_root.rglob("*")))
+            public_files = {
+                path
+                for path in Path(media_root).rglob("*")
+                if path.is_file() and not path.is_relative_to(private_root)
+            }
+            self.assertEqual(public_files, set())
+        schedule.assert_not_called()
 
     @patch("apps.leads.lead_creation.schedule_lead_notification")
     def test_storage_error_on_second_file_cleans_first_file(self, schedule):
@@ -896,6 +975,22 @@ class LeadAttachmentAccessAndEmailTests(LeadTestMixin, APITestCase):
             size=len(content),
         )
         return lead, attachment
+
+    def test_legacy_public_upload_is_included_in_notification(self):
+        with self.captureOnCommitCallbacks(execute=True):
+            response = self.client.post(
+                self.endpoint,
+                self.valid_payload(
+                    attachment=SimpleUploadedFile("legacy-spec.txt", b"spec")
+                ),
+                format="multipart",
+            )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data, {"id": Lead.objects.get().id})
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox[0].attachments), 1)
+        self.assertIn("legacy-spec.txt", mail.outbox[0].body)
 
     def test_download_requires_staff_and_view_permission(self):
         _, attachment = self.create_private_attachment()
