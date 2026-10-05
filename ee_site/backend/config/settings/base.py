@@ -161,6 +161,21 @@ LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE = positive_int_from_env(
     "LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE", 10 * 1024 * 1024
 )
 
+
+def choice_from_env(name, default, choices):
+    value = os.getenv(name, default).strip().lower()
+    if value not in choices:
+        allowed = ", ".join(sorted(choices))
+        raise ImproperlyConfigured(f"{name} must be one of: {allowed}.")
+    return value
+
+
+# ``sync`` is deliberately the safe upgrade default.  Switch this to
+# ``background`` only after the separately supervised worker is ready.
+LEAD_NOTIFICATION_MODE = choice_from_env(
+    "LEAD_NOTIFICATION_MODE", "sync", {"sync", "background"}
+)
+
 # =========================================================
 # EMAIL / НАСТРОЙКИ ПОЧТОВЫХ УВЕДОМЛЕНИЙ
 # Используются для отправки заявок менеджеру с сайта.

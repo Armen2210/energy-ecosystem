@@ -316,6 +316,10 @@ def send_lead_notification(lead_id, *, allowed_statuses=None):
 
 
 def schedule_lead_notification(lead_id):
+    if settings.LEAD_NOTIFICATION_MODE == "background":
+        # The pending Lead row is the durable queue item and was written in the
+        # same transaction.  In particular, do not use on_commit in this mode.
+        return
     transaction.on_commit(
         lambda: send_lead_notification(lead_id),
         robust=True,

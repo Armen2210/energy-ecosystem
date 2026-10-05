@@ -1,9 +1,11 @@
 import os
 
 from django.contrib import admin
+from django.conf import settings
 from django.core.exceptions import PermissionDenied, SuspiciousFileOperation
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404
+from django.db import transaction
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.text import get_valid_filename
@@ -140,6 +142,34 @@ class LeadAdmin(admin.ModelAdmin):
             raise PermissionDenied
 
         selected_count = queryset.count()
+        if settings.LEAD_NOTIFICATION_MODE == "background":
+            queued_count = 0
+            # Conditional writes make concurrent actions harmless.  The limit
+            # applies to successful transitions, rather than merely selected IDs.
+            with transaction.atomic():
+                candidates = (
+                    queryset.filter(
+                        notification_status=Lead.NotificationStatus.FAILED,
+                    )
+                    .order_by("pk")
+                    .values_list("pk", flat=True)
+                )
+                for lead_id in candidates.iterator():
+                    if queued_count == NOTIFICATION_RETRY_LIMIT:
+                        break
+                    queued_count += Lead.objects.filter(
+                        pk=lead_id,
+                        notification_status=Lead.NotificationStatus.FAILED,
+                    ).update(
+                        notification_status=Lead.NotificationStatus.PENDING,
+                        notification_last_error_code="",
+                    )
+            self.message_user(
+                request,
+                f"Уведомления: поставлено в очередь — {queued_count}, "
+                f"пропущено — {selected_count - queued_count}.",
+            )
+            return
         lead_ids = list(
             queryset.filter(notification_status=Lead.NotificationStatus.FAILED)
             .order_by("pk")
