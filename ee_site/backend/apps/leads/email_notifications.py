@@ -59,8 +59,12 @@ def _send_email(lead):
         if error_code:
             return False, error_code
 
+        private_documents = list(lead.attachments.all())
+        has_verified_legacy_copy = any(
+            item.legacy_source_id == lead.id for item in private_documents
+        )
         documents = []
-        if lead.attachment:
+        if lead.attachment and not has_verified_legacy_copy:
             documents.append(
                 (
                     lead.attachment.name.rsplit("/", 1)[-1],
@@ -71,7 +75,7 @@ def _send_email(lead):
             )
         documents.extend(
             (item.original_name, item.size, item.file.storage, item.file.name)
-            for item in lead.attachments.all()
+            for item in private_documents
         )
         document_lines = "\n".join(
             f"- {name} ({size} байт)" for name, size, _, _ in documents
