@@ -11,14 +11,15 @@
 // цветовой настройки продуктовых страниц.
 // =========================================================
 
-import bmkGigatermHero from "../assets/bmk-gigaterm-hero.png";
+import bmkGigatermHero from "../assets/bmk-gigaterm-hero.webp";
 import gigatermLogo from "../assets/logo-gigaterm.png";
-import btpEnergolainHero from "../assets/btp-energolain-hero.png";
+import btpEnergolainHero from "../assets/btp-energolain-hero.webp";
+import btpEnergolainHeroSmall from "../assets/btp-energolain-hero-720.webp";
 import energolainLogo from "../assets/logo-energolain.png";
-import vnsAquarusHero from "../assets/vns-aquarus-hero.png";
+import vnsAquarusHero from "../assets/vns-aquarus-hero.webp";
 import aquarusLogo from "../assets/logo-aquarus.png";
-import pnsFireHero from "../assets/pns-fire-hero.jpg";
-import automationCabinetsHero from "../assets/automation-cabinets-hero.png";
+import pnsFireHero from "../assets/pns-fire-hero.webp";
+import automationCabinetsHero from "../assets/automation-cabinets-hero.webp";
 
 const defaultProductTheme = {
   accent: "#f97316",
@@ -37,10 +38,14 @@ export const products = [
     switcherTitle: "БМК",
     theme: { ...defaultProductTheme },
     heroImage: bmkGigatermHero,
+    heroImageWidth: 1448,
+    heroImageHeight: 1086,
     heroImageMode: "portrait",
     heroImageAlt:
       "Блочно-модульная котельная «Гигатерм» для теплоснабжения объекта",
     lineLogo: gigatermLogo,
+    lineLogoWidth: 966,
+    lineLogoHeight: 571,
     lineLogoAlt: "Логотип линейки блочно-модульных котельных «Гигатерм»",
     heroTitle: "Блочно-модульные котельные «Гигатерм»",
     heroSubtitle:
@@ -128,10 +133,15 @@ export const products = [
   switcherTitle: "БТП",
   theme: { ...defaultProductTheme },
   heroImage: btpEnergolainHero,
+  heroImageSet: `${btpEnergolainHeroSmall} 720w, ${btpEnergolainHero} 1122w`,
+  heroImageWidth: 1122,
+  heroImageHeight: 1402,
   heroImageMode: "portrait",
   heroImageAlt:
     "Блочный тепловой пункт «Энерголайн» для распределения тепловой энергии на объекте",
   lineLogo: energolainLogo,
+  lineLogoWidth: 1143,
+  lineLogoHeight: 571,
   lineLogoAlt: "Логотип линейки блочных тепловых пунктов «Энерголайн»",
   heroTitle: "Блочные тепловые пункты «Энерголайн»",
   heroSubtitle:
@@ -222,10 +232,14 @@ export const products = [
   switcherTitle: "ВНС",
   theme: { ...defaultProductTheme },
   heroImage: vnsAquarusHero,
+  heroImageWidth: 1320,
+  heroImageHeight: 2322,
   heroImageMode: "portrait",
   heroImageAlt:
     "Водопроводная насосная станция «Акварус» для подачи воды и поддержания давления",
   lineLogo: aquarusLogo,
+  lineLogoWidth: 746,
+  lineLogoHeight: 600,
   lineLogoAlt: "Логотип линейки водопроводных насосных станций «Акварус»",
   heroTitle: "Водопроводные насосные станции «Акварус»",
   heroSubtitle:
@@ -315,6 +329,8 @@ export const products = [
   switcherTitle: "ПНС",
   theme: { ...defaultProductTheme },
   heroImage: pnsFireHero,
+  heroImageWidth: 1086,
+  heroImageHeight: 1448,
   heroImageMode: "portrait",
   heroImageAlt:
     "Пожарная насосная станция для системы противопожарного водоснабжения объекта",
@@ -406,6 +422,8 @@ export const products = [
   switcherTitle: "ШУиА",
   theme: { ...defaultProductTheme },
   heroImage: automationCabinetsHero,
+  heroImageWidth: 1320,
+  heroImageHeight: 1757,
   heroImageMode: "portrait",
   heroImageAlt:
     "Шкаф управления и автоматизации для инженерного оборудования объекта",

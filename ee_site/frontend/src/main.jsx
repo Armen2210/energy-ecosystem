@@ -14,6 +14,12 @@ import "@fontsource-variable/golos-text/wght.css";
 import App from "./App.jsx";
 import "./index.css";
 
+// Resolve the existing contact alias before mounting the large home tree.
+// App keeps the same redirect for subsequent client-side navigation.
+if (window.location.pathname === "/contacts") {
+  window.history.replaceState(window.history.state, "", "/#contacts");
+}
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

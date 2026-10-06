@@ -6,24 +6,26 @@
 // - запоминает согласие в localStorage.
 // =========================================================
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const COOKIE_CONSENT_KEY = "ee_cookie_consent";
 
 function CookieBanner() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
-
-    if (!savedConsent) {
-      setIsVisible(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    try {
+      return !localStorage.getItem(COOKIE_CONSENT_KEY);
+    } catch {
+      return true;
     }
-  }, []);
+  });
 
   const handleAccept = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
+    } catch {
+      // Storage may be unavailable; acceptance still applies to this visit.
+    }
     setIsVisible(false);
   };
 

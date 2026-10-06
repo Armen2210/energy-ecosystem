@@ -64,6 +64,7 @@ function getSectionScrollTop(sectionId) {
 function animateScrollToTop(duration = 2200, onComplete) {
   const startPosition = window.scrollY;
   const startTime = performance.now();
+  let frameId;
 
   function easeInOutCubic(progress) {
     return progress < 0.5
@@ -83,7 +84,7 @@ function animateScrollToTop(duration = 2200, onComplete) {
     });
 
     if (progress < 1) {
-      requestAnimationFrame(step);
+      frameId = requestAnimationFrame(step);
     } else {
       restoreGlobalSmoothScroll();
 
@@ -93,7 +94,8 @@ function animateScrollToTop(duration = 2200, onComplete) {
     }
   }
 
-  requestAnimationFrame(step);
+  frameId = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(frameId);
 }
 
 function ScrollToTop() {
@@ -103,6 +105,7 @@ function ScrollToTop() {
 
   useLayoutEffect(() => {
     let scrollTimer;
+    let cancelScrollAnimation;
 
     function clearEntryScrollState() {
       navigate(`${pathname}${hash || ""}`, {
@@ -261,11 +264,12 @@ function ScrollToTop() {
       });
 
       scrollTimer = setTimeout(() => {
-        animateScrollToTop(2200, clearEntryScrollState);
+        cancelScrollAnimation = animateScrollToTop(2200, clearEntryScrollState);
       }, 180);
 
       return () => {
         clearTimeout(scrollTimer);
+        cancelScrollAnimation?.();
         restoreGlobalSmoothScroll();
       };
     }
@@ -280,11 +284,12 @@ function ScrollToTop() {
       });
 
       scrollTimer = setTimeout(() => {
-        animateScrollToTop(2200, clearEntryScrollState);
+        cancelScrollAnimation = animateScrollToTop(2200, clearEntryScrollState);
       }, 180);
 
       return () => {
         clearTimeout(scrollTimer);
+        cancelScrollAnimation?.();
         restoreGlobalSmoothScroll();
       };
     }
@@ -299,11 +304,12 @@ function ScrollToTop() {
       });
 
       scrollTimer = setTimeout(() => {
-        animateScrollToTop(2200, clearEntryScrollState);
+        cancelScrollAnimation = animateScrollToTop(2200, clearEntryScrollState);
       }, 180);
 
       return () => {
         clearTimeout(scrollTimer);
+        cancelScrollAnimation?.();
         restoreGlobalSmoothScroll();
       };
     }
@@ -318,11 +324,12 @@ function ScrollToTop() {
       });
 
       scrollTimer = setTimeout(() => {
-        animateScrollToTop(2200, clearEntryScrollState);
+        cancelScrollAnimation = animateScrollToTop(2200, clearEntryScrollState);
       }, 180);
 
       return () => {
         clearTimeout(scrollTimer);
+        cancelScrollAnimation?.();
         restoreGlobalSmoothScroll();
       };
     }
