@@ -1,11 +1,12 @@
 const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 
 export class LeadApiError extends Error {
-  constructor(message, { status = null, indeterminate = false } = {}) {
+  constructor(message, { status = null, indeterminate = false, retryAfter = null } = {}) {
     super(message);
     this.name = "LeadApiError";
     this.status = status;
     this.indeterminate = indeterminate;
+    this.retryAfter = retryAfter;
   }
 }
 
@@ -54,6 +55,19 @@ export async function createLead(formData) {
 
   const data = await readJson(response);
   if (!response.ok) {
+    if (response.status === 429) {
+      const rawWait = response.headers.get("retry-after") ?? data?.retry_after;
+      const wait = Number(rawWait);
+      const retryAfter = rawWait != null && Number.isFinite(wait) && wait > 0
+        ? Math.ceil(wait)
+        : null;
+      throw new LeadApiError(
+        retryAfter
+          ? `Слишком много запросов. Подождите ${retryAfter} сек. и отправьте заявку ещё раз. Данные и документы сохранены в форме.`
+          : "Слишком много запросов. Немного подождите и отправьте заявку ещё раз. Данные и документы сохранены в форме.",
+        { status: response.status, retryAfter },
+      );
+    }
     if (response.status === 413) {
       throw new LeadApiError(
         "Сервер отклонил файлы из-за размера запроса. Уменьшите количество или размер файлов.",
