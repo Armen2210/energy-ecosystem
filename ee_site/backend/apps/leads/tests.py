@@ -1006,9 +1006,15 @@ class LeadAttachmentAccessAndEmailTests(LeadTestMixin, APITestCase):
 
         staff.user_permissions.add(Permission.objects.get(codename="view_lead"))
         allowed = self.client.get(url)
-        self.assertEqual(allowed.status_code, status.HTTP_200_OK)
-        self.assertIn("attachment", allowed["Content-Disposition"])
-        self.assertIn("drawing.dwg", allowed["Content-Disposition"])
+        try:
+            self.assertEqual(allowed.status_code, status.HTTP_200_OK)
+            self.assertIn("attachment", allowed["Content-Disposition"])
+            self.assertIn("drawing.dwg", allowed["Content-Disposition"])
+            self.assertEqual(b"".join(allowed.streaming_content), b"document")
+        finally:
+            # FileResponse owns the storage file and closes it via response.close().
+            # The test client does not consume streaming responses automatically.
+            allowed.close()
 
     @patch("django.core.files.storage.FileSystemStorage.open")
     def test_download_checks_object_permission_before_opening_storage(self, storage_open):
