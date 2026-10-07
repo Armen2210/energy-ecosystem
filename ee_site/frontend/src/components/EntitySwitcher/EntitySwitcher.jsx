@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 /* =========================================================
@@ -13,6 +13,11 @@ import { useNavigate } from "react-router-dom";
    ========================================================= */
 
 const SWITCH_DELAY_MS = 180;
+const INITIAL_INDICATOR_STYLE = {
+  width: 0,
+  height: "auto",
+  transform: "translateX(0px)",
+};
 
 function getItemUrl(item, basePath) {
   if (item.url) {
@@ -44,19 +49,10 @@ export default function EntitySwitcher({
   const listRef = useRef(null);
   const buttonRefs = useRef({});
 
-  const [indicatorStyle, setIndicatorStyle] = useState({
-    width: 0,
-    height: "auto",
-    transform: "translateX(0px)",
-  });
-
-  const [stickyTop, setStickyTop] = useState(78);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  const currentIndex = useMemo(
-    () => items.findIndex((item) => item.slug === currentSlug),
-    [items, currentSlug],
-  );
+  const rootRef = useRef(null);
+  const indicatorRef = useRef(null);
+  const switchTimerRef = useRef(null);
+  const currentIndex = items.findIndex((item) => item.slug === currentSlug);
 
   const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
 
@@ -66,7 +62,6 @@ export default function EntitySwitcher({
     "--entity-accent": theme.accent || "#f97316",
     "--entity-accent-soft": theme.accentSoft || "#fff3ea",
     "--entity-text": theme.text || "#111827",
-    "--entity-sticky-top": `${stickyTop}px`,
   };
 
   /* =========================================================
@@ -81,29 +76,32 @@ export default function EntitySwitcher({
      - перемещаем оболочку по горизонтальной оси.
      ========================================================= */
 
-  function updateIndicatorBySlug(slug) {
+  const updateIndicatorBySlug = useCallback((slug) => {
     const button = buttonRefs.current[slug];
 
     if (!button) {
       return;
     }
 
-    if (isDesktop) {
-      setIndicatorStyle({
+    const indicator = indicatorRef.current;
+    if (!indicator) return;
+
+    if (window.matchMedia("(min-width: 961px)").matches) {
+      Object.assign(indicator.style, {
         width: "auto",
-        height: button.offsetHeight,
+        height: `${button.offsetHeight}px`,
         transform: `translateY(${button.offsetTop}px)`,
       });
 
       return;
     }
 
-    setIndicatorStyle({
-      width: button.offsetWidth,
+    Object.assign(indicator.style, {
+      width: `${button.offsetWidth}px`,
       height: "auto",
       transform: `translateX(${button.offsetLeft}px)`,
     });
-  }
+  }, []);
 
   /* =========================================================
      MOBILE SCROLL / ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ЛЕНТЫ
@@ -118,8 +116,8 @@ export default function EntitySwitcher({
      - продукты сдвигаются только при необходимости.
      ========================================================= */
 
-  function scrollButtonIntoViewport(slug, itemIndex) {
-    if (isDesktop) {
+  const scrollButtonIntoViewport = useCallback((slug, itemIndex) => {
+    if (window.matchMedia("(min-width: 961px)").matches) {
       return;
     }
 
@@ -141,7 +139,7 @@ export default function EntitySwitcher({
     const visibleLeft = viewport.scrollLeft;
     const visibleRight = visibleLeft + viewport.clientWidth;
 
-    let targetLeft = viewport.scrollLeft;
+    let targetLeft;
 
     if (isFirstItem) {
       targetLeft = 0;
@@ -169,7 +167,7 @@ export default function EntitySwitcher({
       left: Math.max(targetLeft, 0),
       behavior: getMotionSafeScrollBehavior(),
     });
-  }
+  }, [items.length, variant]);
 
   /* =========================================================
      STICKY TOP / ВЫСОТА HEADER
@@ -195,7 +193,9 @@ export default function EntitySwitcher({
         header.getBoundingClientRect().height,
       );
 
-      setStickyTop(headerHeight);
+      rootRef.current?.style.setProperty(
+        "--entity-sticky-top", `${headerHeight}px`,
+      );
     };
 
     updateStickyTop();
@@ -217,68 +217,38 @@ export default function EntitySwitcher({
     };
   }, []);
 
-  /* =========================================================
-     RESPONSIVE MODE / DESKTOP И MOBILE
-
-     961px и выше:
-     - вертикальный desktop-переключатель.
-
-     960px и ниже:
-     - существующая горизонтальная лента.
-     ========================================================= */
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return undefined;
-    }
-
-    const mediaQuery = window.matchMedia("(min-width: 961px)");
-
-    const updateDesktopMode = () => {
-      setIsDesktop(mediaQuery.matches);
-    };
-
-    updateDesktopMode();
-
-    mediaQuery.addEventListener("change", updateDesktopMode);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateDesktopMode);
-    };
-  }, []);
-
-  /* =========================================================
-     INDICATOR SYNC / СИНХРОНИЗАЦИЯ АКТИВНОЙ ОБОЛОЧКИ
-
-     Пересчитываем положение:
-     - при смене текущего элемента;
-     - при изменении набора элементов;
-     - при переходе между desktop и mobile;
-     - при изменении размеров окна.
-     ========================================================= */
-
+  // Geometry belongs to the DOM: synchronize the indicator without rerenders.
+  // ResizeObserver also covers font swaps and responsive button wrapping.
   useEffect(() => {
     updateIndicatorBySlug(currentSlug);
-
     scrollButtonIntoViewport(currentSlug, currentIndex);
 
-    const handleResize = () => {
-      updateIndicatorBySlug(currentSlug);
-    };
-
-    window.addEventListener("resize", handleResize);
+    const updateIndicator = () => updateIndicatorBySlug(currentSlug);
+    const observer = "ResizeObserver" in window
+      ? new ResizeObserver(updateIndicator)
+      : null;
+    if (listRef.current) observer?.observe(listRef.current);
+    Object.values(buttonRefs.current).forEach((button) => observer?.observe(button));
+    window.addEventListener("resize", updateIndicator);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      observer?.disconnect();
+      window.removeEventListener("resize", updateIndicator);
     };
-  }, [currentSlug, items, isDesktop]);
+  }, [currentSlug, currentIndex, items, updateIndicatorBySlug, scrollButtonIntoViewport]);
+
+  useEffect(() => () => {
+    window.clearTimeout(switchTimerRef.current);
+  }, [currentSlug]);
 
   /* =========================================================
      SWITCH / ПЕРЕКЛЮЧЕНИЕ МЕЖДУ СТРАНИЦАМИ
      ========================================================= */
 
   function handleSwitch(nextItem, nextIndex) {
+    window.clearTimeout(switchTimerRef.current);
     if (!nextItem || nextItem.slug === currentSlug) {
+      updateIndicatorBySlug(currentSlug);
       return;
     }
 
@@ -289,7 +259,8 @@ export default function EntitySwitcher({
 
     scrollButtonIntoViewport(nextItem.slug, nextIndex);
 
-    window.setTimeout(() => {
+    switchTimerRef.current = window.setTimeout(() => {
+      switchTimerRef.current = null;
       navigate(nextUrl, {
         state: {
           entitySwitchDirection: direction,
@@ -306,6 +277,7 @@ export default function EntitySwitcher({
 
   return (
     <nav
+      ref={rootRef}
       className={`entity-switcher entity-switcher--${variant}`}
       style={switcherStyle}
       aria-label={ariaLabel}
@@ -314,7 +286,8 @@ export default function EntitySwitcher({
         <div ref={listRef} className="entity-switcher__list">
           <span
             className="entity-switcher__indicator"
-            style={indicatorStyle}
+            ref={indicatorRef}
+            style={INITIAL_INDICATOR_STYLE}
             aria-hidden="true"
           />
 
@@ -331,6 +304,8 @@ export default function EntitySwitcher({
                 ref={(element) => {
                   if (element) {
                     buttonRefs.current[item.slug] = element;
+                  } else {
+                    delete buttonRefs.current[item.slug];
                   }
                 }}
                 type="button"

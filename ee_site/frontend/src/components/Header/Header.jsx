@@ -76,14 +76,19 @@ function Header({ navigation }) {
   const location = useLocation();
   const timerRef = useRef(null);
 
-  const [isLogoLeaving, setIsLogoLeaving] = useState(false);
-  const [activeNavUrl, setActiveNavUrl] = useState(null);
+  const locationIdentity = `${location.key}:${location.pathname}${location.hash}`;
+  const [leavingLocationKey, setLeavingLocationKey] = useState(null);
+  const isLogoLeaving = leavingLocationKey === locationIdentity;
+  const [homeActiveNavUrl, setHomeActiveNavUrl] = useState(null);
+  const activeNavUrl = normalizePathname(location.pathname) === "/"
+    ? homeActiveNavUrl
+    : getRouteActiveUrl(location.pathname);
 
   useEffect(() => {
     return () => {
       clearTimeout(timerRef.current);
     };
-  }, []);
+  }, [locationIdentity]);
 
   // =========================================================
   // ACTIVE NAV / АКТИВНЫЙ ПУНКТ НАВИГАЦИИ
@@ -95,27 +100,18 @@ function Header({ navigation }) {
 
   useEffect(() => {
     const currentPath = normalizePathname(location.pathname);
-    const routeActiveUrl = getRouteActiveUrl(currentPath);
-
-    if (routeActiveUrl) {
-      setActiveNavUrl(routeActiveUrl);
-      return undefined;
-    }
-
     if (currentPath !== "/") {
-      setActiveNavUrl(null);
       return undefined;
     }
 
     let frameId = null;
 
     const updateActiveNav = () => {
-      if (frameId) {
-        window.cancelAnimationFrame(frameId);
-      }
+      if (frameId !== null) return;
 
       frameId = window.requestAnimationFrame(() => {
-        setActiveNavUrl(getHomeActiveUrl(navigation));
+        frameId = null;
+        setHomeActiveNavUrl(getHomeActiveUrl(navigation));
       });
     };
 
@@ -135,12 +131,15 @@ function Header({ navigation }) {
   }, [location.pathname, navigation]);
 
   function handleLogoClick(event) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
+    clearTimeout(timerRef.current);
 
-    setIsLogoLeaving(true);
+    setLeavingLocationKey(locationIdentity);
 
     timerRef.current = setTimeout(() => {
-      setIsLogoLeaving(false);
+      setLeavingLocationKey(null);
 
       const currentPath = normalizePathname(location.pathname);
 

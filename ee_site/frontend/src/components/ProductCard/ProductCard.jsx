@@ -65,6 +65,10 @@ function ProductCard({ product }) {
         <div className="product-card__media">
           <img
             src={product.heroImage}
+            srcSet={product.heroImageSet}
+            sizes="(min-width: 961px) 32vw, calc(100vw - 32px)"
+            width={product.heroImageWidth}
+            height={product.heroImageHeight}
             alt={product.heroImageAlt || product.title}
             loading="lazy"
           />
