@@ -5,6 +5,7 @@
 // =========================================================
 
 import { Link } from "react-router-dom";
+import { analytics } from "../../analytics/runtime.js";
 
 function Footer({ navigation }) {
   return (
@@ -52,6 +53,7 @@ function Footer({ navigation }) {
         </div>
 
         <div className="footer__legal">
+          <button className="footer__analytics-settings" type="button" onClick={() => analytics.openSettings()}>Настройки аналитики</button>
           <span>© ООО «Энергоэффект»</span>
           <span>ИНН: 6161070112</span>
           <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>

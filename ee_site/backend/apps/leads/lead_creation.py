@@ -22,6 +22,9 @@ FINGERPRINT_FIELDS = (
     "source_page",
     "source_system",
 )
+# Optional campaign metadata and operational direction use first-write-wins.
+# Keep this legacy set/hash unchanged: retries with expired/revoked metadata
+# must return the existing record, while edited content/files still conflict.
 
 
 class SubmissionConflict(Exception):

@@ -22,7 +22,7 @@ function Hero({ image, imageSmall, imageMedium }) {
           </p>
 
           <div className="hero__actions">
-            <a className="button button--primary" href="#contacts">
+            <a className="button button--primary" href="#contacts" data-analytics-cta="hero">
               Обсудить проект
             </a>
 

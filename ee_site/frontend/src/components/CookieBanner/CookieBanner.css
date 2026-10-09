@@ -39,11 +39,15 @@
 
 .cookie-banner__actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex: 0 0 auto;
 }
+
+.cookie-banner__actions button { max-width: 100%; padding: 10px 16px; }
+.cookie-banner__actions button:focus-visible { outline: 3px solid var(--color-text); outline-offset: 3px; }
 
 .cookie-banner__actions a {
   color: var(--color-red);

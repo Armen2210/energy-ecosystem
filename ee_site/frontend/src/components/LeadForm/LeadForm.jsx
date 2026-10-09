@@ -20,6 +20,8 @@ import {
 import TopicSelect from "../TopicSelect";
 
 import FileSelect from "../FileSelect";
+import { analytics } from "../../analytics/runtime.js";
+import { pageParams, safePath } from "../../analytics/policy.js";
 
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
@@ -34,6 +36,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     initialTopicRef.current = initialTopic;
   }, [initialTopic]);
   const submissionRef = useRef(null);
+  const snapshotRef = useRef(null);
+  const startedRef = useRef(false);
   const isSubmittingRef = useRef(false);
   const statusHideTimerRef = useRef(null);
   const statusResetTimerRef = useRef(null);
@@ -49,6 +53,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       mountedRef.current = false;
       window.clearTimeout(statusHideTimerRef.current);
       window.clearTimeout(statusResetTimerRef.current);
+      if (snapshotRef.current) analytics.release(snapshotRef.current);
     };
   }, []);
 
@@ -67,6 +72,22 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
     setSelectedFiles(result.files);
     setFileError(result.error);
+    if (result.files.length > selectedFiles.length) {
+      markStart();
+      analytics.goal("document_selected", { ...pageParams(window.location.pathname), document_count: result.files.length === 1 ? "1" : result.files.length <= 5 ? "2-5" : "6-10" });
+    }
+  }
+
+  function direction() {
+    const product = products.find(item => (item.formTitle || item.title) === selectedTopic);
+    const service = services.find(item => (item.cardTitle || item.title) === selectedTopic);
+    return product ? { product: product.slug } : service ? { service: service.slug } : {};
+  }
+
+  function markStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    analytics.goal("lead_form_start", { ...pageParams(window.location.pathname), ...direction(), placement: "form" });
   }
 
   function handleRemoveFile(fileId) {
@@ -118,16 +139,37 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     try {
       const submissionSignature = await createSubmissionSignature(formData);
       if (!mountedRef.current) return;
+      const previousSubmission = submissionRef.current;
+      const recovered = previousSubmission ? null : analytics.recoverSubmission(submissionSignature);
       submissionRef.current = submissionForSignature(
-        submissionRef.current,
+        submissionRef.current || recovered,
         submissionSignature,
         () => crypto.randomUUID(),
       );
+      if (previousSubmission !== submissionRef.current) {
+        if (snapshotRef.current) analytics.release(snapshotRef.current);
+        snapshotRef.current = analytics.snapshot(direction(), recovered);
+      }
+      const snapshot = snapshotRef.current;
+      for (const type of ["product", "service"]) {
+        if (snapshot.direction[type]) {
+          formData.set("direction_type", type);
+          formData.set("direction_slug", snapshot.direction[type]);
+        }
+      }
+      const attribution = analytics.payload(snapshot);
+      analytics.rememberSubmission(submissionRef.current, snapshot);
+      if (attribution) formData.set("campaign_attribution", JSON.stringify(attribution));
       formData.set("submission_id", submissionRef.current.id);
 
       await createLead(formData);
+      analytics.success(submissionRef.current.id, snapshot);
+      analytics.forgetSubmission(submissionRef.current.id);
+      analytics.release(snapshot);
+      snapshotRef.current = null;
       if (!mountedRef.current) return;
       submissionRef.current = null;
+      startedRef.current = false;
 
       form.reset();
       setSelectedTopic(initialTopicRef.current);
@@ -153,7 +195,10 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     } catch (error) {
       if (!mountedRef.current) return;
       if (error.status === 409) {
+        if (submissionRef.current) analytics.forgetSubmission(submissionRef.current.id);
         submissionRef.current = null;
+        if (snapshotRef.current) analytics.release(snapshotRef.current);
+        snapshotRef.current = null;
       }
       setSubmitStatus("error");
       setSubmitMessage(
@@ -167,7 +212,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   }
 
   return (
-    <form className="lead-form" onSubmit={handleSubmit}>
+    <form className="lead-form" onSubmit={handleSubmit} onInput={markStart}>
       <fieldset className="lead-form__fieldset" disabled={isSubmitting}>
       <div className="lead-form__grid">
         <label>
@@ -211,7 +256,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
             products={products}
             services={services}
             value={selectedTopic}
-            onChange={setSelectedTopic}
+            onChange={(topic) => { markStart(); setSelectedTopic(topic); }}
             disabled={isSubmitting}
           />
         </label>
@@ -257,7 +302,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       <input
         type="hidden"
         name="source_page"
-        value={`${window.location.pathname}${window.location.hash}`}
+        value={safePath(window.location.pathname)}
       />
 
       <label className="lead-form__consent">

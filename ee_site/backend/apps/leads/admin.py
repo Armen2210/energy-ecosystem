@@ -47,12 +47,15 @@ class LeadAdmin(admin.ModelAdmin):
         "notification_status",
         "source_page",
         "source_system",
+        "direction_summary",
+        "campaign_summary",
         "created_at",
     )
     list_filter = (
         "status",
         "notification_status",
         "source_system",
+        "direction_type",
         "created_at",
     )
     search_fields = (
@@ -63,6 +66,7 @@ class LeadAdmin(admin.ModelAdmin):
         "description",
     )
     readonly_fields = (
+        "direction_type", "direction_slug", "direction_summary", "campaign_summary", "campaign_attribution",
         "legacy_attachment_state",
         "created_at",
         "notification_status",
@@ -77,6 +81,7 @@ class LeadAdmin(admin.ModelAdmin):
     fields = (
         "name", "company_name", "phone", "email", "description",
         "source_page", "source_system", "status", "legacy_attachment_state",
+        "direction_type", "direction_slug", "direction_summary", "campaign_summary", "campaign_attribution",
         "notification_status", "notification_attempts",
         "notification_last_attempt_at", "notification_sent_at",
         "notification_last_error_code", "submission_id",
@@ -85,6 +90,28 @@ class LeadAdmin(admin.ModelAdmin):
     ordering = (
         "-created_at",
     )
+
+    @admin.display(description="Источник")
+    def campaign_summary(self, lead):
+        value = lead.campaign_attribution if lead else {}
+        if not value:
+            return "Неизвестный источник"
+        parts = []
+        for key, label in (("first", "Первый размеченный вход"), ("last", "Последний рекламный вход")):
+            tags = value.get(key, {}).get("tags", {})
+            parts.append(f"{label}: " + ", ".join(f"{name}={code}" for name, code in tags.items()))
+        return " | ".join(parts)
+
+    @admin.display(description="Направление")
+    def direction_summary(self, lead):
+        names = {
+            "bmk": "БМК «Гигатерм»", "btp": "БТП «Энерголайн»",
+            "vns": "ВНС «Акварус»", "pns": "Пожарные насосные станции",
+            "automation-cabinets": "Шкафы управления и автоматизации",
+            "design": "Проектирование", "construction-installation": "СМР",
+            "commissioning": "Пусконаладочные работы",
+        }
+        return names.get(lead.direction_slug, "Не выбрано") if lead else "Не выбрано"
 
     @admin.display(description="Историческое вложение")
     def legacy_attachment_state(self, lead):

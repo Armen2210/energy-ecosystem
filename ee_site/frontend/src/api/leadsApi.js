@@ -32,7 +32,7 @@ async function readJson(response) {
 }
 
 function isConfirmedSuccess(response, data) {
-  if (!data || !(typeof data.id === "number" || typeof data.id === "string")) {
+  if (!data || !(Number.isSafeInteger(data.id) && data.id > 0 || typeof data.id === "string" && /^[1-9][0-9]{0,18}$/.test(data.id))) {
     return false;
   }
   if (response.status === 201) return true;
@@ -95,7 +95,7 @@ async function sha256Hex(value) {
 export async function createSubmissionSignature(formData) {
   const fields = [];
   for (const [name, value] of formData.entries()) {
-    if (name === "submission_id") continue;
+    if (["submission_id", "campaign_attribution", "direction_type", "direction_slug"].includes(name)) continue;
     if (value instanceof File) {
       fields.push([
         name,

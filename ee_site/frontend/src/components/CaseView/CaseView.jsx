@@ -254,6 +254,8 @@ function CaseView({
               className="case-modal__top-cta"
               type="button"
               onClick={onCtaClick}
+              data-analytics-cta="case"
+              data-analytics-case={caseItem.slug}
             >
               <span>Обсудить задачу</span>
               <span aria-hidden="true">↗</span>
@@ -307,6 +309,8 @@ function CaseView({
               className="button button--primary case-modal__cta"
               type="button"
               onClick={onCtaClick}
+              data-analytics-cta="case"
+              data-analytics-case={caseItem.slug}
             >
               {caseItem.cta.buttonText}
             </button>
