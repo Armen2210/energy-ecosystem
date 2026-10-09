@@ -278,7 +278,11 @@ function ProductPage() {
           >
 
             <div className="product-hero__visual">
-              <img src={product.heroImage} alt={product.heroImageAlt} />
+              <img src={product.heroImage} alt={product.heroImageAlt}
+                width={product.heroImageWidth} height={product.heroImageHeight}
+                srcSet={product.heroImageSet}
+                sizes="(min-width: 961px) 32vw, calc(100vw - 34px)"
+                fetchPriority="high" />
             </div>
 
             <div className="product-hero__content">
@@ -286,6 +290,7 @@ function ProductPage() {
                 <div className="product-hero__brand">
                   <img
                     src={product.lineLogo}
+                    width={product.lineLogoWidth} height={product.lineLogoHeight}
                     alt={product.lineLogoAlt || `Логотип линейки ${product.shortTitle}`}
                   />
                 </div>

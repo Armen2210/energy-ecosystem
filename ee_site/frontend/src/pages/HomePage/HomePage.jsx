@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
-import heroImage from "../../assets/hero.jpg";
+import heroImage from "../../assets/hero.webp";
+import heroImageSmall from "../../assets/hero-480.webp";
+import heroImageMedium from "../../assets/hero-780.webp";
 import AiSummary from "../../components/AiSummary";
 import CaseCard from "../../components/CaseCard";
 import Hero from "../../components/Hero";
@@ -43,7 +45,7 @@ function HomePage() {
         path="/"
       />
 
-      <Hero image={heroImage} />
+      <Hero image={heroImage} imageSmall={heroImageSmall} imageMedium={heroImageMedium} />
 
       {/* =========================================================
           AI SUMMARY / КРАТКО О ГЛАВНОЙ СТРАНИЦЕ

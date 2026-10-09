@@ -134,3 +134,69 @@ test("reports HTTP 413 even when a proxy returns HTML", async () => {
     globalThis.fetch = originalFetch;
   }
 });
+
+test("429/413 JSON and HTML preserve documents and submission for a manual retry", async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    for (const status of [429, 413]) {
+      for (const contentType of ["application/json", "text/html"]) {
+        const form = new FormData();
+        form.set("name", "Synthetic visitor");
+        form.set("description", "Keep this text");
+        form.append("attachments", new File(["document"], "request.txt"));
+        const signature = await createSubmissionSignature(form);
+        const submission = submissionForSignature(null, signature, () => "fixed-key");
+        form.set("submission_id", submission.id);
+        let calls = 0;
+        globalThis.fetch = async (_url, options) => {
+          calls += 1;
+          assert.equal(options.body, form);
+          return new Response(
+            contentType === "application/json"
+              ? JSON.stringify({ code: "lead_rate_limited", retry_after: 12 })
+              : "<html>nginx rejection</html>",
+            { status, headers: { "content-type": contentType } },
+          );
+        };
+        await assert.rejects(createLead(form), (error) => {
+          assert.equal(error.status, status);
+          if (status === 429) {
+            assert.match(error.message, /подождите|Подождите/);
+            assert.equal(error.retryAfter, contentType === "application/json" ? 12 : null);
+          }
+          return true;
+        });
+        assert.equal(calls, 1, "no automatic POST retry");
+        assert.equal(form.get("name"), "Synthetic visitor");
+        assert.equal(form.get("description"), "Keep this text");
+        assert.equal(await form.get("attachments").text(), "document");
+        assert.equal(form.get("submission_id"), "fixed-key");
+        const retry = submissionForSignature(
+          submission, await createSubmissionSignature(form), () => "unexpected-new-key",
+        );
+        assert.equal(retry, submission);
+        globalThis.fetch = async () => new Response(JSON.stringify({ id: 7, duplicate: true }), {
+          status: 200, headers: { "content-type": "application/json" },
+        });
+        assert.deepEqual(await createLead(form), { id: 7, duplicate: true });
+      }
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("429 Retry-After takes precedence and invalid values have a safe fallback", async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    for (const [header, expected] of [["30", 30], ["not-a-delay", null], ["-1", null]]) {
+      globalThis.fetch = async () => new Response("<html>limited</html>", {
+        status: 429,
+        headers: { "content-type": "text/html", "retry-after": header },
+      });
+      await assert.rejects(createLead(new FormData()), { status: 429, retryAfter: expected });
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

@@ -23,6 +23,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const EMPTY_GALLERY = [];
+
 function CaseView({
   caseItem,
   onCtaClick,
@@ -31,20 +33,19 @@ function CaseView({
   showMobileCta = true,
 }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [gallerySlug, setGallerySlug] = useState(caseItem.slug);
+
+  // Reset only gallery state before rendering a different case; no remount.
+  if (gallerySlug !== caseItem.slug) {
+    setGallerySlug(caseItem.slug);
+    setActiveImageIndex(0);
+  }
 
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
 
-  const gallery = caseItem.gallery || [];
+  const gallery = caseItem.gallery || EMPTY_GALLERY;
   const activeImage = gallery[activeImageIndex];
-
-  /*
-    При смене кейса возвращаем галерею
-    к первой фотографии.
-  */
-  useEffect(() => {
-    setActiveImageIndex(0);
-  }, [caseItem.slug]);
 
   /*
     GALLERY PRELOAD / ПРЕДЗАГРУЗКА ФОТОГРАФИЙ
@@ -94,6 +95,9 @@ function CaseView({
       }
 
       function handleGalleryKeyDown(event) {
+        if (event.defaultPrevented || event.target.closest(
+          'input, textarea, select, [contenteditable="true"]',
+        )) return;
         if (event.key === "ArrowLeft") {
           setActiveImageIndex((currentIndex) =>
             currentIndex === 0

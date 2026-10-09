@@ -117,7 +117,8 @@ def _cleanup_files(stored_files):
 
 def create_lead(validated_data, attachments=()):
     attachments = list(attachments)
-    _validate_attachments(validated_data.get("attachment"), attachments)
+    legacy_attachment = validated_data.get("attachment")
+    files = _validate_attachments(legacy_attachment, attachments)
     submission_id = validated_data.get("submission_id")
     fingerprint = (
         submission_fingerprint(validated_data, attachments) if submission_id else ""
@@ -129,36 +130,21 @@ def create_lead(validated_data, attachments=()):
         except Lead.DoesNotExist:
             pass
 
+    # ``attachment`` remains an accepted serializer/model field for backwards
+    # compatibility, but new public uploads must use the private attachment
+    # records.  Calculate the legacy fingerprint above before removing it.
+    lead_data = dict(validated_data)
+    lead_data.pop("attachment", None)
     lead = Lead(
-        **validated_data,
+        **lead_data,
         submission_fingerprint=fingerprint,
         notification_status=Lead.NotificationStatus.PENDING,
     )
     stored_files = []
-    legacy_was_uncommitted = bool(
-        lead.attachment and not lead.attachment._committed
-    )
-
-    def track_saved_legacy_attachment():
-        if (
-            legacy_was_uncommitted
-            and lead.attachment
-            and lead.attachment._committed
-            and lead.attachment.name
-            and not any(
-                name == lead.attachment.name and field_type == "legacy"
-                for _, name, field_type in stored_files
-            )
-        ):
-            stored_files.append(
-                (lead.attachment.storage, lead.attachment.name, "legacy")
-            )
-
     try:
         with transaction.atomic():
             lead.save()
-            track_saved_legacy_attachment()
-            for uploaded_file in attachments:
+            for uploaded_file in files:
                 attachment = LeadAttachment(
                     lead=lead,
                     original_name=uploaded_file.name,
@@ -171,13 +157,11 @@ def create_lead(validated_data, attachments=()):
                 attachment.save()
             schedule_lead_notification(lead.id)
     except IntegrityError:
-        track_saved_legacy_attachment()
         _cleanup_files(stored_files)
         if not submission_id:
             raise
         return _duplicate_result(submission_id, fingerprint), False
     except Exception:
-        track_saved_legacy_attachment()
         _cleanup_files(stored_files)
         raise
 

@@ -4,8 +4,10 @@
 // Header, маршруты страниц и Footer.
 // =========================================================
 
+import { useEffect } from "react";
+
 import {
-  Navigate,
+  useNavigate,
   Route,
   Routes,
   useLocation,
@@ -34,6 +36,14 @@ import "./App.css";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Render home immediately at the alias, avoiding a footer-only frame.
+  useEffect(() => {
+    if (location.pathname === "/contacts") {
+      navigate("/#contacts", { replace: true });
+    }
+  }, [location.pathname, navigate]);
 
   const backgroundLocation = location.state?.backgroundLocation;
   return (
@@ -51,7 +61,7 @@ function App() {
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/cases" element={<CasesPage />} />
         <Route path="/cases/:slug" element={<CasePage />} />
-        <Route path="/contacts" element={<Navigate to="/#contacts" replace />} />
+        <Route path="/contacts" element={<HomePage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

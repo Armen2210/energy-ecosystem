@@ -23,6 +23,16 @@ import FileSelect from "../FileSelect";
 
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
+  const [topicOrigin, setTopicOrigin] = useState(initialTopic);
+  if (topicOrigin !== initialTopic) {
+    setTopicOrigin(initialTopic);
+    setSelectedTopic(initialTopic);
+  }
+  const mountedRef = useRef(false);
+  const initialTopicRef = useRef(initialTopic);
+  useEffect(() => {
+    initialTopicRef.current = initialTopic;
+  }, [initialTopic]);
   const submissionRef = useRef(null);
   const isSubmittingRef = useRef(false);
   const statusHideTimerRef = useRef(null);
@@ -34,16 +44,13 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const [submitMessage, setSubmitMessage] = useState("");
   const [isStatusHiding, setIsStatusHiding] = useState(false);
   useEffect(() => {
-    setSelectedTopic(initialTopic);
-  }, [initialTopic]);
-
-  useEffect(
-    () => () => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
       window.clearTimeout(statusHideTimerRef.current);
       window.clearTimeout(statusResetTimerRef.current);
-    },
-    [],
-  );
+    };
+  }, []);
 
   function clearStatusTimers() {
     window.clearTimeout(statusHideTimerRef.current);
@@ -110,6 +117,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
     try {
       const submissionSignature = await createSubmissionSignature(formData);
+      if (!mountedRef.current) return;
       submissionRef.current = submissionForSignature(
         submissionRef.current,
         submissionSignature,
@@ -118,10 +126,11 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       formData.set("submission_id", submissionRef.current.id);
 
       await createLead(formData);
+      if (!mountedRef.current) return;
       submissionRef.current = null;
 
       form.reset();
-      setSelectedTopic(initialTopic);
+      setSelectedTopic(initialTopicRef.current);
       setSelectedFiles([]);
       setFileError("");
 
@@ -142,6 +151,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         setIsStatusHiding(false);
       }, 5600);
     } catch (error) {
+      if (!mountedRef.current) return;
       if (error.status === 409) {
         submissionRef.current = null;
       }
@@ -152,7 +162,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       );
     } finally {
       isSubmittingRef.current = false;
-      setIsSubmitting(false);
+      if (mountedRef.current) setIsSubmitting(false);
     }
   }
 

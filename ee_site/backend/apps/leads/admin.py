@@ -1,9 +1,11 @@
 import os
 
 from django.contrib import admin
+from django.conf import settings
 from django.core.exceptions import PermissionDenied, SuspiciousFileOperation
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404
+from django.db import transaction
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.text import get_valid_filename
@@ -17,6 +19,7 @@ NOTIFICATION_RETRY_LIMIT = 5
 
 class LeadAttachmentInline(admin.TabularInline):
     model = LeadAttachment
+    fk_name = "lead"
     extra = 0
     can_delete = False
     fields = ("original_name", "size", "created_at", "download_link")
@@ -60,6 +63,7 @@ class LeadAdmin(admin.ModelAdmin):
         "description",
     )
     readonly_fields = (
+        "legacy_attachment_state",
         "created_at",
         "notification_status",
         "notification_attempts",
@@ -70,9 +74,25 @@ class LeadAdmin(admin.ModelAdmin):
         "submission_fingerprint",
         "updated_at",
     )
+    fields = (
+        "name", "company_name", "phone", "email", "description",
+        "source_page", "source_system", "status", "legacy_attachment_state",
+        "notification_status", "notification_attempts",
+        "notification_last_attempt_at", "notification_sent_at",
+        "notification_last_error_code", "submission_id",
+        "submission_fingerprint", "created_at", "updated_at",
+    )
     ordering = (
         "-created_at",
     )
+
+    @admin.display(description="Историческое вложение")
+    def legacy_attachment_state(self, lead):
+        if not lead or not lead.pk or not lead.attachment:
+            return "Отсутствует"
+        if LeadAttachment.objects.filter(legacy_source=lead).exists():
+            return "Проверенная приватная копия показана ниже"
+        return "Ожидает переноса; публичная ссылка скрыта"
 
     def get_urls(self):
         custom_urls = [
@@ -122,6 +142,34 @@ class LeadAdmin(admin.ModelAdmin):
             raise PermissionDenied
 
         selected_count = queryset.count()
+        if settings.LEAD_NOTIFICATION_MODE == "background":
+            queued_count = 0
+            # Conditional writes make concurrent actions harmless.  The limit
+            # applies to successful transitions, rather than merely selected IDs.
+            with transaction.atomic():
+                candidates = (
+                    queryset.filter(
+                        notification_status=Lead.NotificationStatus.FAILED,
+                    )
+                    .order_by("pk")
+                    .values_list("pk", flat=True)
+                )
+                for lead_id in candidates.iterator():
+                    if queued_count == NOTIFICATION_RETRY_LIMIT:
+                        break
+                    queued_count += Lead.objects.filter(
+                        pk=lead_id,
+                        notification_status=Lead.NotificationStatus.FAILED,
+                    ).update(
+                        notification_status=Lead.NotificationStatus.PENDING,
+                        notification_last_error_code="",
+                    )
+            self.message_user(
+                request,
+                f"Уведомления: поставлено в очередь — {queued_count}, "
+                f"пропущено — {selected_count - queued_count}.",
+            )
+            return
         lead_ids = list(
             queryset.filter(notification_status=Lead.NotificationStatus.FAILED)
             .order_by("pk")

@@ -24,6 +24,9 @@ function TopicSelect({
   const buttonRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  if (isOpen && disabled) {
+    setIsOpen(false);
+  }
 
   const productOptions = products.map((product) => ({
     value: product.formTitle || product.title,
@@ -64,11 +67,6 @@ function TopicSelect({
     };
   }, []);
 
-  useEffect(() => {
-    if (!disabled) return undefined;
-    const closeTimer = window.setTimeout(() => setIsOpen(false), 0);
-    return () => window.clearTimeout(closeTimer);
-  }, [disabled]);
 
   function handleKeyDown(event) {
     if (disabled) return;

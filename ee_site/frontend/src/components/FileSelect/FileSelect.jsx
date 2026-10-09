@@ -51,6 +51,9 @@ function FileSelect({
   const fileInputRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  if (isOpen && (disabled || files.length === 0)) {
+    setIsOpen(false);
+  }
 
   const totalSize = files.reduce(
     (sum, { file }) => sum + file.size,
@@ -97,18 +100,6 @@ function FileSelect({
     };
   }, []);
 
-  useEffect(() => {
-    if (!disabled && files.length > 0) {
-      return undefined;
-    }
-
-    const closeTimer = window.setTimeout(
-      () => setIsOpen(false),
-      0,
-    );
-
-    return () => window.clearTimeout(closeTimer);
-  }, [disabled, files.length]);
 
   function openFilePicker() {
     if (!canAddFiles) return;

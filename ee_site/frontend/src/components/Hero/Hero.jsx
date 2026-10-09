@@ -4,7 +4,7 @@
 // ЭЭ-5.1: убраны дублирующие hero-facts, структура упрощена.
 // =========================================================
 
-function Hero({ image }) {
+function Hero({ image, imageSmall, imageMedium }) {
   return (
     <section className="hero">
       <div className="container hero__grid">
@@ -43,7 +43,10 @@ function Hero({ image }) {
         </div>
 
         <div className="hero__visual">
-          <img src={image} alt="Инженерное оборудование Энергоэффект" />
+          <img src={image} width="1554" height="1012"
+            srcSet={`${imageSmall} 480w, ${imageMedium} 780w, ${image} 1554w`}
+            sizes="(min-width: 961px) 50vw, calc(100vw - 32px)"
+            alt="Инженерное оборудование Энергоэффект" />
         </div>
       </div>
     </section>

@@ -28,3 +28,6 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.MD5PasswordHasher",
 ]
+
+# Rate tests explicitly enable an isolated store; other suites never share state.
+LEAD_RATE_LIMIT_ENABLED = False

@@ -161,6 +161,21 @@ LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE = positive_int_from_env(
     "LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE", 10 * 1024 * 1024
 )
 
+
+def choice_from_env(name, default, choices):
+    value = os.getenv(name, default).strip().lower()
+    if value not in choices:
+        allowed = ", ".join(sorted(choices))
+        raise ImproperlyConfigured(f"{name} must be one of: {allowed}.")
+    return value
+
+
+# ``sync`` is deliberately the safe upgrade default.  Switch this to
+# ``background`` only after the separately supervised worker is ready.
+LEAD_NOTIFICATION_MODE = choice_from_env(
+    "LEAD_NOTIFICATION_MODE", "sync", {"sync", "background"}
+)
+
 # =========================================================
 # EMAIL / НАСТРОЙКИ ПОЧТОВЫХ УВЕДОМЛЕНИЙ
 # Используются для отправки заявок менеджеру с сайта.
@@ -257,3 +272,25 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+
+# Public EE lead endpoint only. The store is separate from application data,
+# shared by all Gunicorn workers on ONE host, and must not live on NFS.
+LEAD_RATE_LIMIT_ENABLED = choice_from_env(
+    "LEAD_RATE_LIMIT_ENABLED", "true", {"true", "false"}
+) == "true"
+LEAD_RATE_STORE = Path(os.getenv("LEAD_RATE_STORE", BASE_DIR / "lead_rate_limits.sqlite3"))
+LEAD_RATE_BURST_LIMIT = positive_int_from_env("LEAD_RATE_BURST_LIMIT", 20)
+LEAD_RATE_BURST_SECONDS = positive_int_from_env("LEAD_RATE_BURST_SECONDS", 60)
+LEAD_RATE_SUSTAINED_LIMIT = positive_int_from_env("LEAD_RATE_SUSTAINED_LIMIT", 100)
+LEAD_RATE_SUSTAINED_SECONDS = positive_int_from_env("LEAD_RATE_SUSTAINED_SECONDS", 3600)
+LEAD_TRUSTED_PROXY_NETWORKS = [
+    value.strip() for value in os.getenv("LEAD_TRUSTED_PROXY_NETWORKS", "").split(",")
+    if value.strip()
+]
+LEAD_TRUST_UNIX_SOCKET_PROXY = choice_from_env(
+    "LEAD_TRUST_UNIX_SOCKET_PROXY", "false", {"true", "false"}
+) == "true"
+# Whole body, including multipart overhead, distinct from document limits.
+LEAD_MAX_REQUEST_SIZE = positive_int_from_env("LEAD_MAX_REQUEST_SIZE", 27 * 1024 * 1024)
+LEAD_MAX_FORM_FIELDS = positive_int_from_env("LEAD_MAX_FORM_FIELDS", 64)
