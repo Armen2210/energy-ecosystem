@@ -1,57 +1,64 @@
-// =========================================================
-// COOKIE BANNER / УВЕДОМЛЕНИЕ О COOKIES
-// Небольшой production-ready баннер:
-// - сообщает пользователю об использовании cookies;
-// - ведёт на раздел /privacy#cookies;
-// - запоминает согласие в localStorage.
-// =========================================================
-
-import { useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
+import { analytics } from "../../analytics/runtime.js";
 
-const COOKIE_CONSENT_KEY = "ee_cookie_consent";
-
-function CookieBanner() {
-  const [isVisible, setIsVisible] = useState(() => {
-    try {
-      return !localStorage.getItem(COOKIE_CONSENT_KEY);
-    } catch {
-      return true;
+export default function CookieBanner() {
+  const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
+  const [opened, setOpened] = useState(false);
+  const accept = useRef(null);
+  const returnFocus = useRef(null);
+  useEffect(() => {
+    function open() {
+      returnFocus.current = document.activeElement;
+      setOpened(true);
+      setTimeout(() => accept.current?.focus(), 0);
     }
-  });
-
-  const handleAccept = () => {
-    try {
-      localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
-    } catch {
-      // Storage may be unavailable; acceptance still applies to this visit.
-    }
-    setIsVisible(false);
-  };
-
-  if (!isVisible) {
-    return null;
+    window.addEventListener("ee:analytics-settings", open);
+    return () => window.removeEventListener("ee:analytics-settings", open);
+  }, []);
+  function choose(next) {
+    analytics.choose(next);
+    setOpened(false);
+    returnFocus.current?.focus();
   }
-
+  if (!opened && choice !== "unknown") return null;
   return (
-    <div className="cookie-banner" role="dialog" aria-live="polite">
+    <section className="cookie-banner" aria-labelledby="cookie-banner-title">
       <div className="cookie-banner__content">
-        <p>
-          Мы используем cookies, чтобы сайт работал корректно и становился
-          удобнее. Продолжая пользоваться сайтом, вы соглашаетесь с
-          использованием cookies.
-        </p>
-
+        <div className="cookie-banner__copy">
+          <h2 id="cookie-banner-title">Помогите нам стать удобнее</h2>
+          <p>
+            С вашего разрешения мы используем cookies и Яндекс Метрику, чтобы
+            понимать, что полезно посетителям, и делать сайт удобнее. Изменить
+            выбор можно в настройках cookies внизу сайта.
+          </p>
+          <details className="cookie-banner__details">
+            <summary>Подробнее</summary>
+            <p>
+              Для аналитики используем Яндекс Метрику. Она включается только после
+              вашего разрешения и может использовать cookies и хранилище браузера.
+              При разрешении также сохраняются сведения об источниках перехода на
+              сайт и отметки учёта целей.
+            </p>
+            <p>
+              Отказ от аналитики не отключает техническое хранение для работы сайта.
+              Поля формы и выбранные файлы в хранилище браузера не сохраняются.
+            </p>
+            <p>
+              Изменить решение или отозвать разрешение можно через “Настройки cookies”
+              внизу сайта. Этот выбор не заменяет согласия на обработку данных при
+              отправке заявки.
+            </p>
+            <Link to="/privacy#cookies">Подробнее о хранении и обработке данных</Link>
+          </details>
+          {opened && <p className="cookie-banner__status">Сейчас аналитика: {choice === "allowed" ? "разрешена" : "выключена"}.</p>}
+        </div>
         <div className="cookie-banner__actions">
-          <Link to="/privacy#cookies">Подробнее</Link>
-
-          <button type="button" onClick={handleAccept}>
-            Хорошо
-          </button>
+          <button ref={accept} type="button" onClick={() => choose("allowed")}>Разрешить аналитику</button>
+          <button type="button" onClick={() => choose("denied")}>Без аналитики</button>
+          {opened && choice !== "unknown" && <button type="button" onClick={() => { setOpened(false); returnFocus.current?.focus(); }}>Закрыть</button>}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
-
-export default CookieBanner;

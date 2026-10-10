@@ -33,6 +33,7 @@ import PrivacyPage from "./pages/PrivacyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import "./App.css";
+import AnalyticsBridge from "./analytics/AnalyticsBridge";
 
 function App() {
   const location = useLocation();
@@ -41,13 +42,14 @@ function App() {
   // Render home immediately at the alias, avoiding a footer-only frame.
   useEffect(() => {
     if (location.pathname === "/contacts") {
-      navigate("/#contacts", { replace: true });
+      navigate(`/${location.search}#contacts`, { replace: true });
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, location.search, navigate]);
 
   const backgroundLocation = location.state?.backgroundLocation;
   return (
     <div className="site">
+      <AnalyticsBridge />
       <Header navigation={navigation} />
 
       <ScrollToTop />

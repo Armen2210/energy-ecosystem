@@ -74,6 +74,10 @@ class Lead(models.Model):
         verbose_name="Система-источник"
     )
 
+    direction_type = models.CharField(max_length=10, blank=True, choices=(("product", "Продукт"), ("service", "Услуга")), verbose_name="Тип направления")
+    direction_slug = models.CharField(max_length=40, blank=True, verbose_name="Направление")
+    campaign_attribution = models.JSONField(default=dict, blank=True, verbose_name="Рекламный источник")
+
     status = models.CharField(
         max_length=30,
         choices=Status.choices,
