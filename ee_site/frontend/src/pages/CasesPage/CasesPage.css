@@ -61,7 +61,7 @@
   margin-bottom: 0;
 }
 
-.cases-page__intro .section__head h2 {
+.cases-page__intro .section__head :is(h1, h2) {
   max-width: 760px;
 }
 

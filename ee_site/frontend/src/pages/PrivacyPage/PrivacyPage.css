@@ -8,6 +8,14 @@
   padding-bottom: 52px;
 }
 
+.privacy-page__return-note {
+  max-width: 760px;
+  margin: 0 0 28px;
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .privacy-page__notice {
   max-width: 760px;
   margin-top: 22px;

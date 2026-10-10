@@ -41,7 +41,7 @@ function CasesPage() {
             />
 
             <div className="cases-page__intro">
-              <SectionHeader
+              <SectionHeader as="h1"
                 title="Реализованные инженерные решения"
                 description="Здесь собраны задачи и направления, в которых ООО «Энергоэффект» разрабатывает, производит и сопровождает инженерные решения для объектов."
               />
@@ -49,7 +49,7 @@ function CasesPage() {
 
           <div className="cases-grid cases-grid--page">
             {cases.map((caseItem) => (
-              <CaseCard caseItem={caseItem} key={caseItem.slug} />
+              <CaseCard headingLevel={2} caseItem={caseItem} key={caseItem.slug} />
             ))}
           </div>
 

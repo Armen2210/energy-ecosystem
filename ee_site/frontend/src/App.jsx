@@ -13,12 +13,15 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import { SeoLocationContext } from "./components/Seo/location";
+
 import CaseModal from "./components/CaseModal";
 import CookieBanner from "./components/CookieBanner";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 import { navigation } from "./data/navigation";
+import { cases } from "./data/cases";
 
 import AboutPage from "./pages/AboutPage";
 import CasesPage from "./pages/CasesPage";
@@ -41,13 +44,15 @@ function App() {
 
   // Render home immediately at the alias, avoiding a footer-only frame.
   useEffect(() => {
-    if (location.pathname === "/contacts") {
+    if (/^\/contacts\/?$/.test(location.pathname)) {
       navigate(`/${location.search}#contacts`, { replace: true });
     }
   }, [location.pathname, location.search, navigate]);
 
-  const backgroundLocation = location.state?.backgroundLocation;
+  const isDetailedCase = cases.some((item) => item.hasDetailPage && item.url === location.pathname);
+  const backgroundLocation = isDetailedCase ? location.state?.backgroundLocation : null;
   return (
+    <SeoLocationContext.Provider value={location}>
     <div className="site">
       <AnalyticsBridge />
       <Header navigation={navigation} />
@@ -55,28 +60,29 @@ function App() {
       <ScrollToTop />
 
       <Routes location={backgroundLocation || location}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/solutions" element={<SolutionsPage />} />
-        <Route path="/solutions/:slug" element={<ProductPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/:slug" element={<ServicePage />} />
-        <Route path="/cases" element={<CasesPage />} />
-        <Route path="/cases/:slug" element={<CasePage />} />
-        <Route path="/contacts" element={<HomePage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route caseSensitive path="/" element={<HomePage />} />
+        <Route caseSensitive path="/about" element={<AboutPage />} />
+        <Route caseSensitive path="/solutions" element={<SolutionsPage />} />
+        <Route caseSensitive path="/solutions/:slug" element={<ProductPage />} />
+        <Route caseSensitive path="/services" element={<ServicesPage />} />
+        <Route caseSensitive path="/services/:slug" element={<ServicePage />} />
+        <Route caseSensitive path="/cases" element={<CasesPage />} />
+        <Route caseSensitive path="/cases/:slug" element={<CasePage />} />
+        <Route caseSensitive path="/contacts" element={<HomePage />} />
+        <Route caseSensitive path="/privacy" element={<PrivacyPage />} />
+        <Route caseSensitive path="*" element={<NotFoundPage />} />
       </Routes>
 
       {backgroundLocation && (
         <Routes>
-          <Route path="/cases/:slug" element={<CaseModal />} />
+          <Route caseSensitive path="/cases/:slug" element={<CaseModal />} />
         </Routes>
       )}
 
       <Footer navigation={navigation} />
       <CookieBanner />
     </div>
+    </SeoLocationContext.Provider>
   );
 }
 

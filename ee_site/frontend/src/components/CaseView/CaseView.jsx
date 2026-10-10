@@ -29,6 +29,7 @@ function CaseView({
   caseItem,
   onCtaClick,
   titleId = "case-view-title",
+  headingLevel = 2,
   showTopCta = true,
   showMobileCta = true,
 }) {
@@ -41,6 +42,8 @@ function CaseView({
     setActiveImageIndex(0);
   }
 
+  const Title = `h${headingLevel}`;
+  const Subheading = `h${headingLevel + 1}`;
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
 
@@ -263,9 +266,9 @@ function CaseView({
           )}
         </div>
 
-        <h2 id={titleId}>
+        <Title id={titleId}>
           {caseItem.heroTitle}
-        </h2>
+        </Title>
 
         <p className="case-modal__lead">
           {caseItem.heroSubtitle}
@@ -286,7 +289,7 @@ function CaseView({
         </div>
 
         <div className="case-modal__text-block">
-          <h3>{caseItem.task.title}</h3>
+          <Subheading>{caseItem.task.title}</Subheading>
 
           {caseItem.task.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -294,7 +297,7 @@ function CaseView({
         </div>
 
         <div className="case-modal__text-block">
-          <h3>{caseItem.completedWorks.title}</h3>
+          <Subheading>{caseItem.completedWorks.title}</Subheading>
 
           <ul>
             {caseItem.completedWorks.items.map((item) => (

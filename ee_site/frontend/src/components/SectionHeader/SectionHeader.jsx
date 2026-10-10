@@ -4,7 +4,7 @@
 // Используется в продуктах, услугах, кейсах, процессе и т.д.
 // =========================================================
 
-function SectionHeader({ eyebrow, title, description, theme = "light" }) {
+function SectionHeader({ eyebrow, title, description, theme = "light", as: Heading = "h2" }) {
   const isDark = theme === "dark";
 
   return (
@@ -15,7 +15,7 @@ function SectionHeader({ eyebrow, title, description, theme = "light" }) {
         </div>
       )}
 
-      <h2>{title}</h2>
+      {title ? <Heading>{title}</Heading> : <div className="section__head-rule" aria-hidden="true" />}
 
       {description && <p>{description}</p>}
     </div>

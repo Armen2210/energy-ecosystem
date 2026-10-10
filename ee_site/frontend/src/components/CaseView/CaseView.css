@@ -167,7 +167,7 @@
   outline-offset: 3px;
 }
 
-.case-modal__content h2 {
+.case-modal__content > :is(h1, h2) {
   margin: 0;
   font-family: var(--font-heading);
   font-size: clamp(36px, 3vw, 48px);
@@ -217,7 +217,8 @@
   margin-top: 18px;
 }
 
-.case-modal__text-block h3 {
+.case-modal__text-block :is(h2, h3) {
+  font-weight: 700;
   margin: 0 0 8px;
   font-size: 20px;
   line-height: 1.1;
@@ -421,7 +422,7 @@
     margin-top: 20px;
   }
 
-  .case-modal__text-block h3 {
+  .case-modal__text-block :is(h2, h3) {
     font-size: 22px;
   }
 
@@ -450,7 +451,7 @@
 }
 
 @media (max-width: 640px) {
-  .case-modal__content h2 {
+  .case-modal__content > :is(h1, h2) {
     font-size: clamp(29px, 8vw, 32px);
     font-weight: 750;
     line-height: 1.07;

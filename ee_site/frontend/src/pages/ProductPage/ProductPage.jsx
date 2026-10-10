@@ -18,6 +18,7 @@ import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
 
 import Seo from "../../components/Seo";
+import NotFoundPage from "../NotFoundPage";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -201,23 +202,8 @@ function ProductPage() {
   const productFaq = productFaqBySlug[slug] || [];
 
   if (!product) {
-    return (
-      <main>
-
-
-        <section className="section">
-          <div className="container">
-            <SectionHeader
-              eyebrow="Продукция"
-              title="Направление не найдено"
-              description="Проверьте адрес страницы или вернитесь к списку продуктовых направлений."
-            />
-          </div>
-        </section>
-      </main>
-    );
+    return <NotFoundPage />;
   }
-
 
 
   return (
@@ -346,7 +332,7 @@ function ProductPage() {
                 eyebrow={`Частые вопросы: ${product.shortTitle}`}
               />
 
-              <FAQ items={productFaq} stateKey={`product-${product.slug}`} />
+              <FAQ path={`/solutions/${product.slug}`} items={productFaq} stateKey={`product-${product.slug}`} />
           </div>
 
           </div>

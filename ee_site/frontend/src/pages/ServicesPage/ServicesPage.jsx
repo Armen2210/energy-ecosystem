@@ -20,7 +20,7 @@ function ServicesPage() {
 
       <section className="section">
         <div className="container">
-          <SectionHeader
+          <SectionHeader as="h1"
             eyebrow="Услуги"
             title="Работы вокруг инженерных объектов"
             description="Проектирование, строительно-монтажные работы, пусконаладка и ввод инженерных систем в эксплуатацию."
@@ -28,7 +28,7 @@ function ServicesPage() {
 
           <div className="services-grid">
             {services.map((service, index) => (
-              <ServiceCard service={service} index={index} key={service.slug} />
+              <ServiceCard headingLevel={2} service={service} index={index} key={service.slug} />
             ))}
           </div>
         </div>

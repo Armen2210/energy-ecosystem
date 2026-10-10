@@ -1,0 +1,58 @@
+# TEMPLATE: merge these server{} directives with the current EE virtual host.
+# Do not replace TLS, API/admin/static/media locations or request-protection rules.
+# root must point at the COMPLETE Vite dist (including 404.html).
+# Tested with nginx 1.26.3 locally; never applied to production.
+
+error_page 404 /404.html;
+location = /404.html {
+    internal;
+    # No '=200': retain the original HTTP 404 after the internal redirect.
+    # robots meta in 404.html supplies noindex; inherit server add_header unchanged.
+}
+
+# Confirmed existing contact alias; retain campaign query.
+location = /contacts {
+    return 301 "/$is_args$args#contacts";
+}
+location = /contacts/ {
+    return 301 "/$is_args$args#contacts";
+}
+location = /index.html {
+    return 301 "/$is_args$args";
+}
+
+# Normalize trailing slashes ONLY for known public pages.
+location ~ ^(?<ee_page>/(?:about|privacy|solutions(?:/(?:bmk|btp|vns|pns|automation-cabinets))?|services(?:/(?:design|construction-installation|commissioning))?|cases(?:/(?:bmk-sports-complex|btp-food-production|btp-hotel-complex|btp-residential-complex|btp-industrial-facility))?))/+$ {
+    return 301 "$ee_page$is_args$args";
+}
+
+location = / {
+    try_files /index.html =404;
+}
+# SPA fallback belongs ONLY to existing pages, not arbitrary slugs.
+location ~ ^/(?:about|privacy|solutions(?:/(?:bmk|btp|vns|pns|automation-cabinets))?|services(?:/(?:design|construction-installation|commissioning))?|cases(?:/(?:bmk-sports-complex|btp-food-production|btp-hotel-complex|btp-residential-complex|btp-industrial-facility))?)$ {
+    try_files /index.html =404;
+}
+
+location ^~ /assets/ {
+    try_files $uri =404;
+}
+location = /analytics-frame.html {
+    try_files $uri =404;
+    # robots meta supplies noindex; no local add_header overriding server headers.
+}
+location = /robots.txt {
+    try_files $uri =404;
+}
+location = /sitemap.xml {
+    try_files $uri =404;
+}
+
+# Preserve the existing API/admin/static/media and private-storage locations.
+# Do not enable proxy_intercept_errors: JSON errors and Retry-After must survive.
+# This fragment intentionally defines no API/admin proxy or media access policy.
+location / {
+    # Public files (icons, verification HTML, manifest) remain reachable.
+    # /404, /about-us and /raskhodomery stay 404: no replacement was confirmed.
+    try_files $uri =404;
+}

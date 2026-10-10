@@ -18,12 +18,13 @@ function NotFoundPage() {
       <Seo
         title="Страница не найдена — Энергоэффект"
         description="Страница не найдена. Вернитесь на главную, перейдите к продукции или оставьте заявку на инженерное решение."
-        path="/404"
+        path={null}
+        robots="noindex, follow"
       />
 
       <section className="section">
         <div className="container">
-          <SectionHeader
+          <SectionHeader as="h1"
             eyebrow="404"
             title="Страница не найдена"
             description="Возможно, адрес изменился или страница была удалена. Вы можете вернуться на главную, перейти к продукции или сразу оставить заявку."

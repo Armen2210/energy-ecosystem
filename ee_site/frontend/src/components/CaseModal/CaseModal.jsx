@@ -23,7 +23,6 @@ import {
 } from "react";
 
 import {
-  Navigate,
   useLocation,
   useNavigate,
   useParams,
@@ -132,7 +131,7 @@ function CaseModal() {
   }, [handleClose]);
 
   if (!caseItem || !caseItem.hasDetailPage) {
-    return <Navigate to="/cases" replace />;
+    return null;
   }
 
   const handleCtaClick = () => {

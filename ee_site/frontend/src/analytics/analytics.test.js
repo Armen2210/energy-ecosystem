@@ -289,3 +289,16 @@ test('retry optional cleanup with write/delete blocked remains sanitized in memo
   pending.clearOptional(); assert.equal(pending.get(submission.signature).attribution, null);
   assert.ok(createPending(s, () => time).get(submission.signature).attribution);
 });
+
+test('privacy form entry marker never enters analytics URLs, attribution or params', () => {
+  const p = platform();
+  p.win.location.search = '?from=lead-form';
+  p.visit('/privacy');
+  p.app.choose('allowed');
+  p.ready();
+  const hit = p.commands.find(command => command.type === 'hit');
+  assert.equal(hit.url, 'https://www.energoeffekt-rostov.ru/privacy');
+  assert.deepEqual(campaign('?from=lead-form'), null);
+  assert.deepEqual(safeParams({ from: 'lead-form', page_category: 'privacy' }), { page_category: 'privacy' });
+  assert.ok(!JSON.stringify(p.commands).includes('lead-form'));
+});
