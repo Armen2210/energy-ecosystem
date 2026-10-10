@@ -4,11 +4,15 @@
 // Визуально оформлена в стиле остальных страниц сайта.
 // =========================================================
 
+import { useLocation } from "react-router-dom";
+
 import PageNavigation from "../../components/PageNavigation";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
 function PrivacyPage() {
+  const { search } = useLocation();
+  const fromLeadForm = new URLSearchParams(search).get("from") === "lead-form";
   return (
     <main className="page privacy-page">
       <Seo
@@ -19,19 +23,25 @@ function PrivacyPage() {
 
       <section className="section">
         <div className="container">
-          <PageNavigation
-            backLabel="На главную"
-            backTo="/"
-            breadcrumbItems={[
-              {
-                label: "Главная",
-                to: "/",
-              },
-              {
-                label: "Правовая информация",
-              },
-            ]}
-          />
+          {fromLeadForm ? (
+            <p className="privacy-page__return-note">
+              Ваша заявка осталась в предыдущей вкладке. После ознакомления закройте эту вкладку, чтобы продолжить заполнение.
+            </p>
+          ) : (
+            <PageNavigation
+              backLabel="На главную"
+              backTo="/"
+              breadcrumbItems={[
+                {
+                  label: "Главная",
+                  to: "/",
+                },
+                {
+                  label: "Правовая информация",
+                },
+              ]}
+            />
+          )}
 
           <SectionHeader as="h1"
             eyebrow="Правовая информация"
