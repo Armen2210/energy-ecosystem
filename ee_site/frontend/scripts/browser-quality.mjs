@@ -53,7 +53,7 @@ try {
       await page.waitForLoadState('networkidle');
       await settle(page);
       if (name === 'home') {
-        await page.getByRole('button', { name: 'Разрешить', exact: true }).click();
+        await page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
         await page.reload();
         assert.equal(await page.locator('.cookie-banner').count(), 0);
         check(`cookie acceptance survives reload at ${width}`);
@@ -153,7 +153,7 @@ try {
   });
   await page.goto(base + '/contacts');
   await page.waitForLoadState('networkidle');
-  await page.getByRole('button', { name: 'Разрешить', exact: true }).click();
+  await page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
   await page.locator('[name=name]').fill('Retry test');
   await page.locator('[name=phone]').fill('+79000000000');
   await page.locator('textarea[name=description]').fill('Keep after error');
@@ -204,7 +204,7 @@ try {
   check('direct case change resets gallery without remounting parent page');
   await extra.goto(base + '/solutions/btp');
   await extra.waitForLoadState('networkidle');
-  await extra.getByRole('button', { name: 'Разрешить', exact: true }).click();
+  await extra.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
   await extra.locator('.entity-switcher__item').filter({ hasText: /^ВНС$/ }).scrollIntoViewIfNeeded();
   await extra.evaluate(() => {
     [...document.querySelectorAll('.entity-switcher__item')].find(e => e.textContent.trim() === 'ВНС').click();
@@ -264,7 +264,7 @@ try {
   watch(storagePage);
   await storagePage.goto(base + '/');
   await storagePage.waitForLoadState('networkidle');
-  await storagePage.getByRole('button', { name: 'Разрешить', exact: true }).click();
+  await storagePage.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
   assert.equal(await storagePage.locator('.cookie-banner').count(), 0);
   check('cookie acceptance works when storage is unavailable for this visit');
   const icon = await storagePage.request.get(base + '/favicon.svg');

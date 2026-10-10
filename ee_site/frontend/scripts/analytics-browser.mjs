@@ -76,8 +76,8 @@ async function scenario({ width = 1440, seed = {}, failStorage = false, tagDelay
  await page.goto(`https://${hostname}${url}`, referrer ? { referer:referrer } : {}); await page.waitForSelector('footer');
  return { ctx, page, calls, network, responses, mode(value) { mode = value; }, async settle() { await page.waitForTimeout(850); }, goals: () => calls.filter(c => c.method === 'reachGoal'), hits: () => calls.filter(c => c.method === 'hit') };
 }
-const accept = async s => { await s.page.getByRole('button', { name: 'Разрешить', exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
-const settings = async s => { await s.page.getByRole('button', { name: 'Настройки cookies', exact: true }).click(); await s.page.waitForFunction(() => document.activeElement?.textContent === 'Разрешить'); };
+const accept = async s => { await s.page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
+const settings = async s => { await s.page.getByRole('button', { name: 'Настройки cookies', exact: true }).click(); await s.page.waitForFunction(() => document.activeElement?.textContent === 'Разрешить аналитику'); };
 const deny = async s => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); await s.settle(); };
 const form = s => s.page.locator('.lead-form');
 const fill = async (s, name='Synthetic person') => {
@@ -111,7 +111,7 @@ try {
 
  const mobile = await scenario({ width:360 });
  assert.equal(await mobile.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),true);
- for (const label of ['Разрешить','Без аналитики']) { const box=await mobile.page.getByRole('button',{name:label,exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
+ for (const label of ['Разрешить аналитику','Без аналитики']) { const box=await mobile.page.getByRole('button',{name:label,exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
  await mobile.page.screenshot({ path:path.join(out,'banner-360.png'),fullPage:false }); await accept(mobile);
  pass('360px banner fits viewport; accessible named actions and keyboard settings');
 
@@ -170,13 +170,13 @@ try {
  await settings(errors); await accept(errors); assert.equal(errors.goals().filter(c=>c.args[0]==='lead_success').length,0);
  pass('denied submission still has operational direction, no campaign; later allow does not replay success');
 
- const race=await scenario({tagDelay:700}); await race.page.getByRole('button',{name:'Разрешить',exact:true}).click();
+ const race=await scenario({tagDelay:700}); await race.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click();
  await race.page.waitForTimeout(100); await settings(race); await deny(race); await race.page.waitForTimeout(850);
  assert.equal(race.calls.filter(c=>c.method==='init').length,0); assert.equal(await race.page.locator('iframe').count(),0);
  await settings(race); await accept(race); assert.equal(race.calls.filter(c=>c.method==='init').length,1); assert.equal(race.hits().length,1);
  pass('revoke during delayed load, late callback cannot restart; reallow fresh context/no backlog');
 
- const blocked = await scenario({ blockTag:true }); await blocked.page.getByRole('button',{name:'Разрешить',exact:true}).click(); await blocked.settle(); await fill(blocked); await send(blocked);
+ const blocked = await scenario({ blockTag:true }); await blocked.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await blocked.settle(); await fill(blocked); await send(blocked);
  assert.equal(blocked.responses.at(-1).status,201); assert.equal(blocked.goals().length,0);
  pass('blocked script does not break real API submission or falsely acknowledge analytic delivery');
  const broken = await scenario(); await accept(broken); await broken.page.frames().find(f=>f.url().includes('analytics-frame')).evaluate(()=>{ window.ym=()=>{ throw Error('Adapter exception'); }; });
@@ -195,7 +195,7 @@ try {
 
  const unknown=await scenario({url:'/private_person?email=private_marker#private_fragment'}); await accept(unknown);
  assert.equal(unknown.hits()[0].args[0],origin+'/404'); pass('unknown route is /404, no unknown slug/query/fragment exported');
- const noHost=await scenario({hostname:'staging.example.invalid'}); await noHost.page.getByRole('button',{name:'Разрешить',exact:true}).click(); await noHost.settle(); assert.equal(noHost.network.length,0); pass('production build on staging hostname never loads real counter');
+ const noHost=await scenario({hostname:'staging.example.invalid'}); await noHost.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await noHost.settle(); assert.equal(noHost.network.length,0); pass('production build on staging hostname never loads real counter');
  assert.doesNotMatch(JSON.stringify(results.calls),/Synthetic person|private_marker|private_fragment|secret-document|private document|\+70000000000|submission_id|lead_id/);
  pass('all adapter/mock network payloads exclude synthetic personal values, documents and ids');
  }
@@ -203,7 +203,7 @@ try {
    const real=await scenario({realTag:true,referrer:'https://example.invalid/private_marker?email=private_marker',url:'/?utm_source=yandex&utm_campaign=btp_rostov&email=private_marker#private_fragment'});
    await real.settle(); assert.equal(real.network.length,0);
    await real.page.evaluate(()=>document.addEventListener('click',event=>{const href=event.target.closest('a')?.getAttribute('href')||'';if(href.startsWith('tel:')||href.startsWith('mailto:'))event.preventDefault();},true));
-   await real.page.getByRole('button',{name:'Разрешить',exact:true}).click(); await real.page.waitForTimeout(2000);
+   await real.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await real.page.waitForTimeout(2000);
    await real.page.locator('a[href="/solutions/btp"]').first().click(); await real.page.waitForTimeout(1500);
    await real.page.locator('a[href^="tel:"]').first().click();
    await real.page.locator('footer a[href^="mailto:"]').click();
@@ -235,11 +235,11 @@ try {
      if(ref) assert.ok(ref.startsWith(origin+'/')||ref==='https://yandex.ru/'||ref==='https://www.google.com/',ref);
      assert.equal(item.referer,'');
    }
-   await settings(real); await real.page.getByRole('button',{name:'Разрешить',exact:true}).click(); await real.page.waitForTimeout(1500);
+   await settings(real); await real.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await real.page.waitForTimeout(1500);
    const renewed=real.network.slice(before); assert.ok(renewed.length>0); assert.equal(renewed.some(item=>item.url.includes('goal%3A')||item.url.includes('goal://')),false);
    await settings(real); await deny(real);
    results.realLibrary=real.network; pass('cached real library: actual outgoing requests captured/blocked, PII/referrer filtered; none after revoke, cookies cleared, reallow without goal backlog');
-   const delayed=await scenario({realTag:true,tagDelay:1000}); await delayed.page.getByRole('button',{name:'Разрешить',exact:true}).click(); await delayed.page.waitForTimeout(100); await settings(delayed); await deny(delayed); await delayed.page.waitForTimeout(1200);
+   const delayed=await scenario({realTag:true,tagDelay:1000}); await delayed.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await delayed.page.waitForTimeout(100); await settings(delayed); await deny(delayed); await delayed.page.waitForTimeout(1200);
    assert.equal(await delayed.page.locator('iframe').count(),0); assert.equal(delayed.network.filter(item=>item.type==='blocked-external').length,0);
    pass('actual library delayed load then revoke: no late counter requests');
    const standalone=await real.ctx.newPage(); const beforeStandalone=real.network.length; await standalone.goto(origin+'/analytics-frame.html'); await standalone.waitForTimeout(350); assert.equal(real.network.length,beforeStandalone);
