@@ -16,6 +16,7 @@ import PageNavigation from "../../components/PageNavigation";
 import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
+import NotFoundPage from "../NotFoundPage";
 import { products } from "../../data/products";
 import { services } from "../../data/services";
 
@@ -133,21 +134,8 @@ function ServicePage() {
   const serviceFaq = serviceFaqBySlug[slug] || [];
 
   if (!service) {
-    return (
-      <main>
-        <section className="section">
-          <div className="container">
-            <SectionHeader
-              eyebrow="Услуги"
-              title="Услуга не найдена"
-              description="Проверьте адрес страницы или вернитесь к списку услуг компании."
-            />
-          </div>
-        </section>
-      </main>
-    );
+    return <NotFoundPage />;
   }
-
 
 
   return (
@@ -253,7 +241,7 @@ function ServicePage() {
                 eyebrow={`Частые вопросы: ${service.shortTitle}`}
               />
 
-              <FAQ items={serviceFaq} stateKey={`service-${service.slug}`} />
+              <FAQ path={`/services/${service.slug}`} items={serviceFaq} stateKey={`service-${service.slug}`} />
           </div>
           </div>
          </div>

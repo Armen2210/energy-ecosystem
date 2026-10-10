@@ -8,7 +8,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function ServiceCard({ service }) {
+function ServiceCard({ service, headingLevel = 3 }) {
+  const Heading = `h${headingLevel}`;
   const navigate = useNavigate();
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
@@ -72,7 +73,7 @@ function ServiceCard({ service }) {
       <div className="service-card__body">
 
 
-        <h3>{title}</h3>
+        <Heading>{title}</Heading>
         <p>{description}</p>
 
         <span className="service-card__cta">Подробнее</span>

@@ -343,7 +343,7 @@
     justify-self: start;
   }
 
-  .section-block .section__head h2:empty {
+  .section-block .section__head .section__head-rule {
     width: fit-content;
     height: 2px;
     margin: 0;
@@ -351,7 +351,7 @@
     line-height: 0;
   }
 
-  .section-block .section__head h2:empty::after {
+  .section-block .section__head .section__head-rule::after {
     margin-top: 0;
   }
 
@@ -375,14 +375,14 @@
     margin-bottom: 0;
   }
 
-  #lead-form .section__head h2:empty {
+  #lead-form .section__head .section__head-rule {
     height: 2px;
     margin: 0;
     font-size: 0;
     line-height: 0;
   }
 
-  #lead-form .section__head h2:empty::after {
+  #lead-form .section__head .section__head-rule::after {
     margin-top: 0;
   }
 

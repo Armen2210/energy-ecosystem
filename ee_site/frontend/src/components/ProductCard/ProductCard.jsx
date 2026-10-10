@@ -8,7 +8,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function ProductCard({ product }) {
+function ProductCard({ product, headingLevel = 3 }) {
+  const Heading = `h${headingLevel}`;
   const navigate = useNavigate();
   const timerRef = useRef(null);
   const [isLeaving, setIsLeaving] = useState(false);
@@ -89,7 +90,7 @@ function ProductCard({ product }) {
           )}
         </div>
 
-        <h3>{title}</h3>
+        <Heading>{title}</Heading>
         <p>{description}</p>
 
         <span className="product-card__cta">Подробнее</span>

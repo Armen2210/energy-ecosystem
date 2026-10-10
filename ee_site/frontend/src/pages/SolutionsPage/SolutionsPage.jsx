@@ -20,7 +20,7 @@ function SolutionsPage() {
 
       <section className="section">
         <div className="container">
-          <SectionHeader
+          <SectionHeader as="h1"
             eyebrow="Продукция"
             title="Инженерные решения под задачи объекта"
             description="Продуктовые направления Энергоэффект: БМК, БТП, ВНС, ПНС, шкафы управления и автоматизации."
@@ -28,7 +28,7 @@ function SolutionsPage() {
 
           <div className="product-grid">
             {products.map((product, index) => (
-              <ProductCard product={product} index={index} key={product.slug} />
+              <ProductCard headingLevel={2} product={product} index={index} key={product.slug} />
             ))}
           </div>
         </div>

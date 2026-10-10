@@ -169,8 +169,8 @@ ee_site/frontend/
 | `/services` | `ServicesPage` | Реестр всех карточек услуг. |
 | `/services/:slug` | `ServicePage` | Детальная страница услуги по данным `services.js`; неизвестный slug показывает `NotFoundPage`. |
 | `/cases` | `CasesPage` | Реестр реализованных объектов. Внутренний route и технические имена `cases` сохранены. |
-| `/cases/:slug` | `CasePage` или `CaseModal` | Прямая страница кейса либо модальное представление поверх исходного списка. Неизвестный/недоступный кейс перенаправляется на `/cases`. |
-| `/contacts` | `Navigate` | Клиентский redirect с `replace` на `/#contacts`; `ContactsPage` к маршрутам не подключён. |
+| `/cases/:slug` | `CasePage` или `CaseModal` | Прямая страница кейса либо модальное представление поверх исходного списка. Неизвестный/недоступный кейс показывает `NotFoundPage` без перенаправления. |
+| `/contacts` | `HomePage` + replace | Клиентский переход на `/#contacts` с сохранением query; `/contacts/` также поддержан. nginx-шаблон выполняет HTTP 301. `ContactsPage` к маршрутам не подключён. |
 | `/privacy` | `PrivacyPage` | Политика обработки персональных данных; `#cookies` ведёт к разделу о cookies. |
 | `*` | `NotFoundPage` | Страница 404 для остальных маршрутов. |
 
@@ -218,7 +218,7 @@ FAQ для этих страниц определён в самих `ProductPage
 - `CaseCard` — карточка объекта и вход в modal/direct сценарий. На desktop главной используется фотогалерейный вариант `.cases-grid--home` с hover-обрамлением; на внутреннем реестре — отдельный модификатор `.cases-grid--page`.
 - `CaseModal` — доступная модальная оболочка кейса: backdrop, Escape, focus trap, блокировка фонового scroll и возврат к источнику.
 - `CaseView` — общее содержимое кейса, галерея, клавиатурные стрелки, свайп, метаданные и CTA.
-- `Seo` — обновление title, description, Open Graph URL/title/description и canonical при клиентской навигации.
+- `Seo` — title, description, canonical, robots, OG/Twitter; отсутствие canonical и `noindex` для ошибок. При модальном кейсе описывает его URL, при закрытии восстанавливает фон.
 - `ScrollToTop` — специальная логика позиционирования для маршрутов, якорей и возврата из объектов. Для возврата с внутренних страниц используются прямые сценарии `cases-direct`, `products-direct`, `services-direct` и `contacts-direct`, которые сразу позиционируют главную на нужной секции без видимого скролла от Hero.
 - `CookieBanner` — единый компактный блок «Помогите нам стать удобнее», кнопки «Разрешить аналитику» / «Без аналитики», раскрытие «Подробнее». Повторное открытие — кнопкой «Настройки cookies» над ссылкой на политику в Footer; текущее решение относится именно к аналитике, «Закрыть» его не меняет. Согласие формы отдельно. Старое `ee_cookie_consent=accepted` не даёт разрешения. На ширине от 1000 px действия справа, на меньших — под текстом; низкий экран допускает прокрутку и keyboard focus.
 
@@ -358,20 +358,65 @@ POST ${VITE_API_BASE_URL}/api/leads/
 
 - `lang="ru"`, charset и viewport;
 - favicon ICO/SVG/PNG, Apple Touch Icon и ссылку на manifest;
-- базовые title, description и canonical;
+- общие title и description сайта; canonical создаётся только после определения маршрута;
 - Open Graph title, description, URL, image и locale;
 - нестандартный meta `summary`;
 - статический JSON-LD типа `Organization`.
 
-`Seo` на страницах клиентски обновляет title, description, `og:title`, `og:description`, `og:url` и canonical. Он не обновляет `og:image`, `og:type`, locale и Organization JSON-LD. Поскольку это SPA без SSR/SSG, динамические meta и FAQ JSON-LD появляются после выполнения JavaScript.
+`Seo` клиентски создаёт/обновляет title, description, canonical, robots, OG и
+Twitter. У известных страниц — `index, follow` и canonical без query/fragment;
+у отсутствующих — `noindex, follow`, без canonical и `og:url`. Organization
+остаётся общей статической сущностью с постоянным `@id`; FAQ имеет URL/`@id`
+текущего изделия или услуги и повторяет доступные в аккордеоне ответы.
+Google больше не показывает FAQ rich results с 7 мая 2026 (официальный источник
+и дата проверки — в аудите); сохранение FAQPage не обещает расширенный сниппет.
+
+Это SPA без SSR/SSG: у существующих страниц исходный HTTP HTML содержит общую
+оболочку и общие метаданные, основной текст и уникальные meta появляются после
+JavaScript. Ложный общий canonical главной удалён из оболочки. Это не исправляет
+доступность полного текста для клиентов без JS; варианты предварительной
+генерации и ограничения описаны в [техническом SEO-аудите](docs/technical-seo-audit.md).
+Нестандартный `summary` не является специальным протоколом доступа ИИ.
+
+### HTTP-статусы и будущая раздача
+
+Vite dev/preview и старый `serve-quality.py` не подтверждают production-статусы.
+[Отдельный nginx-шаблон](../deploy/nginx_technical_seo.conf.example) разрешает
+SPA fallback только для существующих публичных URL, сохраняет 404 неизвестных
+страниц, 301 подтверждённого `/contacts` и известных trailing-slash вариантов.
+Неизвестные кейсы больше не перенаправляются в реестр. `/about-us` и
+`/raskhodomery` не имеют подтверждённых замен и остаются 404 в шаблоне.
+
+Новый Vite entry `404.html` содержит читаемое сообщение до JS и загружает общую
+React-страницу ошибки. Не удаляйте его при копировании `dist`. Шаблон нужно
+согласованно встроить в существующий vhost, сохранив API/admin/static/media,
+TLS и защиту заявок; действующий сервер этим этапом не изменялся. При добавлении
+маршрута обновляйте allowlist nginx вместе с sitemap и проверяйте HTTP-тесты.
+
+Локальные дополнительные проверки (nginx и Playwright — внешние инструменты,
+не зависимости приложения):
+
+```bash
+# Из ee_site/frontend, после npm run build; nginx должен быть доступен.
+node --test scripts/technical-seo-http.test.mjs
+# Включить browser suite в тот же автоматически создаваемый nginx fixture:
+SEO_BROWSER=true node --test scripts/technical-seo-http.test.mjs
+# Либо использовать отдельно уже запущенный локальный nginx на 8088.
+SEO_TEST_ORIGIN=http://127.0.0.1:8088 node scripts/technical-seo-browser.mjs
+```
+
+Для нестандартной установки задайте `NGINX_BIN`, `NGINX_MIME_TYPES`,
+`PLAYWRIGHT_MODULE`, `CHROME_PATH`. HTTP-runner сам создаёт изолированный
+nginx и mock upstream и завершает их; browser-runner не меняет сервер.
+Результаты, границы проверки и будущие серверные действия — в аудите.
 
 ### `public/`
 
-- `robots.txt` разрешает обход сайта, запрещает `/admin/` и `/api/`, указывает sitemap;
+- `robots.txt` разрешает обход публичного сайта, запрещает `/admin/` и `/api/`, указывает sitemap; политика ботов не менялась;
 - `sitemap.xml` перечисляет главную, about, реестры, все product/service URL, пять прямых кейсов и privacy; `/contacts` не включён, так как является redirect;
 - `site.webmanifest` задаёт имя, `start_url`, scope, standalone display, цвета и иконки 192/512;
 - favicon и touch/android icons подключены из `index.html`/manifest;
-- `og-image.jpg` используется статическим Open Graph meta;
+- `og-image.jpg` используется OG/Twitter; служебный `analytics-frame.html` доступен, но имеет `noindex, nofollow`;
 - verification HTML-файлы лежат в `public` и копируются как есть;
 - `icons.svg` — публичный SVG-спрайт.
 
@@ -447,7 +492,7 @@ POST ${VITE_API_BASE_URL}/api/leads/
 
 - [ ] Главная и все затронутые прямые URL открываются через клиентскую навигацию.
 - [ ] Внутренний URL можно открыть/обновить напрямую в окружении с SPA fallback.
-- [ ] Неизвестный общий URL показывает 404; неизвестные product/service slug дают `NotFoundPage`; неизвестный case slug возвращает в `/cases`.
+- [ ] Неизвестные URL и product/service/case slug показывают `NotFoundPage` без redirect; при проверке nginx получают реальный HTTP 404. /404 также возвращает 404.
 - [ ] `/#products`, `/#services`, `/#cases`, `/#contacts`, `/contacts` и возврат из объекта приводят к ожидаемой позиции; кнопки «К продукции на главной», «К услугам на главной» и «К объектам на главной» используют прямое позиционирование без видимой прокрутки от Hero.
 - [ ] Активное состояние Header и `EntitySwitcher` соответствует странице.
 

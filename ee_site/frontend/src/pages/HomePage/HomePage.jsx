@@ -93,6 +93,9 @@ function HomePage() {
               <ProductCard product={product} key={product.slug} />
             ))}
           </div>
+          <div className="cases-actions">
+            <Link className="cases-link" to="/solutions">Все продуктовые направления</Link>
+          </div>
         </div>
       </section>
 
@@ -112,6 +115,9 @@ function HomePage() {
             {services.map((service) => (
               <ServiceCard service={service} key={service.slug} />
             ))}
+          </div>
+          <div className="cases-actions">
+            <Link className="cases-link" to="/services">Все инженерные услуги</Link>
           </div>
         </div>
       </section>

@@ -19,7 +19,7 @@
 
 import { useMemo, useState } from "react";
 
-function FAQ({ items = [], stateKey = "default" }) {
+function FAQ({ items = [], stateKey = "default", path }) {
   const [openItemsByKey, setOpenItemsByKey] = useState({});
 
   const safeStateKey = useMemo(
@@ -52,6 +52,8 @@ function FAQ({ items = [], stateKey = "default" }) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `https://www.energoeffekt-rostov.ru${path}#faq`,
+    url: `https://www.energoeffekt-rostov.ru${path}`,
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
@@ -73,7 +75,7 @@ function FAQ({ items = [], stateKey = "default" }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
         }}
       />
 

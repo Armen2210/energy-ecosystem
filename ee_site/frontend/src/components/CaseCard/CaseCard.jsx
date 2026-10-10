@@ -16,7 +16,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-function CaseCard({ caseItem }) {
+function CaseCard({ caseItem, headingLevel = 3 }) {
+  const Heading = `h${headingLevel}`;
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ function CaseCard({ caseItem }) {
       <div className="case-card__body">
         <span>{caseItem.type}</span>
 
-        <h3>{caseItem.title}</h3>
+        <Heading>{caseItem.title}</Heading>
 
         <p>{caseItem.previewDescription || caseItem.description}</p>
 

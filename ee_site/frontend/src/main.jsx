@@ -16,7 +16,7 @@ import "./index.css";
 
 // Resolve the existing contact alias before mounting the large home tree.
 // App keeps the same redirect for subsequent client-side navigation.
-if (window.location.pathname === "/contacts") {
+if (/^\/contacts\/?$/.test(window.location.pathname)) {
   window.history.replaceState(window.history.state, "", `/${window.location.search}#contacts`);
 }
 

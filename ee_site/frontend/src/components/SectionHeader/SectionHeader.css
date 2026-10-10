@@ -15,7 +15,8 @@
   margin-bottom: 34px;
 }
 
-.section__head h2 {
+.section__head :is(h1, h2) {
+  max-width: none;
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-heading);
@@ -26,7 +27,7 @@
   text-wrap: balance;
 }
 
-.section__head h2::after {
+.section__head :is(h1, h2, .section__head-rule)::after {
   content: "";
   display: block;
   width: 56px;
@@ -43,7 +44,7 @@
   line-height: 1.55;
 }
 
-.section__head--light h2 {
+.section__head--light :is(h1, h2) {
   color: #ffffff;
 }
 
@@ -84,7 +85,7 @@
     margin-bottom: 20px;
   }
 
-  .section__head h2::after {
+  .section__head :is(h1, h2, .section__head-rule)::after {
     margin-top: 8px;
   }
 
@@ -117,13 +118,13 @@
     letter-spacing: 0.055em;
   }
 
-  .section__head h2 {
+  .section__head :is(h1, h2) {
     font-size: clamp(27px, 7.4vw, 29px);
     line-height: 1.11;
     letter-spacing: -0.015em;
   }
 
-  .section__head h2::after {
+  .section__head :is(h1, h2, .section__head-rule)::after {
     width: 56px;
     height: 2px;
     margin-top: 12px;

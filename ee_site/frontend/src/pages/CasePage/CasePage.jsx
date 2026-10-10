@@ -8,13 +8,15 @@
 
 import {
   Link,
-  Navigate,
   useNavigate,
   useParams,
 } from "react-router-dom";
 
 import CaseView from "../../components/CaseView";
 import Seo from "../../components/Seo";
+import NotFoundPage from "../NotFoundPage";
+import { products } from "../../data/products";
+import { services } from "../../data/services";
 
 import { cases } from "../../data/cases";
 
@@ -26,7 +28,7 @@ function CasePage() {
   const caseItem = cases.find((item) => item.slug === slug);
 
   if (!caseItem || !caseItem.hasDetailPage) {
-    return <Navigate to="/cases" replace />;
+    return <NotFoundPage />;
   }
 
   const handleCtaClick = () => {
@@ -62,8 +64,21 @@ function CasePage() {
               caseItem={caseItem}
               onCtaClick={handleCtaClick}
               titleId="case-page-title"
+              headingLevel={1}
             />
           </div>
+
+          <nav className="case-page__related" aria-label="Связанные направления">
+            <h2>Связанные направления</h2>
+            <ul>
+              {products.filter((item) => item.slug === caseItem.relatedProductSlug).map((item) => (
+                <li key={item.slug}><Link to={`/solutions/${item.slug}`}>{item.title}</Link></li>
+              ))}
+              {services.filter((item) => caseItem.relatedServiceSlugs?.includes(item.slug)).map((item) => (
+                <li key={item.slug}><Link to={`/services/${item.slug}`}>{item.title}</Link></li>
+              ))}
+            </ul>
+          </nav>
 
           <div className="case-page__actions">
             <Link
