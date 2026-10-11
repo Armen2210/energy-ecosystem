@@ -4,7 +4,8 @@
 // Отправляет данные в backend: POST /api/leads/
 // =========================================================
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+import { leadDraft } from "../../api/leadDraft.js";
 import { Link } from "react-router-dom";
 
 import {
@@ -24,58 +25,30 @@ import { analytics } from "../../analytics/runtime.js";
 import { pageParams, safePath } from "../../analytics/policy.js";
 
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
-  const [selectedTopic, setSelectedTopic] = useState(initialTopic);
-  const [topicOrigin, setTopicOrigin] = useState(initialTopic);
-  if (topicOrigin !== initialTopic) {
-    setTopicOrigin(initialTopic);
-    setSelectedTopic(initialTopic);
-  }
-  const mountedRef = useRef(false);
-  const initialTopicRef = useRef(initialTopic);
-  useEffect(() => {
-    initialTopicRef.current = initialTopic;
-  }, [initialTopic]);
-  const submissionRef = useRef(null);
-  const snapshotRef = useRef(null);
-  const startedRef = useRef(false);
-  const isSubmittingRef = useRef(false);
-  const statusHideTimerRef = useRef(null);
-  const statusResetTimerRef = useRef(null);
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [fileError, setFileError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("idle");
-  const [submitMessage, setSubmitMessage] = useState("");
-  const [isStatusHiding, setIsStatusHiding] = useState(false);
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-      window.clearTimeout(statusHideTimerRef.current);
-      window.clearTimeout(statusResetTimerRef.current);
-      if (snapshotRef.current) analytics.release(snapshotRef.current);
-    };
-  }, []);
+  const draft = useSyncExternalStore(leadDraft.subscribe, leadDraft.get);
+  const selectedTopic = draft.started ? draft.topic : initialTopic;
+  const selectedFiles = draft.files;
+  const isSubmitting = draft.submitting;
+  const fileError = draft.fileError;
+  const submitStatus = draft.status;
+  const submitMessage = draft.message;
+  useEffect(() => leadDraft.presentSuccess(draft.successToken), [draft.successToken]);
 
-  function clearStatusTimers() {
-    window.clearTimeout(statusHideTimerRef.current);
-    window.clearTimeout(statusResetTimerRef.current);
-    statusHideTimerRef.current = null;
-    statusResetTimerRef.current = null;
+  function handleFieldChange(event) {
+    if (leadDraft.get().submitting) return;
+    const { name, value, checked, type } = event.target;
+    markStart();
+    leadDraft.update({ fields: { ...leadDraft.get().fields, [name]: type === "checkbox" ? checked : value } });
   }
 
   function handleAddFiles(addedFiles) {
-    const result = appendSelectedFiles(
-      selectedFiles,
-      addedFiles,
-    );
-
-    setSelectedFiles(result.files);
-    setFileError(result.error);
+    if (leadDraft.get().submitting) return;
+    const result = appendSelectedFiles(leadDraft.get().files, addedFiles);
     if (result.files.length > selectedFiles.length) {
       markStart();
       analytics.goal("document_selected", { ...pageParams(window.location.pathname), document_count: result.files.length === 1 ? "1" : result.files.length <= 5 ? "2-5" : "6-10" });
     }
+    leadDraft.update({ files: result.files, fileError: result.error });
   }
 
   function direction() {
@@ -85,72 +58,62 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   }
 
   function markStart() {
-    if (startedRef.current) return;
-    startedRef.current = true;
+    if (leadDraft.get().started || leadDraft.get().submitting) return;
+    leadDraft.update({ started: true, topic: selectedTopic, sourcePage: safePath(window.location.pathname), status: "idle", message: "" });
     analytics.goal("lead_form_start", { ...pageParams(window.location.pathname), ...direction(), placement: "form" });
   }
 
   function handleRemoveFile(fileId) {
-    setSelectedFiles((files) => files.filter(({ id }) => id !== fileId));
-    setFileError("");
+    if (leadDraft.get().submitting) return;
+    leadDraft.update({ files: leadDraft.get().files.filter(({ id }) => id !== fileId), fileError: "" });
+  }
+
+  function handleClear() {
+    const current = leadDraft.get();
+    if (current.submitting) return;
+    const nonempty = current.started || current.files.length > 0 || Object.values(current.fields).some(Boolean);
+    if (nonempty && !window.confirm("Очистить форму? Введённые данные и прикреплённые файлы будут удалены")) return;
+    for (const id of current.retryIds) analytics.forgetSubmission(id);
+    if (current.snapshot) analytics.release(current.snapshot);
+    leadDraft.reset();
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    if (isSubmittingRef.current) {
-      return;
-    }
-
-    clearStatusTimers();
-    setIsStatusHiding(false);
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
+    if (leadDraft.get().submitting) return;
+    const formData = new FormData(event.currentTarget);
     const submittedTopic = formData.get("description_topic");
     const description = formData.get("description");
-    const consentAccepted = formData.get("consent");
-
-    if (!consentAccepted) {
-      setSubmitStatus("error");
-      setSubmitMessage("Подтвердите согласие на обработку персональных данных.");
+    if (!formData.get("consent")) {
+      leadDraft.update({ status: "error", message: "Подтвердите согласие на обработку персональных данных." });
       return;
     }
-
+    markStart();
     if (submittedTopic) {
-      formData.set(
-        "description",
-        `Интересующее направление: ${submittedTopic}\n\nОписание задачи:\n${
-          description || "Не указано"
-        }`,
-      );
+      formData.set("description", `Интересующее направление: ${submittedTopic}\n\nОписание задачи:\n${description || "Не указано"}`);
     }
-
     formData.delete("description_topic");
     formData.delete("consent");
-    setLeadAttachments(formData, selectedFiles);
+    setLeadAttachments(formData, leadDraft.get().files);
 
-    isSubmittingRef.current = true;
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-    setSubmitMessage("");
-
+    // Acquire the tab-wide lock before hashing; unmounting never releases it.
+    const operation = {};
+    leadDraft.update({ submitting: true, operation, status: "idle", message: "" });
+    const ownsDraft = () => leadDraft.get().operation === operation;
     try {
       const submissionSignature = await createSubmissionSignature(formData);
-      if (!mountedRef.current) return;
-      const previousSubmission = submissionRef.current;
+      if (!ownsDraft()) return;
+      const previousSubmission = leadDraft.get().submission;
       const recovered = previousSubmission ? null : analytics.recoverSubmission(submissionSignature);
-      submissionRef.current = submissionForSignature(
-        submissionRef.current || recovered,
-        submissionSignature,
-        () => crypto.randomUUID(),
-      );
-      if (previousSubmission !== submissionRef.current) {
-        if (snapshotRef.current) analytics.release(snapshotRef.current);
-        snapshotRef.current = analytics.snapshot(direction(), recovered);
+      const submission = submissionForSignature(previousSubmission || recovered, submissionSignature, () => crypto.randomUUID());
+      let snapshot = leadDraft.get().snapshot;
+      if (previousSubmission !== submission) {
+        if (snapshot) analytics.release(snapshot);
+        snapshot = analytics.snapshot(direction(), recovered);
       }
-      const snapshot = snapshotRef.current;
+      // Keep ownership of superseded attempts without changing existing retry storage.
+      const retryIds = [...new Set([...leadDraft.get().retryIds, submission.id])];
+      leadDraft.update({ submission, snapshot, retryIds });
       for (const type of ["product", "service"]) {
         if (snapshot.direction[type]) {
           formData.set("direction_type", type);
@@ -158,61 +121,31 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         }
       }
       const attribution = analytics.payload(snapshot);
-      analytics.rememberSubmission(submissionRef.current, snapshot);
+      analytics.rememberSubmission(submission, snapshot);
       if (attribution) formData.set("campaign_attribution", JSON.stringify(attribution));
-      formData.set("submission_id", submissionRef.current.id);
-
+      formData.set("submission_id", submission.id);
       await createLead(formData);
-      analytics.success(submissionRef.current.id, snapshot);
-      analytics.forgetSubmission(submissionRef.current.id);
+      analytics.success(submission.id, snapshot);
+      for (const id of retryIds) analytics.forgetSubmission(id);
       analytics.release(snapshot);
-      snapshotRef.current = null;
-      if (!mountedRef.current) return;
-      submissionRef.current = null;
-      startedRef.current = false;
-
-      form.reset();
-      setSelectedTopic(initialTopicRef.current);
-      setSelectedFiles([]);
-      setFileError("");
-
-      setSubmitStatus("success");
-      setSubmitMessage(
-        "Заявка отправлена. Мы свяжемся с вами после обработки обращения.",
-      );
-
-      statusHideTimerRef.current = window.setTimeout(() => {
-        statusHideTimerRef.current = null;
-        setIsStatusHiding(true);
-      }, 5000);
-
-      statusResetTimerRef.current = window.setTimeout(() => {
-        statusResetTimerRef.current = null;
-        setSubmitStatus("idle");
-        setSubmitMessage("");
-        setIsStatusHiding(false);
-      }, 5600);
+      if (!ownsDraft()) return;
+      leadDraft.reset({ status: "success", message: "Заявка отправлена. Мы свяжемся с вами после обработки обращения." });
     } catch (error) {
-      if (!mountedRef.current) return;
+      if (!ownsDraft()) return;
       if (error.status === 409) {
-        if (submissionRef.current) analytics.forgetSubmission(submissionRef.current.id);
-        submissionRef.current = null;
-        if (snapshotRef.current) analytics.release(snapshotRef.current);
-        snapshotRef.current = null;
+        const current = leadDraft.get();
+        if (current.submission) analytics.forgetSubmission(current.submission.id);
+        if (current.snapshot) analytics.release(current.snapshot);
+        leadDraft.update({ submission: null, snapshot: null });
       }
-      setSubmitStatus("error");
-      setSubmitMessage(
-        error.message ||
-          "Не удалось отправить заявку. Проверьте данные или попробуйте позже.",
-      );
+      leadDraft.update({ status: "error", message: error.message || "Не удалось отправить заявку. Проверьте данные или попробуйте позже." });
     } finally {
-      isSubmittingRef.current = false;
-      if (mountedRef.current) setIsSubmitting(false);
+      if (ownsDraft()) leadDraft.update({ submitting: false, operation: null });
     }
   }
 
   return (
-    <form className="lead-form" onSubmit={handleSubmit} onInput={markStart}>
+    <form className="lead-form" onSubmit={handleSubmit}>
       <fieldset className="lead-form__fieldset" disabled={isSubmitting}>
       <div className="lead-form__grid">
         <label>
@@ -220,6 +153,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <input
             type="text"
             name="name"
+            value={draft.fields.name}
+            onChange={handleFieldChange}
             placeholder="Как к вам обращаться"
             required
           />
@@ -230,6 +165,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <input
             type="text"
             name="company_name"
+            value={draft.fields.company_name}
+            onChange={handleFieldChange}
             placeholder="Название компании"
           />
         </label>
@@ -239,6 +176,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <input
             type="tel"
             name="phone"
+            value={draft.fields.phone}
+            onChange={handleFieldChange}
             placeholder="+7 (___) ___-__-__"
             required
           />
@@ -246,7 +185,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
         <label>
           Email
-          <input type="email" name="email" placeholder="name@company.ru" />
+          <input type="email" name="email" value={draft.fields.email} onChange={handleFieldChange} placeholder="name@company.ru" />
         </label>
 
         <label className="lead-form__topic-field">
@@ -256,7 +195,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
             products={products}
             services={services}
             value={selectedTopic}
-            onChange={(topic) => { markStart(); setSelectedTopic(topic); }}
+            onChange={(topic) => { if (!leadDraft.get().submitting) { markStart(); leadDraft.update({ topic }); } }}
             disabled={isSubmitting}
           />
         </label>
@@ -293,6 +232,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         Описание задачи
         <textarea
           name="description"
+            value={draft.fields.description}
+            onChange={handleFieldChange}
           rows="5"
           placeholder="Кратко опишите объект, задачу, сроки или приложите ТЗ"
         />
@@ -302,11 +243,11 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       <input
         type="hidden"
         name="source_page"
-        value={safePath(window.location.pathname)}
+        value={draft.sourcePage || safePath(window.location.pathname)}
       />
 
       <label className="lead-form__consent">
-        <input type="checkbox" name="consent" />
+        <input type="checkbox" name="consent" checked={draft.fields.consent} onChange={handleFieldChange} />
         <span>
           Я согласен на обработку персональных данных и передачу информации для
           подготовки ответа по заявке.{" "}
@@ -318,9 +259,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
       {submitMessage && (
         <div
-          className={`lead-form__status lead-form__status--${submitStatus} ${
-            isStatusHiding ? "lead-form__status--hiding" : ""
-          }`}
+          className={`lead-form__status lead-form__status--${submitStatus}${draft.hiding ? " lead-form__status--hiding" : ""}`}
           role="status"
           aria-live="polite"
         >
@@ -328,13 +267,23 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         </div>
       )}
 
-      <button
+      <div className="lead-form__actions">
+        <button
         className="button button--primary"
         type="submit"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Отправляем..." : "Отправить заявку"}
       </button>
+        <button
+          className="lead-form__clear"
+          type="button"
+          onClick={handleClear}
+          disabled={isSubmitting}
+        >
+          Очистить форму
+        </button>
+      </div>
       </fieldset>
     </form>
   );
