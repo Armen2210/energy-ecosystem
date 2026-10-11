@@ -120,6 +120,7 @@ try {
     check(`modal gallery, focus, Escape, scroll restore and reopen at ${width}`);
     await page.goto(base + '/solutions/btp');
     await page.waitForLoadState('networkidle');
+    const draftTopic = await page.locator('[name=description_topic]').inputValue();
     await page.locator('[name=name]').fill('Retained on switch');
     await page.locator('textarea[name=description]').fill('Retained description');
     await page.locator('input[type=file]').setInputFiles(fileA);
@@ -128,7 +129,7 @@ try {
     assert.equal(await page.locator('[name=name]').inputValue(), 'Retained on switch');
     assert.equal(await page.locator('textarea[name=description]').inputValue(), 'Retained description');
     assert.match(await page.locator('.file-select__toggle').textContent(), /1 файл/);
-    assert.match(await page.locator('[name=description_topic]').inputValue(), /насос/);
+    assert.equal(await page.locator('[name=description_topic]').inputValue(), draftTopic, 'started draft retains its chosen direction');
     await page.goBack();
     await page.waitForURL('**/solutions/btp');
     await page.goForward();
