@@ -1,0 +1,191 @@
+[
+  {
+    "source": "DSC05801.jpg",
+    "sourceWidth": 5897,
+    "sourceHeight": 3931,
+    "sourceBytes": 16989440,
+    "sourceSha256": "303e14e6a88e5debaf7066a9ccb914928b6096da1b6789e234d585e1bed8c7cd",
+    "variants": {
+      "small": {
+        "file": "dsc05801-small.webp",
+        "width": 600,
+        "height": 400,
+        "bytes": 13508
+      },
+      "page": {
+        "file": "dsc05801-page.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 57780
+      },
+      "large": {
+        "file": "dsc05801-large.webp",
+        "width": 2000,
+        "height": 1333,
+        "bytes": 269518
+      }
+    }
+  },
+  {
+    "source": "IMG_5539.jpg",
+    "sourceWidth": 3213,
+    "sourceHeight": 5712,
+    "sourceBytes": 6068887,
+    "sourceSha256": "f459182c429b37628c8e982b48e50f32019ab559098ee5ee25e68173f601fc8a",
+    "variants": {
+      "small": {
+        "file": "img_5539-small.webp",
+        "width": 337,
+        "height": 600,
+        "bytes": 35950
+      },
+      "page": {
+        "file": "img_5539-page.webp",
+        "width": 675,
+        "height": 1200,
+        "bytes": 151286
+      },
+      "large": {
+        "file": "img_5539-large.webp",
+        "width": 1125,
+        "height": 2000,
+        "bytes": 482302
+      }
+    }
+  },
+  {
+    "source": "IMG_6486.JPG",
+    "sourceWidth": 4284,
+    "sourceHeight": 5712,
+    "sourceBytes": 5667993,
+    "sourceSha256": "60803a9ab35a9f7b320dae9ac7032f7719fd54b1a31cd9b02da9b88124ef81c4",
+    "variants": {
+      "small": {
+        "file": "img_6486-small.webp",
+        "width": 450,
+        "height": 600,
+        "bytes": 47714
+      },
+      "page": {
+        "file": "img_6486-page.webp",
+        "width": 900,
+        "height": 1200,
+        "bytes": 182344
+      },
+      "large": {
+        "file": "img_6486-large.webp",
+        "width": 1500,
+        "height": 2000,
+        "bytes": 524272
+      }
+    }
+  },
+  {
+    "source": "IMG_5858.png",
+    "sourceWidth": 943,
+    "sourceHeight": 1668,
+    "sourceBytes": 2072205,
+    "sourceSha256": "557c6b42f85ffb719f641a18846ac9556de71af755a042ef6cfc775d442a6cbe",
+    "variants": {
+      "small": {
+        "file": "img_5858-small.webp",
+        "width": 339,
+        "height": 600,
+        "bytes": 29608
+      },
+      "page": {
+        "file": "img_5858-page.webp",
+        "width": 678,
+        "height": 1200,
+        "bytes": 89356
+      },
+      "large": {
+        "file": "img_5858-large.webp",
+        "width": 943,
+        "height": 1668,
+        "bytes": 158588
+      }
+    }
+  },
+  {
+    "source": "IMG_1497.png",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "sourceBytes": 2594641,
+    "sourceSha256": "ba0faa2eb4d8efb2056a08ec1aad5bb06626eb2835153c7a67190626a2b51b48",
+    "variants": {
+      "small": {
+        "file": "img_1497-small.webp",
+        "width": 338,
+        "height": 600,
+        "bytes": 51736
+      },
+      "page": {
+        "file": "img_1497-page.webp",
+        "width": 675,
+        "height": 1200,
+        "bytes": 166654
+      },
+      "large": {
+        "file": "img_1497-large.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 304374
+      }
+    }
+  },
+  {
+    "source": "IMG_5629.jpg",
+    "sourceWidth": 3213,
+    "sourceHeight": 5712,
+    "sourceBytes": 6699345,
+    "sourceSha256": "d6abc1f7d4b5a7e4dae5a6d33b20d4d434e3d8e41484804090790266e3336564",
+    "variants": {
+      "small": {
+        "file": "img_5629-small.webp",
+        "width": 337,
+        "height": 600,
+        "bytes": 45594
+      },
+      "page": {
+        "file": "img_5629-page.webp",
+        "width": 675,
+        "height": 1200,
+        "bytes": 185742
+      },
+      "large": {
+        "file": "img_5629-large.webp",
+        "width": 1125,
+        "height": 2000,
+        "bytes": 554302
+      }
+    }
+  },
+  {
+    "source": "IMG_4442.JPG",
+    "sourceWidth": 5712,
+    "sourceHeight": 3213,
+    "sourceBytes": 6253956,
+    "sourceSha256": "2e613f923b3916d7d9ba4a50b2b054c4cced91d2db2f1eff51ff4acb7f87b907",
+    "variants": {
+      "small": {
+        "file": "img_4442-small.webp",
+        "width": 600,
+        "height": 338,
+        "bytes": 55620
+      },
+      "page": {
+        "file": "img_4442-page.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 196302
+      },
+      "large": {
+        "file": "img_4442-large.webp",
+        "width": 2000,
+        "height": 1125,
+        "bytes": 519802
+      }
+    }
+  }
+]

@@ -44,6 +44,8 @@ function getRouteActiveUrl(pathname) {
     return "/#contacts";
   }
 
+  if (currentPath === "/about") return "/about";
+
   return null;
 }
 

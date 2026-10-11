@@ -20,10 +20,6 @@ function Footer({ navigation }) {
         </div>
 
         <nav className="footer__nav">
-          <Link to="/about" state={{ entryScroll: "top-smooth" }}>
-            О компании
-          </Link>
-
           {navigation.map((item) => (
             <Link to={item.url} key={item.title}>
               {item.title}

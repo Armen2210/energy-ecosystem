@@ -1,0 +1,78 @@
+.about-page { padding: 24px 0 36px; }
+.about-page__heading { margin: 26px 0 24px; }
+.about-page h1, .about-page h2, .about-page h3 { font-family: var(--font-heading); line-height: 1.15; }
+.about-page h1 { font-size: clamp(36px, 5vw, 56px); margin: 0 0 12px; }
+.about-page h2 { font-size: clamp(26px, 3vw, 36px); margin: 0 0 20px; }
+.about-page h3 { font-size: 21px; margin: 0 0 10px; }
+.about-page p { line-height: 1.65; margin: 0 0 16px; }
+.about-page__heading p { color: var(--color-muted); font-size: clamp(17px, 2vw, 21px); }
+.about-page__director { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.25fr); gap: 40px; align-items: start; }
+.about-page__section { padding-top: 42px; margin-top: 42px; border-top: 1px solid var(--color-border); }
+.about-page__team, .about-page__production-lead { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: center; }
+.about-page__signature { margin-top: 24px !important; }
+.about-page__signature strong, .about-page__signature span { display: block; }
+.about-page__signature span { color: var(--color-muted); font-size: 14px; }
+.about-page__departments { margin: 22px 0 0; padding-left: 20px; }
+.about-page__departments li { padding-left: 4px; margin: 0 0 10px; line-height: 1.55; }
+.about-page__departments li::marker { color: var(--color-red); }
+.about-page__quote { margin: 24px 0; padding: 0 0 0 22px; border-left: 3px solid var(--color-red); font-size: clamp(22px, 3vw, 32px); line-height: 1.4; max-width: 620px; }
+.about-page__process { list-style: none; padding: 0; margin: 32px 0 0; counter-reset: process; max-width: 960px; }
+.about-page__process li { position: relative; padding-left: 48px; margin-bottom: 28px; counter-increment: process; }
+.about-page__process li::before { content: "0" counter(process); position: absolute; left: 0; top: 0; color: var(--color-red-dark); font-weight: 700; }
+.about-page__scope { color: var(--color-muted); }
+.about-page__gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.about-page__gallery .about-photo { width: min(100%, 220px); margin-inline: auto; }
+.about-page__anniversary { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: 36px; align-items: center; }
+.about-page__contact { max-width: 860px; }
+.about-page__contact .button { margin-top: 8px; }
+.about-photo { margin: 0; min-width: 0; }
+.about-photo__open { display: block; position: relative; width: 100%; padding: 0; border: 0; border-radius: 18px; background: var(--color-surface); cursor: zoom-in; overflow: hidden; }
+.about-photo__open img { display: block; width: 100%; height: auto; }
+.about-photo__open:focus-visible { outline: 3px solid var(--color-red); outline-offset: 4px; }
+.about-photo__hint { position: absolute; bottom: 12px; right: 12px; border-radius: 12px; background: rgba(21, 23, 26, .82); padding: 5px 9px; color: white; font-size: 12px; }
+.about-photo figcaption { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--color-muted); }
+.about-viewer { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 20px; border: 0; background: transparent; color: white; }
+.about-viewer::backdrop { background: rgba(15, 18, 22, .94); }
+.about-viewer[open] { display: grid; place-items: center; }
+.about-viewer__panel { position: relative; width: min(1100px, 100%); height: 100%; max-height: 100%; display: flex; flex-direction: column; padding-top: 48px; }
+.about-viewer__close { position: absolute; top: 0; right: 0; }
+.about-viewer button { border: 1px solid rgba(255,255,255,.4); border-radius: 12px; background: #23272c; color: white; padding: 10px 14px; min-width: 44px; min-height: 44px; cursor: pointer; font: inherit; }
+.about-viewer button:focus-visible { outline: 3px solid var(--color-red); outline-offset: 3px; }
+.about-viewer__close { font-size: 26px !important; line-height: 1; }
+.about-viewer__image-area { min-height: 0; flex: 1; position: relative; display: grid; place-items: center; }
+.about-viewer__image { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.about-viewer__image--loading { opacity: 0; }
+.about-viewer__status { position: absolute; text-align: center; }
+.about-viewer__bar { display: flex; align-items: center; justify-content: center; gap: 16px; padding-top: 14px; flex: 0 0 auto; max-height: 32%; }
+.about-viewer__caption { text-align: center; overflow: auto; max-height: 100%; }
+.about-viewer__caption p { margin: 0; line-height: 1.4; }
+.about-viewer__caption span { display: block; margin-top: 6px; color: #c0c6cc; font-size: 13px; }
+@media (max-width: 960px) {
+  .about-page__director { grid-template-columns: 1fr; gap: 24px; }
+  .about-page__director .about-photo { max-width: 440px; }
+  .about-page__team, .about-page__production-lead { grid-template-columns: minmax(0, 1fr) 260px; gap: 28px; }
+  .about-page__gallery .about-photo { max-width: 180px; }
+  .about-page__anniversary { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 640px) {
+  .about-page { padding-top: 16px; }
+  .about-page__heading { margin: 22px 0 20px; }
+  .about-page__section { margin-top: 28px; padding-top: 28px; }
+  .about-page__team, .about-page__production-lead { grid-template-columns: 1fr; gap: 12px; }
+  .about-photo--vertical { max-width: 220px; margin-inline: auto; }
+  .about-page__quote { margin-block: 18px; padding-left: 16px; }
+  .about-page__process li { padding-left: 34px; margin-bottom: 22px; }
+  .about-page__gallery { grid-template-columns: 1fr; gap: 20px; }
+  .about-page__gallery .about-photo { width: 160px; }
+  .about-page__gallery .about-photo figcaption { width: 230px; margin-left: -35px; text-align: center; }
+  .about-viewer { padding: 12px; }
+  .about-viewer__bar { gap: 8px; font-size: 13px; }
+}
+@media (max-height: 420px) {
+  .about-viewer { padding: 8px; }
+  .about-viewer__panel { padding-top: 0; padding-right: 52px; }
+  .about-viewer__bar { padding-top: 6px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-page *, .about-viewer * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
