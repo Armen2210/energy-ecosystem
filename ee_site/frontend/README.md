@@ -1,6 +1,7 @@
 # Frontend сайта «Энергоэффект»
 
-Первая локальная версия `/about` называется «О нас» и содержит команду,
+Страница `/about` («О нас») реализована и принята владельцем; визуальные
+доработки отложены. Она содержит команду,
 производственный процесс и семь фотографий с увеличенным просмотром.
 Данные, подготовка WebP, результаты проверок и ограничения перед публикацией:
 [docs/about-page.md](docs/about-page.md). Имена двух руководителей пока временные;
@@ -10,7 +11,13 @@
 
 Документ описывает состояние исходного кода в репозитории. Он не подтверждает состояние production, сервера, DNS, почты, базы данных или внешних кабинетов: это нельзя установить по frontend-коду.
 
-**Дата основного описания:** 29 сентября 2026 года; актуализация по коду — 10 октября 2026 года. Аналитика добавлена 9 октября 2026 года; подробности и границы — в [analytics.md](docs/analytics.md), результаты — в [analytics-validation.md](docs/analytics-validation.md).
+**Дата основного описания:** 29 сентября 2026 года; актуализация по коду и решению владельца — 11 октября 2026 года. Аналитика добавлена 9 октября 2026 года; подробности и границы — в [analytics.md](docs/analytics.md), результаты — в [analytics-validation.md](docs/analytics-validation.md).
+
+Уточняющий аудит пяти изделий и трёх услуг завершён. Владелец решил сохранить
+существующие описания и FAQ всех восьми страниц без изменений. R1–R5 отложены
+как возможные будущие уточнения; это не установленные дефекты и не условия
+публикации. [Отчёт и решение](docs/content-audit/product-service-review.md),
+[остальные материалы аудита](docs/content-audit/README.md).
 
 ## Продуктовый контекст
 
@@ -30,18 +37,18 @@
 
 - production-домен — `https://www.energoeffekt-rostov.ru`;
 - frontend работает совместно с backend на Django и Django REST Framework;
-- production использует SPA fallback для прямого открытия внутренних маршрутов;
+- по прежним сведениям владельца production использовал SPA fallback; фактическая версия и переход к раздаче prerender HTML проверяются отдельно;
 - состояние production проверяется отдельно от локальной сборки.
 
 **Факты, подтверждённые frontend-кодом и структурой репозитория:**
 
 - заявки отправляются через backend endpoint `/api/leads/`;
 - URL запроса составляется из `VITE_API_BASE_URL` и `/api/leads/`;
-- клиент использует `BrowserRouter`, поэтому прямое открытие внутренних маршрутов требует SPA fallback в среде размещения; конфигурация production-сервера в frontend-каталоге отсутствует.
+- клиент использует `BrowserRouter`; текущая сборка создаёт собственный HTML для каждого известного публичного URL и отдельную 404. Для прямого открытия нужна согласованная раздача этих файлов, а не общий fallback неизвестных URL в `index.html`. nginx-шаблон находится в `ee_site/deploy`, его production-применение проверяется отдельно.
 
 ## Быстрый старт
 
-Требуется среда Node.js с npm. Конкретная версия Node.js в репозитории не зафиксирована (`.nvmrc` и поле `engines` отсутствуют).
+Требуется Node.js 22.13+ в ветке 22 либо Node.js 24 с npm (совместимость с Vite 8 и ESLint 10). Конкретная версия Node.js в репозитории не зафиксирована (`.nvmrc` и поле `engines` отсутствуют).
 
 ```bash
 cd ee_site/frontend
@@ -57,18 +64,19 @@ VITE_API_BASE_URL
 VITE_EE_ANALYTICS_ENABLED=false
 ```
 
-`VITE_API_BASE_URL` задаёт базовый URL backend без завершающего `/api/leads/`. `VITE_EE_ANALYTICS_ENABLED=true` явно включает возможность аналитики в production-сборке, после согласия и только на разрешённых HTTPS-hostname; по умолчанию выключено. Значение для конкретной среды необходимо задавать локально; секреты и реальные реквизиты окружения в README не приводятся. Vite автоматически загружает `.env`, а корневой `.gitignore` исключает его из Git.
+`VITE_API_BASE_URL` задаёт базовый URL backend без завершающего `/api/leads/`. `VITE_EE_ANALYTICS_ENABLED=true` явно включает возможность аналитики в production-сборке, после согласия и только на разрешённых HTTPS-hostname; по умолчанию выключено. Значение для конкретной среды необходимо задавать локально; секреты и реальные реквизиты окружения в README не приводятся. Vite dev/preview автоматически загружают `.env`, а корневой `.gitignore` исключает его из Git. Штатный `npm run build` использует отдельный prerender-скрипт: `.env` не читает, нужные `VITE_*` передаются явно переменными процесса.
 
 Для Windows/PowerShell вместо `cp` используйте `Copy-Item .env.example .env`.
 `npm ci` использует существующий lockfile; `npm install` нужен при намеренном
 обновлении зависимостей. Backend запускается отдельно по [его README](../backend/README.md).
 
-### Приоритет переменных Vite
+### Приоритет переменных Vite в dev/preview
 
 От высокого приоритета к низкому: переменные процесса → `.env.[mode].local` →
 `.env.[mode]` → `.env.local` → `.env`. Файлы с mode дополняют и переопределяют
-общие. Dev использует mode `development`, build — `production`; `--mode` меняет
-mode, но не превращает dev server в production-сборку. `.env.example` автоматически
+общие. Dev использует mode `development`, preview — `production`; `--mode` меняет
+mode Vite, но не превращает dev server в production-сборку. Штатный `npm run build`
+не использует эту цепочку файлов и не принимает `--mode`: разрешён только `--outDir`. `.env.example` автоматически
 не загружается. После изменения файлов перезапустите dev server или пересоберите
 bundle. Все `VITE_*` значения попадают в публичный frontend, секретов там быть не должно.
 
@@ -77,10 +85,11 @@ bundle. Все `VITE_*` значения попадают в публичный 
 | Команда | Назначение |
 | --- | --- |
 | `npm run dev` | Запускает Vite dev server. |
-| `npm run build` | Создаёт production-сборку в `dist/`. |
+| `npm run build` | Создаёт production-сборку с prerender 19 публичных страниц и отдельной 404 в `dist/`. |
 | `npm run preview` | Локально раздаёт ранее созданную production-сборку Vite. Сначала нужен `npm run build`. |
 | `npm run lint` | Запускает ESLint для проекта; каталог `dist` исключён конфигурацией. |
 | `npm test` | Node test runner: `src/api/*.test.js` и `src/analytics/*.test.js`. |
+| `npm run test:prerender` | Проверки генератора prerender встроенным Node test runner. |
 
 `npm test` запускает Node-тесты API и аналитики. Отдельных scripts для форматирования или type-check нет.
 
@@ -95,7 +104,7 @@ bundle. Все `VITE_*` значения попадают в публичный 
 - локальные variable-шрифты Onest (заголовки) и Golos Text (основной текст) из Fontsource;
 - браузерный `fetch` и `FormData` для отправки заявок.
 
-В `vite.config.js` подключён React-плагин и задан multi-page build input: `index.html` и `analytics-frame.html`. Алиасы путей, dev proxy, кастомный `base` и PWA-плагин отсутствуют.
+В `vite.config.js` подключён React-плагин и задан multi-page build input: `index.html`, `404.html` и `analytics-frame.html`. Алиасы путей, dev proxy, кастомный `base` и PWA-плагин отсутствуют.
 
 ## Структура frontend
 
@@ -103,8 +112,8 @@ bundle. Все `VITE_*` значения попадают в публичный 
 ee_site/frontend/
 ├── .env.example                 # API URL и выключенный флаг аналитики
 ├── analytics-frame.html         # отдельный документ адаптера счётчика
-├── docs/                        # analytics.md и analytics-validation.md
-├── scripts/                     # браузерные проверки и оценка загрузки
+├── docs/                        # аналитика, prerender, «О нас» и content-audit
+├── scripts/                     # prerender, браузерные проверки и оценка загрузки
 ├── eslint.config.js             # flat-конфигурация ESLint
 ├── index.html                   # HTML shell, базовые meta, favicon, JSON-LD
 ├── package.json
@@ -127,18 +136,21 @@ ee_site/frontend/
     │   └── leadFiles.js         # ограничения и сбор repeated attachments
     ├── analytics/               # согласие, iframe bridge, атрибуция, retry, tests
     ├── assets/                  # импортируемые Vite изображения и логотипы
+    │   ├── about/               # исходники фото и optimized/ для «О нас»
     │   └── cases/               # фотографии пяти кейсов по slug-каталогам
     ├── components/              # переиспользуемые JSX-компоненты и их CSS
     ├── data/
+    │   ├── about.js
     │   ├── cases.js
     │   ├── navigation.js
     │   ├── products.js
     │   └── services.js
+    ├── prerender/               # реестр маршрутов и entry.jsx для генерации HTML
     ├── pages/                   # компоненты маршрутов и page-level CSS
     ├── styles/                  # базовые CSS-слои
     ├── App.css                  # только агрегатор CSS-import
     ├── App.jsx                  # общий каркас и маршрутизация
-    ├── index.css                # пустая точка подключения из main.jsx
+    ├── index.css                # точка подключения из main.jsx, только комментарии
     └── main.jsx                 # React entry point и BrowserRouter
 ```
 
@@ -146,7 +158,7 @@ ee_site/frontend/
 
 ## Архитектура приложения
 
-`index.html` содержит `#root`; `src/main.jsx` подключает шрифты, `src/index.css`, включает React `StrictMode`, создаёт root и оборачивает `App` в `BrowserRouter`.
+`index.html` содержит `#root`; `src/main.jsx` подключает шрифты, `src/index.css`, включает React `StrictMode` и оборачивает `App` в `BrowserRouter`. При `data-prerendered="true"` используется `hydrateRoot` для готового HTML; в dev без prerender — `createRoot`.
 
 `src/App.jsx` формирует общий каркас:
 
@@ -159,7 +171,7 @@ ee_site/frontend/
 
 `AnalyticsBridge` связывает SPA-навигацию и разрешённые действия с адаптером аналитики. В `main.jsx` также нормализуется начальный `/contacts` до `/#contacts` с сохранением query.
 
-Приложение полностью клиентское. Для прямого открытия внутренних URL сервер, который раздаёт сборку, должен возвращать `index.html` для неизвестных файловых путей. Конкретная серверная конфигурация в этом frontend-каталоге не задаётся.
+Интерактивность и переходы приложения работают на клиенте. При сборке `scripts/prerender.mjs` рендерит готовый HTML из тех же компонентов; серверный SSR runtime не требуется. Раздача должна возвращать собственный HTML известных URL и 404 для неизвестных, сохраняя API и служебные пути. [nginx-шаблон](../deploy/nginx_technical_seo.conf.example) и [порядок внедрения](../deploy/README.md) находятся вне frontend-каталога; их применение на production не подтверждено этой документацией.
 
 Контент каталога не запрашивается с API: продукты, услуги, кейсы и главное меню импортируются из `src/data`. Backend вызывается только при отправке формы заявки.
 
@@ -168,7 +180,7 @@ ee_site/frontend/
 | Маршрут | Компонент | Назначение |
 | --- | --- | --- |
 | `/` | `HomePage` | Hero, AI Summary, продукция, услуги, объекты, контакты и форма заявки. В пользовательском интерфейсе используется термин «Объекты», технический route/id остаётся `cases`. Якоря: `#products`, `#services`, `#cases`, `#contacts`. |
-| `/about` | `AboutPage` | Краткая информация о компании и блок принципов/доверия. |
+| `/about` | `AboutPage` | Принятая страница «О нас»: команда, производство, семь фотографий, документы при поставке и обращение. |
 | `/solutions` | `SolutionsPage` | Реестр всех продуктовых карточек. |
 | `/solutions/:slug` | `ProductPage` | Детальная продуктовая страница по данным `products.js`; неизвестный slug показывает `NotFoundPage` внутри этого компонента. |
 | `/services` | `ServicesPage` | Реестр всех карточек услуг. |
@@ -189,7 +201,7 @@ ee_site/frontend/
 - `/cases/btp-residential-complex`;
 - `/cases/btp-industrial-facility`.
 
-Основная навигация из `navigation.js` ведёт не на страницы-реестры, а на секции главной: `/#products`, `/#services`, `/#cases`, `/#contacts`. `Header` определяет активный раздел по текущему pathname либо по видимой секции главной.
+Основная навигация из `navigation.js` ведёт не на страницы-реестры, а на секции главной: `/#products`, `/#services`, `/#cases`, `/#contacts`; «О нас» ведёт на `/about`. `Header` определяет активный раздел по текущему pathname либо по видимой секции главной.
 
 ## Страницы продуктов и услуг
 
@@ -200,7 +212,7 @@ ee_site/frontend/
 - hero с изображением и режимом отображения из данных;
 - `AiSummary`;
 - `ProductDetailsAccordion`;
-- списки характеристик/областей применения;
+- описания состава, применения и исходных данных внутри `detailSections`; отдельные списки `features`/`useCases` из data на этих страницах не выводятся;
 - `FAQ`, который также выводит JSON-LD `FAQPage`;
 - секция `#lead-form` с `LeadForm` и заранее выбранной текущей темой.
 
@@ -210,7 +222,7 @@ FAQ для этих страниц определён в самих `ProductPage
 
 - `Header` — логотип, знак «12 лет», desktop/mobile-навигация, активный пункт и переходы к секциям.
 - `Footer` — навигация, контакты, юридические данные, ссылка на политику и внешние ссылки экосистемы. На desktop используется симметричная трёхколоночная раскладка; tablet/mobile сохраняют отдельную responsive-компоновку.
-- `PageNavigation` — общий блок возврата и хлебных крошек для внутренних страниц; используется на страницах продуктов, услуг, объектов, «О компании» и политики.
+- `PageNavigation` — общий блок возврата и хлебных крошек для внутренних страниц; используется на страницах продуктов, услуг, объектов, «О нас» и политики.
 - `Hero` — главный экран главной страницы.
 - `SectionHeader` — унифицированный заголовок секции.
 - `ProductCard`, `ServiceCard` — карточки, ведущие на детальные страницы.
@@ -416,7 +428,7 @@ POST ${VITE_API_BASE_URL}/api/leads/
 5. `styles/cases.css` — общие actions/link реестров кейсов;
 6. `styles/buttons.css` — общие `.button` variants;
 7. CSS компонентов в порядке `AiSummary` → `FAQ` → `ProductDetailsAccordion` → `CookieBanner` → `TrustBlock` → `InfoListBlock` → `EntitySwitcher` → `LeadForm` → карточки → общие элементы → кейсы;
-8. page-level CSS в порядке `NotFoundPage` → `PrivacyPage` → `EntityPage` → `HomePage` → `CasesPage` → `CasePage`.
+8. page-level CSS в порядке `NotFoundPage` → `PrivacyPage` → `EntityPage` → `HomePage` → `CasesPage` → `CasePage` → `AboutPage`.
 
 `src/index.css` остаётся точкой импорта Vite/React, но сейчас содержит только комментарий. Стили компонента следует менять в его `<Component>.css`, общие токены — в `variables.css`, общую компоновку — в соответствующем файле `styles`, а общие product/service-страницы — в `EntityPage.css`.
 
@@ -569,7 +581,7 @@ nginx и mock upstream и завершает их; browser-runner не меня�
 
 В текущем frontend отсутствуют:
 
-- SSR/SSG;
+- серверный SSR runtime с рендерингом при HTTP-запросе; статическая генерация HTML при сборке (prerender) уже реализована;
 - TypeScript;
 - state manager вроде Redux;
 - отдельный сторонний framework unit-тестов (используется встроенный Node test runner);
@@ -590,7 +602,7 @@ nginx и mock upstream и завершает их; browser-runner не меня�
 - В `grids.css` есть несколько последовательных определений `.product-grid` и `.services-grid`; итог зависит от каскада. При правках нельзя оценивать только первый блок правил.
 - Комментарии в отдельных JSX могут описывать прежний план (например, старый комментарий `CasesPage` про отсутствие детальных страниц), тогда как маршруты и компоненты уже реализованы. Источником истины является исполняемый код.
 - Есть Node-тесты API/аналитики и отдельные браузерные сценарии; они не заменяют ручную приёмку routing, scroll, modal, responsive и submit на целевой среде.
-- Корректность прямых SPA URL зависит от fallback на стороне сервера, не заданного в этом каталоге.
+- Корректность прямых URL и HTTP 404 зависит от серверной раздачи сгенерированных HTML по nginx-шаблону; состояние действующего vhost отдельно не проверено.
 - Последний сохранённый результат `npm run lint` — exit 0, без ошибок/предупреждений. Старый baseline 5 ошибок / 2 предупреждения устранён предыдущими изменениями; новые задачи должны сохранять успешный lint.
 
 ## Правила безопасного внесения изменений
@@ -621,7 +633,7 @@ nginx и mock upstream и завершает их; browser-runner не меня�
 ### Маршруты и навигация
 
 - [ ] Главная и все затронутые прямые URL открываются через клиентскую навигацию.
-- [ ] Внутренний URL можно открыть/обновить напрямую в окружении с SPA fallback.
+- [ ] Внутренний URL можно открыть/обновить напрямую в окружении с корректной раздачей prerender HTML.
 - [ ] Неизвестные URL и product/service/case slug показывают `NotFoundPage` без redirect; при проверке nginx получают реальный HTTP 404. /404 также возвращает 404.
 - [ ] `/#products`, `/#services`, `/#cases`, `/#contacts`, `/contacts` и возврат из объекта приводят к ожидаемой позиции; кнопки «К продукции на главной», «К услугам на главной» и «К объектам на главной» используют прямое позиционирование без видимой прокрутки от Hero.
 - [ ] Активное состояние Header и `EntitySwitcher` соответствует странице.
@@ -742,7 +754,7 @@ lint/build. Эти исторические результаты относят�
 **Успешные тесты не подтверждают поступление событий в настоящий счётчик.**
 Перед серверным внедрением владелец отдельно согласует юридический текст,
 настройки семи JavaScript-целей и отключение лишнего автоматического сбора,
-CSP/TLS и загрузку frame/script, SPA fallback и API, миграции/private storage,
+CSP/TLS и загрузку frame/script, раздачу prerender HTML и API, миграции/private storage,
 proxy/limiter и worker. После внедрения требуется контролируемая проверка доставки
 в кабинете с разрешением тестировщика, отказа/отзыва, API/документов и уведомлений
 на staging/production. Публикация, миграция сервера и настройка кабинета этим
