@@ -126,9 +126,10 @@ try {
       }
       assert.equal(request.method(), 'GET');
       let target = path.resolve(dist, decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html');
+      if (!path.extname(target)) target += '.html';
       assert.ok(target.startsWith(dist + path.sep));
-      try { if (!(await stat(target)).isFile()) target = path.join(dist, 'index.html'); }
-      catch { target = path.join(dist, 'index.html'); }
+      try { if (!(await stat(target)).isFile()) target = path.join(dist, url.pathname === '/contacts' || url.pathname === '/contacts/' ? 'index.html' : '404.html'); }
+      catch { target = path.join(dist, url.pathname === '/contacts' || url.pathname === '/contacts/' ? 'index.html' : '404.html'); }
       return route.fulfill({ path: target });
     });
     const page = await context.newPage();

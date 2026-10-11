@@ -16,7 +16,9 @@ const fragment = path.resolve(frontend, '../deploy/nginx_technical_seo.conf.exam
 const nginx = process.env.NGINX_BIN || 'nginx';
 const mimeTypes = process.env.NGINX_MIME_TYPES || '/etc/nginx/mime.types';
 let upstream, server, run, origin;
-const sitemap = await readFile(path.join(frontend, 'public/sitemap.xml'), 'utf8');
+const sitemap = await readFile(path.join(frontend, 'dist/sitemap.xml'), 'utf8');
+const routeFragment = (await readFile(fragment, 'utf8')).replaceAll('__EE_DIST__', frontend + '/dist');
+import { validatePage } from './prerender-validation.mjs';
 const pages = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
 const rows = [];
 
@@ -66,7 +68,7 @@ http {
     location ^~ /admin/ { proxy_pass http://127.0.0.1:${upstream.address().port}; }
     location ^~ /static/ { return 204; }
     location ^~ /media/ { return 403; }
-    include "${fragment}";
+    ${routeFragment}
   }
 }`;
   await writeFile(path.join(run, 'nginx.conf'), config);
@@ -103,14 +105,16 @@ test('every sitemap page and its query variant returns actual HTML 200', async (
     const { response, body } = await request(url);
     assert.equal(response.status, 200, url);
     assert.match(response.headers.get('content-type'), /text\/html/);
-    assert.match(body, /<div id="root"><\/div>/);
-    assert.equal((await request(url + '?utm_source=local')).response.status, 200, url);
+    validatePage(body, url, pages);
+    const query = await request(url + '?utm_source=local');
+    assert.equal(query.response.status, 200, url);
+    assert.equal(query.body, body, 'query must not leak into static HTML');
   }
 });
 
 test('missing general/entity/historical URLs return 404 without masking redirects', async () => {
   for (const url of ['/missing', '/solutions/missing', '/services/missing', '/cases/missing',
-    '/404', '/about-us', '/raskhodomery', '/About', '/SOLUTIONS/bmk', '/missing/', '/missing.html', '/cases/btp-hotel-complex/extra']) {
+    '/404', '/about-us', '/raskhodomery', '/About', '/SOLUTIONS/bmk', '/missing/', '/missing.html', '/about.html', '/solutions/bmk.html', '/prerender-routes.conf', '/prerender-manifest.json', '/cases/btp-hotel-complex/extra']) {
     const { response, body } = await request(url);
     assert.equal(response.status, 404, url);
     assert.equal(response.headers.get('location'), null, url);
@@ -173,12 +177,14 @@ test('API/admin are passed to the existing upstream without swallowing status or
 // then stop both servers in after(). No hand-edited local config is needed.
 if (process.env.SEO_BROWSER === 'true') {
   test('browser SEO checks against the same isolated nginx fixture', async () => {
-    const runner = spawn(process.execPath, [path.join(frontend, 'scripts/technical-seo-browser.mjs')], {
-      cwd: frontend,
-      env: { ...process.env, SEO_TEST_ORIGIN: origin },
-      stdio: 'inherit',
-    });
-    const [code] = await once(runner, 'exit');
-    assert.equal(code, 0, 'browser runner failed');
+    for (const script of ['technical-seo-browser.mjs', 'prerender-browser.mjs', 'privacy-form-browser.mjs']) {
+      const runner = spawn(process.execPath, [path.join(frontend, 'scripts', script)], {
+        cwd: frontend,
+        env: { ...process.env, SEO_TEST_ORIGIN: origin, PRIVACY_TEST_ORIGIN: origin },
+        stdio: 'inherit',
+      });
+      const [code] = await once(runner, 'exit');
+      assert.equal(code, 0, script + ' failed');
+    }
   });
 }

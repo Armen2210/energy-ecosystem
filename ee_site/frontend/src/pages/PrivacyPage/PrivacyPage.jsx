@@ -5,6 +5,7 @@
 // =========================================================
 
 import { useLocation } from "react-router-dom";
+import { useClientReady } from "../../hooks/useClientReady";
 
 import PageNavigation from "../../components/PageNavigation";
 import SectionHeader from "../../components/SectionHeader";
@@ -12,7 +13,8 @@ import Seo from "../../components/Seo";
 
 function PrivacyPage() {
   const { search } = useLocation();
-  const fromLeadForm = new URLSearchParams(search).get("from") === "lead-form";
+  const ready = useClientReady();
+  const fromLeadForm = ready && new URLSearchParams(search).get("from") === "lead-form";
   return (
     <main className="page privacy-page">
       <Seo

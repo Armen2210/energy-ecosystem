@@ -1,6 +1,6 @@
 # TEMPLATE: merge these server{} directives with the current EE virtual host.
 # Do not replace TLS, API/admin/static/media locations or request-protection rules.
-# root must point at the COMPLETE Vite dist (including 404.html).
+# root must point at the COMPLETE Vite dist (including 404.html and prerender-routes.conf).
 # Tested with nginx 1.26.3 locally; never applied to production.
 
 error_page 404 /404.html;
@@ -21,18 +21,13 @@ location = /index.html {
     return 301 "/$is_args$args";
 }
 
-# Normalize trailing slashes ONLY for known public pages.
-location ~ ^(?<ee_page>/(?:about|privacy|solutions(?:/(?:bmk|btp|vns|pns|automation-cabinets))?|services(?:/(?:design|construction-installation|commissioning))?|cases(?:/(?:bmk-sports-complex|btp-food-production|btp-hotel-complex|btp-residential-complex|btp-industrial-facility))?))/+$ {
-    return 301 "$ee_page$is_args$args";
-}
+# Replace __EE_DIST__ with the absolute dist directory when integrating.
+# The included file is generated alongside HTML and sitemap; deploy complete dist.
+# Flat /about.html artifacts avoid nginx directory slash redirects at /about.
+include __EE_DIST__/prerender-routes.conf;
 
-location = / {
-    try_files /index.html =404;
-}
-# SPA fallback belongs ONLY to existing pages, not arbitrary slugs.
-location ~ ^/(?:about|privacy|solutions(?:/(?:bmk|btp|vns|pns|automation-cabinets))?|services(?:/(?:design|construction-installation|commissioning))?|cases(?:/(?:bmk-sports-complex|btp-food-production|btp-hotel-complex|btp-residential-complex|btp-industrial-facility))?)$ {
-    try_files /index.html =404;
-}
+location = /prerender-routes.conf { return 404; }
+location = /prerender-manifest.json { return 404; }
 
 location ^~ /assets/ {
     try_files $uri =404;

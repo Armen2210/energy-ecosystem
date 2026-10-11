@@ -5,7 +5,7 @@
 // =========================================================
 
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import "@fontsource-variable/onest/wght.css";
@@ -20,10 +20,17 @@ if (/^\/contacts\/?$/.test(window.location.pathname)) {
   window.history.replaceState(window.history.state, "", `/${window.location.search}#contacts`);
 }
 
-createRoot(document.getElementById("root")).render(
+const root = document.getElementById("root");
+const app = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );
+
+if (root.dataset.prerendered === "true") {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}
