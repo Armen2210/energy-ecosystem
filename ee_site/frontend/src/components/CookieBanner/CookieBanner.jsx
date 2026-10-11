@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import { analytics } from "../../analytics/runtime.js";
+import { useClientReady } from "../../hooks/useClientReady";
 
 export default function CookieBanner() {
+  const ready = useClientReady();
   const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
   const [opened, setOpened] = useState(false);
   const accept = useRef(null);
@@ -21,7 +23,7 @@ export default function CookieBanner() {
     setOpened(false);
     returnFocus.current?.focus();
   }
-  if (!opened && choice !== "unknown") return null;
+  if (!ready || (!opened && choice !== "unknown")) return null;
   return (
     <section className="cookie-banner" aria-labelledby="cookie-banner-title">
       <div className="cookie-banner__content">

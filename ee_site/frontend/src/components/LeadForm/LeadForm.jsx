@@ -6,7 +6,8 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { leadDraft } from "../../api/leadDraft.js";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useClientReady } from "../../hooks/useClientReady";
 
 import {
   createLead,
@@ -25,7 +26,9 @@ import { analytics } from "../../analytics/runtime.js";
 import { pageParams, safePath } from "../../analytics/policy.js";
 
 function LeadForm({ products = [], services = [], initialTopic = "" }) {
-  const draft = useSyncExternalStore(leadDraft.subscribe, leadDraft.get);
+  const ready = useClientReady();
+  const { pathname } = useLocation();
+  const draft = useSyncExternalStore(leadDraft.subscribe, leadDraft.get, leadDraft.getServerSnapshot);
   const selectedTopic = draft.started ? draft.topic : initialTopic;
   const selectedFiles = draft.files;
   const isSubmitting = draft.submitting;
@@ -35,7 +38,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   useEffect(() => leadDraft.presentSuccess(draft.successToken), [draft.successToken]);
 
   function handleFieldChange(event) {
-    if (leadDraft.get().submitting) return;
+    if (!ready || leadDraft.get().submitting) return;
     const { name, value, checked, type } = event.target;
     markStart();
     leadDraft.update({ fields: { ...leadDraft.get().fields, [name]: type === "checkbox" ? checked : value } });
@@ -80,7 +83,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (leadDraft.get().submitting) return;
+    if (!ready || leadDraft.get().submitting) return;
     const formData = new FormData(event.currentTarget);
     const submittedTopic = formData.get("description_topic");
     const description = formData.get("description");
@@ -145,8 +148,9 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   }
 
   return (
-    <form className="lead-form" onSubmit={handleSubmit}>
-      <fieldset className="lead-form__fieldset" disabled={isSubmitting}>
+    <form className="lead-form" method="post" onSubmit={handleSubmit} aria-busy={!ready}>
+      <noscript><p>Для заполнения и отправки заявки включите JavaScript. Основное содержание сайта и ссылки доступны без него.</p></noscript>
+      <fieldset className="lead-form__fieldset" disabled={!ready || isSubmitting}>
       <div className="lead-form__grid">
         <label>
           Имя
@@ -243,7 +247,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       <input
         type="hidden"
         name="source_page"
-        value={draft.sourcePage || safePath(window.location.pathname)}
+        value={draft.sourcePage || safePath(pathname)}
       />
 
       <label className="lead-form__consent">

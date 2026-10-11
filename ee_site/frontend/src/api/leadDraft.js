@@ -5,6 +5,7 @@ const empty = () => ({
   successToken: null, hiding: false, submitting: false, status: 'idle', message: '', submission: null, snapshot: null, retryIds: [],
 });
 let draft = empty();
+const serverDraft = empty();
 const listeners = new Set();
 const presenters = new Set();
 let hideTimer, removeTimer;
@@ -23,6 +24,7 @@ function messagePatch(patch) {
 }
 export const leadDraft = {
   get: () => draft,
+  getServerSnapshot: () => serverDraft,
   subscribe(listener) {
     listeners.add(listener);
     return () => listeners.delete(listener);

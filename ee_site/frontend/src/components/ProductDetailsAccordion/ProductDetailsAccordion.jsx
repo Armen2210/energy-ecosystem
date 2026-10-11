@@ -14,8 +14,10 @@
 // =========================================================
 
 import { useState } from "react";
+import { useClientReady } from "../../hooks/useClientReady";
 
 function ProductDetailsAccordion({ sections = [], stateKey = "default" }) {
+  const ready = useClientReady();
   const [openIndexByKey, setOpenIndexByKey] = useState({});
   const [spinningIndex, setSpinningIndex] = useState(null);
 
@@ -86,7 +88,7 @@ function ProductDetailsAccordion({ sections = [], stateKey = "default" }) {
 
             <div
               className="product-details-accordion__panel"
-              aria-hidden={!isOpen}
+              aria-hidden={ready && !isOpen}
             >
               <div className="product-details-accordion__content">
                 {section.paragraphs.map((paragraph) => (

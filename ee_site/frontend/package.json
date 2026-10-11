@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/prerender.mjs",
     "lint": "eslint .",
     "test": "node --test src/api/*.test.js src/analytics/*.test.js",
+    "test:prerender": "node --test scripts/prerender.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "parse5": "8.0.0",
     "vite": "^8.0.16"
   }
 }

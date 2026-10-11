@@ -18,8 +18,10 @@
 // =========================================================
 
 import { useMemo, useState } from "react";
+import { useClientReady } from "../../hooks/useClientReady";
 
 function FAQ({ items = [], stateKey = "default", path }) {
+  const ready = useClientReady();
   const [openItemsByKey, setOpenItemsByKey] = useState({});
 
   const safeStateKey = useMemo(
@@ -107,7 +109,7 @@ function FAQ({ items = [], stateKey = "default", path }) {
                 className="faq__panel"
                 role="region"
                 aria-labelledby={buttonId}
-                aria-hidden={!isOpen}
+                aria-hidden={ready && !isOpen}
               >
                 <div className="faq__content">
                   <p className="faq__answer">{item.answer}</p>

@@ -12,7 +12,7 @@ const origin = process.env.SEO_TEST_ORIGIN || 'http://127.0.0.1:8088';
 assert.match(origin, /^http:\/\/127\.0\.0\.1:\d+$/);
 const out = process.env.SEO_OUTPUT || '/tmp/ee-technical-seo';
 await mkdir(out, { recursive: true });
-const sitemap = await readFile('public/sitemap.xml', 'utf8');
+const sitemap = await readFile('dist/sitemap.xml', 'utf8');
 const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
 const missing = ['/missing', '/solutions/missing', '/services/missing', '/cases/missing',
   '/404', '/about-us', '/raskhodomery', '/About', '/SOLUTIONS/bmk'];
@@ -63,6 +63,9 @@ try {
     const response = await page.goto(origin + url);
     assert.equal(response.status(), 200, url);
     const source = await response.text();
+    assert.match(source, /data-prerendered="true"/);
+    assert.match(source, /rel="canonical"/);
+    assert.match(source, /<h1/);
     await page.waitForFunction(() => document.querySelector('link[rel="canonical"]'));
     const data = await metadata();
     assert.equal(data.canonical, 'https://www.energoeffekt-rostov.ru' + url);

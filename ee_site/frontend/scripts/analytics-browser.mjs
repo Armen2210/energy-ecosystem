@@ -61,10 +61,11 @@ async function scenario({ width = 1440, seed = {}, failStorage = false, tagDelay
      }
      if (request.method() !== 'GET' && request.method() !== 'HEAD') { await route.abort(); return; }
      const relative = decodeURIComponent(u.pathname).replace(/^\/+/, '');
-     const target = path.resolve(dist, relative || 'index.html');
+     let target = path.resolve(dist, relative || 'index.html');
+     if (!path.extname(target)) target += '.html';
      assert.ok(target.startsWith(dist + path.sep));
      let file = target;
-     try { if (!(await fs.stat(file)).isFile()) file = path.join(dist, 'index.html'); } catch { file = path.join(dist, 'index.html'); }
+     try { if (!(await fs.stat(file)).isFile()) file = path.join(dist, u.pathname === '/contacts' || u.pathname === '/contacts/' ? 'index.html' : '404.html'); } catch { file = path.join(dist, u.pathname === '/contacts' || u.pathname === '/contacts/' ? 'index.html' : '404.html'); }
      await route.fulfill({ path: file, headers: { 'cache-control': 'no-store' } }); return;
    }
    // Capture the real library payload without ever delivering it to Yandex.

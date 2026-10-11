@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { SeoLocationContext } from "./location";
+import { SeoBuildContext } from "./buildContext";
 import { cases } from "../../data/cases";
 
 const SITE_URL = "https://www.energoeffekt-rostov.ru";
@@ -32,6 +33,8 @@ function Seo({
   const pageTitle = modalCase?.seo.title ?? title;
   const pageDescription = modalCase?.seo.description ?? description;
   const pagePath = modalCase?.url ?? path;
+  const collect = useContext(SeoBuildContext);
+  collect?.({ title: pageTitle, description: pageDescription, path: pagePath, robots });
 
   useEffect(() => {
     const pageUrl = pagePath === null ? null : `${SITE_URL}${pagePath}`;
