@@ -18,6 +18,10 @@ export const navigation = [
     url: "/#cases",
   },
   {
+    title: "О нас",
+    url: "/about",
+  },
+  {
     title: "Контакты",
     url: "/#contacts",
   },
