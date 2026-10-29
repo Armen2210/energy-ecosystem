@@ -6,7 +6,7 @@
 // - будущих детальных страниц отдельных объектов.
 // =========================================================
 
-import bmkFokElistaCover from "../assets/cases/bmk-sports-complex/cover.jpg";
+import bmkFokElistaCover from "../assets/cases/bmk-sports-complex/cover.webp";
 import bmkFokElista01 from "../assets/cases/bmk-sports-complex/01.jpg";
 import bmkFokElista04 from "../assets/cases/bmk-sports-complex/04.jpg";
 import bmkFokElista05 from "../assets/cases/bmk-sports-complex/05.jpg";

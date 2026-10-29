@@ -189,13 +189,15 @@
   }
 
   .hero h1 {
-    font-size: clamp(31px, 8.2vw, 34px);
+    gap: 0;
+    font-size: clamp(28px, 7.5vw, 31px);
     line-height: 1.07;
     letter-spacing: -0.02em;
   }
 
   .hero__text {
-    font-size: 15px;
+    margin-top: 16px;
+    font-size: 14px;
   }
 
   .hero__visual img {

@@ -52,7 +52,7 @@ function ProductCard({ product, headingLevel = 3 }) {
 
   return (
     <Link
-      className={`product-card ${
+      className={`product-card product-card--${product.slug} ${
         product.heroImage ? "product-card--has-image" : ""
       } ${product.lineLogo ? "product-card--has-line-logo" : ""} ${
         isLeaving ? "product-card--leaving" : ""

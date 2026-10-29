@@ -11,15 +11,14 @@
 // цветовой настройки продуктовых страниц.
 // =========================================================
 
-import bmkGigatermHero from "../assets/bmk-gigaterm-hero.webp";
+import bmkGigatermHero from "../assets/bmk-card.webp";
 import gigatermLogo from "../assets/logo-gigaterm.png";
-import btpEnergolainHero from "../assets/btp-energolain-hero.webp";
-import btpEnergolainHeroSmall from "../assets/btp-energolain-hero-720.webp";
+import btpEnergolainHero from "../assets/btp-energolain-new.webp";
 import energolainLogo from "../assets/logo-energolain.png";
-import vnsAquarusHero from "../assets/vns-aquarus-hero.webp";
+import vnsAquarusHero from "../assets/vns-aquarus-new.webp";
 import aquarusLogo from "../assets/logo-aquarus.png";
-import pnsFireHero from "../assets/pns-fire-hero.webp";
-import automationCabinetsHero from "../assets/automation-cabinets-hero.webp";
+import pnsFireHero from "../assets/pns-fire-new.webp";
+import automationCabinetsHero from "../assets/automation-cabinets-new.webp";
 
 const defaultProductTheme = {
   accent: "#f97316",
@@ -38,8 +37,8 @@ export const products = [
     switcherTitle: "БМК",
     theme: { ...defaultProductTheme },
     heroImage: bmkGigatermHero,
-    heroImageWidth: 1448,
-    heroImageHeight: 1086,
+    heroImageWidth: 1536,
+    heroImageHeight: 717,
     heroImageMode: "portrait",
     heroImageAlt:
       "Блочно-модульная котельная «Гигатерм» для теплоснабжения объекта",
@@ -133,9 +132,8 @@ export const products = [
   switcherTitle: "БТП",
   theme: { ...defaultProductTheme },
   heroImage: btpEnergolainHero,
-  heroImageSet: `${btpEnergolainHeroSmall} 720w, ${btpEnergolainHero} 1122w`,
-  heroImageWidth: 1122,
-  heroImageHeight: 1402,
+  heroImageWidth: 1600,
+  heroImageHeight: 900,
   heroImageMode: "portrait",
   heroImageAlt:
     "Блочный тепловой пункт «Энерголайн» для распределения тепловой энергии на объекте",
@@ -232,8 +230,8 @@ export const products = [
   switcherTitle: "ВНС",
   theme: { ...defaultProductTheme },
   heroImage: vnsAquarusHero,
-  heroImageWidth: 1320,
-  heroImageHeight: 2322,
+  heroImageWidth: 1836,
+  heroImageHeight: 857,
   heroImageMode: "portrait",
   heroImageAlt:
     "Водопроводная насосная станция «Акварус» для подачи воды и поддержания давления",
@@ -329,8 +327,8 @@ export const products = [
   switcherTitle: "ПНС",
   theme: { ...defaultProductTheme },
   heroImage: pnsFireHero,
-  heroImageWidth: 1086,
-  heroImageHeight: 1448,
+  heroImageWidth: 1200,
+  heroImageHeight: 560,
   heroImageMode: "portrait",
   heroImageAlt:
     "Пожарная насосная станция для системы противопожарного водоснабжения объекта",
@@ -422,8 +420,8 @@ export const products = [
   switcherTitle: "ШУиА",
   theme: { ...defaultProductTheme },
   heroImage: automationCabinetsHero,
-  heroImageWidth: 1320,
-  heroImageHeight: 1757,
+  heroImageWidth: 1834,
+  heroImageHeight: 858,
   heroImageMode: "portrait",
   heroImageAlt:
     "Шкаф управления и автоматизации для инженерного оборудования объекта",

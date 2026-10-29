@@ -257,7 +257,7 @@ function ProductPage() {
 
         {product.heroImage ? (
           <section
-              className={`product-hero ${
+              className={`product-hero product-hero--${product.slug} ${
                 product.heroImageMode ? `product-hero--${product.heroImageMode}` : ""
               }`}
               aria-labelledby="product-hero-title"
