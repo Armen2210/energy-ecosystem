@@ -363,6 +363,11 @@
     display: none;
   }
 
+  /* БМК на главной: сохраняем нижний край котельной в кадре. */
+  .product-grid--home .product-card--bmk .product-card__media img {
+    object-position: center bottom;
+  }
+
 
   /* ---------------------------------------------------------
      ОБЩАЯ ПРОПОРЦИЯ

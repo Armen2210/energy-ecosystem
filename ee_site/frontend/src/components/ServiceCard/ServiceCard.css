@@ -256,7 +256,7 @@
     background-position: center;
     background-size: cover;
 
-    opacity: 0.12;
+    opacity: 0.18;
   }
 
   .services-grid--home .service-card :is(h2, h3) {
@@ -336,7 +336,7 @@
     background-position: center;
     background-size: cover;
 
-    opacity: 0.12;
+    opacity: 0.18;
   }
 
 
@@ -372,7 +372,7 @@
     background-position: center;
     background-size: cover;
 
-    opacity: 0.12;
+    opacity: 0.18;
   }
 }
 
