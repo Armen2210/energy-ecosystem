@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { parse } from 'parse5';
+import { documentFilesByUrl, validateDocumentFile } from './document-files.mjs';
 
 export function nodes(node) {
   return [node, ...(node.childNodes || []).flatMap(nodes)];
@@ -54,7 +55,9 @@ export function validatePage(html, route, routes) {
     const href = attr(anchor, 'href');
     if (href?.startsWith('/')) {
       const url = new URL(href, 'https://www.energoeffekt-rostov.ru');
-      assert.ok(routes.includes(url.pathname) || url.pathname === '/contacts', `${route}: dead link ${href}`);
+      const file = documentFilesByUrl.get(url.pathname);
+      if (file) validateDocumentFile(file);
+      else assert.ok(routes.includes(url.pathname) || url.pathname === '/contacts', `${route}: dead link ${href}`);
     }
   }
   const schemas = elements('script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(text(node)));

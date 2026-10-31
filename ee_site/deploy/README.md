@@ -11,7 +11,7 @@
    Production .env сборка не читает. Нужные VITE_* задавать явно процессу;
    аналитика выключена по умолчанию. При изменении её флага проверить consent
    и hostname gate отдельно; наличие prerender не включает счётчик.
-3. Подготовить отдельный versioned каталог полного dist: assets, все 19 HTML,
+3. Подготовить отдельный versioned каталог полного dist: assets, все HTML из реестра,
    404, sitemap, robots, analytics-frame и `prerender-routes.conf`. Не копировать
    только index.html, не смешивать старые и новые hashed assets. Manifest служит
    для проверки полноты, nginx не выдаёт его и конфигурационный include публично.
@@ -21,6 +21,9 @@
    и server root должны указывать на одну версию dist. Имена HTML — плоские
    `/about.html`, `/solutions/bmk.html`; не добавлять `$uri/` или общий index
    fallback к неизвестным URL. Публичные URL остаются без trailing slash.
+   `/documents` — страница; вложенные PDF/XLSX в `documents/` — публичные файлы.
+   Ограниченный document location из примера сохраняет MIME и реальный 404,
+   не использует private storage и не добавляет локальных security headers.
 5. До reload выполнить `nginx -t`. На staging/целевом сервере проверить все
    canonical URL (200 и собственный HTML), unknown entity URLs (404 без redirect
    или canonical), contacts/index/known trailing slash (301 с query), assets,

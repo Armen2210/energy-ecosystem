@@ -1,0 +1,37 @@
+/* Heading rhythm follows AboutPage; the page inherits .site and .container. */
+.documents-page { padding: 24px 0 36px; }
+.documents-page__heading { margin: 26px 0 24px; }
+.documents-page h1 { margin: 0 0 12px; font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.15; overflow-wrap: anywhere; }
+.documents-page__heading p { margin: 0; color: var(--color-muted); font-size: clamp(1.0625rem, 2vw, 1.3125rem); line-height: 1.65; }
+.documents-page__category { padding: 32px; border: 1px solid var(--color-border); border-radius: 24px; background: var(--color-surface); }
+.documents-page__category + .documents-page__category { margin-top: 28px; }
+.documents-page h2 { margin: 0 0 12px; font-size: clamp(1.625rem, 3vw, 2.25rem); line-height: 1.15; }
+.documents-page__description { margin: 0 0 8px; color: var(--color-muted); line-height: 1.65; }
+.documents-page__list, .documents-page__files { margin: 0; padding: 0; list-style: none; }
+.documents-page__document { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr); align-items: start; gap: 32px; padding: 24px 0; }
+.documents-page__document + .documents-page__document { border-top: 1px solid var(--color-border); }
+.documents-page__document:last-child { padding-bottom: 0; }
+.documents-page h3 { margin: 0; font-size: 1.25rem; line-height: 1.4; overflow-wrap: anywhere; }
+.documents-page__document-description { margin: 8px 0 0; color: var(--color-muted); font-size: .9375rem; line-height: 1.55; }
+.documents-page__files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.documents-page__files li { min-width: 0; }
+.documents-page__file { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-height: 44px; padding: 2px 0; overflow-wrap: anywhere; }
+.documents-page__action { color: var(--color-dark); font-weight: 650; line-height: 1.4; text-decoration: underline; text-decoration-color: var(--color-red); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.documents-page__file:hover .documents-page__action { text-decoration-thickness: 3px; text-decoration-color: var(--color-red-dark); }
+.documents-page__file-meta { color: var(--color-muted); font-size: .8125rem; line-height: 1.5; }
+.documents-page a:focus-visible { outline: 3px solid var(--color-red-dark); outline-offset: 4px; border-radius: 2px; }
+#footer-documents:focus-visible { outline: 2px solid var(--color-surface); outline-offset: 3px; }
+@media (max-width: 960px) {
+  .documents-page__category { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .documents-page__document { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .documents-page__files { max-width: 480px; }
+}
+@media (max-width: 640px) {
+  .documents-page { padding-top: 16px; }
+  .documents-page__heading { margin: 22px 0 20px; }
+  .documents-page__files { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  /* Keep both breadcrumbs readable, including with enlarged text. */
+  .documents-page .page-navigation { flex-wrap: wrap; }
+  .documents-page .page-navigation__breadcrumb { flex: 0 1 auto; flex-wrap: wrap; white-space: normal; }
+  .documents-page .page-navigation__breadcrumb-item:last-child { display: inline-flex; }
+}

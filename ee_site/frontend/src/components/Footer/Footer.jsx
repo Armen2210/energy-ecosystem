@@ -4,10 +4,13 @@
 // экосистема компаний, контакты и юридические ссылки.
 // =========================================================
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { analytics } from "../../analytics/runtime.js";
 
 function Footer({ navigation }) {
+  const location = useLocation();
+  const footerNavigation = navigation.flatMap(item => item.url === '/about'
+    ? [item, { title: 'Документы', url: '/documents', id: 'footer-documents' }] : [item]);
   return (
     <footer className="footer">
       <div className="container footer__grid">
@@ -20,8 +23,10 @@ function Footer({ navigation }) {
         </div>
 
         <nav className="footer__nav">
-          {navigation.map((item) => (
-            <Link to={item.url} key={item.title}>
+          {footerNavigation.map((item) => (
+            <Link to={item.url} key={item.title} id={item.id}
+              state={item.id === 'footer-documents' && location.pathname === '/'
+                ? { documentsReturnKey: location.key } : undefined}>
               {item.title}
             </Link>
           ))}

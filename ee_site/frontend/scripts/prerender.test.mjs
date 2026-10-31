@@ -9,6 +9,7 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { validatePage } from './prerender-validation.mjs';
 import { parseBuildOptions } from './prerender-options.mjs';
+import { documentFiles } from './document-files.mjs';
 
 const frontend = fileURLToPath(new URL('../', import.meta.url));
 const buildScript = path.join(frontend, 'scripts/prerender.mjs');
@@ -69,6 +70,13 @@ test('custom output with spaces contains all artifacts and leaves dist unchanged
 const routes = manifest.pages.filter((row) => row.route !== '/404').map((row) => row.route);
 const home = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
 
+test('prerender checks registered files and rejects unregistered file-looking links', async () => {
+  const html = await readFile(new URL('../dist/documents.html', import.meta.url), 'utf8');
+  validatePage(html, '/documents', routes);
+  assert.throws(() => validatePage(html.replace(documentFiles[0].url, '/documents/missing.xlsx'), '/documents', routes));
+  assert.throws(() => validatePage(html.replace(documentFiles[0].url, '/some-unknown.pdf'), '/documents', routes));
+});
+
 test('all declared artifacts pass the mandatory content/metadata/isolation checks', async () => {
   assert.equal(routes.length, new Set(routes).size);
   for (const row of manifest.pages) {
@@ -85,10 +93,13 @@ test('mandatory validation rejects a shell instead of public content', () => {
 test('mandatory validation rejects missing metadata, dead links and stale consent', () => {
   for (const corrupted of [
     home.replace(/<link rel="canonical"[^>]+>/, ''),
-    home.replace(/href="\/solutions"/, 'href="/removed-product"'),
+    home.replace(/href="\/about"/, 'href="/removed-page"'),
     home.replace('data-prerendered="true"', 'data-prerendered="false"'),
     home.replace('<fieldset', '<section class="cookie-banner"></section><fieldset'),
-  ]) assert.throws(() => validatePage(corrupted, '/', routes));
+  ]) {
+    assert.notEqual(corrupted, home, 'The negative fixture must actually change the HTML');
+    assert.throws(() => validatePage(corrupted, '/', routes));
+  }
 });
 
 test('mandatory validation rejects visitor fields and an enabled pre-hydration form', () => {

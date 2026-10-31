@@ -32,6 +32,19 @@ location = /prerender-manifest.json { return 404; }
 location ^~ /assets/ {
     try_files $uri =404;
 }
+
+# Only public document paths and formats; files are under this dist's root.
+# Do not use ^~ /documents/: the generated /documents/ canonical redirect
+# must still win. Missing files keep 404; never fall back to the SPA HTML.
+location ~ ^/documents/(?:[a-z0-9-]+/)+[a-z0-9-]+\.(?:xlsx|pdf)$ {
+    types {
+        application/pdf pdf;
+        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx;
+    }
+    try_files $uri =404;
+    # No local add_header: preserve inherited security headers.
+}
+location /documents/ { return 404; }
 location = /analytics-frame.html {
     try_files $uri =404;
     # robots meta supplies noindex; no local add_header overriding server headers.

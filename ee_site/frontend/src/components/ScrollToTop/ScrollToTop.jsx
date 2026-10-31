@@ -8,8 +8,8 @@
 // - модальные кейсы не меняют позицию фоновой страницы.
 // =========================================================
 
-import { useLayoutEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLayoutEffect, useRef } from "react";
+import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
 
 function getHeaderHeight() {
   return document.querySelector(".header")?.offsetHeight || 0;
@@ -101,11 +101,19 @@ function animateScrollToTop(duration = 2200, onComplete) {
 function ScrollToTop() {
   const location = useLocation();
   const navigate = useNavigate();
+  const navigationType = useNavigationType();
+  const documentsReturnKey = useRef(null);
+  const previousPath = useRef(null);
   const { pathname, hash, state } = location;
 
   useLayoutEffect(() => {
     let scrollTimer;
     let cancelScrollAnimation;
+    const cameFromDocuments = previousPath.current === '/documents';
+    previousPath.current = pathname;
+    if (pathname === '/documents' && state?.documentsReturnKey) {
+      documentsReturnKey.current = state.documentsReturnKey;
+    }
 
     function clearEntryScrollState() {
       navigate(`${pathname}${hash || ""}`, {
@@ -162,6 +170,20 @@ function ScrollToTop() {
 
     return;
   }
+
+    // Only the documents return uses this address/focus behavior. Keep all
+    // product/service/modal entry handling below unchanged.
+    if (pathname === '/' && (hash === '#footer-documents' ||
+      (navigationType === 'POP' && cameFromDocuments && location.key === documentsReturnKey.current))) {
+      const link = document.getElementById('footer-documents');
+      if (link) {
+        disableGlobalSmoothScroll();
+        window.scrollTo({ top: getSectionScrollTop('footer-documents'), left: 0, behavior: 'auto' });
+        link.focus({ preventScroll: true });
+        restoreGlobalSmoothScroll();
+      }
+      return;
+    }
 
     /*
       CASES DIRECT / ПРЯМОЙ ПЕРЕХОД К КЕЙСАМ
@@ -373,7 +395,7 @@ function ScrollToTop() {
       left: 0,
       behavior: "auto",
     });
-  }, [pathname, hash, state, navigate, location.key]);
+  }, [pathname, hash, state, navigate, location.key, navigationType]);
 
   return null;
 }

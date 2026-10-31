@@ -50,10 +50,10 @@ try {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
     }
     await page.goto(origin + '/');
-    await page.locator('a[href="/solutions"]').first().click();
-    assert.equal(new URL(page.url()).pathname, '/solutions');
+    await page.locator('a[href="/solutions/bmk"]').first().click();
+    assert.equal(new URL(page.url()).pathname, '/solutions/bmk');
     await nojs.close();
-    pass(`${width}px: all 19 pages readable without JS, links work, form disabled and no GET submission`);
+    pass(`${width}px: all ${manifest.pages.length - 1} pages readable without JS, links work, form disabled and no GET submission`);
 
     const delayed = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     await protect(delayed);
@@ -79,11 +79,16 @@ try {
     report.geometry.push({ width, before, after });
     await live.screenshot({ path: path.join(out, `${width}-after-js.png`) });
     await live.locator('.lead-form input[name=name]').fill('synthetic_ready_input');
-    await live.locator('a[href="/solutions"]').first().click();
     await live.locator('a[href="/solutions/bmk"]').first().click();
+    await live.waitForURL(origin + '/solutions/bmk');
+    await live.waitForFunction(() => !history.state?.usr?.entryScroll);
+    await live.locator('.entity-switcher__item').filter({ hasText: /^БТП$/ }).click();
+    await live.waitForURL(origin + '/solutions/btp');
     assert.equal(await live.locator('.lead-form input[name=name]').inputValue(), 'synthetic_ready_input');
     await live.goBack();
+    await live.waitForURL(origin + '/solutions/bmk');
     await live.goBack();
+    await live.waitForURL(origin + '/');
     assert.equal(await live.locator('.lead-form input[name=name]').inputValue(), 'synthetic_ready_input');
     assert.equal(new URL(live.url()).search, '');
     await delayed.close();
