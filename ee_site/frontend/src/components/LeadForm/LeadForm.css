@@ -449,25 +449,84 @@
   border-radius: 4px;
 }
 
-/* Compact natural flow: extra errors/text grow the page, never clip the form. */
-.lead-form__draft-note { margin:6px 0; color:var(--color-muted); font-size:11px; line-height:1.35; }
-@media(min-width:961px) {
-  .contact-grid > .lead-form { align-self:start; }
-  .lead-form { padding:14px 16px; border-radius:26px; }
-  .lead-form__grid { gap:10px 14px; }
-  .lead-form label { gap:5px; font-size:12px; }
-  .lead-form input,.lead-form select,.lead-form textarea { padding:8px 10px; }
-  .lead-form .topic-select__button { min-height:38px; padding:8px 10px; }
-  .lead-form .file-select__control { min-height:38px; grid-template-columns:38px minmax(0,1fr); }
-  .lead-form__file-field { gap:5px; }
-  .lead-form__file-note { font-size:11px; line-height:1.35; margin-top:0; }
-  .lead-form__message { margin-top:9px; }
-  .lead-form textarea { min-height:58px; }
-  .lead-form label.lead-form__consent { padding:8px 10px; gap:8px; margin:10px 0; font-size:11.5px; line-height:1.4; }
-  .lead-form__actions { gap:8px 14px; }
-  .lead-form .button--primary { padding:10px 16px; min-height:42px; }
-  .lead-form__status { margin-bottom:10px; padding:10px 12px; }
-  .contact-content { gap:12px; }
-  .contact-note { padding:12px 14px; gap:6px; }
-  .contact-note span { font-size:14px; line-height:1.4; }
+@media (min-width: 961px) {
+  /* Форма растягивается по высоте соседней колонки. */
+  .contact-grid > .lead-form {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lead-form {
+    padding: 14px 16px;
+    border-radius: 26px;
+  }
+
+  .lead-form__fieldset {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+  }
+
+  .lead-form__grid { gap: 10px 14px; }
+  .lead-form label { gap: 5px; font-size: 12px; }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    padding: 8px 10px;
+  }
+
+  .lead-form .topic-select__button {
+    min-height: 38px;
+    padding: 8px 10px;
+  }
+
+  .lead-form .file-select__control {
+    min-height: 38px;
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .lead-form__file-field { gap: 5px; }
+  .lead-form__file-note {
+    font-size: 11px;
+    line-height: 1.35;
+    margin-top: 0;
+  }
+
+  /* Свободное место занимает описание, а не пустота под кнопками. */
+  .lead-form label.lead-form__message {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    margin-top: 9px;
+  }
+
+  .lead-form__message textarea {
+    flex: 1 0 auto;
+    min-height: 104px;
+  }
+
+  .lead-form label.lead-form__consent {
+    padding: 8px 10px;
+    gap: 8px;
+    margin: 10px 0;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+
+  .lead-form__actions { gap: 8px 14px; }
+  .lead-form .button--primary {
+    padding: 10px 16px;
+    min-height: 42px;
+  }
+
+  .lead-form__status {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+  }
+
+  .contact-content { gap: 12px; }
+  .contact-note { padding: 12px 14px; gap: 6px; }
+  .contact-note span { font-size: 14px; line-height: 1.4; }
 }
