@@ -80,3 +80,12 @@ class LeadCreateAPIView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+
+class QuestionnaireCapabilitiesAPIView(APIView):
+    authentication_classes = []
+    permission_classes = []
+    def get(self,request):
+        response = Response({'version':1,'enabled':getattr(settings,'QUESTIONNAIRES_ENABLED',False),'products':['vns','pns','bmk','btp']})
+        response['Cache-Control']='no-store'
+        return response

@@ -20,6 +20,10 @@ import {
 } from "../../api/leadFiles";
 
 import TopicSelect from "../TopicSelect";
+import { QuestionnaireSwitch, QuestionnaireSummary } from "../../questionnaires/QuestionnaireEditor.jsx";
+import { serializeQuestionnaires, validateQuestionnaires } from "../../questionnaires/domain.js";
+import { verifyQuestionnaireBackend } from "../../questionnaires/capabilities.js";
+import { openFirstError, selectedProduct } from "../../questionnaires/state.js";
 
 import FileSelect from "../FileSelect";
 import { analytics } from "../../analytics/runtime.js";
@@ -30,7 +34,9 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const { pathname } = useLocation();
   const draft = useSyncExternalStore(leadDraft.subscribe, leadDraft.get, leadDraft.getServerSnapshot);
   const selectedTopic = draft.started ? draft.topic : initialTopic;
+  const productSlug = selectedProduct(draft, products, initialTopic);
   const selectedFiles = draft.files;
+  useEffect(() => leadDraft.restore(), []);
   const isSubmitting = draft.submitting;
   const fileError = draft.fileError;
   const submitStatus = draft.status;
@@ -91,6 +97,14 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       leadDraft.update({ status: "error", message: "Подтвердите согласие на обработку персональных данных." });
       return;
     }
+    const errors = validateQuestionnaires(leadDraft.get().questionnaires);
+    if (Object.keys(errors).length) {
+      openFirstError(errors, products);
+      leadDraft.update({ status: "error", message: "Проверьте включённые опросные листы. Открыт первый незаполненный раздел." });
+      return;
+    }
+    const questionnaires = serializeQuestionnaires(leadDraft.get().questionnaires);
+    if (questionnaires) formData.set("questionnaires", JSON.stringify(questionnaires));
     markStart();
     if (submittedTopic) {
       formData.set("description", `Интересующее направление: ${submittedTopic}\n\nОписание задачи:\n${description || "Не указано"}`);
@@ -104,9 +118,13 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     leadDraft.update({ submitting: true, operation, status: "idle", message: "" });
     const ownsDraft = () => leadDraft.get().operation === operation;
     try {
+      if (questionnaires) await verifyQuestionnaireBackend();
       const submissionSignature = await createSubmissionSignature(formData);
       if (!ownsDraft()) return;
       const previousSubmission = leadDraft.get().submission;
+      if (leadDraft.get().indeterminate && previousSubmission && previousSubmission.signature !== submissionSignature) {
+        if (!window.confirm("Предыдущая отправка могла быть принята. Данные изменены: новая отправка может создать ещё одну заявку. Отправить новую?")) return;
+      }
       const recovered = previousSubmission ? null : analytics.recoverSubmission(submissionSignature);
       const submission = submissionForSignature(previousSubmission || recovered, submissionSignature, () => crypto.randomUUID());
       let snapshot = leadDraft.get().snapshot;
@@ -128,6 +146,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       if (attribution) formData.set("campaign_attribution", JSON.stringify(attribution));
       formData.set("submission_id", submission.id);
       await createLead(formData);
+      leadDraft.update({ indeterminate: false });
       analytics.success(submission.id, snapshot);
       for (const id of retryIds) analytics.forgetSubmission(id);
       analytics.release(snapshot);
@@ -141,6 +160,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         if (current.snapshot) analytics.release(current.snapshot);
         leadDraft.update({ submission: null, snapshot: null });
       }
+      if (error.questionnaires) openFirstError(error.questionnaires, products);
+      leadDraft.update({ indeterminate: error.indeterminate ?? (error.status ? false : leadDraft.get().indeterminate) });
       leadDraft.update({ status: "error", message: error.message || "Не удалось отправить заявку. Проверьте данные или попробуйте позже." });
     } finally {
       if (ownsDraft()) leadDraft.update({ submitting: false, operation: null });
@@ -204,6 +225,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           />
         </label>
 
+        <div className="ql-desktop-switch"><QuestionnaireSwitch product={productSlug} /></div>
         <div className="lead-form__file-field">
           <span className="lead-form__file-label">
             Документы
@@ -261,6 +283,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         </span>
       </label>
 
+      {draft.storageNotice && <p className="lead-form__file-note" role="status">{draft.storageNotice}</p>}
+      <QuestionnaireSummary products={products} />
       {submitMessage && (
         <div
           className={`lead-form__status lead-form__status--${submitStatus}${draft.hiding ? " lead-form__status--hiding" : ""}`}

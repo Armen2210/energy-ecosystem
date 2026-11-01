@@ -31,6 +31,9 @@ page.on('console', (message) => {
 });
 // No accidental account/crawler/analytics/public API traffic during testing.
 await context.route('**/*', async (route) => {
+      // New read-only capability gate is stubbed off for legacy UI regression.
+      if (route.request().method() === 'GET' && new URL(route.request().url()).pathname === '/api/leads/questionnaire-capabilities/') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,enabled:false,products:[]})});
+
   if (new URL(route.request().url()).origin !== origin) {
     results.blockedExternal.push(route.request().url());
     await route.abort();

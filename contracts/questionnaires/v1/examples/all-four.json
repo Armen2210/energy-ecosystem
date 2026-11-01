@@ -1,0 +1,3855 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "product": "vns",
+      "schemaVersion": 1,
+      "answers": {
+        "technical": {
+          "purpose": "Тестовое уточнение",
+          "main_count": "2",
+          "reserve_count": "2",
+          "flow": "10",
+          "head": "10",
+          "tank": "Да",
+          "avr": "Да",
+          "valves": "Да",
+          "vibration": "Не нужны"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    },
+    {
+      "product": "pns",
+      "schemaVersion": 1,
+      "answers": {
+        "technical": {
+          "main_count": "2",
+          "reserve_count": "2",
+          "flow": "10",
+          "head": "10",
+          "jockey": "Да",
+          "jockey_flow": "10",
+          "jockey_head": "10",
+          "gate_control": "Да",
+          "gate_count": "2",
+          "tank": "Да",
+          "avr": "Да",
+          "separation": "Да"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    },
+    {
+      "product": "bmk",
+      "schemaVersion": 1,
+      "answers": {
+        "loads": {
+          "heating": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "ventilation": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "dhw_max": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "dhw_average": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "losses": {
+            "value": "100",
+            "unit": "кВт"
+          }
+        },
+        "ov": {
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "supply_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "return_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "dhw": {
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "supply_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "return_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "fuel": {
+          "main": "Газ",
+          "reserve": "Газ",
+          "gas_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "water": {
+          "analysis": "Да",
+          "source": "Тестовое уточнение",
+          "pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "lights": "Да",
+          "chimney_height": "10"
+        },
+        "scheme": {
+          "pipes": "Двухтрубная",
+          "pto": "С ПТО",
+          "weather": "Да",
+          "staff": "С обслуживающим персоналом",
+          "placement": "Пристроенная",
+          "reliability": "Первая"
+        },
+        "equipment": {
+          "heat_meter": "Да",
+          "water_meter": "Да",
+          "gas_meter": "Да",
+          "diesel_generator": "Да",
+          "gas_regulator": "Да",
+          "diesel_tank": "Да",
+          "per_unit_meter": "Да",
+          "diesel_storage": "Да",
+          "dispatch": "Да",
+          "rs485": "Да",
+          "ethernet": "Да",
+          "gsm": "Да"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    },
+    {
+      "product": "btp",
+      "schemaVersion": 1,
+      "answers": {
+        "selectedSections": [
+          "heating",
+          "ventilation",
+          "dhw",
+          "collector_heating",
+          "collector_ventilation",
+          "collector_dhw"
+        ],
+        "common": {
+          "object": "Синтетический объект",
+          "source": "Синтетический объект",
+          "winter_supply": "-10",
+          "winter_return": "-10",
+          "supply_pressure": "10",
+          "return_pressure": "10",
+          "commercial_meter": "Нужен",
+          "diameter": "10",
+          "summer_supply": "-10",
+          "summer_return": "-10",
+          "regulator": "Да",
+          "dispatch": "Да",
+          "insulation": "Да",
+          "material": "Экоролл",
+          "note": "Тестовое уточнение",
+          "requirements": "Тестовое уточнение"
+        },
+        "heating": {
+          "system_name": "Тестовое уточнение",
+          "connection": "Зависимое",
+          "power": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "height": "10",
+          "resistance": "10",
+          "max_pressure": "10",
+          "volume": {
+            "value": "100",
+            "unit": "л"
+          },
+          "pumps": "Один",
+          "frequency": "Да",
+          "regulator": "Да",
+          "dispatch": "Да",
+          "meter": "Да",
+          "note": "Тестовое уточнение"
+        },
+        "ventilation": {
+          "system_name": "Тестовое уточнение",
+          "connection": "Зависимое",
+          "power": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "height": "10",
+          "resistance": "10",
+          "max_pressure": "10",
+          "volume": {
+            "value": "100",
+            "unit": "л"
+          },
+          "pumps": "Один",
+          "frequency": "Да",
+          "regulator": "Да",
+          "dispatch": "Да",
+          "meter": "Да",
+          "note": "Тестовое уточнение"
+        },
+        "dhw": {
+          "system_name": "Тестовое уточнение",
+          "connection": "Открытое",
+          "power": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "t3": "-10",
+          "b1": "-10",
+          "circulation": "10",
+          "resistance": "10",
+          "pumps": "Один",
+          "frequency": "Да",
+          "water_meter": "Да",
+          "softener": "Да",
+          "meter": "Да",
+          "equipment": "Тестовое уточнение",
+          "note": "Тестовое уточнение"
+        },
+        "collector_heating": {
+          "requirements": "Тестовое уточнение",
+          "outlets": [
+            {
+              "id": "output-1",
+              "power": {
+                "value": "1",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-2",
+              "power": {
+                "value": "2",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-3",
+              "power": {
+                "value": "3",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-4",
+              "power": {
+                "value": "4",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-5",
+              "power": {
+                "value": "5",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-6",
+              "power": {
+                "value": "6",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-7",
+              "power": {
+                "value": "7",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-8",
+              "power": {
+                "value": "8",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-9",
+              "power": {
+                "value": "9",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-10",
+              "power": {
+                "value": "10",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-11",
+              "power": {
+                "value": "11",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-12",
+              "power": {
+                "value": "12",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-13",
+              "power": {
+                "value": "13",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-14",
+              "power": {
+                "value": "14",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-15",
+              "power": {
+                "value": "15",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-16",
+              "power": {
+                "value": "16",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-17",
+              "power": {
+                "value": "17",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-18",
+              "power": {
+                "value": "18",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-19",
+              "power": {
+                "value": "19",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-20",
+              "power": {
+                "value": "20",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-21",
+              "power": {
+                "value": "21",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-22",
+              "power": {
+                "value": "22",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-23",
+              "power": {
+                "value": "23",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-24",
+              "power": {
+                "value": "24",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-25",
+              "power": {
+                "value": "25",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-26",
+              "power": {
+                "value": "26",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-27",
+              "power": {
+                "value": "27",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-28",
+              "power": {
+                "value": "28",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-29",
+              "power": {
+                "value": "29",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-30",
+              "power": {
+                "value": "30",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-31",
+              "power": {
+                "value": "31",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-32",
+              "power": {
+                "value": "32",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-33",
+              "power": {
+                "value": "33",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-34",
+              "power": {
+                "value": "34",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-35",
+              "power": {
+                "value": "35",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-36",
+              "power": {
+                "value": "36",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-37",
+              "power": {
+                "value": "37",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-38",
+              "power": {
+                "value": "38",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-39",
+              "power": {
+                "value": "39",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-40",
+              "power": {
+                "value": "40",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-41",
+              "power": {
+                "value": "41",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-42",
+              "power": {
+                "value": "42",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-43",
+              "power": {
+                "value": "43",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-44",
+              "power": {
+                "value": "44",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-45",
+              "power": {
+                "value": "45",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-46",
+              "power": {
+                "value": "46",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-47",
+              "power": {
+                "value": "47",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-48",
+              "power": {
+                "value": "48",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-49",
+              "power": {
+                "value": "49",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-50",
+              "power": {
+                "value": "50",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-51",
+              "power": {
+                "value": "51",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-52",
+              "power": {
+                "value": "52",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-53",
+              "power": {
+                "value": "53",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-54",
+              "power": {
+                "value": "54",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-55",
+              "power": {
+                "value": "55",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-56",
+              "power": {
+                "value": "56",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-57",
+              "power": {
+                "value": "57",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-58",
+              "power": {
+                "value": "58",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-59",
+              "power": {
+                "value": "59",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-60",
+              "power": {
+                "value": "60",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-61",
+              "power": {
+                "value": "61",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-62",
+              "power": {
+                "value": "62",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-63",
+              "power": {
+                "value": "63",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-64",
+              "power": {
+                "value": "64",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-65",
+              "power": {
+                "value": "65",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-66",
+              "power": {
+                "value": "66",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-67",
+              "power": {
+                "value": "67",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-68",
+              "power": {
+                "value": "68",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-69",
+              "power": {
+                "value": "69",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-70",
+              "power": {
+                "value": "70",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-71",
+              "power": {
+                "value": "71",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-72",
+              "power": {
+                "value": "72",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-73",
+              "power": {
+                "value": "73",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-74",
+              "power": {
+                "value": "74",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-75",
+              "power": {
+                "value": "75",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-76",
+              "power": {
+                "value": "76",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-77",
+              "power": {
+                "value": "77",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-78",
+              "power": {
+                "value": "78",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-79",
+              "power": {
+                "value": "79",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-80",
+              "power": {
+                "value": "80",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-81",
+              "power": {
+                "value": "81",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-82",
+              "power": {
+                "value": "82",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-83",
+              "power": {
+                "value": "83",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-84",
+              "power": {
+                "value": "84",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-85",
+              "power": {
+                "value": "85",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-86",
+              "power": {
+                "value": "86",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-87",
+              "power": {
+                "value": "87",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-88",
+              "power": {
+                "value": "88",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-89",
+              "power": {
+                "value": "89",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-90",
+              "power": {
+                "value": "90",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-91",
+              "power": {
+                "value": "91",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-92",
+              "power": {
+                "value": "92",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-93",
+              "power": {
+                "value": "93",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-94",
+              "power": {
+                "value": "94",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-95",
+              "power": {
+                "value": "95",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-96",
+              "power": {
+                "value": "96",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-97",
+              "power": {
+                "value": "97",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-98",
+              "power": {
+                "value": "98",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-99",
+              "power": {
+                "value": "99",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-100",
+              "power": {
+                "value": "100",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            }
+          ]
+        },
+        "collector_ventilation": {
+          "requirements": "Тестовое уточнение",
+          "outlets": [
+            {
+              "id": "output-1",
+              "power": {
+                "value": "1",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-2",
+              "power": {
+                "value": "2",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-3",
+              "power": {
+                "value": "3",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-4",
+              "power": {
+                "value": "4",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-5",
+              "power": {
+                "value": "5",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-6",
+              "power": {
+                "value": "6",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-7",
+              "power": {
+                "value": "7",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-8",
+              "power": {
+                "value": "8",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-9",
+              "power": {
+                "value": "9",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-10",
+              "power": {
+                "value": "10",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-11",
+              "power": {
+                "value": "11",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-12",
+              "power": {
+                "value": "12",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-13",
+              "power": {
+                "value": "13",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-14",
+              "power": {
+                "value": "14",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-15",
+              "power": {
+                "value": "15",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-16",
+              "power": {
+                "value": "16",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-17",
+              "power": {
+                "value": "17",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-18",
+              "power": {
+                "value": "18",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-19",
+              "power": {
+                "value": "19",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-20",
+              "power": {
+                "value": "20",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-21",
+              "power": {
+                "value": "21",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-22",
+              "power": {
+                "value": "22",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-23",
+              "power": {
+                "value": "23",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-24",
+              "power": {
+                "value": "24",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-25",
+              "power": {
+                "value": "25",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-26",
+              "power": {
+                "value": "26",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-27",
+              "power": {
+                "value": "27",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-28",
+              "power": {
+                "value": "28",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-29",
+              "power": {
+                "value": "29",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-30",
+              "power": {
+                "value": "30",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-31",
+              "power": {
+                "value": "31",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-32",
+              "power": {
+                "value": "32",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-33",
+              "power": {
+                "value": "33",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-34",
+              "power": {
+                "value": "34",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-35",
+              "power": {
+                "value": "35",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-36",
+              "power": {
+                "value": "36",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-37",
+              "power": {
+                "value": "37",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-38",
+              "power": {
+                "value": "38",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-39",
+              "power": {
+                "value": "39",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-40",
+              "power": {
+                "value": "40",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-41",
+              "power": {
+                "value": "41",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-42",
+              "power": {
+                "value": "42",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-43",
+              "power": {
+                "value": "43",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-44",
+              "power": {
+                "value": "44",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-45",
+              "power": {
+                "value": "45",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-46",
+              "power": {
+                "value": "46",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-47",
+              "power": {
+                "value": "47",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-48",
+              "power": {
+                "value": "48",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-49",
+              "power": {
+                "value": "49",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-50",
+              "power": {
+                "value": "50",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-51",
+              "power": {
+                "value": "51",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-52",
+              "power": {
+                "value": "52",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-53",
+              "power": {
+                "value": "53",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-54",
+              "power": {
+                "value": "54",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-55",
+              "power": {
+                "value": "55",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-56",
+              "power": {
+                "value": "56",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-57",
+              "power": {
+                "value": "57",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-58",
+              "power": {
+                "value": "58",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-59",
+              "power": {
+                "value": "59",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-60",
+              "power": {
+                "value": "60",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-61",
+              "power": {
+                "value": "61",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-62",
+              "power": {
+                "value": "62",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-63",
+              "power": {
+                "value": "63",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-64",
+              "power": {
+                "value": "64",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-65",
+              "power": {
+                "value": "65",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-66",
+              "power": {
+                "value": "66",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-67",
+              "power": {
+                "value": "67",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-68",
+              "power": {
+                "value": "68",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-69",
+              "power": {
+                "value": "69",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-70",
+              "power": {
+                "value": "70",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-71",
+              "power": {
+                "value": "71",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-72",
+              "power": {
+                "value": "72",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-73",
+              "power": {
+                "value": "73",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-74",
+              "power": {
+                "value": "74",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-75",
+              "power": {
+                "value": "75",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-76",
+              "power": {
+                "value": "76",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-77",
+              "power": {
+                "value": "77",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-78",
+              "power": {
+                "value": "78",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-79",
+              "power": {
+                "value": "79",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-80",
+              "power": {
+                "value": "80",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-81",
+              "power": {
+                "value": "81",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-82",
+              "power": {
+                "value": "82",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-83",
+              "power": {
+                "value": "83",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-84",
+              "power": {
+                "value": "84",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-85",
+              "power": {
+                "value": "85",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-86",
+              "power": {
+                "value": "86",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-87",
+              "power": {
+                "value": "87",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-88",
+              "power": {
+                "value": "88",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-89",
+              "power": {
+                "value": "89",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-90",
+              "power": {
+                "value": "90",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-91",
+              "power": {
+                "value": "91",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-92",
+              "power": {
+                "value": "92",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-93",
+              "power": {
+                "value": "93",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-94",
+              "power": {
+                "value": "94",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-95",
+              "power": {
+                "value": "95",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-96",
+              "power": {
+                "value": "96",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-97",
+              "power": {
+                "value": "97",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-98",
+              "power": {
+                "value": "98",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-99",
+              "power": {
+                "value": "99",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-100",
+              "power": {
+                "value": "100",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            }
+          ]
+        },
+        "collector_dhw": {
+          "requirements": "Тестовое уточнение",
+          "outlets": [
+            {
+              "id": "output-1",
+              "power": {
+                "value": "1",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-2",
+              "power": {
+                "value": "2",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-3",
+              "power": {
+                "value": "3",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-4",
+              "power": {
+                "value": "4",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-5",
+              "power": {
+                "value": "5",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-6",
+              "power": {
+                "value": "6",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-7",
+              "power": {
+                "value": "7",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-8",
+              "power": {
+                "value": "8",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-9",
+              "power": {
+                "value": "9",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-10",
+              "power": {
+                "value": "10",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-11",
+              "power": {
+                "value": "11",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-12",
+              "power": {
+                "value": "12",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-13",
+              "power": {
+                "value": "13",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-14",
+              "power": {
+                "value": "14",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-15",
+              "power": {
+                "value": "15",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-16",
+              "power": {
+                "value": "16",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-17",
+              "power": {
+                "value": "17",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-18",
+              "power": {
+                "value": "18",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-19",
+              "power": {
+                "value": "19",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-20",
+              "power": {
+                "value": "20",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-21",
+              "power": {
+                "value": "21",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-22",
+              "power": {
+                "value": "22",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-23",
+              "power": {
+                "value": "23",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-24",
+              "power": {
+                "value": "24",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-25",
+              "power": {
+                "value": "25",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-26",
+              "power": {
+                "value": "26",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-27",
+              "power": {
+                "value": "27",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-28",
+              "power": {
+                "value": "28",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-29",
+              "power": {
+                "value": "29",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-30",
+              "power": {
+                "value": "30",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-31",
+              "power": {
+                "value": "31",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-32",
+              "power": {
+                "value": "32",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-33",
+              "power": {
+                "value": "33",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-34",
+              "power": {
+                "value": "34",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-35",
+              "power": {
+                "value": "35",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-36",
+              "power": {
+                "value": "36",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-37",
+              "power": {
+                "value": "37",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-38",
+              "power": {
+                "value": "38",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-39",
+              "power": {
+                "value": "39",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-40",
+              "power": {
+                "value": "40",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-41",
+              "power": {
+                "value": "41",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-42",
+              "power": {
+                "value": "42",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-43",
+              "power": {
+                "value": "43",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-44",
+              "power": {
+                "value": "44",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-45",
+              "power": {
+                "value": "45",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-46",
+              "power": {
+                "value": "46",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-47",
+              "power": {
+                "value": "47",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-48",
+              "power": {
+                "value": "48",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-49",
+              "power": {
+                "value": "49",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-50",
+              "power": {
+                "value": "50",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-51",
+              "power": {
+                "value": "51",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-52",
+              "power": {
+                "value": "52",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-53",
+              "power": {
+                "value": "53",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-54",
+              "power": {
+                "value": "54",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-55",
+              "power": {
+                "value": "55",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-56",
+              "power": {
+                "value": "56",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-57",
+              "power": {
+                "value": "57",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-58",
+              "power": {
+                "value": "58",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-59",
+              "power": {
+                "value": "59",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-60",
+              "power": {
+                "value": "60",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-61",
+              "power": {
+                "value": "61",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-62",
+              "power": {
+                "value": "62",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-63",
+              "power": {
+                "value": "63",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-64",
+              "power": {
+                "value": "64",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-65",
+              "power": {
+                "value": "65",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-66",
+              "power": {
+                "value": "66",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-67",
+              "power": {
+                "value": "67",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-68",
+              "power": {
+                "value": "68",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-69",
+              "power": {
+                "value": "69",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-70",
+              "power": {
+                "value": "70",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-71",
+              "power": {
+                "value": "71",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-72",
+              "power": {
+                "value": "72",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-73",
+              "power": {
+                "value": "73",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-74",
+              "power": {
+                "value": "74",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-75",
+              "power": {
+                "value": "75",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-76",
+              "power": {
+                "value": "76",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-77",
+              "power": {
+                "value": "77",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-78",
+              "power": {
+                "value": "78",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-79",
+              "power": {
+                "value": "79",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-80",
+              "power": {
+                "value": "80",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-81",
+              "power": {
+                "value": "81",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-82",
+              "power": {
+                "value": "82",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-83",
+              "power": {
+                "value": "83",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-84",
+              "power": {
+                "value": "84",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-85",
+              "power": {
+                "value": "85",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-86",
+              "power": {
+                "value": "86",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-87",
+              "power": {
+                "value": "87",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-88",
+              "power": {
+                "value": "88",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-89",
+              "power": {
+                "value": "89",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-90",
+              "power": {
+                "value": "90",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-91",
+              "power": {
+                "value": "91",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-92",
+              "power": {
+                "value": "92",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-93",
+              "power": {
+                "value": "93",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-94",
+              "power": {
+                "value": "94",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-95",
+              "power": {
+                "value": "95",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-96",
+              "power": {
+                "value": "96",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-97",
+              "power": {
+                "value": "97",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-98",
+              "power": {
+                "value": "98",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-99",
+              "power": {
+                "value": "99",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            },
+            {
+              "id": "output-100",
+              "power": {
+                "value": "100",
+                "unit": "кВт"
+              },
+              "flow": "1,5",
+              "diameter": "25",
+              "balance_supply": "Да",
+              "balance_return": "Нет",
+              "meter": "Да"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

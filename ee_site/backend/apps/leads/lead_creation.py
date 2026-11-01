@@ -83,6 +83,8 @@ def submission_fingerprint(validated_data, attachments=()):
     else:
         # Keep the original single-file fingerprint format for existing keys.
         canonical["attachment"] = _attachment_digest(legacy_attachment)
+    if validated_data.get("questionnaires"):
+        canonical["questionnaires"] = validated_data["questionnaires"]
     encoded = json.dumps(
         canonical,
         ensure_ascii=False,
@@ -138,6 +140,7 @@ def create_lead(validated_data, attachments=()):
     # records.  Calculate the legacy fingerprint above before removing it.
     lead_data = dict(validated_data)
     lead_data.pop("attachment", None)
+    questionnaires = lead_data.pop("questionnaires", None)
     lead = Lead(
         **lead_data,
         submission_fingerprint=fingerprint,
@@ -158,6 +161,9 @@ def create_lead(validated_data, attachments=()):
                     (attachment.file.storage, attachment.file.name, "multiple")
                 )
                 attachment.save()
+            if questionnaires:
+                from .questionnaire_jobs import create_questionnaire_job
+                create_questionnaire_job(lead, questionnaires)
             schedule_lead_notification(lead.id)
     except IntegrityError:
         _cleanup_files(stored_files)

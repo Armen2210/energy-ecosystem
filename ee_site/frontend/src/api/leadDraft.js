@@ -1,10 +1,18 @@
-// One memory-only draft per document. Never serialize fields or File objects.
+import { DRAFT_KEY, readDraft, saveDraft } from "./leadDraftStorage.js";
+// One shared draft. Only serializable answers/contact fields are persisted in this tab.
 const empty = () => ({
   fields: { name: '', company_name: '', phone: '', email: '', description: '', consent: false },
+  questionnaires: {}, questionnaireErrors: {}, questionnaireFocus: '', changedAt: null, storageNotice: '', indeterminate: false,
   topic: '', sourcePage: '', started: false, files: [], fileError: '',
   successToken: null, hiding: false, submitting: false, status: 'idle', message: '', submission: null, snapshot: null, retryIds: [],
 });
+let restored = false;
 let draft = empty();
+function persist() {
+  if (typeof window === "undefined" || !draft.changedAt) return;
+  try { saveDraft(window.sessionStorage, draft); if (!draft.storageNotice) draft = { ...draft, storageNotice: "Черновик этой вкладки сохраняется на 24 часа без изменений. Файлы после перезагрузки нужно выбрать повторно." }; }
+  catch { draft = { ...draft, storageNotice: "Сохранение черновика недоступно. Не закрывайте вкладку до отправки." }; }
+}
 const serverDraft = empty();
 const listeners = new Set();
 const presenters = new Set();
@@ -29,9 +37,23 @@ export const leadDraft = {
     listeners.add(listener);
     return () => listeners.delete(listener);
   },
-  update(patch) {
+  restore() {
+    if (typeof window === "undefined" || restored) return;
+    restored = true;
+    try {
+      const saved = readDraft(window.sessionStorage);
+      if (saved && !draft.started) {
+        draft = { ...draft, fields: { ...saved.fields, consent: false }, topic: saved.topic, sourcePage: saved.sourcePage, started: saved.started, questionnaires: saved.questionnaires, changedAt: saved.changedAt, submission: saved.submission, indeterminate: saved.indeterminate, storageNotice: "Восстановлен черновик этой вкладки. Он удаляется через 24 часа без изменений. Согласие подтвердите заново." + (saved.hadFiles ? " Прикрепите файлы повторно." : "") };
+        notify();
+      }
+    } catch { draft = { ...draft, storageNotice: "Не удалось восстановить черновик. Данные доступны только в открытой форме." }; notify(); }
+  },
+  update(patch, { content = true } = {}) {
     if (Object.hasOwn(patch, 'status') || Object.hasOwn(patch, 'message')) patch = messagePatch(patch);
     draft = { ...draft, ...patch };
+    const meaningful = ["fields", "files", "questionnaires"].some(k => Object.hasOwn(patch, k));
+    if (content && meaningful) draft.changedAt = Date.now();
+    persist();
     notify();
   },
   // Register only after React commits the success message. One timer pair per
@@ -60,6 +82,7 @@ export const leadDraft = {
   },
   reset(patch = {}) {
     draft = { ...empty(), ...messagePatch(patch) };
+    try { window.sessionStorage.removeItem(DRAFT_KEY); } catch { draft.storageNotice = "Форма очищена в этой вкладке, но хранилище недоступно: удаление сохранённого черновика не подтверждено."; }
     notify();
   },
 };

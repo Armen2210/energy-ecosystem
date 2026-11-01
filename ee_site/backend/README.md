@@ -1,5 +1,7 @@
 # Backend сайта «Энергоэффект»
 
+Электронные ОЛ ВНС/ПНС/БМК/БТП: [порядок внедрения и восстановления](docs/electronic-questionnaires-release.md), [контракт v1](../../contracts/questionnaires/v1/README.md). Приём включается только после подготовки worker; по умолчанию выключен.
+
 Точка входа в серверную часть ЭЭ. Описание сверено с исходниками 10 октября
 2026 года; оно не подтверждает состояние production, PostgreSQL, SMTP или nginx.
 Frontend описан в [соседнем README](../frontend/README.md), история проекта —

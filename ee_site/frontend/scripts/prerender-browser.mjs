@@ -22,6 +22,9 @@ async function protect(context) {
     page.on('console', (message) => { if (message.type() === 'error') report.errors.push(message.text()); });
   });
   await context.route('**/*', (route) => {
+      // New read-only capability gate is stubbed off for legacy UI regression.
+      if (route.request().method() === 'GET' && new URL(route.request().url()).pathname === '/api/leads/questionnaire-capabilities/') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,enabled:false,products:[]})});
+
     const request = route.request();
     if (new URL(request.url()).origin !== origin || request.method() !== 'GET') {
       report.forbidden.push({ url: request.url(), method: request.method() });

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "product": "vns",
+      "schemaVersion": 1,
+      "answers": {
+        "technical": {
+          "purpose": "Тестовое уточнение",
+          "main_count": "2",
+          "reserve_count": "2",
+          "flow": "10",
+          "head": "10",
+          "tank": "Да",
+          "avr": "Да",
+          "valves": "Да",
+          "vibration": "Не нужны"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    },
+    {
+      "product": "pns",
+      "schemaVersion": 1,
+      "answers": {
+        "technical": {
+          "main_count": "2",
+          "reserve_count": "2",
+          "flow": "10",
+          "head": "10",
+          "jockey": "Да",
+          "jockey_flow": "10",
+          "jockey_head": "10",
+          "gate_control": "Да",
+          "gate_count": "2",
+          "tank": "Да",
+          "avr": "Да",
+          "separation": "Да"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    }
+  ]
+}

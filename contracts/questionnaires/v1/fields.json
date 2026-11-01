@@ -1,0 +1,1361 @@
+{
+  "version": 1,
+  "limits": {
+    "items": 4,
+    "outlets": 100,
+    "bytes": 262144,
+    "text": 2000
+  },
+  "units": {
+    "power": {
+      "кВт": "1",
+      "Гкал/ч": "1162.222222222222222222222222"
+    },
+    "volume": {
+      "л": "1",
+      "м³": "1000"
+    },
+    "pressure": {
+      "МПа": "1",
+      "кгс/см²": "0.0980665"
+    }
+  },
+  "products": {
+    "vns": {
+      "title": "ВНС",
+      "sheets": [
+        {
+          "key": "technical",
+          "title": "Технические данные",
+          "fields": [
+            {
+              "key": "purpose",
+              "label": "Назначение насосной установки",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "main_count",
+              "label": "Количество основных насосов",
+              "type": "number",
+              "required": false,
+              "unit": "шт.",
+              "integer": true,
+              "min": 0
+            },
+            {
+              "key": "reserve_count",
+              "label": "Количество резервных насосов",
+              "type": "number",
+              "required": false,
+              "unit": "шт.",
+              "integer": true,
+              "min": 0
+            },
+            {
+              "key": "flow",
+              "label": "Суммарная подача установки при работе основных насосов",
+              "type": "number",
+              "required": true,
+              "unit": "м³/ч"
+            },
+            {
+              "key": "head",
+              "label": "Требуемый напор",
+              "type": "number",
+              "required": true,
+              "unit": "м",
+              "help": "Напор, требуемый в системе, без учёта гарантированного напора в точке подключения насосной"
+            },
+            {
+              "key": "tank",
+              "label": "Бак на напорном коллекторе",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "avr",
+              "label": "Автоматический ввод резерва по питанию (АВР)",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "valves",
+              "label": "Запорная арматура на коллекторе",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "vibration",
+              "label": "Вибровставки",
+              "type": "choice",
+              "required": false,
+              "options": [
+                "Не нужны",
+                "На коллекторах",
+                "На насосах",
+                "На коллекторах и насосах"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "notes",
+          "title": "Дополнительные требования",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "pns": {
+      "title": "ПНС",
+      "sheets": [
+        {
+          "key": "technical",
+          "title": "Технические данные",
+          "fields": [
+            {
+              "key": "main_count",
+              "label": "Количество основных насосов",
+              "type": "number",
+              "required": false,
+              "unit": "шт.",
+              "integer": true,
+              "min": 0
+            },
+            {
+              "key": "reserve_count",
+              "label": "Количество резервных насосов",
+              "type": "number",
+              "required": false,
+              "unit": "шт.",
+              "integer": true,
+              "min": 0
+            },
+            {
+              "key": "flow",
+              "label": "Суммарная подача установки при работе основных насосов",
+              "type": "number",
+              "required": true,
+              "unit": "м³/ч"
+            },
+            {
+              "key": "head",
+              "label": "Требуемый напор",
+              "type": "number",
+              "required": true,
+              "unit": "м",
+              "help": "Напор, требуемый в системе, без учёта гарантированного напора в точке подключения насосной"
+            },
+            {
+              "key": "jockey",
+              "label": "Жокей-насос нужен?",
+              "type": "choice",
+              "required": true,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "jockey_flow",
+              "label": "Подача жокей-насоса",
+              "type": "number",
+              "required": true,
+              "unit": "м³/ч",
+              "when": {
+                "jockey": ["Да"]
+              }
+            },
+            {
+              "key": "jockey_head",
+              "label": "Требуемый напор жокей-насоса",
+              "type": "number",
+              "required": true,
+              "unit": "м",
+              "when": {
+                "jockey": ["Да"]
+              },
+              "help": "Напор, требуемый в системе, без учёта гарантированного напора в точке подключения насосной"
+            },
+            {
+              "key": "gate_control",
+              "label": "Управление задвижками с электроприводами",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "gate_count",
+              "label": "Количество задвижек с электроприводами",
+              "type": "number",
+              "required": false,
+              "unit": "шт.",
+              "integer": true,
+              "min": 0
+            },
+            {
+              "key": "tank",
+              "label": "Бак на напорном коллекторе",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "avr",
+              "label": "Автоматический ввод резерва по питанию (АВР)",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "separation",
+              "label": "Разделительные затворы на коллекторах",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            }
+          ]
+        },
+        {
+          "key": "notes",
+          "title": "Дополнительные требования",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "bmk": {
+      "title": "БМК",
+      "sheets": [
+        {
+          "key": "loads",
+          "title": "Тепловые нагрузки",
+          "fields": [
+            {
+              "key": "heating",
+              "label": "Отопление",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "ventilation",
+              "label": "Вентиляция",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "dhw_max",
+              "label": "ГВС: максимальная нагрузка",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "dhw_average",
+              "label": "ГВС: среднечасовая нагрузка",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "losses",
+              "label": "Потери в теплосетях и собственные нужды",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power",
+              "help": "Не заменяют полезную нагрузку."
+            }
+          ]
+        },
+        {
+          "key": "ov",
+          "title": "Общие параметры ОВ",
+          "fields": [
+            {
+              "key": "supply_temp",
+              "label": "Температура подачи ОВ",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "return_temp",
+              "label": "Температура обратки ОВ",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "supply_pressure",
+              "label": "Давление подачи ОВ",
+              "type": "number",
+              "required": true,
+              "unit": "МПа",
+              "units": "pressure"
+            },
+            {
+              "key": "return_pressure",
+              "label": "Давление обратки ОВ",
+              "type": "number",
+              "required": true,
+              "unit": "МПа",
+              "units": "pressure"
+            }
+          ]
+        },
+        {
+          "key": "dhw",
+          "title": "Дополнительные параметры ГВС",
+          "fields": [
+            {
+              "key": "supply_temp",
+              "label": "Температура подачи ГВС",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "return_temp",
+              "label": "Температура обратки ГВС",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "supply_pressure",
+              "label": "Давление подачи ГВС",
+              "type": "number",
+              "required": false,
+              "unit": "МПа",
+              "units": "pressure"
+            },
+            {
+              "key": "return_pressure",
+              "label": "Давление обратки ГВС",
+              "type": "number",
+              "required": false,
+              "unit": "МПа",
+              "units": "pressure"
+            }
+          ]
+        },
+        {
+          "key": "fuel",
+          "title": "Топливоснабжение",
+          "fields": [
+            {
+              "key": "main",
+              "label": "Основное топливо",
+              "type": "choice",
+              "required": true,
+              "options": ["Газ", "Дизель", "Уголь", "Мазут"]
+            },
+            {
+              "key": "reserve",
+              "label": "Резервное топливо",
+              "type": "choice",
+              "required": true,
+              "options": ["Газ", "Дизель", "Уголь", "Мазут", "Не требуется"]
+            },
+            {
+              "key": "gas_pressure",
+              "label": "Давление природного газа",
+              "type": "number",
+              "required": true,
+              "unit": "МПа",
+              "units": "pressure",
+              "whenAny": {
+                "main": ["Газ"],
+                "reserve": ["Газ"]
+              }
+            }
+          ]
+        },
+        {
+          "key": "water",
+          "title": "Вода и дымовая труба",
+          "fields": [
+            {
+              "key": "analysis",
+              "label": "Анализ воды прилагается",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "source",
+              "label": "Источник водоснабжения",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "pressure",
+              "label": "Давление исходной воды",
+              "type": "number",
+              "required": false,
+              "unit": "МПа",
+              "units": "pressure"
+            },
+            {
+              "key": "lights",
+              "label": "Светоограждение дымовой трубы",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "chimney_height",
+              "label": "Высота дымовой трубы",
+              "type": "number",
+              "required": false,
+              "unit": "м"
+            }
+          ]
+        },
+        {
+          "key": "scheme",
+          "title": "Схема и исполнение",
+          "fields": [
+            {
+              "key": "pipes",
+              "label": "Трубность схемы",
+              "type": "choice",
+              "required": true,
+              "options": ["Двухтрубная", "Четырёхтрубная"],
+              "help": "Четырёхтрубная — только при наличии обеих нагрузок ГВС."
+            },
+            {
+              "key": "pto",
+              "label": "Отопление",
+              "type": "choice",
+              "required": true,
+              "options": ["С ПТО", "Без ПТО"]
+            },
+            {
+              "key": "weather",
+              "label": "Погодное регулирование температуры",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "staff",
+              "label": "Обслуживающий персонал",
+              "type": "choice",
+              "required": true,
+              "options": [
+                "С обслуживающим персоналом",
+                "Без обслуживающего персонала"
+              ]
+            },
+            {
+              "key": "placement",
+              "label": "Размещение котельной",
+              "type": "choice",
+              "required": true,
+              "options": ["Пристроенная", "Отдельно стоящая"]
+            },
+            {
+              "key": "reliability",
+              "label": "Категория надёжности отпуска тепла",
+              "type": "choice",
+              "required": true,
+              "options": ["Первая", "Вторая"]
+            }
+          ]
+        },
+        {
+          "key": "equipment",
+          "title": "Оборудование и функции",
+          "fields": [
+            {
+              "key": "heat_meter",
+              "label": "Узел учёта тепловой энергии",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "water_meter",
+              "label": "Расходомер ХВ на вводе",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "gas_meter",
+              "label": "Узел учёта расхода газа",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "diesel_generator",
+              "label": "Дизельная электростанция",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "gas_regulator",
+              "label": "Установка ГРУ в котельной",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "diesel_tank",
+              "label": "Расходная ёмкость дизеля",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "per_unit_meter",
+              "label": "Поагрегатный учёт газа",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "diesel_storage",
+              "label": "Склад дизельного топлива",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "dispatch",
+              "label": "Система диспетчеризации",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "rs485",
+              "label": "RS-485",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "ethernet",
+              "label": "Ethernet",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "gsm",
+              "label": "GSM-modem",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            }
+          ]
+        },
+        {
+          "key": "notes",
+          "title": "Дополнительные требования",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "btp": {
+      "title": "БТП",
+      "sheets": [
+        {
+          "key": "common",
+          "title": "Общие данные",
+          "fields": [
+            {
+              "key": "object",
+              "label": "Объект",
+              "type": "text",
+              "required": true
+            },
+            {
+              "key": "source",
+              "label": "Источник теплоснабжения",
+              "type": "text",
+              "required": true
+            },
+            {
+              "key": "winter_supply",
+              "label": "Зимняя температура подачи",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "winter_return",
+              "label": "Зимняя температура обратки",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "supply_pressure",
+              "label": "Давление подачи теплосети",
+              "type": "number",
+              "required": true,
+              "unit": "м вод. ст."
+            },
+            {
+              "key": "return_pressure",
+              "label": "Давление обратки теплосети",
+              "type": "number",
+              "required": true,
+              "unit": "м вод. ст."
+            },
+            {
+              "key": "commercial_meter",
+              "label": "Узел коммерческого учёта",
+              "type": "choice",
+              "required": true,
+              "options": ["Нужен", "Не нужен"]
+            },
+            {
+              "key": "diameter",
+              "label": "Диаметр ввода теплосети",
+              "type": "number",
+              "required": false,
+              "unit": "мм"
+            },
+            {
+              "key": "summer_supply",
+              "label": "Летняя температура подачи",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "summer_return",
+              "label": "Летняя температура обратки",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "regulator",
+              "label": "Регулятор перепада давления",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "dispatch",
+              "label": "Система диспетчеризации",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "insulation",
+              "label": "Теплоизоляция",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "material",
+              "label": "Материал теплоизоляции",
+              "type": "choice",
+              "required": false,
+              "options": ["Экоролл", "K-FLEX", "Другое"],
+              "when": {
+                "insulation": ["Да"]
+              }
+            },
+            {
+              "key": "material_other",
+              "label": "Пояснение материала «Другое»",
+              "type": "text",
+              "required": false,
+              "when": {
+                "insulation": ["Да"],
+                "material": ["Другое"]
+              }
+            },
+            {
+              "key": "note",
+              "label": "Общее примечание",
+              "type": "longtext",
+              "required": false
+            },
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования к расчёту БТП",
+              "type": "longtext",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "heating",
+          "title": "Отопление",
+          "fields": [
+            {
+              "key": "system_name",
+              "label": "Уточнение наименования системы",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "connection",
+              "label": "Подключение",
+              "type": "choice",
+              "required": true,
+              "options": ["Зависимое", "Независимое", "Прямое"]
+            },
+            {
+              "key": "power",
+              "label": "Мощность системы",
+              "type": "number",
+              "required": true,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "supply_temp",
+              "label": "Температура подачи",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "return_temp",
+              "label": "Температура обратки",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "height",
+              "label": "Высота системы",
+              "type": "number",
+              "required": true,
+              "unit": "м"
+            },
+            {
+              "key": "resistance",
+              "label": "Гидравлическое сопротивление",
+              "type": "number",
+              "required": false,
+              "unit": "м вод. ст."
+            },
+            {
+              "key": "max_pressure",
+              "label": "Максимальное давление",
+              "type": "number",
+              "required": false,
+              "unit": "бар"
+            },
+            {
+              "key": "volume",
+              "label": "Объём системы",
+              "type": "number",
+              "required": false,
+              "unit": "л",
+              "units": "volume"
+            },
+            {
+              "key": "pumps",
+              "label": "Выбор насосов",
+              "type": "choice",
+              "required": true,
+              "options": [
+                "Один",
+                "Один и резервный на склад заказчика",
+                "Два: рабочий и резервный"
+              ]
+            },
+            {
+              "key": "frequency",
+              "label": "Частотное регулирование",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "reserve_to",
+              "label": "Резервирование ТО",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"],
+              "when": {
+                "connection": ["Независимое"]
+              }
+            },
+            {
+              "key": "reserve_percent",
+              "label": "Доля нагрузки каждого из двух ТО",
+              "type": "number",
+              "required": true,
+              "unit": "%",
+              "when": {
+                "connection": ["Независимое"],
+                "reserve_to": ["Да"]
+              },
+              "min": 50,
+              "max": 100,
+              "help": "70% — два ТО, каждый на 70% нагрузки системы."
+            },
+            {
+              "key": "reserve_makeup",
+              "label": "Резерв подпиточного насоса",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"],
+              "when": {
+                "connection": ["Независимое"]
+              }
+            },
+            {
+              "key": "regulator",
+              "label": "Регулятор перепада давления",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "dispatch",
+              "label": "Система диспетчеризации",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Узел учёта",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "note",
+              "label": "Примечание системы",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true
+        },
+        {
+          "key": "ventilation",
+          "title": "Вентиляция",
+          "fields": [
+            {
+              "key": "system_name",
+              "label": "Уточнение наименования системы",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "connection",
+              "label": "Подключение",
+              "type": "choice",
+              "required": true,
+              "options": ["Зависимое", "Независимое", "Прямое"]
+            },
+            {
+              "key": "power",
+              "label": "Мощность системы",
+              "type": "number",
+              "required": true,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "supply_temp",
+              "label": "Температура подачи",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "return_temp",
+              "label": "Температура обратки",
+              "type": "number",
+              "required": true,
+              "unit": "°C"
+            },
+            {
+              "key": "height",
+              "label": "Высота системы",
+              "type": "number",
+              "required": true,
+              "unit": "м"
+            },
+            {
+              "key": "resistance",
+              "label": "Гидравлическое сопротивление",
+              "type": "number",
+              "required": false,
+              "unit": "м вод. ст."
+            },
+            {
+              "key": "max_pressure",
+              "label": "Максимальное давление",
+              "type": "number",
+              "required": false,
+              "unit": "бар"
+            },
+            {
+              "key": "volume",
+              "label": "Объём системы",
+              "type": "number",
+              "required": false,
+              "unit": "л",
+              "units": "volume"
+            },
+            {
+              "key": "pumps",
+              "label": "Выбор насосов",
+              "type": "choice",
+              "required": true,
+              "options": [
+                "Один",
+                "Один и резервный на склад заказчика",
+                "Два: рабочий и резервный"
+              ]
+            },
+            {
+              "key": "frequency",
+              "label": "Частотное регулирование",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "reserve_to",
+              "label": "Резервирование ТО",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"],
+              "when": {
+                "connection": ["Независимое"]
+              }
+            },
+            {
+              "key": "reserve_percent",
+              "label": "Доля нагрузки каждого из двух ТО",
+              "type": "number",
+              "required": true,
+              "unit": "%",
+              "when": {
+                "connection": ["Независимое"],
+                "reserve_to": ["Да"]
+              },
+              "min": 50,
+              "max": 100,
+              "help": "70% — два ТО, каждый на 70% нагрузки системы."
+            },
+            {
+              "key": "reserve_makeup",
+              "label": "Резерв подпиточного насоса",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"],
+              "when": {
+                "connection": ["Независимое"]
+              }
+            },
+            {
+              "key": "regulator",
+              "label": "Регулятор перепада давления",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "dispatch",
+              "label": "Система диспетчеризации",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Узел учёта",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "note",
+              "label": "Примечание системы",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true
+        },
+        {
+          "key": "dhw",
+          "title": "ГВС",
+          "fields": [
+            {
+              "key": "system_name",
+              "label": "Уточнение наименования системы",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "connection",
+              "label": "Подключение ГВС",
+              "type": "choice",
+              "required": true,
+              "options": ["Открытое", "Закрытое"]
+            },
+            {
+              "key": "power",
+              "label": "Мощность системы",
+              "type": "number",
+              "required": true,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "t3",
+              "label": "Температура ГВС (Т3)",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "b1",
+              "label": "Температура холодной воды (В1)",
+              "type": "number",
+              "required": false,
+              "unit": "°C"
+            },
+            {
+              "key": "circulation",
+              "label": "Расход воды на циркуляцию",
+              "type": "number",
+              "required": false,
+              "unit": "%"
+            },
+            {
+              "key": "resistance",
+              "label": "Сопротивление циркуляционного контура",
+              "type": "number",
+              "required": false,
+              "unit": "м вод. ст."
+            },
+            {
+              "key": "pumps",
+              "label": "Выбор насосов",
+              "type": "choice",
+              "required": true,
+              "options": [
+                "Один",
+                "Один и резервный на склад заказчика",
+                "Два: рабочий и резервный"
+              ]
+            },
+            {
+              "key": "frequency",
+              "label": "Частотное регулирование",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "scheme",
+              "label": "Схема при закрытом ГВС",
+              "type": "choice",
+              "required": false,
+              "options": ["Одноступенчатая", "Двухступенчатая"],
+              "when": {
+                "connection": ["Закрытое"]
+              }
+            },
+            {
+              "key": "construction",
+              "label": "Исполнение двухступенчатой схемы",
+              "type": "choice",
+              "required": false,
+              "options": ["Моноблок", "Два отдельных ТО"],
+              "when": {
+                "connection": ["Закрытое"],
+                "scheme": ["Двухступенчатая"]
+              }
+            },
+            {
+              "key": "reserve_to",
+              "label": "Резервирование ТО",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"],
+              "when": {
+                "connection": ["Закрытое"],
+                "scheme": ["Одноступенчатая"]
+              }
+            },
+            {
+              "key": "reserve_percent",
+              "label": "Доля нагрузки каждого из двух ТО",
+              "type": "number",
+              "required": true,
+              "unit": "%",
+              "when": {
+                "connection": ["Закрытое"],
+                "scheme": ["Одноступенчатая"],
+                "reserve_to": ["Да"]
+              },
+              "min": 50,
+              "max": 100
+            },
+            {
+              "key": "cold_pressure",
+              "label": "Давление ХВ на входе в ТО",
+              "type": "number",
+              "required": true,
+              "unit": "м вод. ст.",
+              "when": {
+                "connection": ["Закрытое"]
+              }
+            },
+            {
+              "key": "water_meter",
+              "label": "Расходомер ХВ на вводе",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "softener",
+              "label": "Умягчитель воды / МПАВ",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Некоммерческий УУТЭ",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "equipment",
+              "label": "Дополнительное оборудование",
+              "type": "longtext",
+              "required": false
+            },
+            {
+              "key": "note",
+              "label": "Примечание системы",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true
+        },
+        {
+          "key": "collector_heating",
+          "title": "Коллектор отопления",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true,
+          "outletFields": [
+            {
+              "key": "power",
+              "label": "Мощность",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "flow",
+              "label": "Расход",
+              "type": "number",
+              "required": false,
+              "unit": "м³/ч"
+            },
+            {
+              "key": "diameter",
+              "label": "Ду",
+              "type": "number",
+              "required": false,
+              "unit": "мм"
+            },
+            {
+              "key": "balance_supply",
+              "label": "Балансировка подачи",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "balance_return",
+              "label": "Балансировка обратки",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Некоммерческий учёт",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            }
+          ]
+        },
+        {
+          "key": "collector_ventilation",
+          "title": "Коллектор вентиляции",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true,
+          "outletFields": [
+            {
+              "key": "power",
+              "label": "Мощность",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "flow",
+              "label": "Расход",
+              "type": "number",
+              "required": false,
+              "unit": "м³/ч"
+            },
+            {
+              "key": "diameter",
+              "label": "Ду",
+              "type": "number",
+              "required": false,
+              "unit": "мм"
+            },
+            {
+              "key": "balance_supply",
+              "label": "Балансировка подачи",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "balance_return",
+              "label": "Балансировка обратки",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Некоммерческий учёт",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            }
+          ]
+        },
+        {
+          "key": "collector_dhw",
+          "title": "Коллектор ГВС",
+          "fields": [
+            {
+              "key": "requirements",
+              "label": "Дополнительные требования",
+              "type": "longtext",
+              "required": false
+            }
+          ],
+          "optional": true,
+          "outletFields": [
+            {
+              "key": "power",
+              "label": "Мощность",
+              "type": "number",
+              "required": false,
+              "unit": "кВт",
+              "units": "power"
+            },
+            {
+              "key": "flow",
+              "label": "Расход",
+              "type": "number",
+              "required": false,
+              "unit": "м³/ч"
+            },
+            {
+              "key": "diameter",
+              "label": "Ду",
+              "type": "number",
+              "required": false,
+              "unit": "мм"
+            },
+            {
+              "key": "balance_supply",
+              "label": "Балансировка подачи",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "balance_return",
+              "label": "Балансировка обратки",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            },
+            {
+              "key": "meter",
+              "label": "Некоммерческий учёт",
+              "type": "choice",
+              "required": false,
+              "options": ["Да", "Нет"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

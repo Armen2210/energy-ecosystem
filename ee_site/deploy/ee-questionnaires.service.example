@@ -1,0 +1,23 @@
+# Adapt paths, user and EnvironmentFile to the actual existing deployment.
+[Unit]
+Description=Energoeffekt electronic questionnaire worker
+After=network.target
+
+[Service]
+Type=simple
+User=__EE_SERVICE_USER__
+WorkingDirectory=/var/www/ee_site/repo/ee_site/backend
+EnvironmentFile=__EE_ENVIRONMENT_FILE__
+ExecStart=/var/www/ee_site/repo/ee_site/backend/.venv/bin/python manage.py process_questionnaires --settings=config.settings.prod --continuous --limit 10 --interval 5
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=65
+KillMode=control-group
+MemoryMax=768M
+CPUQuota=100%
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

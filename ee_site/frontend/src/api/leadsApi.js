@@ -74,7 +74,9 @@ export async function createLead(formData) {
         { status: response.status },
       );
     }
-    throw new LeadApiError(getReadableApiError(data), { status: response.status });
+    const error = new LeadApiError(data?.questionnaires ? "Проверьте опросные листы: сервер обнаружил ошибки." : getReadableApiError(data), { status: response.status });
+    if (data?.questionnaires) error.questionnaires = data.questionnaires;
+    throw error;
   }
   if (!isConfirmedSuccess(response, data)) {
     throw new LeadApiError(

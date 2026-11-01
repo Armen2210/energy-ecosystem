@@ -1,5 +1,7 @@
 # Frontend сайта «Энергоэффект»
 
+Электронные ОЛ ВНС/ПНС/БМК/БТП: [контракт и единицы](../../contracts/questionnaires/v1/README.md), [проверки](docs/electronic-questionnaires-validation.md), [внедрение backend/worker/frontend](../backend/docs/electronic-questionnaires-release.md).
+
 Страница `/about` («О нас») реализована и принята владельцем; визуальные
 доработки отложены. Она содержит команду,
 производственный процесс и семь фотографий с увеличенным просмотром.

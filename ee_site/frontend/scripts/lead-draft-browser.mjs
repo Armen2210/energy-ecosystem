@@ -111,6 +111,7 @@ try {
         return route.fulfill({ contentType: 'application/javascript', body: 'window.ym=(id,method,...args)=>window.__draftAnalytics({method,args});' });
       }
       assert.equal(url.origin, origin, 'Unexpected external request');
+      if (url.pathname === '/api/leads/questionnaire-capabilities/') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,enabled:false,products:[]})});
       if (url.pathname === '/api/leads/') {
         assert.equal(request.method(), 'POST');
         const body = request.postDataBuffer().toString();
@@ -210,6 +211,7 @@ try {
     await form(page).locator('.lead-form__status--error').waitFor();
     const clearedId = requests.at(-1).id;
     await form(page).locator('[name=company_name]').fill('draft_private_revision');
+    page.once('dialog', async dialog => { assert.match(dialog.message(), /Предыдущая отправка могла быть принята/); await dialog.accept(); });
     await form(page).getByRole('button', { name: 'Отправить заявку', exact: true }).click();
     await form(page).locator('.lead-form__status--error').waitFor();
     const revisionId = requests.at(-1).id;
@@ -259,15 +261,22 @@ try {
     const other = await context.newPage(); await other.goto(origin + '/'); await empty(other); await other.close();
     const storage = await page.evaluate(async () => ({ local: { ...localStorage }, session: { ...sessionStorage },
       writes: window.__storageWrites, cookies: document.cookie, databases: await indexedDB.databases() }));
-    assert.doesNotMatch(JSON.stringify(storage), /draft_private|draft-private|new_private_draft|70000000000/);
+    const { 'ee-lead-draft-v1': persisted, ...otherSession } = storage.session;
+    assert.equal(JSON.parse(persisted).fields.name, 'new_private_draft');
+    assert.doesNotMatch(JSON.stringify({local:storage.local,session:otherSession,writes:storage.writes.filter(([key])=>key!=='ee-lead-draft-v1'),cookies:storage.cookies}), /draft_private|draft-private|new_private_draft|70000000000/);
+    assert.doesNotMatch(persisted, /draft_private_document|draft-private-first|draft-private-second/);
     assert.deepEqual(storage.databases, []);
-    await page.reload(); await empty(page);
+    await page.reload();
+    await page.waitForFunction(() => document.querySelector(".lead-form [name=name]")?.value === "new_private_draft");
+    assert.equal(await form(page).locator("[name=name]").inputValue(), "new_private_draft");
+    assert.equal(await form(page).locator("[name=consent]").isChecked(), false);
+    await clear(page, true); await empty(page);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     await form(page).getByRole('button', { name: 'Очистить форму', exact: true }).focus();
     assert.equal(await form(page).getByRole('button', { name: 'Очистить форму', exact: true }).evaluate(element => element === document.activeElement), true);
     await mkdir(output, { recursive: true });
     await form(page).screenshot({ path: path.join(output, `${width}-form.png`) });
-    pass(`${width}: independent tab/reload, no PII in storage/writes/IndexedDB/cookies, responsive keyboard action`);
+    pass(`${width}: independent tab; 24h session draft restores; clear removes it; no PII outside dedicated session key, responsive keyboard action`);
     // Virtual browser time exercises real React messages without sleeping 5s.
     await page.clock.install();
     await page.clock.pauseAt(new Date());

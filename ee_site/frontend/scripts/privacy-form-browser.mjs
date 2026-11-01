@@ -29,6 +29,9 @@ try {
       page.on('console', item => { if (item.type() === 'error') results.errors.push(item.text()); });
     });
     await context.route('**/*', route => {
+      // New read-only capability gate is stubbed off for legacy UI regression.
+      if (route.request().method() === 'GET' && new URL(route.request().url()).pathname === '/api/leads/questionnaire-capabilities/') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,enabled:false,products:[]})});
+
       const request = route.request();
       const url = new URL(request.url());
       if (request.method() !== 'GET' || url.origin !== origin || /^\/(api|admin)(\/|$)/.test(url.pathname)) {
