@@ -10,7 +10,7 @@ from rest_framework import serializers
 CONTRACT = json.loads(
     (
         Path(__file__).resolve().parents[4] / "contracts/questionnaires/v1/fields.json"
-    ).read_text()
+    ).read_text(encoding="utf-8")
 )
 NUMBER = re.compile(r"^[+-]?(?:[0-9]+(?:[.,][0-9]*)?|[.,][0-9]+)$")
 
