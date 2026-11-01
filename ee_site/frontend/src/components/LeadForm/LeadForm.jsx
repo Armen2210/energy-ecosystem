@@ -36,7 +36,11 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   const selectedTopic = draft.started ? draft.topic : initialTopic;
   const productSlug = selectedProduct(draft, products, initialTopic);
   const selectedFiles = draft.files;
-  useEffect(() => leadDraft.restore(), []);
+  const productContext = /^\/solutions\/[^/]+$/.test(pathname) && !!initialTopic;
+  useEffect(() => {
+    leadDraft.restore();
+    if(productContext) leadDraft.enterProduct(initialTopic, pathname);
+  }, [initialTopic, pathname, productContext, draft.submitting, draft.indeterminate]);
   const isSubmitting = draft.submitting;
   const fileError = draft.fileError;
   const submitStatus = draft.status;
@@ -225,7 +229,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           />
         </label>
 
-        <div className="ql-desktop-switch"><QuestionnaireSwitch product={productSlug} /></div>
+        {productContext && <div className="ql-desktop-switch"><QuestionnaireSwitch product={productSlug} /></div>}
         <div className="lead-form__file-field">
           <span className="lead-form__file-label">
             Документы
@@ -260,7 +264,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           name="description"
             value={draft.fields.description}
             onChange={handleFieldChange}
-          rows="5"
+          rows="2"
           placeholder="Кратко опишите объект, задачу, сроки или приложите ТЗ"
         />
       </label>
@@ -283,7 +287,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
         </span>
       </label>
 
-      {draft.storageNotice && <p className="lead-form__file-note" role="status">{draft.storageNotice}</p>}
+      {draft.storageNotice && <p className="lead-form__draft-note" role="status">{draft.storageNotice}</p>}
       <QuestionnaireSummary products={products} />
       {submitMessage && (
         <div

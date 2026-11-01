@@ -21,10 +21,14 @@ from .lead_creation import create_lead, SubmissionConflict
 
 ROOT = Path(__file__).resolve().parents[4]
 EXAMPLE = json.loads(
-    (ROOT / "contracts/questionnaires/v1/examples/all-four.json").read_text()
+    (ROOT / "contracts/questionnaires/v1/examples/all-four.json").read_text(
+        encoding="utf-8"
+    )
 )
 PUMPS = json.loads(
-    (ROOT / "contracts/questionnaires/v1/examples/pumps.json").read_text()
+    (ROOT / "contracts/questionnaires/v1/examples/pumps.json").read_text(
+        encoding="utf-8"
+    )
 )
 
 
@@ -493,3 +497,44 @@ console.log(JSON.stringify({before,after,reloaded,edited:serializeQuestionnaires
         data["questionnaires"] = edited
         with self.assertRaises(SubmissionConflict):
             create_lead(data)
+
+    def test_multipart_acknowledges_saved_sheets_and_job_on_repeat(self):
+        data = {
+            "name": "Synthetic multi OL",
+            "phone": "000",
+            "submission_id": str(uuid.uuid4()),
+            "questionnaires": json.dumps(PUMPS),
+        }
+        data["attachments"] = SimpleUploadedFile(
+            "synthetic.txt", b"synthetic shared file"
+        )
+        first = self.client.post("/api/leads/", data, format="multipart")
+        self.assertEqual(first.status_code, 201)
+        self.assertEqual(
+            first.json()["questionnaires"], {"version": 1, "products": ["pns", "vns"]}
+        )
+        lead = Lead.objects.get(pk=first.json()["id"])
+        self.assertEqual(
+            list(lead.questionnaires.values_list("product", flat=True)), ["pns", "vns"]
+        )
+        self.assertEqual(lead.questionnaire_job.expected_products, ["pns", "vns"])
+        self.assertEqual(len(getattr(mail, "outbox", [])), 0)
+        self.assertEqual(process_job(lead.pk), "done")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox[0].attachments), 3)
+        names = [attachment[0] for attachment in mail.outbox[0].attachments]
+        self.assertTrue(any(name.startswith("ee-pns-") for name in names))
+        self.assertTrue(any(name.startswith("ee-vns-") for name in names))
+        self.assertIn("Опросные листы: ПНС, ВНС", mail.outbox[0].body)
+        data["attachments"] = SimpleUploadedFile(
+            "synthetic.txt", b"synthetic shared file"
+        )
+        second = self.client.post("/api/leads/", data, format="multipart")
+        self.assertEqual(second.status_code, 200)
+        self.assertEqual(
+            second.json()["questionnaires"], first.json()["questionnaires"]
+        )
+        self.assertEqual(second.json()["id"], first.json()["id"])
+        self.assertEqual(QuestionnaireJob.objects.count(), 1)
+        self.assertEqual(process_job(lead.pk), "skipped")
+        self.assertEqual(len(mail.outbox), 1)

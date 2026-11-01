@@ -94,6 +94,15 @@ export async function createLead(formData) {
       { status: response.status, indeterminate: true },
     );
   }
+  if (formData.has("questionnaires")) {
+    let expected;
+    try { expected = JSON.parse(formData.get("questionnaires")).items.map(item=>item.product).sort(); } catch { expected = null; }
+    const accepted = data.questionnaires;
+    if (!expected || accepted?.version !== 1 || !Array.isArray(accepted.products)
+      || JSON.stringify([...accepted.products].sort()) !== JSON.stringify(expected)) {
+      throw new LeadApiError("Сервер не подтвердил сохранение опросных листов. Заявка могла быть принята частично; данные сохранены в форме. Не изменяйте их перед повтором.", {status:response.status,indeterminate:true});
+    }
+  }
   return data;
 }
 

@@ -19,6 +19,7 @@ import {
 import { updateQuestionnaire, openQuestionnaire } from "./state.js";
 import "./QuestionnaireEditor.css";
 import { selectedProduct } from "./state.js";
+import NumericInput from "./NumericInput.jsx";
 import { useQuestionnaireBackend } from "./capabilities.js";
 export function QuestionnaireSwitch({ product }) {
   const backend = useQuestionnaireBackend(
@@ -42,7 +43,7 @@ export function QuestionnaireSwitch({ product }) {
       onClick={() =>
         updateQuestionnaire(product, {
           enabled: !enabled,
-          ...(!enabled ? { expanded: true } : {}),
+          expanded: !enabled,
         })
       }
     >
@@ -71,13 +72,14 @@ export function QuestionnaireSummary({ products }) {
   const errors = validateQuestionnaires(d.questionnaires);
   return (
     <div className="ql-summary">
-      <strong>Опросные листы в заявке:</strong>
+      <strong>ОЛ в заявке:</strong>
       <div>
         {included.map(([p]) => (
           <button
             key={p}
             type="button"
             disabled={d.submitting}
+            title={"Редактировать опросный лист " + contract.products[p].title}
             onClick={() => {
               openQuestionnaire(p, products);
               if (!/^\/solutions\/[^/]+$/.test(location.pathname))
@@ -100,19 +102,16 @@ function Quantity({ field, value, onChange, invalid, id, describedBy }) {
   return (
     <>
       <div className="ql-quantity">
-        <input
+        <NumericInput
+          field={field}
           id={id}
-          type="text"
-          inputMode="decimal"
           value={field.units ? value?.value || "" : value || ""}
           aria-required={field.required || undefined}
           aria-describedby={describedBy}
           aria-invalid={invalid || undefined}
-          onChange={(e) => {
+          onChange={(text) => {
             setUnitError("");
-            onChange(
-              field.units ? { value: e.target.value, unit } : e.target.value,
-            );
+            onChange(field.units ? { value: text, unit } : text);
           }}
         />
         {field.units ? (
@@ -374,30 +373,19 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
               )
             }
           >
-            {q.expanded ? "⌃" : "⌄"}
+            <span className="faq__chevron" aria-hidden="true" />
           </button>
         </div>
       </header>
       <div className="ql-content">
         <nav className="ql-nav" aria-label="Листы опросника">
-          <button
-            type="button"
-            aria-label="Предыдущий лист"
-            disabled={index === 0 || d.submitting}
-            onClick={() => navigate(index - 1)}
-          >
-            ←
-          </button>
-          <label>
-            <span>
-              {index + 1} из {sheets.length}
-            </span>
+          <label className="ql-section-select">
             <select
               aria-label="Раздел опросного листа"
               value={sheet.key}
               disabled={d.submitting}
-              onChange={(e) =>
-                navigate(sheets.findIndex((s) => s.key === e.target.value))
+              onChange={(event) =>
+                navigate(sheets.findIndex((s) => s.key === event.target.value))
               }
             >
               {sheets.map((s) => (
@@ -406,15 +394,35 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
                 </option>
               ))}
             </select>
+            <span className="faq__chevron" aria-hidden="true" />
           </label>
-          <button
-            type="button"
-            aria-label="Следующий лист"
-            disabled={index === sheets.length - 1 || d.submitting}
-            onClick={() => navigate(index + 1)}
-          >
-            →
-          </button>
+          <div className="ql-paging">
+            <button
+              type="button"
+              aria-label="Предыдущий лист"
+              disabled={index === 0 || d.submitting}
+              onClick={() => navigate(index - 1)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5m6-6-6 6 6 6" />
+              </svg>
+              <span>Назад</span>
+            </button>
+            <span className="ql-page-count" aria-live="polite">
+              {index + 1} из {sheets.length}
+            </span>
+            <button
+              type="button"
+              aria-label="Следующий лист"
+              disabled={index === sheets.length - 1 || d.submitting}
+              onClick={() => navigate(index + 1)}
+            >
+              <span>Далее</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" />
+              </svg>
+            </button>
+          </div>
         </nav>
         <div
           className="ql-body"

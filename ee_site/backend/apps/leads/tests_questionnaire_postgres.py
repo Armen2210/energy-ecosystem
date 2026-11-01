@@ -27,7 +27,7 @@ class QuestionnairePostgresTests(TransactionTestCase):
             (
                 Path(__file__).resolve().parents[4]
                 / "contracts/questionnaires/v1/examples/pumps.json"
-            ).read_text()
+            ).read_text(encoding="utf-8")
         )
         submission = uuid.uuid4()
         barrier = Barrier(2)

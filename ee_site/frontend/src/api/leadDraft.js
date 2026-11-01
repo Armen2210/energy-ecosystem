@@ -3,6 +3,7 @@ import { DRAFT_KEY, readDraft, saveDraft } from "./leadDraftStorage.js";
 const empty = () => ({
   fields: { name: '', company_name: '', phone: '', email: '', description: '', consent: false },
   questionnaires: {}, questionnaireErrors: {}, questionnaireFocus: '', changedAt: null, storageNotice: '', indeterminate: false,
+  topicPage: '', restoredTopic: false,
   topic: '', sourcePage: '', started: false, files: [], fileError: '',
   successToken: null, hiding: false, submitting: false, status: 'idle', message: '', submission: null, snapshot: null, retryIds: [],
 });
@@ -43,10 +44,15 @@ export const leadDraft = {
     try {
       const saved = readDraft(window.sessionStorage);
       if (saved && !draft.started) {
-        draft = { ...draft, fields: { ...saved.fields, consent: false }, topic: saved.topic, sourcePage: saved.sourcePage, started: saved.started, questionnaires: saved.questionnaires, changedAt: saved.changedAt, submission: saved.submission, indeterminate: saved.indeterminate, storageNotice: "Восстановлен черновик этой вкладки. Он удаляется через 24 часа без изменений. Согласие подтвердите заново." + (saved.hadFiles ? " Прикрепите файлы повторно." : "") };
+        draft = { ...draft, fields: { ...saved.fields, consent: false }, topic: saved.topic, topicPage: saved.topicPage || "", restoredTopic: true, sourcePage: saved.sourcePage, started: saved.started, questionnaires: saved.questionnaires, changedAt: saved.changedAt, submission: saved.submission, indeterminate: saved.indeterminate, storageNotice: "Восстановлен черновик этой вкладки. Он удаляется через 24 часа без изменений. Согласие подтвердите заново." + (saved.hadFiles ? " Прикрепите файлы повторно." : "") };
         notify();
       }
     } catch { draft = { ...draft, storageNotice: "Не удалось восстановить черновик. Данные доступны только в открытой форме." }; notify(); }
+  },
+  enterProduct(topic, page) {
+    if (draft.submitting || draft.indeterminate || draft.topicPage === page) return;
+    const preserveRestored = draft.restoredTopic && !draft.topicPage;
+    leadDraft.update({ ...(preserveRestored ? {} : { topic }), topicPage: page, restoredTopic: false }, { content: false });
   },
   update(patch, { content = true } = {}) {
     if (Object.hasOwn(patch, 'status') || Object.hasOwn(patch, 'message')) patch = messagePatch(patch);

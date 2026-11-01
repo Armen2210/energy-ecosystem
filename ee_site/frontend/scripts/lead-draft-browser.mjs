@@ -149,10 +149,10 @@ try {
     await checkFields(page); await checkFiles(page);
     await page.goForward(); await page.goBack();
     await navigate(page, '/solutions/btp');
-    await checkFields(page); assert.equal(await topic(), initial);
+    await checkFields(page); assert.equal(await topic(), next);
     await form(page).locator('.topic-select__button').click();
     await form(page).getByRole('button', { name: next, exact: true }).click();
-    await navigate(page, '/solutions/bmk'); assert.equal(await topic(), next);
+    await navigate(page, '/solutions/bmk'); assert.equal(await topic(), initial);
     await checkFiles(page);
     await form(page).locator('.file-select__toggle').click();
     await form(page).getByRole('button', { name: `Удалить файл ${files[0].name}`, exact: true }).click();

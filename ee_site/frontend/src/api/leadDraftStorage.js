@@ -7,6 +7,7 @@ export function saveDraft(storage, draft, now = Date.now()) {
     changedAt: draft.changedAt || now,
     fields: draft.fields,
     topic: draft.topic,
+    topicPage: draft.topicPage || "",
     sourcePage: draft.sourcePage,
     started: draft.started,
     questionnaires: draft.questionnaires,

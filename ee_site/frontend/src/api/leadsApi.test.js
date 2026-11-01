@@ -223,3 +223,16 @@ test("gateway/server and unrecognised rejections retain an indeterminate result"
     }
   } finally {globalThis.fetch=originalFetch;}
 });
+
+test('OL success requires acknowledgment of the exact accepted product set',async()=>{
+ const original=globalThis.fetch;
+ const form=new FormData();form.set('questionnaires',JSON.stringify({version:1,items:[{product:'vns'},{product:'pns'}]}));
+ try{
+  for(const ack of [undefined,{version:1,products:[]},{version:1,products:['vns']},{version:1,products:['vns','vns']},{version:2,products:['vns','pns']}]){
+   globalThis.fetch=async()=>new Response(JSON.stringify({id:15,questionnaires:ack}),{status:201,headers:{'content-type':'application/json'}});
+   await assert.rejects(createLead(form),{indeterminate:true,status:201});
+  }
+  globalThis.fetch=async()=>new Response(JSON.stringify({id:15,duplicate:true,questionnaires:{version:1,products:['pns','vns']}}),{status:200,headers:{'content-type':'application/json'}});
+  assert.equal((await createLead(form)).id,15);
+ }finally{globalThis.fetch=original;}
+});
