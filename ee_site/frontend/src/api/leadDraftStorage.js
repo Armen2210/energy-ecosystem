@@ -1,4 +1,4 @@
-import { contract } from "../questionnaires/domain.js";
+import { contract, numberValue } from "../questionnaires/domain.js";
 export const DRAFT_KEY = "ee-lead-draft-v1";
 export const DRAFT_TTL = 24 * 60 * 60 * 1000;
 export function saveDraft(storage, draft, now = Date.now()) {
@@ -57,6 +57,16 @@ export function readDraft(storage, now = Date.now()) {
           (v.base != null && !Number.isFinite(v.base))
         )
           throw Error("invalid quantity");
+        if (
+          v.source != null &&
+          (typeof v.source !== "object" ||
+            Array.isArray(v.source) ||
+            typeof v.source.value !== "string" ||
+            numberValue(v.source.value) === null ||
+            typeof v.source.unit !== "string" ||
+            !Object.hasOwn(contract.units[field.units], v.source.unit))
+        )
+          throw Error("invalid source quantity");
       } else if (typeof v !== "string" || v.length > contract.limits.text)
         throw Error("invalid answer");
     }

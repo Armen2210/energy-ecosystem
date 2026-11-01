@@ -128,13 +128,13 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       const recovered = previousSubmission ? null : analytics.recoverSubmission(submissionSignature);
       const submission = submissionForSignature(previousSubmission || recovered, submissionSignature, () => crypto.randomUUID());
       let snapshot = leadDraft.get().snapshot;
-      if (previousSubmission !== submission) {
+      if (!snapshot || previousSubmission !== submission) {
         if (snapshot) analytics.release(snapshot);
         snapshot = analytics.snapshot(direction(), recovered);
       }
       // Keep ownership of superseded attempts without changing existing retry storage.
       const retryIds = [...new Set([...leadDraft.get().retryIds, submission.id])];
-      leadDraft.update({ submission, snapshot, retryIds });
+      leadDraft.update({ submission, snapshot, retryIds, indeterminate: previousSubmission?.id === submission.id && leadDraft.get().indeterminate });
       for (const type of ["product", "service"]) {
         if (snapshot.direction[type]) {
           formData.set("direction_type", type);
@@ -154,14 +154,14 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       leadDraft.reset({ status: "success", message: "Заявка отправлена. Мы свяжемся с вами после обработки обращения." });
     } catch (error) {
       if (!ownsDraft()) return;
-      if (error.status === 409) {
+      if (error.status === 409 && !error.indeterminate) {
         const current = leadDraft.get();
         if (current.submission) analytics.forgetSubmission(current.submission.id);
         if (current.snapshot) analytics.release(current.snapshot);
-        leadDraft.update({ submission: null, snapshot: null });
+        leadDraft.update({ submission: null, snapshot: null, indeterminate: false });
       }
       if (error.questionnaires) openFirstError(error.questionnaires, products);
-      leadDraft.update({ indeterminate: error.indeterminate ?? (error.status ? false : leadDraft.get().indeterminate) });
+      leadDraft.update({ indeterminate: leadDraft.get().indeterminate || !!error.indeterminate });
       leadDraft.update({ status: "error", message: error.message || "Не удалось отправить заявку. Проверьте данные или попробуйте позже." });
     } finally {
       if (ownsDraft()) leadDraft.update({ submitting: false, operation: null });

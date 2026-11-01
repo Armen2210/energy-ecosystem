@@ -74,8 +74,18 @@ export async function createLead(formData) {
         { status: response.status },
       );
     }
-    const error = new LeadApiError(data?.questionnaires ? "Проверьте опросные листы: сервер обнаружил ошибки." : getReadableApiError(data), { status: response.status });
-    if (data?.questionnaires) error.questionnaires = data.questionnaires;
+    // Only the endpoint's structured validation/conflict response establishes
+    // rejection. Gateway/server errors and unrecognised replies may follow commit.
+    const structuredError = data !== null && typeof data === "object" && !Array.isArray(data)
+      && !Object.hasOwn(data, "id") && !Object.hasOwn(data, "duplicate")
+      && (typeof data.detail === "string" || typeof data.code === "string"
+        || Object.values(data).some(Array.isArray) || data.questionnaires && typeof data.questionnaires === "object");
+    const rejected = [400, 409].includes(response.status) && !!structuredError;
+    const message = !rejected
+      ? "Сервер не подтвердил результат. Заявка могла быть сохранена. Повторите отправку без изменения данных."
+      : data?.questionnaires ? "Проверьте опросные листы: сервер обнаружил ошибки." : getReadableApiError(data);
+    const error = new LeadApiError(message, { status: response.status, indeterminate: !rejected });
+    if (rejected && data?.questionnaires) error.questionnaires = data.questionnaires;
     throw error;
   }
   if (!isConfirmedSuccess(response, data)) {

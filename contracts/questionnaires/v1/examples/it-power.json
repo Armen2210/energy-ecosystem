@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "product": "bmk",
+      "schemaVersion": 1,
+      "answers": {
+        "loads": {
+          "heating": {
+            "value": "1",
+            "unit": "Гкал/ч"
+          },
+          "ventilation": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "dhw_max": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "dhw_average": {
+            "value": "100",
+            "unit": "кВт"
+          },
+          "losses": {
+            "value": "100",
+            "unit": "кВт"
+          }
+        },
+        "ov": {
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "supply_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "return_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "dhw": {
+          "supply_temp": "-10",
+          "return_temp": "-10",
+          "supply_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "return_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "fuel": {
+          "main": "Газ",
+          "reserve": "Газ",
+          "gas_pressure": {
+            "value": "100",
+            "unit": "МПа"
+          }
+        },
+        "water": {
+          "analysis": "Да",
+          "source": "Тестовое уточнение",
+          "pressure": {
+            "value": "100",
+            "unit": "МПа"
+          },
+          "lights": "Да",
+          "chimney_height": "10"
+        },
+        "scheme": {
+          "pipes": "Двухтрубная",
+          "pto": "С ПТО",
+          "weather": "Да",
+          "staff": "С обслуживающим персоналом",
+          "placement": "Пристроенная",
+          "reliability": "Первая"
+        },
+        "equipment": {
+          "heat_meter": "Да",
+          "water_meter": "Да",
+          "gas_meter": "Да",
+          "diesel_generator": "Да",
+          "gas_regulator": "Да",
+          "diesel_tank": "Да",
+          "per_unit_meter": "Да",
+          "diesel_storage": "Да",
+          "dispatch": "Да",
+          "rs485": "Да",
+          "ethernet": "Да",
+          "gsm": "Да"
+        },
+        "notes": {
+          "requirements": "Тестовое уточнение"
+        }
+      }
+    }
+  ]
+}

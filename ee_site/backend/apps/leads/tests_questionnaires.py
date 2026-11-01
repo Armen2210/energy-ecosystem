@@ -2,6 +2,7 @@ import copy
 import json
 import tempfile
 import uuid
+from fractions import Fraction
 from datetime import timedelta
 from pathlib import Path
 from unittest.mock import patch
@@ -294,7 +295,10 @@ class QuestionnaireTests(TestCase):
         a = item(p, "bmk")["answers"]["loads"]
         a["heating"] = {"value": "1", "unit": "Гкал/ч"}
         one = validated(p)
-        a["heating"] = {"value": "1162.2222222222222", "unit": "кВт"}
+        a["heating"] = {
+            "value": str(Fraction(41868, 10000) * 10**9 / 3600 / 1000),
+            "unit": "кВт",
+        }
         self.assertEqual(one, validated(p))
         item(p, "btp")["answers"]["common"]["object"] = "  "
         with self.assertRaises(ValidationError):
@@ -359,3 +363,133 @@ class QuestionnaireTests(TestCase):
         self.assertEqual(QuestionnaireJob.objects.count(), 0)
         self.assertFalse(any(Path(self.tmp.name).rglob("*.txt")))
         self.assertEqual(len(getattr(mail, "outbox", [])), 0)
+
+    def test_it_coefficient_uses_independent_nist_calculation_for_new_pdf(self):
+        expected = Fraction(41868, 10000) * 10**9 / 3600 / 1000
+        self.assertEqual(expected, 1163)
+        p = copy.deepcopy(EXAMPLE)
+        item(p, "bmk")["answers"]["loads"]["heating"] = {"value": "1", "unit": "Гкал/ч"}
+        lead = self.create(p)
+        sheet = lead.questionnaires.get(product="bmk")
+        self.assertEqual(
+            sheet.answers["loads"]["heating"], {"value": str(expected), "unit": "кВт"}
+        )
+        from .questionnaire_pdf import render_pdf
+        from reportlab.platypus import Paragraph
+
+        with patch(
+            "apps.leads.questionnaire_pdf.Paragraph",
+            wraps=Paragraph,
+        ) as paragraph:
+            self.assertTrue(render_pdf(sheet).startswith(b"%PDF-"))
+        self.assertTrue(
+            any(
+                "Отопление: 1163 кВт" in str(call.args[0])
+                for call in paragraph.call_args_list
+            )
+        )
+
+    def test_invalid_quantity_types_return_field_addressed_http_400(self):
+        path = "bmk.loads.heating"
+        for key in ("unit", "value"):
+            for value in ([], {}, None, True, False, 0, 1.5):
+                with self.subTest(key=key, value=value):
+                    p = copy.deepcopy(EXAMPLE)
+                    item(p, "bmk")["answers"]["loads"]["heating"][key] = value
+                    response = self.client.post(
+                        "/api/leads/",
+                        {
+                            "name": "Synthetic",
+                            "phone": "000",
+                            "questionnaires": json.dumps(p),
+                        },
+                        format="multipart",
+                    )
+                    self.assertEqual(response.status_code, 400)
+                    self.assertIn(path, response.json()["questionnaires"])
+        for value in ([], {}, None, True, 1.5):
+            p = copy.deepcopy(EXAMPLE)
+            item(p, "bmk")["answers"]["loads"]["heating"] = value
+            response = self.client.post(
+                "/api/leads/",
+                {"name": "Synthetic", "phone": "000", "questionnaires": json.dumps(p)},
+                format="multipart",
+            )
+            self.assertEqual(response.status_code, 400)
+            self.assertIn(path, response.json()["questionnaires"])
+        self.assertEqual(Lead.objects.count(), 0)
+
+    def test_js_unit_toggle_reload_preserves_server_canonical_and_fingerprint(self):
+        import subprocess
+        import shutil
+
+        if not shutil.which("node"):
+            self.skipTest("Cross-language contract check requires Node.js")
+        script = r"""
+import {readFileSync} from 'node:fs';
+import {changeUnit,serializeQuestionnaires} from './src/questionnaires/domain.js';
+import {saveDraft,readDraft} from './src/api/leadDraftStorage.js';
+const fixture=JSON.parse(readFileSync('../../contracts/questionnaires/v1/examples/all-four.json','utf8'));
+const drafts=Object.fromEntries(fixture.items.map(i=>[i.product,{enabled:true,answers:i.answers}]));
+const regular=drafts.bmk.answers.loads;
+const outlet=drafts.btp.answers.collector_heating.outlets[0];
+regular.heating={value:'123456789012345.678901234567',unit:'кВт'};
+outlet.power={...regular.heating};
+drafts.btp.answers.heating.volume={value:'1000.000000000001',unit:'л'};
+drafts.bmk.answers.ov.supply_pressure={value:'0.123456789123',unit:'МПа'};
+const before=serializeQuestionnaires(drafts);
+for(let i=0;i<9;i++){
+ regular.heating=changeUnit(regular.heating,i%2?'кВт':'Гкал/ч','power');
+ outlet.power=changeUnit(outlet.power,i%2?'кВт':'Гкал/ч','power');
+ drafts.btp.answers.heating.volume=changeUnit(drafts.btp.answers.heating.volume,i%2?'л':'м³','volume');
+ drafts.bmk.answers.ov.supply_pressure=changeUnit(drafts.bmk.answers.ov.supply_pressure,i%2?'МПа':'кгс/см²','pressure');
+}
+const after=serializeQuestionnaires(drafts);
+const memory=new Map();const storage={setItem:(k,v)=>memory.set(k,v),getItem:k=>memory.get(k)};
+saveDraft(storage,{fields:{name:'Test',company_name:'',phone:'000',email:'',description:''},topic:'Test',questionnaires:drafts,changedAt:1000,files:[]},1000);
+const recovered=readDraft(storage,1100).questionnaires;
+const reloaded=serializeQuestionnaires(recovered);
+recovered.bmk.answers.loads.heating={value:'2.5',unit:'Гкал/ч'};
+recovered.btp.answers.collector_heating.outlets[0].power={value:'3.5',unit:'Гкал/ч'};
+console.log(JSON.stringify({before,after,reloaded,edited:serializeQuestionnaires(recovered)}));
+"""
+        result = subprocess.run(
+            ["node", "--input-type=module", "-e", script],
+            cwd=ROOT / "ee_site/frontend",
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        vectors = json.loads(result.stdout)
+        before = validated(vectors["before"])
+        self.assertEqual(before, validated(vectors["after"]))
+        self.assertEqual(before, validated(vectors["reloaded"]))
+        data = {
+            "name": "Test",
+            "phone": "000",
+            "submission_id": uuid.uuid4(),
+            "questionnaires": before,
+        }
+        lead, created = create_lead(data)
+        self.assertTrue(created)
+        for key in ("after", "reloaded"):
+            data["questionnaires"] = validated(vectors[key])
+            same, created = create_lead(data)
+            self.assertFalse(created)
+            self.assertEqual(same.pk, lead.pk)
+        edited = validated(vectors["edited"])
+        coefficient = Fraction(41868, 10000) * 10**9 / 3600 / 1000
+        self.assertEqual(
+            item(edited, "bmk")["answers"]["loads"]["heating"]["value"],
+            str(float(coefficient * Fraction(5, 2))),
+        )
+        self.assertEqual(
+            item(edited, "btp")["answers"]["collector_heating"]["outlets"][0]["power"][
+                "value"
+            ],
+            str(float(coefficient * Fraction(7, 2))),
+        )
+        data["questionnaires"] = edited
+        with self.assertRaises(SubmissionConflict):
+            create_lead(data)

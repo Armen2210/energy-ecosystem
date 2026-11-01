@@ -48,6 +48,9 @@ def validate_payload(raw):
                 if key in data:
                     error(p, "Поле неприменимо при выбранных условиях.")
                 continue
+            if f["type"] == "number" and key in data and value is None:
+                error(p, "Ожидается число или числовая пара, а не null.")
+                continue
             if value is None or value == "":
                 if f["required"]:
                     error(p, "Обязательное поле.")
@@ -59,7 +62,7 @@ def validate_payload(raw):
                     unit = value.get("unit")
                     text = value.get("value")
                     factors = CONTRACT["units"][f["units"]]
-                    if unit not in factors:
+                    if not isinstance(unit, str) or unit not in factors:
                         error(p, "Неизвестная единица.")
                         continue
                 else:

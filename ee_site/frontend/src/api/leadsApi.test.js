@@ -200,3 +200,26 @@ test("429 Retry-After takes precedence and invalid values have a safe fallback",
     globalThis.fetch = originalFetch;
   }
 });
+
+
+test("gateway/server and unrecognised rejections retain an indeterminate result", async () => {
+  const originalFetch=globalThis.fetch;
+  try {
+    for (const status of [500,502,503,504,408,401,403,404,422]) {
+      for (const contentType of ["text/html","application/json"]) {
+        globalThis.fetch=async()=>new Response(contentType==="text/html"?"<h1>Gateway error</h1>":JSON.stringify({detail:"synthetic response"}),{status,headers:{"content-type":contentType}});
+        await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+      }
+    }
+    for (const status of [400,409]) {
+      globalThis.fetch=async()=>new Response("proxy response",{status});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+      globalThis.fetch=async()=>new Response(JSON.stringify({id:19}),{status,headers:{"content-type":"application/json"}});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+    }
+    for(const status of [400,409,413,429]) {
+      globalThis.fetch=async()=>new Response(JSON.stringify({detail:"rejected before commit"}),{status,headers:{"content-type":"application/json"}});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:false});
+    }
+  } finally {globalThis.fetch=originalFetch;}
+});

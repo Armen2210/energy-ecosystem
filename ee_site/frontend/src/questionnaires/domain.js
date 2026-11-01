@@ -15,16 +15,27 @@ export function numberValue(value) {
     ? Number(text.replace(",", "."))
     : null;
 }
+// API precision comes from the original strings, never from the rounded display
+// or the legacy floating-point base kept by older tab drafts.
+export function quantityPair(value) {
+  const source = value.source ?? value;
+  return { value: source.value, unit: source.unit };
+}
 export function changeUnit(value, unit, group) {
   if (blank(value)) return { value: "", unit };
-  const n = numberValue(value.value);
+  if (numberValue(value.value) === null) return null;
+  const source = quantityPair(value);
+  const n = numberValue(source.value);
   if (n === null) return null;
   const factors = contract.units[group];
-  const base = value.base ?? n * Number(factors[value.unit]);
+  const display = (n * Number(factors[source.unit])) / Number(factors[unit]);
   return {
-    value: String(Number((base / Number(factors[unit])).toPrecision(15))),
+    value:
+      unit === source.unit
+        ? source.value
+        : String(Number(display.toPrecision(15))),
     unit,
-    base,
+    source,
   };
 }
 export const initialQuestionnaire = () => ({
@@ -54,7 +65,7 @@ export function serializeQuestionnaires(drafts) {
       for (const f of sheet.fields) {
         const v = data[f.key];
         if (!applicable(f, data) || blank(v)) continue;
-        output[f.key] = f.units ? { value: v.value, unit: v.unit } : v;
+        output[f.key] = f.units ? quantityPair(v) : v;
       }
       if (sheet.outletFields)
         output.outlets = (data.outlets || [])
@@ -63,9 +74,7 @@ export function serializeQuestionnaires(drafts) {
             const result = { id: row.id };
             for (const f of sheet.outletFields)
               if (!blank(row[f.key]))
-                result[f.key] = f.units
-                  ? { value: row[f.key].value, unit: row[f.key].unit }
-                  : row[f.key];
+                result[f.key] = f.units ? quantityPair(row[f.key]) : row[f.key];
             return result;
           });
       answers[sheet.key] = output;
