@@ -159,7 +159,7 @@ function ServicePage() {
                     },
                     {
                       label: "Услуги",
-                      to: "/#services",
+                      to: "/services",
                     },
                     {
                       label: service.cardTitle || service.shortTitle || service.title,

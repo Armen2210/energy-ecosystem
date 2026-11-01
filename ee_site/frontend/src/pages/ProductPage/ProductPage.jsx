@@ -13,7 +13,7 @@ import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 
 import LeadForm from "../../components/LeadForm";
-import QuestionnaireEditor from "../../questionnaires/QuestionnaireEditor.jsx";
+import QuestionnaireEditor from "../../questionnaires/DeferredQuestionnaireEditor.jsx";
 import PageNavigation from "../../components/PageNavigation";
 import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
@@ -228,7 +228,7 @@ function ProductPage() {
                 },
                 {
                   label: "Продукция",
-                  to: "/#products",
+                  to: "/solutions",
                 },
                 {
                   label: product.shortTitle || product.title,

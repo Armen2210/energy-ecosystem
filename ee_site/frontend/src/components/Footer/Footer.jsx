@@ -9,7 +9,7 @@ import { analytics } from "../../analytics/runtime.js";
 
 function Footer({ navigation }) {
   const location = useLocation();
-  const footerNavigation = navigation.flatMap(item => item.url === '/about'
+  const footerNavigation = navigation.map(item => ({...item, url: item.url === "/#products" ? "/solutions" : item.url === "/#services" ? "/services" : item.url})).flatMap(item => item.url === '/about'
     ? [item, { title: 'Документы', url: '/documents', id: 'footer-documents' }] : [item]);
   return (
     <footer className="footer">

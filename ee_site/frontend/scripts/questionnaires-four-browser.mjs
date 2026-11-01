@@ -197,7 +197,10 @@ try {
   await p.setViewportSize({ width: 1440, height: 1100 });
   const responsePromise = p.waitForResponse(
     (r) =>
-      r.url() === "http://127.0.0.1:8000/api/leads/" &&
+      ["http://127.0.0.1:5173", "http://127.0.0.1:8000"].includes(
+        new URL(r.url()).origin,
+      ) &&
+      new URL(r.url()).pathname === "/api/leads/" &&
       r.request().method() === "POST",
   );
   await p

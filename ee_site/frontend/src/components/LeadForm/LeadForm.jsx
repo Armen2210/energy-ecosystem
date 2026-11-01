@@ -20,7 +20,7 @@ import {
 } from "../../api/leadFiles";
 
 import TopicSelect from "../TopicSelect";
-import { QuestionnaireSwitch, QuestionnaireSummary } from "../../questionnaires/QuestionnaireEditor.jsx";
+import { QuestionnaireSwitch, QuestionnaireSummary } from "../../questionnaires/QuestionnaireControls.jsx";
 import { serializeQuestionnaires, validateQuestionnaires } from "../../questionnaires/domain.js";
 import { verifyQuestionnaireBackend } from "../../questionnaires/capabilities.js";
 import { openFirstError, selectedProduct } from "../../questionnaires/state.js";

@@ -103,6 +103,7 @@ try {
   await page
     .getByRole("button", { name: "Без аналитики", exact: true })
     .click();
+  await page.locator(".questionnaire-column").scrollIntoViewIfNeeded();
   await toggle().waitFor();
   assert.equal(await panel().locator(".ql-body").isVisible(), false);
   await toggle().click();

@@ -1,0 +1,122 @@
+{
+  "before": {
+    "chunks": [
+      {
+        "file": "assets/404-CnUvcjPe.js",
+        "entry": true,
+        "imports": [
+          "assets/main-BTDjzdtS.js",
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 56,
+        "gzip": 66
+      },
+      {
+        "file": "assets/analytics-frame-C-Ovz5Ri.js",
+        "entry": true,
+        "imports": [
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 1382,
+        "gzip": 782
+      },
+      {
+        "file": "assets/index-CnUvcjPe.js",
+        "entry": true,
+        "imports": [
+          "assets/main-BTDjzdtS.js",
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 56,
+        "gzip": 66
+      },
+      {
+        "file": "assets/main-BTDjzdtS.js",
+        "entry": false,
+        "imports": [
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 524919,
+        "gzip": 140099
+      },
+      {
+        "file": "assets/policy-DuWXjjRp.js",
+        "entry": false,
+        "imports": [],
+        "dynamicImports": [],
+        "bytes": 3550,
+        "gzip": 1640
+      }
+    ]
+  },
+  "after": {
+    "chunks": [
+      {
+        "file": "assets/404-DxblCSvn.js",
+        "entry": true,
+        "imports": [
+          "assets/main-B-i9ZS08.js",
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 56,
+        "gzip": 66
+      },
+      {
+        "file": "assets/analytics-frame-C-Ovz5Ri.js",
+        "entry": true,
+        "imports": [
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 1382,
+        "gzip": 782
+      },
+      {
+        "file": "assets/index-DxblCSvn.js",
+        "entry": true,
+        "imports": [
+          "assets/main-B-i9ZS08.js",
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 56,
+        "gzip": 66
+      },
+      {
+        "file": "assets/QuestionnaireEditor-CsToO-R2.js",
+        "entry": false,
+        "imports": [
+          "assets/main-B-i9ZS08.js"
+        ],
+        "dynamicImports": [],
+        "bytes": 12448,
+        "gzip": 4703
+      },
+      {
+        "file": "assets/main-B-i9ZS08.js",
+        "entry": false,
+        "imports": [
+          "assets/policy-DuWXjjRp.js"
+        ],
+        "dynamicImports": [
+          "assets/QuestionnaireEditor-CsToO-R2.js"
+        ],
+        "bytes": 511645,
+        "gzip": 136655
+      },
+      {
+        "file": "assets/policy-DuWXjjRp.js",
+        "entry": false,
+        "imports": [],
+        "dynamicImports": [],
+        "bytes": 3550,
+        "gzip": 1640
+      }
+    ]
+  }
+}
