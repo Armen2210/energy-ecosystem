@@ -5,7 +5,7 @@ import { contract, validateQuestionnaires } from "./domain.js";
 import { updateQuestionnaire, openQuestionnaire } from "./state.js";
 import { useQuestionnaireBackend } from "./capabilities.js";
 import "./QuestionnaireEditor.css";
-export function QuestionnaireSwitch({ product }) {
+export function QuestionnaireSwitch({ product, beforeChange }) {
   const backend = useQuestionnaireBackend(
     Object.hasOwn(contract.products, product),
   );
@@ -24,12 +24,13 @@ export function QuestionnaireSwitch({ product }) {
       aria-label="Электронный опросный лист"
       aria-checked={enabled}
       disabled={draft.submitting}
-      onClick={() =>
+      onClick={(event) => {
+        beforeChange?.(event.currentTarget.closest(".ql-header"));
         updateQuestionnaire(product, {
           enabled: !enabled,
           expanded: !enabled,
-        })
-      }
+        });
+      }}
     >
       <span className="ql-switch__track" aria-hidden="true">
         <span />
@@ -68,6 +69,14 @@ export function QuestionnaireSummary({ products }) {
               openQuestionnaire(p, products);
               if (!/^\/solutions\/[^/]+$/.test(location.pathname))
                 navigate(`/solutions/${p}#lead-form`);
+              else requestAnimationFrame(() => {
+                const panel = document.querySelector(".ql-panel");
+                const header = document.querySelector(".header");
+                if (panel) window.scrollTo({
+                  top: panel.getBoundingClientRect().top + window.scrollY - (header?.getBoundingClientRect().height || 0) - 12,
+                  behavior: "instant",
+                });
+              });
             }}
           >
             {contract.products[p].title} ·{" "}

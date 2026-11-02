@@ -105,3 +105,25 @@ test("27 ordered images have optimized responsive assets and no old hidden conte
       );
     }
 });
+
+test("product prerender includes registry downloads in the lightweight questionnaire header", async () => {
+  const { documents } = await import("../src/data/documents.js");
+  for (const document of documents.filter(d => d.categoryId === "questionnaires")) {
+    const all = nodes(await read(`dist/solutions/${document.productSlug}.html`));
+    const header = all.find(n => (attr(n, "class") || "").split(" ").includes("ql-header"));
+    assert.ok(header, `${document.productSlug}: initial header required`);
+    const descendants = [];
+    function visit(n) { descendants.push(n); for (const child of n.childNodes || []) visit(child); }
+    visit(header);
+    const links = descendants.filter(n => n.tagName === "a");
+    assert.deepEqual(links.map(n => attr(n, "href")), document.files.map(f => f.url));
+    for (const link of links) {
+      assert.equal(attr(link, "download"), "");
+      assert.match(attr(link, "aria-label"), /Скачать бланк .+ — (Excel|PDF)/);
+    }
+    assert.ok(descendants.some(n => n.tagName === "button" && attr(n, "disabled") !== undefined), "online control waits for backend");
+    assert.equal(all.some(n => (attr(n, "class") || "").split(" ").includes("ql-fields")), false, "heavy fields remain deferred");
+  }
+  assert.equal(nodes(await read("dist/solutions/automation-cabinets.html")).some(n =>
+    (attr(n, "class") || "").split(" ").includes("ql-downloads")), false);
+});

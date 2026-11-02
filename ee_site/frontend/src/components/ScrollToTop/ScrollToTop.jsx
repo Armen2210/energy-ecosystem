@@ -390,10 +390,12 @@ function ScrollToTop() {
       };
     }
 
+    // A normal route entry owns the document position. Do not inherit the
+    // global smooth-scroll CSS while the new product/draft is mounting.
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "auto",
+      behavior: "instant",
     });
   }, [pathname, hash, state, navigate, location.key, navigationType]);
 

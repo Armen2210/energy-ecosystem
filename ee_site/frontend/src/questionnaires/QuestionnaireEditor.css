@@ -19,10 +19,12 @@
 .ql-header {
   padding: 18px 20px;
   border-bottom: 1px solid var(--color-border);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  column-gap: 12px;
+  row-gap: 0;
+  flex-shrink: 0;
 }
 .ql-header strong {
   display: block;
@@ -369,11 +371,11 @@
   }
   .ql-nav {
     position: sticky;
-    top: 0;
+    top: var(--ql-sticky-top, 0px);
     z-index: 1;
   }
   .ql-panel {
-    scroll-margin-top: 140px;
+    scroll-margin-top: calc(var(--ql-sticky-top, 0px) + 12px);
   }
   .ql-quantity select {
     width: 100px;
@@ -538,4 +540,104 @@
 }
 .ql-section-select select {
   min-height: 44px;
+}
+
+/* The lightweight header keeps the original two-line desktop geometry. */
+.ql-header > strong {
+  grid-column: 1;
+  grid-row: 1;
+}
+.ql-online {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: normal;
+}
+.ql-online small {
+  margin-top: 0;
+}
+.ql-online-action {
+  display: block;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-red);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.ql-online-action:disabled {
+  color: var(--color-muted);
+  cursor: default;
+  font-weight: 400;
+}
+.ql-downloads {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ql-downloads a {
+  display: inline-block;
+  color: var(--color-text);
+  text-underline-offset: 3px;
+}
+.ql-downloads a:hover {
+  color: var(--color-red);
+}
+.ql-downloads__mobile {
+  display: none;
+}
+.ql-online-action:focus-visible,
+.ql-downloads a:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+.ql-panel > .ql-unavailable {
+  padding: 16px 20px;
+}
+@media (max-width: 960px) {
+  .ql-header > .ql-mobile {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .ql-header > strong {
+    min-width: 0;
+  }
+  .ql-online {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+  .ql-online-action {
+    min-height: 44px;
+  }
+  .ql-online small {
+    padding-block: 10px;
+    max-width: none;
+  }
+  .ql-downloads {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    font-size: 13px;
+  }
+  .ql-downloads a {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px 5px;
+  }
+  .ql-downloads__desktop {
+    display: none;
+  }
+  .ql-downloads__mobile {
+    display: inline;
+  }
+}
+.ql-header > strong,
+.ql-online,
+.ql-downloads {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
