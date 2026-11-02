@@ -45,24 +45,42 @@ export default function AboutPage() {
           aria-label="Фотографии компании"
         >
           <ol className="about-page__gallery">
-            {aboutGallery.map((photo) => (
-              <li
-                key={photo.number}
-                data-photo={photo.number}
-                style={{ "--photo-ratio": photo.width / photo.height }}
-              >
-                <img
-                  src={photo.src}
-                  srcSet={photo.srcSet}
-                  sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 960px) 45vw, 40vw"
-                  width={photo.width}
-                  height={photo.height}
-                  alt={photo.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </li>
-            ))}
+            {aboutGallery.map((photo, index) => {
+              // Соседние фотографии объединяем в пары.
+              const pairStart = index - (index % 2);
+              const pair = aboutGallery.slice(pairStart, pairStart + 2);
+
+              const ratio = photo.width / photo.height;
+              const pairRatio = pair.reduce(
+                (sum, item) => sum + item.width / item.height,
+                0,
+              );
+
+              // Ширина пропорциональна форме кадра.
+              const mobileShare = pair.length === 1 ? 0.5 : ratio / pairRatio;
+
+              return (
+                <li
+                  key={photo.number}
+                  data-photo={photo.number}
+                  style={{
+                    "--photo-ratio": ratio,
+                    "--mobile-photo-share": mobileShare,
+                  }}
+                >
+                  <img
+                    src={photo.src}
+                    srcSet={photo.srcSet}
+                    sizes={`(max-width: 640px) calc((100vw - 44px) * ${mobileShare}), (max-width: 960px) 45vw, 40vw`}
+                    width={photo.width}
+                    height={photo.height}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+              );
+            })}
           </ol>
         </section>
         <section
