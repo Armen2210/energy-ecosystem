@@ -1,0 +1,343 @@
+{
+  "browser": "154.0.8037.57",
+  "rows": [
+    {
+      "width": 360,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 360,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 360,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 360,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 360,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 360,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 360,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 360,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 390,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 390,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 390,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 390,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 390,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 390,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 390,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    },
+    {
+      "width": 640,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 640,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 640,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 640,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 640,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 640,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 640,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 640,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 768,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 768,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 768,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 768,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 768,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 768,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 768,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    },
+    {
+      "width": 960,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 960,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 960,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 960,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 960,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 960,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 960,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 960,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "overflow": 0,
+      "h1": "ЗАВОДСовременногоинженерного оборудования",
+      "missingLabels": 1
+    },
+    {
+      "width": 1440,
+      "route": "/about",
+      "overflow": 0,
+      "h1": "О нас",
+      "missingLabels": 0
+    },
+    {
+      "width": 1440,
+      "route": "/documents",
+      "overflow": 0,
+      "h1": "Документы",
+      "missingLabels": 0
+    },
+    {
+      "width": 1440,
+      "route": "/solutions",
+      "overflow": 0,
+      "h1": "Инженерные решения под задачи объекта",
+      "missingLabels": 0
+    },
+    {
+      "width": 1440,
+      "route": "/services",
+      "overflow": 0,
+      "h1": "Работы вокруг инженерных объектов",
+      "missingLabels": 0
+    },
+    {
+      "width": 1440,
+      "route": "/solutions/btp",
+      "overflow": 0,
+      "h1": "Блочные тепловые пункты «Энерголайн»",
+      "missingLabels": 1
+    },
+    {
+      "width": 1440,
+      "route": "/services/commissioning",
+      "overflow": 0,
+      "h1": "Пусконаладочные работы инженерных систем",
+      "missingLabels": 1
+    },
+    {
+      "width": 1440,
+      "route": "/cases",
+      "overflow": 0,
+      "h1": "Реализованные инженерные решения",
+      "missingLabels": 0
+    }
+  ],
+  "errors": [],
+  "network": []
+}

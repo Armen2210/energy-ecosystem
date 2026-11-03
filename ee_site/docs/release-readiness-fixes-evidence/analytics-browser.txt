@@ -1,0 +1,23 @@
+PASS legacy accepted is not analytics consent; zero script, requests or campaign storage before choice
+PASS denial keeps fields and selected documents, navigation and form available
+PASS keyboard settings/allow: one init, one filtered initial view with valid campaign
+PASS anchors ignored; SPA transition/title and Back/Forward once each; later hit has no entry UTM
+PASS revoke calls destruct, removes context; reload remains denied, no further requests
+PASS 360px banner fits viewport; accessible named actions and keyboard settings
+PASS /contacts normalized once with valid campaign retained, no fragment exported
+PASS case modal one case_open without page hit; close no hit; direct case ordinary view
+PASS real isolated API: lost 201 then confirmed duplicate 200, stable id, retained file, first success goal
+PASS new submission is a separate conversion
+PASS real API 201 then identical submission confirmed 200: one lead_success, internal id not exported
+PASS lost response + reload/new campaign: restored technical UUID, stable snapshot, duplicate 200 and first confirmation goal
+PASS revoke + reload + retry: same UUID, removed optional metadata, duplicate record, no goal
+PASS 400/409/413/429/500, HTML and network failure: no conversion, form retained, no automatic retry
+PASS denied submission still has operational direction, no campaign; later allow does not replay success
+PASS revoke during delayed load, late callback cannot restart; reallow fresh context/no backlog
+PASS blocked script does not break real API submission or falsely acknowledge analytic delivery
+PASS library exception cannot delay or break successful submission
+PASS unavailable storage: explicit session allow works, revoke preserves form, reload safely off
+PASS cross-tab revoke destroys both counters; current form remains filled
+PASS unknown route is /404, no unknown slug/query/fragment exported
+PASS production build on staging hostname never loads real counter
+PASS all adapter/mock network payloads exclude synthetic personal values, documents and ids

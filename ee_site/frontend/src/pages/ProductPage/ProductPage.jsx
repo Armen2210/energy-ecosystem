@@ -13,6 +13,7 @@ import EntitySwitcher from "../../components/EntitySwitcher";
 import FAQ from "../../components/FAQ";
 
 import LeadForm from "../../components/LeadForm";
+import QuestionnaireEditor from "../../questionnaires/DeferredQuestionnaireEditor.jsx";
 import PageNavigation from "../../components/PageNavigation";
 import ProductDetailsAccordion from "../../components/ProductDetailsAccordion";
 import SectionHeader from "../../components/SectionHeader";
@@ -227,7 +228,7 @@ function ProductPage() {
                 },
                 {
                   label: "Продукция",
-                  to: "/#products",
+                  to: "/solutions",
                 },
                 {
                   label: product.shortTitle || product.title,
@@ -342,7 +343,7 @@ function ProductPage() {
 
       <section id="lead-form" className="section section--contact">
         <div className="container contact-grid">
-          <div>
+          <div className="questionnaire-column">
               <h2 className="visually-hidden">
                 {`Обсудить направление: ${product.shortTitle}`}
               </h2>
@@ -351,6 +352,7 @@ function ProductPage() {
                 eyebrow={`Обсудить направление: ${product.shortTitle}`}
                 description="Оставьте контакты и приложите файл, если есть техническое задание, проект или спецификация."
               />
+              <QuestionnaireEditor products={products} initialTopic={product.formTitle || product.title} />
           </div>
 
           <LeadForm

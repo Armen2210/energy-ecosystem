@@ -54,7 +54,8 @@ class Command(BaseCommand):
                 try:
                     ids = list(
                         Lead.objects.filter(
-                            notification_status=Lead.NotificationStatus.PENDING
+                            notification_status=Lead.NotificationStatus.PENDING,
+                            questionnaire_job__isnull=True
                         )
                         .order_by("created_at", "pk")
                         .values_list("pk", flat=True)[: options["limit"]]

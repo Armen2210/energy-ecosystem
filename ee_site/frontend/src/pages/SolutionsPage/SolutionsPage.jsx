@@ -5,30 +5,45 @@
 
 import ProductCard from "../../components/ProductCard";
 import SectionHeader from "../../components/SectionHeader";
+import PageNavigation from "../../components/PageNavigation";
 import Seo from "../../components/Seo";
 
 import { products } from "../../data/products";
 
 function SolutionsPage() {
   return (
-    <main>
+    <main className="catalog-page">
       <Seo
         title="Продукция Энергоэффект — БМК, БТП, ВНС, ПНС и шкафы управления"
         description="Продуктовые направления ООО «Энергоэффект»: блочно-модульные котельные, блочные тепловые пункты, водопроводные насосные станции, пожарные насосные станции и шкафы управления."
         path="/solutions"
       />
 
-      <section className="section">
+      <section className="section section--products">
         <div className="container">
-          <SectionHeader as="h1"
+          <PageNavigation
+            backLabel="На главную"
+            backTo="/"
+            breadcrumbItems={[
+              { label: "Главная", to: "/" },
+              { label: "Продукция" },
+            ]}
+          />
+          <SectionHeader
+            as="h1"
             eyebrow="Продукция"
             title="Инженерные решения под задачи объекта"
             description="Продуктовые направления Энергоэффект: БМК, БТП, ВНС, ПНС, шкафы управления и автоматизации."
           />
 
-          <div className="product-grid">
+          <div className="product-grid product-grid--home">
             {products.map((product, index) => (
-              <ProductCard headingLevel={2} product={product} index={index} key={product.slug} />
+              <ProductCard
+                headingLevel={2}
+                product={product}
+                index={index}
+                key={product.slug}
+              />
             ))}
           </div>
         </div>

@@ -56,7 +56,7 @@
 }
 
 .nav a:hover {
-  color: var(--color-red);
+  color: var(--color-accent-text);
 }
 
 .header__phone {
@@ -212,9 +212,9 @@
 }
 
 .nav .nav__link--active {
-  color: var(--color-red);
+  color: var(--color-accent-text);
 }
 
 .nav .nav__link--active:hover {
-  color: var(--color-red);
+  color: var(--color-accent-text);
 }

@@ -189,3 +189,33 @@ class LeadAttachment(models.Model):
         ordering = ("id",)
         verbose_name = "Вложение заявки"
         verbose_name_plural = "Вложения заявки"
+
+
+class LeadQuestionnaire(models.Model):
+    lead = models.ForeignKey(Lead, on_delete=models.CASCADE, related_name='questionnaires')
+    product = models.CharField(max_length=10)
+    schema_version = models.PositiveIntegerField(default=1)
+    answers = models.JSONField()
+    # Complete immutable rendering definitions retained with the accepted snapshot.
+    definition = models.JSONField()
+    contact_snapshot = models.JSONField(default=dict)
+    file = models.FileField(upload_to='leads/questionnaires/', storage=private_lead_attachment_storage, blank=True)
+    sha256 = models.CharField(max_length=64, blank=True)
+    size = models.PositiveIntegerField(default=0)
+    generator_version = models.PositiveIntegerField(default=1)
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=('lead','product'),name='unique_lead_questionnaire_product')]
+        ordering = ('product',)
+
+
+class QuestionnaireJob(models.Model):
+    expected_products = models.JSONField(default=list)
+    lead = models.OneToOneField(Lead,on_delete=models.CASCADE,related_name='questionnaire_job')
+    # pending/retry -> generating -> sending -> done; uncertain requires human review.
+    status = models.CharField(max_length=20,default='pending',db_index=True)
+    attempts = models.PositiveIntegerField(default=0)
+    token = models.UUIDField(null=True,blank=True)
+    lease_until = models.DateTimeField(null=True,blank=True)
+    next_run = models.DateTimeField(null=True,blank=True)
+    error_code = models.CharField(max_length=50,blank=True)
+    updated_at = models.DateTimeField(auto_now=True)

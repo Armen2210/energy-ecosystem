@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { pathToFileURL } from 'node:url';
+import { documentFilesByUrl } from './document-files.mjs';
 
 // External Playwright runner, following the existing browser scripts. Run
 // against the isolated nginx serving dist, never against production/Vite.
@@ -30,6 +31,9 @@ page.on('console', (message) => {
 });
 // No accidental account/crawler/analytics/public API traffic during testing.
 await context.route('**/*', async (route) => {
+      // New read-only capability gate is stubbed off for legacy UI regression.
+      if (route.request().method() === 'GET' && new URL(route.request().url()).pathname === '/api/leads/questionnaire-capabilities/') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({version:1,enabled:false,products:[]})});
+
   if (new URL(route.request().url()).origin !== origin) {
     results.blockedExternal.push(route.request().url());
     await route.abort();
@@ -81,7 +85,7 @@ try {
     assert.ok(data.headings.every((h) => h.text), 'empty heading on ' + url);
     for (const href of data.links.filter((h) => h.startsWith('/'))) {
       const linked = new URL(href, origin);
-      assert.ok(paths.includes(linked.pathname) || linked.pathname === '/contacts', url + ' -> ' + href);
+      assert.ok(paths.includes(linked.pathname) || linked.pathname === '/contacts' || documentFilesByUrl.has(linked.pathname), url + ' -> ' + href);
       if (linked.hash && linked.pathname === url) {
         assert.ok(await page.locator('[id="' + linked.hash.slice(1) + '"]').count(), href);
       }
@@ -134,13 +138,13 @@ try {
   await page.waitForURL(origin + '/#products');
   await page.waitForFunction(() => document.querySelector('meta[name="robots"]')?.content === 'index, follow');
   assert.equal((await metadata()).canonical, 'https://www.energoeffekt-rostov.ru/');
-  await page.locator('a[href="/solutions"]').first().click();
-  await page.waitForURL(origin + '/solutions');
+  await page.locator('a[href="/solutions/bmk"]').first().click();
+  await page.waitForURL(origin + '/solutions/bmk');
   await page.goBack();
   await page.waitForURL(origin + '/#products');
   await page.goForward();
-  await page.waitForURL(origin + '/solutions');
-  assert.equal((await metadata()).canonical, 'https://www.energoeffekt-rostov.ru/solutions');
+  await page.waitForURL(origin + '/solutions/bmk');
+  assert.equal((await metadata()).canonical, 'https://www.energoeffekt-rostov.ru/solutions/bmk');
   pass('client navigation and Back/Forward restore robots and canonical after a 404');
 
   await page.goto(origin + '/cases');

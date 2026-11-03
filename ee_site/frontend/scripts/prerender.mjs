@@ -8,6 +8,7 @@ import { performance } from 'node:perf_hooks';
 import process from 'node:process';
 import { validatePage } from './prerender-validation.mjs';
 import { parseBuildOptions } from './prerender-options.mjs';
+import { validateDocumentFiles } from './document-files.mjs';
 
 const frontend = fileURLToPath(new URL('../', import.meta.url));
 let options;
@@ -49,6 +50,7 @@ const ssrDir = await mkdtemp(path.join(frontend, 'node_modules/.ee-prerender-'))
 const emptyEnvDir = await mkdtemp(path.join(tmpdir(), 'ee-build-env-'));
 try {
   await build({ ...config, envDir: emptyEnvDir, build: { outDir: dist } });
+  validateDocumentFiles(dist);
   const shell = (await readFile(path.join(dist, 'index.html'), 'utf8'))
     .replace(/<title>[\s\S]*?<\/title>/g, '')
     .replace(/<meta\s+(?:name="(?:description|robots|twitter:[^"]+)"|property="og:[^"]+")[\s\S]*?\/?>/g, '')

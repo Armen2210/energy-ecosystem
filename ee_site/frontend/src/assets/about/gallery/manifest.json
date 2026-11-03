@@ -1,0 +1,758 @@
+[
+  {
+    "number": 1,
+    "source": "1.png",
+    "sourceBytes": 2151119,
+    "width": 1448,
+    "height": 1086,
+    "alt": "Сотрудники за рабочими столами в светлом офисе",
+    "variants": [
+      {
+        "file": "01-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 15700
+      },
+      {
+        "file": "01-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 43808
+      },
+      {
+        "file": "01-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 78688
+      }
+    ]
+  },
+  {
+    "number": 2,
+    "source": "2.png",
+    "sourceBytes": 2268639,
+    "width": 1448,
+    "height": 1086,
+    "alt": "Рабочее место с инженерными чертежами на двух мониторах",
+    "variants": [
+      {
+        "file": "02-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 20794
+      },
+      {
+        "file": "02-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 62856
+      },
+      {
+        "file": "02-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 117198
+      }
+    ]
+  },
+  {
+    "number": 3,
+    "source": "3.png",
+    "sourceBytes": 2787913,
+    "width": 1448,
+    "height": 1086,
+    "alt": "Специалист за компьютером с трёхмерной моделью оборудования",
+    "variants": [
+      {
+        "file": "03-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 17110
+      },
+      {
+        "file": "03-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 59542
+      },
+      {
+        "file": "03-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 138496
+      }
+    ]
+  },
+  {
+    "number": 4,
+    "source": "4.png",
+    "sourceBytes": 2489071,
+    "width": 1774,
+    "height": 887,
+    "alt": "Насосная установка на раме в производственном цехе",
+    "variants": [
+      {
+        "file": "04-360.webp",
+        "width": 360,
+        "height": 180,
+        "bytes": 16978
+      },
+      {
+        "file": "04-720.webp",
+        "width": 720,
+        "height": 360,
+        "bytes": 51940
+      },
+      {
+        "file": "04-1080.webp",
+        "width": 1080,
+        "height": 540,
+        "bytes": 96910
+      }
+    ]
+  },
+  {
+    "number": 5,
+    "source": "5.JPG",
+    "sourceBytes": 2076136,
+    "width": 3072,
+    "height": 4096,
+    "alt": "Трубная обвязка и шкаф управления на раме установки",
+    "variants": [
+      {
+        "file": "05-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 30882
+      },
+      {
+        "file": "05-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 96748
+      },
+      {
+        "file": "05-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 179954
+      }
+    ]
+  },
+  {
+    "number": 6,
+    "source": "6.png",
+    "sourceBytes": 2664934,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Трубопроводы с фланцами и запорной арматурой",
+    "variants": [
+      {
+        "file": "06-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 43032
+      },
+      {
+        "file": "06-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 130630
+      },
+      {
+        "file": "06-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 227872
+      }
+    ]
+  },
+  {
+    "number": 7,
+    "source": "7.png",
+    "sourceBytes": 2536852,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Узел трубопроводов и измерительных приборов на раме",
+    "variants": [
+      {
+        "file": "07-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 32704
+      },
+      {
+        "file": "07-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 103178
+      },
+      {
+        "file": "07-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 185846
+      }
+    ]
+  },
+  {
+    "number": 8,
+    "source": "8.png",
+    "sourceBytes": 2714792,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Коллекторы с красной запорной арматурой",
+    "variants": [
+      {
+        "file": "08-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 38960
+      },
+      {
+        "file": "08-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 124830
+      },
+      {
+        "file": "08-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 224532
+      }
+    ]
+  },
+  {
+    "number": 9,
+    "source": "9.webp",
+    "sourceBytes": 233938,
+    "width": 2048,
+    "height": 1536,
+    "alt": "Газопровод жёлтого цвета рядом с котельным оборудованием",
+    "variants": [
+      {
+        "file": "09-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 19166
+      },
+      {
+        "file": "09-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 54384
+      },
+      {
+        "file": "09-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 101606
+      }
+    ]
+  },
+  {
+    "number": 10,
+    "source": "10.webp",
+    "sourceBytes": 173038,
+    "width": 1536,
+    "height": 2048,
+    "alt": "Насосы и вертикальные трубопроводы внутри установки",
+    "variants": [
+      {
+        "file": "10-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 24978
+      },
+      {
+        "file": "10-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 66456
+      },
+      {
+        "file": "10-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 115816
+      }
+    ]
+  },
+  {
+    "number": 11,
+    "source": "11.png",
+    "sourceBytes": 2900453,
+    "width": 1836,
+    "height": 857,
+    "alt": "Инженерное оборудование в модульном блоке на открытой площадке",
+    "variants": [
+      {
+        "file": "11-360.webp",
+        "width": 360,
+        "height": 168,
+        "bytes": 18314
+      },
+      {
+        "file": "11-720.webp",
+        "width": 720,
+        "height": 336,
+        "bytes": 59404
+      },
+      {
+        "file": "11-1080.webp",
+        "width": 1080,
+        "height": 504,
+        "bytes": 119656
+      }
+    ]
+  },
+  {
+    "number": 12,
+    "source": "12.webp",
+    "sourceBytes": 240974,
+    "width": 1536,
+    "height": 2048,
+    "alt": "Открытый модульный блок на автомобильном полуприцепе",
+    "variants": [
+      {
+        "file": "12-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 18246
+      },
+      {
+        "file": "12-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 68450
+      },
+      {
+        "file": "12-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 145344
+      }
+    ]
+  },
+  {
+    "number": 13,
+    "source": "13.png",
+    "sourceBytes": 2594641,
+    "width": 941,
+    "height": 1672,
+    "alt": "Сборочные участки и оборудование в производственном цехе",
+    "variants": [
+      {
+        "file": "13-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 53632
+      },
+      {
+        "file": "13-720.webp",
+        "width": 720,
+        "height": 1279,
+        "bytes": 157276
+      },
+      {
+        "file": "13-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 230692
+      }
+    ]
+  },
+  {
+    "number": 14,
+    "source": "14.png",
+    "sourceBytes": 2348219,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Шкаф управления и трубная обвязка установки в цехе",
+    "variants": [
+      {
+        "file": "14-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 30490
+      },
+      {
+        "file": "14-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 99778
+      },
+      {
+        "file": "14-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 175570
+      }
+    ]
+  },
+  {
+    "number": 15,
+    "source": "15.png",
+    "sourceBytes": 2570478,
+    "width": 941,
+    "height": 1672,
+    "alt": "Производственный цех с оборудованием на сборке",
+    "variants": [
+      {
+        "file": "15-360.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 55238
+      },
+      {
+        "file": "15-720.webp",
+        "width": 720,
+        "height": 1279,
+        "bytes": 167644
+      },
+      {
+        "file": "15-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 242432
+      }
+    ]
+  },
+  {
+    "number": 16,
+    "source": "16.webp",
+    "sourceBytes": 238848,
+    "width": 1536,
+    "height": 2048,
+    "alt": "Стальной трубопровод с крупными фланцевыми соединениями",
+    "variants": [
+      {
+        "file": "16-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 30420
+      },
+      {
+        "file": "16-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 87864
+      },
+      {
+        "file": "16-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 159984
+      }
+    ]
+  },
+  {
+    "number": 17,
+    "source": "17.webp",
+    "sourceBytes": 204894,
+    "width": 2048,
+    "height": 1536,
+    "alt": "Предупреждающая табличка на производственном участке",
+    "variants": [
+      {
+        "file": "17-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 17042
+      },
+      {
+        "file": "17-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 46572
+      },
+      {
+        "file": "17-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 85478
+      }
+    ]
+  },
+  {
+    "number": 18,
+    "source": "18.webp",
+    "sourceBytes": 98948,
+    "width": 1536,
+    "height": 2048,
+    "alt": "Латунные соединительные детали перед коробками комплектующих",
+    "variants": [
+      {
+        "file": "18-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 18206
+      },
+      {
+        "file": "18-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 43642
+      },
+      {
+        "file": "18-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 71232
+      }
+    ]
+  },
+  {
+    "number": 19,
+    "source": "19.webp",
+    "sourceBytes": 123636,
+    "width": 2048,
+    "height": 1536,
+    "alt": "Клеммы и проводка внутри электрического шкафа",
+    "variants": [
+      {
+        "file": "19-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 15806
+      },
+      {
+        "file": "19-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 37470
+      },
+      {
+        "file": "19-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 63410
+      }
+    ]
+  },
+  {
+    "number": 20,
+    "source": "20.webp",
+    "sourceBytes": 259268,
+    "width": 1536,
+    "height": 2048,
+    "alt": "Открытый шкаф управления на раме инженерной установки",
+    "variants": [
+      {
+        "file": "20-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 31130
+      },
+      {
+        "file": "20-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 92610
+      },
+      {
+        "file": "20-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 173938
+      }
+    ]
+  },
+  {
+    "number": 21,
+    "source": "21.webp",
+    "sourceBytes": 119120,
+    "width": 2048,
+    "height": 1536,
+    "alt": "Кружки и контейнер с мелкими деталями на рабочем столе",
+    "variants": [
+      {
+        "file": "21-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 13654
+      },
+      {
+        "file": "21-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 35254
+      },
+      {
+        "file": "21-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 60400
+      }
+    ]
+  },
+  {
+    "number": 22,
+    "source": "22.png",
+    "sourceBytes": 2020988,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Инструментальная панель с отвёртками и рулеткой",
+    "variants": [
+      {
+        "file": "22-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 25316
+      },
+      {
+        "file": "22-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 67740
+      },
+      {
+        "file": "22-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 117096
+      }
+    ]
+  },
+  {
+    "number": 23,
+    "source": "23.png",
+    "sourceBytes": 1882543,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Защитная каска и очки на полке",
+    "variants": [
+      {
+        "file": "23-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 11884
+      },
+      {
+        "file": "23-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 32318
+      },
+      {
+        "file": "23-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 58894
+      }
+    ]
+  },
+  {
+    "number": 24,
+    "source": "24.png",
+    "sourceBytes": 2621430,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Табличка «Начальник цеха» на двери",
+    "variants": [
+      {
+        "file": "24-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 6262
+      },
+      {
+        "file": "24-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 54380
+      },
+      {
+        "file": "24-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 144784
+      }
+    ]
+  },
+  {
+    "number": 25,
+    "source": "25.webp",
+    "sourceBytes": 197242,
+    "width": 2048,
+    "height": 1536,
+    "alt": "Сборка электрической панели рядом с красной арматурой",
+    "variants": [
+      {
+        "file": "25-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 25448
+      },
+      {
+        "file": "25-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 64538
+      },
+      {
+        "file": "25-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 106050
+      }
+    ]
+  },
+  {
+    "number": 26,
+    "source": "26.png",
+    "sourceBytes": 2771498,
+    "width": 1448,
+    "height": 1086,
+    "alt": "Настенный ящик с надписью «Я ящик для хороших идей!»",
+    "variants": [
+      {
+        "file": "26-360.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 6422
+      },
+      {
+        "file": "26-720.webp",
+        "width": 720,
+        "height": 540,
+        "bytes": 33992
+      },
+      {
+        "file": "26-1080.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 80452
+      }
+    ]
+  },
+  {
+    "number": 27,
+    "source": "27.png",
+    "sourceBytes": 3070602,
+    "width": 1086,
+    "height": 1448,
+    "alt": "Табличка «Энергоэффект» на кирпичной стене",
+    "variants": [
+      {
+        "file": "27-360.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 33106
+      },
+      {
+        "file": "27-720.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 152792
+      },
+      {
+        "file": "27-1080.webp",
+        "width": 1080,
+        "height": 1440,
+        "bytes": 313188
+      }
+    ]
+  }
+]

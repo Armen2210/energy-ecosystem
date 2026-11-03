@@ -41,7 +41,9 @@ class LeadCreateAPIView(APIView):
         try:
             length = int(request.META.get("CONTENT_LENGTH") or 0)
         except ValueError:
-            raise LeadUploadRejected("Некорректный размер запроса.", status_code=400) from None
+            raise LeadUploadRejected(
+                "Некорректный размер запроса.", status_code=400
+            ) from None
         if length > settings.LEAD_MAX_REQUEST_SIZE:
             raise LeadUploadRejected("Превышен размер запроса.")
 
@@ -65,18 +67,40 @@ class LeadCreateAPIView(APIView):
                     status=status.HTTP_409_CONFLICT,
                 )
 
+            response_data = {"id": lead.id}
             if not created:
-                return Response(
-                    {"id": lead.id, "duplicate": True},
-                    status=status.HTTP_200_OK,
-                )
-
+                response_data["duplicate"] = True
+            if "questionnaires" in serializer.validated_data:
+                response_data["questionnaires"] = {
+                    "version": 1,
+                    "products": list(
+                        lead.questionnaires.order_by("product").values_list(
+                            "product", flat=True
+                        )
+                    ),
+                }
             return Response(
-                {"id": lead.id},
-                status=status.HTTP_201_CREATED,
+                response_data,
+                status=status.HTTP_201_CREATED if created else status.HTTP_200_OK,
             )
 
         return Response(
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+
+class QuestionnaireCapabilitiesAPIView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request):
+        response = Response(
+            {
+                "version": 1,
+                "enabled": getattr(settings, "QUESTIONNAIRES_ENABLED", False),
+                "products": ["vns", "pns", "bmk", "btp"],
+            }
+        )
+        response["Cache-Control"] = "no-store"
+        return response

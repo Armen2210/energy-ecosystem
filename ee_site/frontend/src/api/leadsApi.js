@@ -74,13 +74,34 @@ export async function createLead(formData) {
         { status: response.status },
       );
     }
-    throw new LeadApiError(getReadableApiError(data), { status: response.status });
+    // Only the endpoint's structured validation/conflict response establishes
+    // rejection. Gateway/server errors and unrecognised replies may follow commit.
+    const structuredError = data !== null && typeof data === "object" && !Array.isArray(data)
+      && !Object.hasOwn(data, "id") && !Object.hasOwn(data, "duplicate")
+      && (typeof data.detail === "string" || typeof data.code === "string"
+        || Object.values(data).some(Array.isArray) || data.questionnaires && typeof data.questionnaires === "object");
+    const rejected = [400, 409].includes(response.status) && !!structuredError;
+    const message = !rejected
+      ? "Сервер не подтвердил результат. Заявка могла быть сохранена. Повторите отправку без изменения данных."
+      : data?.questionnaires ? "Проверьте опросные листы: сервер обнаружил ошибки." : getReadableApiError(data);
+    const error = new LeadApiError(message, { status: response.status, indeterminate: !rejected });
+    if (rejected && data?.questionnaires) error.questionnaires = data.questionnaires;
+    throw error;
   }
   if (!isConfirmedSuccess(response, data)) {
     throw new LeadApiError(
       "Сервер не подтвердил сохранение заявки. Повторите отправку.",
       { status: response.status, indeterminate: true },
     );
+  }
+  if (formData.has("questionnaires")) {
+    let expected;
+    try { expected = JSON.parse(formData.get("questionnaires")).items.map(item=>item.product).sort(); } catch { expected = null; }
+    const accepted = data.questionnaires;
+    if (!expected || accepted?.version !== 1 || !Array.isArray(accepted.products)
+      || JSON.stringify([...accepted.products].sort()) !== JSON.stringify(expected)) {
+      throw new LeadApiError("Сервер не подтвердил сохранение опросных листов. Заявка могла быть принята частично; данные сохранены в форме. Не изменяйте их перед повтором.", {status:response.status,indeterminate:true});
+    }
   }
   return data;
 }

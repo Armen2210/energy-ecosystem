@@ -1,0 +1,4 @@
+INFO: Lead notification email sent for lead_id=11
+13 objects imported automatically (use -v 2 for details).
+
+Outside TestCase: PostgreSQL ordinary background worker sent one locmem message; record=sent

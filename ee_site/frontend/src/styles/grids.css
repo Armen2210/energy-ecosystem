@@ -207,3 +207,5 @@
     grid-column: span 5;
   }
 }
+.catalog-page .section { padding-top: 24px; }
+.catalog-page .page-navigation { margin-bottom: 28px; }

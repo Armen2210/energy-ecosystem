@@ -1,5 +1,7 @@
 # Backend сайта «Энергоэффект»
 
+Электронные ОЛ ВНС/ПНС/БМК/БТП: [порядок внедрения и восстановления](docs/electronic-questionnaires-release.md), [контракт v1](../../contracts/questionnaires/v1/README.md). Приём включается только после подготовки worker; по умолчанию выключен.
+
 Точка входа в серверную часть ЭЭ. Описание сверено с исходниками 10 октября
 2026 года; оно не подтверждает состояние production, PostgreSQL, SMTP или nginx.
 Frontend описан в [соседнем README](../frontend/README.md), история проекта —
@@ -9,7 +11,7 @@ Frontend описан в [соседнем README](../frontend/README.md), ис�
 
 Backend принимает публичные заявки, сохраняет их и приватные документы,
 предоставляет Django Admin и управляет уведомлениями менеджерам.
-`requirements/base.txt` фиксирует Django 5.2.13, DRF 3.17.1, psycopg/psycopg-binary
+`requirements/base.txt` фиксирует Django 5.2.18, DRF 3.18.3, psycopg/psycopg-binary
 3.3.3, python-dotenv и django-cors-headers. Версия Python в репозитории отдельно
 не закреплена; выбирайте совместимую с зафиксированными зависимостями.
 Обычные local/prod settings используют PostgreSQL; изолированные тесты — SQLite.

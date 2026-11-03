@@ -24,6 +24,7 @@ import { navigation } from "./data/navigation";
 import { cases } from "./data/cases";
 
 import AboutPage from "./pages/AboutPage";
+import DocumentsPage from "./pages/DocumentsPage";
 import CasesPage from "./pages/CasesPage";
 import CasePage from "./pages/CasePage";
 import HomePage from "./pages/HomePage";
@@ -62,6 +63,7 @@ function App() {
       <Routes location={backgroundLocation || location}>
         <Route caseSensitive path="/" element={<HomePage />} />
         <Route caseSensitive path="/about" element={<AboutPage />} />
+        <Route caseSensitive path="/documents" element={<DocumentsPage />} />
         <Route caseSensitive path="/solutions" element={<SolutionsPage />} />
         <Route caseSensitive path="/solutions/:slug" element={<ProductPage />} />
         <Route caseSensitive path="/services" element={<ServicesPage />} />

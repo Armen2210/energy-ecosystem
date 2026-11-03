@@ -1,0 +1,157 @@
+Creating test database for alias 'default'...
+....WARNING: Forbidden (Permission denied): /admin/leads/lead/attachments/1/download/
+Traceback (most recent call last):
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/energy-ecosystem/ee_site/backend/apps/leads/admin.py", line 146, in download_attachment
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+.WARNING: Forbidden (Permission denied): /admin/leads/lead/attachments/1/download/
+Traceback (most recent call last):
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-fixes/venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/energy-ecosystem/ee_site/backend/apps/leads/admin.py", line 146, in download_attachment
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+.WARNING: Not Found: /admin/leads/lead/attachments/1/download/
+...INFO: Lead notification email sent for lead_id=1
+.INFO: Lead notification email sent for lead_id=1
+...INFO: Lead notification email sent for lead_id=1
+.INFO: Lead notification email sent for lead_id=1
+..WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+........WARNING: Bad Request: /api/leads/
+.WARNING: Bad Request: /api/leads/
+..WARNING: Bad Request: /api/leads/
+.WARNING: Conflict: /api/leads/
+.WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+.WARNING: Conflict: /api/leads/
+.WARNING: Conflict: /api/leads/
+...INFO: Lead notification email sent for lead_id=1
+.....INFO: Lead notification email sent for lead_id=1
+.ERROR: Lead notification email backend sent no messages for lead_id=1
+.....WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+.WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+.WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+.WARNING: Conflict: /api/leads/
+WARNING: Conflict: /api/leads/
+..WARNING: Not Acceptable: /api/leads/
+WARNING: Not Acceptable: /api/leads/
+WARNING: Not Acceptable: /api/leads/
+WARNING: Not Acceptable: /api/leads/
+WARNING: Not Acceptable: /api/leads/
+WARNING: Not Acceptable: /api/leads/
+WARNING: Method Not Allowed: /api/leads/
+..WARNING: Too Many Requests: /api/leads/
+.WARNING: Request Entity Too Large: /api/leads/
+.WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+.WARNING: Bad Request: /api/leads/
+.WARNING: Too Many Requests: /api/leads/
+.ERROR: Lead admission failed code=lead_protection_unavailable
+ERROR: Service Unavailable: /api/leads/
+.WARNING: Bad Request: /api/leads/
+.WARNING: Not Found: /does-not-exist/
+WARNING: Method Not Allowed: /api/leads/
+..ERROR: Lead admission failed code=lead_protection_unavailable
+ERROR: Service Unavailable: /api/leads/
+.WARNING: Too Many Requests: /api/leads/
+.ERROR: Service Unavailable: /api/leads/
+ERROR: Service Unavailable: /api/leads/
+ERROR: Service Unavailable: /api/leads/
+.ERROR: Service Unavailable: /api/leads/
+.WARNING: Too Many Requests: /api/leads/
+...WARNING: Bad Request: /api/leads/
+.....ERROR: Questionnaire job lead_id=1 code=processing_failed exception_type=OSError
+...ERROR: Questionnaire job lead_id=1 code=processing_failed exception_type=OSError
+...WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+....ERROR: Questionnaire job lead_id=1 code=processing_failed exception_type=ValueError
+....ERROR: Lead notification error lead_id=1 stage=send_email code=email_backend_failed exception_type=OSError
+.....................WARNING: Conflict: /api/leads/
+..............s....ERROR: Lead notification error lead_id=38 stage=send_email code=email_backend_failed exception_type=OSError
+INFO: Lead notification email sent for lead_id=39
+.INFO: Lead notification email sent for lead_id=40
+INFO: Lead notification email sent for lead_id=45
+..INFO: Lead notification email sent for lead_id=48
+...
+----------------------------------------------------------------------
+Ran 133 tests in 49.544s
+
+OK (skipped=1)
+Destroying test database for alias 'default'...
+Found 133 test(s).
+System check identified no issues (0 silenced).

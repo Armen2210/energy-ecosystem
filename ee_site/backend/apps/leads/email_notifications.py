@@ -59,6 +59,13 @@ def _send_email(lead):
         if error_code:
             return False, error_code
 
+        generated = list(lead.questionnaires.all())
+        if hasattr(lead, "questionnaire_job") and sorted(q.product for q in generated) != lead.questionnaire_job.expected_products:
+            return False, "questionnaire_snapshot_missing"
+        if generated:
+            from .questionnaire_jobs import _valid
+            if not all(_valid(q) for q in generated): return False, "questionnaire_pdf_missing"
+        pdf_documents = [(f"ee-{q.product}-lead-{lead.id}.pdf", q.size, q.file.storage, q.file.name) for q in generated]
         private_documents = list(lead.attachments.all())
         has_verified_legacy_copy = any(
             item.legacy_source_id == lead.id for item in private_documents
@@ -94,6 +101,8 @@ def _send_email(lead):
                 f"они доступны сотрудникам в админке по ID заявки {lead.id}."
             )
 
+        if generated:
+            attachment_note += " PDF опросных листов приложены полностью. Пользовательские файлы доступны в защищённом Admin."
         message = EmailMessage(
             subject=f"Новая заявка с сайта Энергоэффект: {lead.name}",
             body=(
@@ -108,11 +117,13 @@ def _send_email(lead):
                 f"Статус: {lead.get_status_display()}\n\n"
                 "Описание заявки:\n"
                 f"{lead.description or 'Не указано'}\n\n"
+                f"Опросные листы: {', '.join(q.definition['title'] for q in generated) or 'нет'}\n"
                 f"Документы:\n{document_lines}\n{attachment_note}"
             ),
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=recipients,
             reply_to=[lead.email] if lead.email else None,
+            headers={"Message-ID": f"<ee-lead-{lead.id}@energoeffekt-rostov.ru>"},
         )
     except Exception as exc:
         _log_notification_error(
@@ -122,6 +133,16 @@ def _send_email(lead):
             exc=exc,
         )
         return False, NotificationErrorCode.MESSAGE_PREPARATION_FAILED
+
+    if pdf_documents:
+        try:
+            for name, _, storage, stored_name in pdf_documents:
+                with storage.open(stored_name, "rb") as document:
+                    message.attach(name, document.read(), "application/pdf")
+        except OSError:
+            return False, "questionnaire_pdf_read_failed"
+        if len(message.message().as_bytes()) > settings.LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE:
+            return False, "questionnaire_email_budget"
 
     if attach_to_email:
         try:
@@ -136,6 +157,13 @@ def _send_email(lead):
                 exc=exc,
             )
             return False, NotificationErrorCode.ATTACHMENT_READ_FAILED
+
+    if pdf_documents and len(message.message().as_bytes()) > settings.LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE:
+        message.attachments = message.attachments[:len(pdf_documents)]
+        message.body += ("\nПользовательские вложения сохранены в защищённом Admin по ID заявки; "
+                         "не приложены из-за общего почтового бюджета с учётом MIME. PDF ОЛ приложены полностью.")
+        if len(message.message().as_bytes()) > settings.LEAD_EMAIL_ATTACHMENT_MAX_TOTAL_SIZE:
+            return False, "questionnaire_email_budget"
 
     try:
         sent_count = message.send(fail_silently=False)
@@ -211,6 +239,10 @@ def _store_failed_before_send(lead_id, error_code):
 
 def send_lead_notification(lead_id, *, allowed_statuses=None):
     """Claim and perform one notification attempt without holding a DB lock."""
+    if Lead.objects.filter(pk=lead_id, questionnaires__isnull=False).exists():
+        from .questionnaire_jobs import process_job
+        outcome = process_job(lead_id)
+        return NotificationAttemptResult(NotificationAttemptResult.SENT if outcome == "done" else NotificationAttemptResult.SKIPPED)
     if allowed_statuses is None:
         allowed_statuses = (Lead.NotificationStatus.PENDING,)
 
@@ -316,6 +348,9 @@ def send_lead_notification(lead_id, *, allowed_statuses=None):
 
 
 def schedule_lead_notification(lead_id):
+    if Lead.objects.filter(pk=lead_id, questionnaires__isnull=False).exists():
+        # Dedicated durable worker; web process never generates documents.
+        return
     if settings.LEAD_NOTIFICATION_MODE == "background":
         # The pending Lead row is the durable queue item and was written in the
         # same transaction.  In particular, do not use on_commit in this mode.

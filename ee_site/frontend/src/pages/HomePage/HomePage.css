@@ -51,14 +51,14 @@
 }
 
 .contact-note a {
-  color: var(--color-red);
+  color: var(--color-accent-text);
   font-weight: 650;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .contact-note a:hover {
-  color: var(--color-red-dark);
+  color: var(--color-accent-text);
 }
 
 .contact-note__summary {

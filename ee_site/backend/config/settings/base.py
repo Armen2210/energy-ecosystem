@@ -294,3 +294,15 @@ LEAD_TRUST_UNIX_SOCKET_PROXY = choice_from_env(
 # Whole body, including multipart overhead, distinct from document limits.
 LEAD_MAX_REQUEST_SIZE = positive_int_from_env("LEAD_MAX_REQUEST_SIZE", 27 * 1024 * 1024)
 LEAD_MAX_FORM_FIELDS = positive_int_from_env("LEAD_MAX_FORM_FIELDS", 64)
+
+
+# Electronic questionnaires are enabled only after migrations/worker preflight.
+QUESTIONNAIRES_ENABLED = os.getenv('QUESTIONNAIRES_ENABLED', 'False') == 'True'
+QUESTIONNAIRE_MAX_BYTES = int(os.getenv('QUESTIONNAIRE_MAX_BYTES', '262144'))
+QUESTIONNAIRE_MAX_ITEMS = int(os.getenv('QUESTIONNAIRE_MAX_ITEMS', '4'))
+QUESTIONNAIRE_MAX_OUTLETS = int(os.getenv('QUESTIONNAIRE_MAX_OUTLETS', '100'))
+QUESTIONNAIRE_MAX_TEXT = int(os.getenv('QUESTIONNAIRE_MAX_TEXT', '2000'))
+QUESTIONNAIRE_MAX_PDF_BYTES = int(os.getenv('QUESTIONNAIRE_MAX_PDF_BYTES', '5242880'))
+QUESTIONNAIRE_MAX_ATTEMPTS = int(os.getenv('QUESTIONNAIRE_MAX_ATTEMPTS', '3'))
+QUESTIONNAIRE_PDF_TIMEOUT = int(os.getenv('QUESTIONNAIRE_PDF_TIMEOUT', '45'))
+QUESTIONNAIRE_FONT_PATH = os.getenv('QUESTIONNAIRE_FONT_PATH', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')

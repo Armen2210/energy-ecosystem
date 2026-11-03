@@ -1,0 +1,17 @@
+Checking 360/bmk/restored=false
+Checking 360/btp/restored=false
+Checking 360/vns/restored=false
+Checking 360/pns/restored=false
+Checking 360/bmk/restored=true
+Checking 360/btp/restored=true
+Checking 360/vns/restored=true
+Checking 360/pns/restored=true
+Checking 390/bmk/restored=false
+Checking 390/btp/restored=false
+Checking 390/vns/restored=false
+Checking 390/pns/restored=false
+Checking 390/bmk/restored=true
+Checking 390/btp/restored=true
+Checking 390/vns/restored=true
+Checking 390/pns/restored=true
+Passed 246 viewport-anchor checks, 16 product/draft/mobile combinations, downloads and availability checks.

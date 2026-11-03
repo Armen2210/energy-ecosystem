@@ -167,11 +167,43 @@ class LeadProtectionTests(APITestCase):
         with patch("apps.leads.views.consume_client") as consume:
             for url in ("/admin/", "/does-not-exist/"):
                 response = self.client.get(url)
-                response.close()
+                self.assertTrue(response.closed)
             response = self.client.get("/api/leads/")
             self.assertEqual(response.status_code, 405)
             self.client.options("/api/leads/")
         consume.assert_not_called()
+
+    def test_accept_negotiation_is_bounded_before_post_admission(self):
+        # Small bounded fixtures cover the patched DRF limits, not a DoS load.
+        headers = (
+            "x" * 8250,
+            ",".join(["application/x-unknown"] * 65 + ["application/json"]),
+            'application/json; note="' + ";" * 300 + '"',
+        )
+        with patch("apps.leads.views.consume_client") as consume, patch.object(
+            LeadMultiPartParser, "parse"
+        ) as parser:
+            for accept in headers:
+                for method in ("get", "post"):
+                    response = getattr(self.client, method)(
+                        "/api/leads/", HTTP_ACCEPT=accept
+                    )
+                    self.assertEqual(response.status_code, 406)
+                    self.assertIn("detail", response.json())
+            self.assertEqual(self.client.get("/api/leads/", HTTP_ACCEPT="application/json").status_code, 405)
+            self.assertEqual(self.client.get("/api/leads/questionnaire-capabilities/", HTTP_ACCEPT="application/json").status_code, 200)
+        consume.assert_not_called()
+        parser.assert_not_called()
+        self.assertFalse(Lead.objects.exists())
+
+    def test_non_text_charset_is_rejected_without_saving(self):
+        response = self.client.generic(
+            "POST", "/api/leads/", b"name=Synthetic&phone=123",
+            content_type="application/x-www-form-urlencoded; charset=bz2_codec",
+            HTTP_ACCEPT="application/json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Lead.objects.exists())
 
     @override_settings(LEAD_RATE_LIMIT_ENABLED=False, LEAD_MAX_REQUEST_SIZE=100)
     def test_content_length_rejection_before_parser(self):

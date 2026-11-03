@@ -1,0 +1,20 @@
+PASS 1440: fields/consent/files, SPA/Back/Forward, auto vs explicit direction, file order/remove/re-add
+PASS 1440: policy tab/cookies/modal retain draft; no navigation start or PII events
+PASS 1440: keyboard clear cancel/confirm, consent/files/status reset, analytics choice retained
+PASS 1440: network/indeterminate/400/409/413/429/500 retain draft, stable route retry, duplicate 200 clears
+PASS 1440: delayed SHA/POST, shared lock, one POST, success while unmounted, successor retained, no duplicate success
+PASS 1440: independent tab; 24h session draft restores; clear removes it; no PII outside dedicated session key, responsive keyboard action
+PASS 1440: visible success hides at 5s/removes at 5.6s; timers affect only message
+PASS 1440: unseen success retained >5.6s; remount restarts one countdown, no stale/duplicate timers
+PASS 1440: new draft/manual clear remove success immediately; stale timers cannot erase new error/fields/files
+PASS 1440: stale timers cannot hide next success or unlock/clear a following submission
+PASS 360: fields/consent/files, SPA/Back/Forward, auto vs explicit direction, file order/remove/re-add
+PASS 360: policy tab/cookies/modal retain draft; no navigation start or PII events
+PASS 360: keyboard clear cancel/confirm, consent/files/status reset, analytics choice retained
+PASS 360: network/indeterminate/400/409/413/429/500 retain draft, stable route retry, duplicate 200 clears
+PASS 360: delayed SHA/POST, shared lock, one POST, success while unmounted, successor retained, no duplicate success
+PASS 360: independent tab; 24h session draft restores; clear removes it; no PII outside dedicated session key, responsive keyboard action
+PASS 360: visible success hides at 5s/removes at 5.6s; timers affect only message
+PASS 360: unseen success retained >5.6s; remount restarts one countdown, no stale/duplicate timers
+PASS 360: new draft/manual clear remove success immediately; stale timers cannot erase new error/fields/files
+PASS 360: stale timers cannot hide next success or unlock/clear a following submission

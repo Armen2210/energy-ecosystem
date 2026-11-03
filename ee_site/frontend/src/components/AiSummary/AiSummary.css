@@ -26,7 +26,7 @@
   max-width: 100%;
   padding: 7px 12px;
   border-radius: 999px;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   background: rgba(249, 115, 22, 0.08);
   font-family: var(--font-body);
   font-size: 11px;

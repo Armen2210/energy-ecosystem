@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "width": 360,
+      "submittingLocked": true,
+      "errorRetainsFields": true
+    },
+    {
+      "width": 1440,
+      "submittingLocked": true,
+      "errorRetainsFields": true
+    }
+  ],
+  "dpr": [
+    {
+      "width": 360,
+      "scale": 1,
+      "url": "http://127.0.0.1:8090/assets/design-480-tbzASUBN.webp",
+      "naturalWidth": 296,
+      "complete": true
+    },
+    {
+      "width": 360,
+      "scale": 2,
+      "url": "http://127.0.0.1:8090/assets/design-960-x9Vlc32N.webp",
+      "naturalWidth": 296,
+      "complete": true
+    },
+    {
+      "width": 360,
+      "scale": 3,
+      "url": "http://127.0.0.1:8090/assets/design-960-x9Vlc32N.webp",
+      "naturalWidth": 296,
+      "complete": true
+    },
+    {
+      "width": 1440,
+      "scale": 1,
+      "url": "http://127.0.0.1:8090/assets/design-960-x9Vlc32N.webp",
+      "naturalWidth": 487,
+      "complete": true
+    },
+    {
+      "width": 1440,
+      "scale": 2,
+      "url": "http://127.0.0.1:8090/assets/design-1536-Bzz_i0r8.webp",
+      "naturalWidth": 487,
+      "complete": true
+    },
+    {
+      "width": 1440,
+      "scale": 3,
+      "url": "http://127.0.0.1:8090/assets/design-1536-Bzz_i0r8.webp",
+      "naturalWidth": 487,
+      "complete": true
+    }
+  ]
+}

@@ -6,7 +6,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.db import DatabaseError
-from django.test import RequestFactory, TestCase, override_settings
+from django.test import RequestFactory, TestCase, TransactionTestCase, override_settings
 
 from apps.leads.admin import LeadAdmin
 from apps.leads.email_notifications import (
@@ -21,7 +21,7 @@ from apps.leads.models import Lead
     LEAD_NOTIFICATION_MODE="background",
     LEAD_NOTIFICATION_EMAIL="manager@example.test",
 )
-class BackgroundNotificationTests(TestCase):
+class BackgroundNotificationTests(TransactionTestCase):
     def lead(self, **values):
         defaults = {"name": "Synthetic", "phone": "+70000000000"}
         defaults.update(values)
@@ -29,13 +29,13 @@ class BackgroundNotificationTests(TestCase):
 
     @patch("apps.leads.email_notifications.EmailMessage.send")
     def test_public_create_leaves_durable_pending_without_smtp(self, send):
-        with self.captureOnCommitCallbacks(execute=True) as callbacks:
+        with patch("apps.leads.email_notifications.transaction.on_commit") as on_commit:
             response = self.client.post(
                 "/api/leads/",
                 {"name": "Synthetic", "phone": "+70000000000"},
             )
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(callbacks, [])
+        on_commit.assert_not_called()
         self.assertEqual(set(response.json()), {"id"})
         self.assertEqual(
             Lead.objects.get().notification_status, Lead.NotificationStatus.PENDING

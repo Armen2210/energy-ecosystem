@@ -16,7 +16,7 @@ export function permittedEnvironment(production, enabled, location) {
 }
 export function safePath(path) {
   if (path === "/contacts") return "/";
-  if (["/", "/about", "/solutions", "/services", "/cases", "/privacy"].includes(path)) return path;
+  if (["/", "/about", "/documents", "/solutions", "/services", "/cases", "/privacy"].includes(path)) return path;
   const [, group, slug] = String(path).split("/");
   if (path === `/${group}/${slug}` && ({ solutions: PRODUCTS, services: SERVICES, cases: CASES })[group]?.includes(slug)) return `/${group}/${slug}`;
   return "/404";
@@ -72,7 +72,7 @@ export function safeParams(params = {}) {
   const output = {};
   const lists = { product: PRODUCTS, service: SERVICES, case: CASES,
     placement: ["header", "footer", "contacts", "hero", "case", "form"],
-    page_category: ["home", "about", "solutions", "services", "cases", "privacy", "404"],
+    page_category: ["home", "about", "documents", "solutions", "services", "cases", "privacy", "404"],
     document_count: ["1", "2-5", "6-10"] };
   for (const [key, values] of Object.entries(lists)) if (values.includes(params[key])) output[key] = params[key];
   return output;

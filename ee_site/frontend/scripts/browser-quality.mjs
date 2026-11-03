@@ -132,8 +132,10 @@ try {
     assert.equal(await page.locator('[name=description_topic]').inputValue(), draftTopic, 'started draft retains its chosen direction');
     await page.goBack();
     await page.waitForURL('**/solutions/btp');
+    await page.waitForLoadState('networkidle');
     await page.goForward();
     await page.waitForURL('**/solutions/vns');
+    await page.waitForLoadState('networkidle');
     check(`switcher and Back/Forward preserve form and file at ${width}`);
     await context.close();
   }

@@ -1,4 +1,13 @@
-# Будущее внедрение prerender ЭЭ
+# Внедрение ЭЭ: документы и электронные опросные листы
+
+**Актуальная точка входа для всего выпуска:**
+[полная последовательность backend/frontend/worker и откат](../backend/docs/electronic-questionnaires-release.md).
+Она включает миграции leads 0008–0010, versioned contract, PDF-зависимости/шрифт,
+private storage и отдельный questionnaire worker. Сначала выполните её подготовку
+backend и worker; только затем применяйте frontend/nginx-подплан ниже.
+Никакие команды в этой документации не означают разрешённый или выполненный deploy.
+
+## Подплан frontend/nginx (исторически отдельный prerender-этап)
 
 Это инструкция и nginx-фрагмент для отдельного согласованного внедрения.
 Действующий сервер, TLS, база и production migrate этим этапом не менялись.
@@ -11,7 +20,7 @@
    Production .env сборка не читает. Нужные VITE_* задавать явно процессу;
    аналитика выключена по умолчанию. При изменении её флага проверить consent
    и hostname gate отдельно; наличие prerender не включает счётчик.
-3. Подготовить отдельный versioned каталог полного dist: assets, все 19 HTML,
+3. Подготовить отдельный versioned каталог полного dist: assets, все HTML из реестра,
    404, sitemap, robots, analytics-frame и `prerender-routes.conf`. Не копировать
    только index.html, не смешивать старые и новые hashed assets. Manifest служит
    для проверки полноты, nginx не выдаёт его и конфигурационный include публично.
@@ -21,6 +30,9 @@
    и server root должны указывать на одну версию dist. Имена HTML — плоские
    `/about.html`, `/solutions/bmk.html`; не добавлять `$uri/` или общий index
    fallback к неизвестным URL. Публичные URL остаются без trailing slash.
+   `/documents` — страница; вложенные PDF/XLSX в `documents/` — публичные файлы.
+   Ограниченный document location из примера сохраняет MIME и реальный 404,
+   не использует private storage и не добавляет локальных security headers.
 5. До reload выполнить `nginx -t`. На staging/целевом сервере проверить все
    canonical URL (200 и собственный HTML), unknown entity URLs (404 без redirect
    или canonical), contacts/index/known trailing slash (301 с query), assets,
@@ -36,8 +48,10 @@
 ошибках, потере черновика или изменении API/headers вернуть предыдущий **полный**
 dist и vhost/root/include вместе, выполнить `nginx -t`, затем согласованный
 reload. Учитывать кеширование старых вкладок: сохранить доступность предыдущих
-hashed assets на время перехода по принятой политике сервера. Этот этап не
-меняет backend и не требует миграции БД; откат не должен затрагивать заявки.
+hashed assets на время перехода по принятой политике сервера. Только первоначальный отдельный prerender-этап не менял backend и не требовал
+миграций. **Это утверждение не относится к нынешнему выпуску с электронными ОЛ.**
+После принятия ОЛ не удалять таблицы/новые записи и не возвращать backend к коду
+без snapshots/worker. Полный безопасный откат описан в актуальной точке входа выше.
 
 Локальное подтверждение и таблица маршрутов:
 [prerender-validation.md](../frontend/docs/prerender-validation.md).

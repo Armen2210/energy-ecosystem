@@ -12,6 +12,7 @@ from django.utils.text import get_valid_filename
 
 from .email_notifications import NotificationAttemptResult, send_lead_notification
 from .models import Lead, LeadAttachment
+from .questionnaire_admin import QuestionnaireInline, download_questionnaire
 
 
 NOTIFICATION_RETRY_LIMIT = 5
@@ -35,7 +36,7 @@ class LeadAttachmentInline(admin.TabularInline):
 
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
-    inlines = (LeadAttachmentInline,)
+    inlines = (LeadAttachmentInline, QuestionnaireInline,)
     actions = ("retry_failed_notifications",)
     list_display = (
         "id",
@@ -123,6 +124,7 @@ class LeadAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         custom_urls = [
+            path("questionnaires/<int:pk>/download/", self.admin_site.admin_view(lambda request, pk: download_questionnaire(self, request, pk)), name="leads_questionnaire_download"),
             path(
                 "attachments/<int:attachment_id>/download/",
                 self.admin_site.admin_view(self.download_attachment),

@@ -26,12 +26,12 @@
 
 .button--primary {
   color: #ffffff;
-  background: var(--color-red);
+  background: var(--color-action-bg);
   box-shadow: 0 18px 34px rgba(249, 115, 22, 0.24);
 }
 
 .button--primary:hover {
-  background: var(--color-red-dark);
+  background: var(--color-action-hover);
 }
 
 .button--secondary {

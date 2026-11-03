@@ -1013,8 +1013,12 @@ class LeadAttachmentAccessAndEmailTests(LeadTestMixin, APITestCase):
             self.assertEqual(b"".join(allowed.streaming_content), b"document")
         finally:
             # FileResponse owns the storage file and closes it via response.close().
-            # The test client does not consume streaming responses automatically.
-            allowed.close()
+            # Iterating the client's wrapper closes it with the correct signal
+            # lifecycle. A second close sends request_finished again and breaks
+            # PostgreSQL TestCase's outer transaction; still close on early error.
+            if not allowed.closed:
+                allowed.close()
+        self.assertTrue(allowed.closed)
 
     @patch("django.core.files.storage.FileSystemStorage.open")
     def test_download_checks_object_permission_before_opening_storage(self, storage_open):

@@ -1,5 +1,7 @@
 # Frontend сайта «Энергоэффект»
 
+Электронные ОЛ ВНС/ПНС/БМК/БТП: [контракт и единицы](../../contracts/questionnaires/v1/README.md), [проверки](docs/electronic-questionnaires-validation.md), [внедрение backend/worker/frontend](../backend/docs/electronic-questionnaires-release.md).
+
 Страница `/about` («О нас») реализована и принята владельцем; визуальные
 доработки отложены. Она содержит команду,
 производственный процесс и семь фотографий с увеличенным просмотром.
@@ -20,6 +22,21 @@
 [остальные материалы аудита](docs/content-audit/README.md).
 
 ## Продуктовый контекст
+
+Публичная страница `/documents` содержит принятые опросные листы БМК, БТП,
+ВНС и ПНС: оба формата скачиваются. Excel — для заполнения на компьютере,
+PDF — для печати и заполнения от руки. Поведение каждого варианта задано в
+реестре; будущие PDF сертификатов, писем и СОУТ могут открываться в браузере.
+Добавлены четыре свидетельства/сертификата партнёров и результаты СОУТ 2026/2022;
+эти шесть PDF открываются в новой вкладке. СОУТ 2022 опубликован в предоставленном
+пятистраничном составе, без утверждения о полноте. Подготовка и точный порядок
+замены по прежнему URL: [docs/documents-pdfs-validation.md](docs/documents-pdfs-validation.md).
+Файлы из задания владельца
+копируются без преобразования в `public/documents/questionnaires/`; размеры и
+SHA-256 проверяются при сборке. Категории и варианты файлов — в
+`src/data/documents.js`, пустые категории не выводятся. Ссылка находится в
+существующей навигации футера; возврат со страницы ведёт к `/#footer-documents`.
+Реализация и текущие проверки: [docs/documents-validation.md](docs/documents-validation.md).
 
 Это сайт производственной компании ООО «Энергоэффект», ориентированный на B2B-аудиторию.
 
@@ -70,6 +87,13 @@ VITE_EE_ANALYTICS_ENABLED=false
 `npm ci` использует существующий lockfile; `npm install` нужен при намеренном
 обновлении зависимостей. Backend запускается отдельно по [его README](../backend/README.md).
 
+Security-обновление сохраняет Vite 8 / ESLint 10. В `package.json` есть два узких
+override minimatch 11.0.1 для ESLint и `@eslint/config-array`: их upstream ranges
+пока ограничены уязвимой 10.x. Потребители используют сохранённые `Minimatch` /
+`match()` API; traversal/ignore проверяются `scripts/toolchain.test.mjs` внутри
+`npm test`. Удалить overrides можно после исправления upstream ranges с повторной
+проверкой lockfile, lint и Windows paths; не заменять их слепым `audit fix --force`.
+
 ### Приоритет переменных Vite в dev/preview
 
 От высокого приоритета к низкому: переменные процесса → `.env.[mode].local` →
@@ -85,10 +109,10 @@ bundle. Все `VITE_*` значения попадают в публичный 
 | Команда | Назначение |
 | --- | --- |
 | `npm run dev` | Запускает Vite dev server. |
-| `npm run build` | Создаёт production-сборку с prerender 19 публичных страниц и отдельной 404 в `dist/`. |
+| `npm run build` | Создаёт production-сборку с prerender 20 публичных страниц и отдельной 404 в `dist/`. |
 | `npm run preview` | Локально раздаёт ранее созданную production-сборку Vite. Сначала нужен `npm run build`. |
 | `npm run lint` | Запускает ESLint для проекта; каталог `dist` исключён конфигурацией. |
-| `npm test` | Node test runner: `src/api/*.test.js` и `src/analytics/*.test.js`. |
+| `npm test` | Node test runner: API, аналитика и целевые проверки реестра/файлов документов. |
 | `npm run test:prerender` | Проверки генератора prerender встроенным Node test runner. |
 
 `npm test` запускает Node-тесты API и аналитики. Отдельных scripts для форматирования или type-check нет.
@@ -181,6 +205,7 @@ ee_site/frontend/
 | --- | --- | --- |
 | `/` | `HomePage` | Hero, AI Summary, продукция, услуги, объекты, контакты и форма заявки. В пользовательском интерфейсе используется термин «Объекты», технический route/id остаётся `cases`. Якоря: `#products`, `#services`, `#cases`, `#contacts`. |
 | `/about` | `AboutPage` | Принятая страница «О нас»: команда, производство, семь фотографий, документы при поставке и обращение. |
+| `/documents` | `DocumentsPage` | Четыре опросных листа, по два публичных файла; новые непустые категории выводятся из реестра. |
 | `/solutions` | `SolutionsPage` | Реестр всех продуктовых карточек. |
 | `/solutions/:slug` | `ProductPage` | Детальная продуктовая страница по данным `products.js`; неизвестный slug показывает `NotFoundPage` внутри этого компонента. |
 | `/services` | `ServicesPage` | Реестр всех карточек услуг. |

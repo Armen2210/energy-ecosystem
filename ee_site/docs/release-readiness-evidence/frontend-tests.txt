@@ -1,0 +1,68 @@
+
+> frontend@0.0.0 test
+> node --test src/api/*.test.js src/analytics/*.test.js scripts/documents.test.mjs src/questionnaires/*.test.js
+
+✔ registry has ordered questionnaires, partners and SOUT with exactly fourteen published files (51.371988ms)
+✔ six new PDFs open, SOUT is 2026 then 2022, with no invented completeness claim (0.557817ms)
+✔ PDF behavior remains per variant, including future certificates, letters and SOUT (0.870809ms)
+✔ missing, mislabeled, stale-sized and altered public files fail validation (3.122885ms)
+✔ documents page is a bounded known analytics route; file paths remain unrecognized (0.735089ms)
+✔ strict production + HTTPS + exact host + explicit flag gate (4.037969ms)
+✔ URL, referrer and event parameter allowlists reject personal/freeform values (1.807727ms)
+✔ consent legacy value, corrupt value, version and expiry fail closed (0.374806ms)
+✔ first and last marked touch, internal transitions, new entry, expiry (0.96062ms)
+✔ no attribution, script or events before permission / after denial (1.961849ms)
+✔ one init context and page hit, anchors/rerenders do not duplicate; Back/Forward count (1.385772ms)
+✔ modal case emits one goal, direct case has hit, closing modal has no extra hit (3.302438ms)
+✔ loading/revoke/late callback/reallow destroys old context and no event backlog (0.578548ms)
+✔ storage event revoke stops and clears snapshots; corrupted cross-tab data fails closed (1.357264ms)
+✔ storage failure allows current session only; blocked/throwing adapter does not throw (0.838633ms)
+✔ lead success dedup same id across reload/tab, new id separate; denial never queued (1.941178ms)
+✔ snapshot stable on campaign change, discarded on expiry, legacy content signature stable (53.39965ms)
+✔ API accepts only confirmed positive ids; error status / HTML / network not conversion (9.360954ms)
+✔ pending retry survives reload with original direction/campaign and clears optional data (0.709792ms)
+✔ view queue starts at consent and is cleared by revoke, includes initial safe campaign (0.616478ms)
+✔ readable storage with failed writes retains explicit session choice on focus (0.414349ms)
+✔ unexpected optional adapter exception preserves operational direction and no analytics (0.458788ms)
+✔ confirmed success waits for ready once, without a premature sent marker (0.419897ms)
+✔ pending successes cleared on revoke, consent expiry, load timeout and generation change (1.150862ms)
+✔ success queue is bounded and expired successes never flush (1.885924ms)
+✔ failed postMessage does not mark sent and repeated success can try local transfer again (0.349226ms)
+✔ failed decision write removes old allowed: revoke, reload, reallow and other tab (0.550341ms)
+✔ failed write and delete keeps current document denied, but old allowed can survive reload (0.548309ms)
+✔ failed optional retry rewrite removes stale advertising but retains technical memory (0.249483ms)
+✔ retry optional cleanup with write/delete blocked remains sanitized in memory only (1.310794ms)
+✔ privacy form entry marker never enters analytics URLs, attribution or params (0.278826ms)
+✔ adds files in multiple batches and preserves order and duplicate names (1.816608ms)
+✔ supports removing and adding the same File object again (0.294347ms)
+✔ accepts exact limits and rejects an entire invalid new batch (118.293856ms)
+✔ replaces native file fields with ordered repeated attachments (34.912143ms)
+✔ sends an ordinary form without file fields when no files are selected (0.389845ms)
+✔ signature includes file content, not only its name (44.018987ms)
+✔ reuses an id for unchanged content and rotates it after a change (0.551ms)
+✔ keeps attachment order in the signature and rotates the id after a set change (16.873962ms)
+✔ accepts created and duplicate confirmations and normalizes URL (5.121068ms)
+✔ keeps an indeterminate result retryable (1.121397ms)
+✔ surfaces validation and conflict statuses (0.898703ms)
+✔ reports HTTP 413 even when a proxy returns HTML (0.447995ms)
+✔ 429/413 JSON and HTML preserve documents and submission for a manual retry (10.254076ms)
+✔ 429 Retry-After takes precedence and invalid values have a safe fallback (1.193162ms)
+✔ gateway/server and unrecognised rejections retain an indeterminate result (5.672612ms)
+✔ OL success requires acknowledgment of the exact accepted product set (1.277765ms)
+✔ all four and 300 collector outlets validate; hidden enabled sheets still checked (24.111748ms)
+✔ conditional answers retained in draft but excluded from submitted payload (2.25199ms)
+✔ quantity conversion retains physical value through repeated toggles, blank and zero (0.98156ms)
+✔ BTP composition, conditional reserves and individual outlet settings (2.644263ms)
+✔ tab storage keeps contacts and OL, omits bytes; TTL is from content edit time (5.125861ms)
+✔ unit toggles serialize exact source pairs in fields and outlets, including reload (16.886202ms)
+✔ numeric grammar preserves intermediate editing and contract signs (2.053028ms)
+✔ legacy invalid drafts can be corrected by deletion without allowing new invalid text (0.351507ms)
+✔ product route changes topic, preserving manual choice within the page and all shared data (0.839752ms)
+ℹ tests 56
+ℹ suites 0
+ℹ pass 56
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 373.899152

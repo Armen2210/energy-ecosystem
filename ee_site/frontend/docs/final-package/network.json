@@ -1,0 +1,57 @@
+[
+  {
+    "build": "before",
+    "page": "home",
+    "phase": "initial",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-BTDjzdtS.js"
+    ]
+  },
+  {
+    "build": "before",
+    "page": "product",
+    "phase": "initial",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-BTDjzdtS.js"
+    ]
+  },
+  {
+    "build": "before",
+    "page": "product",
+    "phase": "near-editor",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-BTDjzdtS.js"
+    ]
+  },
+  {
+    "build": "after",
+    "page": "home",
+    "phase": "initial",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-B-i9ZS08.js"
+    ]
+  },
+  {
+    "build": "after",
+    "page": "product",
+    "phase": "initial",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-B-i9ZS08.js"
+    ]
+  },
+  {
+    "build": "after",
+    "page": "product",
+    "phase": "near-editor",
+    "requests": [
+      "/assets/policy-DuWXjjRp.js",
+      "/assets/main-B-i9ZS08.js",
+      "/assets/QuestionnaireEditor-CsToO-R2.js"
+    ]
+  }
+]

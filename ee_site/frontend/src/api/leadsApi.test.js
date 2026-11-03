@@ -200,3 +200,39 @@ test("429 Retry-After takes precedence and invalid values have a safe fallback",
     globalThis.fetch = originalFetch;
   }
 });
+
+
+test("gateway/server and unrecognised rejections retain an indeterminate result", async () => {
+  const originalFetch=globalThis.fetch;
+  try {
+    for (const status of [500,502,503,504,408,401,403,404,422]) {
+      for (const contentType of ["text/html","application/json"]) {
+        globalThis.fetch=async()=>new Response(contentType==="text/html"?"<h1>Gateway error</h1>":JSON.stringify({detail:"synthetic response"}),{status,headers:{"content-type":contentType}});
+        await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+      }
+    }
+    for (const status of [400,409]) {
+      globalThis.fetch=async()=>new Response("proxy response",{status});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+      globalThis.fetch=async()=>new Response(JSON.stringify({id:19}),{status,headers:{"content-type":"application/json"}});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:true});
+    }
+    for(const status of [400,409,413,429]) {
+      globalThis.fetch=async()=>new Response(JSON.stringify({detail:"rejected before commit"}),{status,headers:{"content-type":"application/json"}});
+      await assert.rejects(createLead(new FormData()),{status,indeterminate:false});
+    }
+  } finally {globalThis.fetch=originalFetch;}
+});
+
+test('OL success requires acknowledgment of the exact accepted product set',async()=>{
+ const original=globalThis.fetch;
+ const form=new FormData();form.set('questionnaires',JSON.stringify({version:1,items:[{product:'vns'},{product:'pns'}]}));
+ try{
+  for(const ack of [undefined,{version:1,products:[]},{version:1,products:['vns']},{version:1,products:['vns','vns']},{version:2,products:['vns','pns']}]){
+   globalThis.fetch=async()=>new Response(JSON.stringify({id:15,questionnaires:ack}),{status:201,headers:{'content-type':'application/json'}});
+   await assert.rejects(createLead(form),{indeterminate:true,status:201});
+  }
+  globalThis.fetch=async()=>new Response(JSON.stringify({id:15,duplicate:true,questionnaires:{version:1,products:['pns','vns']}}),{status:200,headers:{'content-type':'application/json'}});
+  assert.equal((await createLead(form)).id,15);
+ }finally{globalThis.fetch=original;}
+});

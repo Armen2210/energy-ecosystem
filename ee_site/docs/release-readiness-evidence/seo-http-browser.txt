@@ -1,0 +1,49 @@
+✔ every sitemap page and its query variant returns actual HTML 200 (200.498844ms)
+✔ missing general/entity/historical URLs return 404 without masking redirects (28.501635ms)
+✔ server always headers survive public HTML, internal 404 and analytics frame (7.093506ms)
+✔ only confirmed aliases and known trailing-slash variants redirect permanently (35.320924ms)
+✔ assets, discovery files and analytics frame remain reachable (17.733646ms)
+✔ public documents serve exact bytes, MIME and HEAD; missing documents are real 404s (84.571777ms)
+✔ API/admin are passed to the existing upstream without swallowing status or Retry-After (15.231343ms)
+PASS all sitemap pages: direct/reload HTTP 200, unique DOM metadata, visible H1, hrefs and matching FAQ
+PASS missing pages: real nginx 404, no redirect, noindex, no canonical, direct/reload
+PASS client navigation and Back/Forward restore robots and canonical after a 404
+PASS case modal metadata and close/backdrop background restoration
+PASS invalid case background cannot mask a missing resource
+PASS nginx contact alias retains query and contact anchor
+PASS responsive widths 360/390/768/961/1440: no horizontal overflow, no JS errors or external traffic
+PASS 360px: all 20 pages readable without JS, links work, form disabled and no GET submission
+PASS 360px: delayed JS disables fields/files/submit, hydration preserves H1 geometry and SPA draft
+PASS 1440px: all 20 pages readable without JS, links work, form disabled and no GET submission
+PASS 1440px: delayed JS disables fields/files/submit, hydration preserves H1 geometry and SPA draft
+PASS 360: keyboard opens isolated tab; close retains fields, both consent states and two files
+PASS 360: direct and footer entry preserve ordinary home navigation
+PASS 1440: keyboard opens isolated tab; close retains fields, both consent states and two files
+PASS 1440: direct and footer entry preserve ordinary home navigation
+PASS download works before any cookie decision or form
+PASS all four PDF and four XLSX download with exact names and bytes, accessible names and no new tabs
+PASS all six certificates/SOUT PDFs open in new tabs with correct URLs, MIME and sizes; keyboard Enter works
+PASS 360px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 390px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 640px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 641px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 768px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 960px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 961px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 1440px: three categories, ten documents, fourteen accessible links, focus, no overflow
+PASS 390px: enlarged text reflows without clipping
+PASS direct /documents and reload hydrate without losing content or SEO
+PASS explicit footer return and Back/Forward preserve route, position and focus
+PASS footer-origin Back survives a documents reload
+PASS SPA footer return has no intermediate Hero scroll frames
+PASS ready HTML and footer return work without JavaScript
+✔ browser SEO checks against the same isolated nginx fixture (63885.645675ms)
+HTTP evidence: /tmp/ee-seo-nginx-QZHuHf/routes.json
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 64391.838914

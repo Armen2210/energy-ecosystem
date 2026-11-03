@@ -8,6 +8,8 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
+import { documentFiles } from './document-files.mjs';
 
 // Real nginx + current dist, with a loopback sentinel upstream. No public API,
 // database, SMTP, account or production server is accessed.
@@ -161,6 +163,30 @@ test('assets, discovery files and analytics frame remain reachable', async () =>
   assert.match(frame.body, /name="robots" content="noindex, nofollow"/);
 });
 
+test('public documents serve exact bytes, MIME and HEAD; missing documents are real 404s', async () => {
+  for (const file of documentFiles) {
+    const expectedType = file.format === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    const response = await fetch(origin + file.url);
+    assert.equal(response.status, 200, file.url);
+    assert.equal(response.headers.get('content-type'), expectedType);
+    assert.equal(response.headers.get('x-seo-server'), 'inherited-always');
+    assert.equal(response.headers.get('content-disposition'), null);
+    const bytes = Buffer.from(await response.arrayBuffer());
+    assert.equal(bytes.length, file.sizeBytes);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
+    const head = await fetch(origin + file.url, { method: 'HEAD' });
+    assert.equal(head.status, 200);
+    assert.equal(head.headers.get('content-type'), expectedType);
+    assert.equal(Number(head.headers.get('content-length')), file.sizeBytes);
+    assert.equal((await head.arrayBuffer()).byteLength, 0);
+  }
+  for (const url of ['/documents/missing.xlsx', '/documents/questionnaires/bmk/missing.pdf', '/documents/certificates/partners/missing.pdf', '/documents/sout/missing.pdf', '/documents/private.txt', '/documents/unknown']) {
+    assert.equal((await request(url)).response.status, 404, url);
+    assert.equal((await fetch(origin + url, { method: 'HEAD' })).status, 404, url);
+  }
+  assert.ok(!pages.some(url => /\.(xlsx|pdf)$/.test(url)));
+});
+
 test('API/admin are passed to the existing upstream without swallowing status or Retry-After', async () => {
   for (const [url, status] of [['/api/leads/', 429], ['/admin/login/', 401], ['/api/not-found/', 404], ['/admin/not-found/', 404]]) {
     const { response, body } = await request(url);
@@ -177,7 +203,7 @@ test('API/admin are passed to the existing upstream without swallowing status or
 // then stop both servers in after(). No hand-edited local config is needed.
 if (process.env.SEO_BROWSER === 'true') {
   test('browser SEO checks against the same isolated nginx fixture', async () => {
-    for (const script of ['technical-seo-browser.mjs', 'prerender-browser.mjs', 'privacy-form-browser.mjs']) {
+    for (const script of ['technical-seo-browser.mjs', 'prerender-browser.mjs', 'privacy-form-browser.mjs', 'documents-browser.mjs']) {
       const runner = spawn(process.execPath, [path.join(frontend, 'scripts', script)], {
         cwd: frontend,
         env: { ...process.env, SEO_TEST_ORIGIN: origin, PRIVACY_TEST_ORIGIN: origin },

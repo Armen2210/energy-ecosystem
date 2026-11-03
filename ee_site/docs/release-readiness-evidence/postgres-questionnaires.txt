@@ -1,0 +1,33 @@
+Creating test database for alias 'default'...
+..WARNING: Bad Request: /api/leads/
+.....ERROR: Questionnaire job lead_id=4 code=processing_failed exception_type=OSError
+...ERROR: Questionnaire job lead_id=8 code=processing_failed exception_type=OSError
+...WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+WARNING: Bad Request: /api/leads/
+....ERROR: Questionnaire job lead_id=12 code=processing_failed exception_type=ValueError
+....ERROR: Lead notification error lead_id=16 stage=send_email code=email_backend_failed exception_type=OSError
+....
+----------------------------------------------------------------------
+Ran 25 tests in 12.706s
+
+OK
+Destroying test database for alias 'default'...
+Found 25 test(s).
+System check identified no issues (0 silenced).
