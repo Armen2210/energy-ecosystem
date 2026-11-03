@@ -36,7 +36,7 @@ export default function AboutPage() {
               {about.director.paragraphs.map((text) => (
                 <p key={text}>{text}</p>
               ))}
-              <p className="about-page__signature">{about.director.role}</p>
+              <p className="about-page__signature">{about.director.name}<br />{about.director.role}</p>
             </div>
           </div>
         </section>
