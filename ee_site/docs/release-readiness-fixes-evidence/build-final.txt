@@ -1,0 +1,181 @@
+
+> frontend@0.0.0 build
+> node scripts/prerender.mjs
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 264 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/analytics-frame.html                                         0.41 kB │ gzip:   0.31 kB
+dist/404.html                                                     1.27 kB │ gzip:   0.63 kB
+dist/assets/service-design-bg-C_rNq5vL.svg                        4.12 kB │ gzip:   1.50 kB
+dist/assets/service-construction-bg-CY-mh4lD.svg                  4.14 kB │ gzip:   1.48 kB
+dist/assets/service-commissioning-bg-DoquNYfE.svg                 4.17 kB │ gzip:   1.33 kB
+dist/index.html                                                   5.16 kB │ gzip:   1.86 kB
+dist/assets/24-360-gQtbQLqk.webp                                  6.26 kB
+dist/assets/26-360-08IM_P6H.webp                                  6.42 kB
+dist/assets/23-360-CJkcKhiZ.webp                                 11.88 kB
+dist/assets/dsc05801-small-nsFj8Dp0.webp                         13.50 kB
+dist/assets/21-360-DXCyD95b.webp                                 13.65 kB
+dist/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2            14.22 kB
+dist/assets/01-360-BpseeHZH.webp                                 15.70 kB
+dist/assets/19-360-Cz_fhsCh.webp                                 15.80 kB
+dist/assets/onest-latin-ext-wght-normal-CnNj8hVb.woff2           15.99 kB
+dist/assets/04-360-DDwd2zqv.webp                                 16.97 kB
+dist/assets/17-360-CSa1fIOX.webp                                 17.04 kB
+dist/assets/03-360-Cvp2_IN9.webp                                 17.11 kB
+dist/assets/golos-text-cyrillic-ext-wght-normal-hICkpzq7.woff2   17.50 kB
+dist/assets/18-360-BpjlR2NF.webp                                 18.20 kB
+dist/assets/12-360-DyrtP-wS.webp                                 18.24 kB
+dist/assets/11-360-BG_oI8fx.webp                                 18.31 kB
+dist/assets/09-360-EycET-2R.webp                                 19.16 kB
+dist/assets/golos-text-latin-ext-wght-normal-B-I5lbAQ.woff2      19.18 kB
+dist/assets/02-360-D-6fwO6u.webp                                 20.79 kB
+dist/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2       22.03 kB
+dist/assets/10-360--zhjUQjO.webp                                 24.97 kB
+dist/assets/22-360-ZPa02WsL.webp                                 25.31 kB
+dist/assets/25-360-Nfe2IQ4G.webp                                 25.44 kB
+dist/assets/16-360-DgCal7Yj.webp                                 30.42 kB
+dist/assets/14-360-Dla28fSD.webp                                 30.49 kB
+dist/assets/05-360-poalKSP_.webp                                 30.88 kB
+dist/assets/20-360-BFZvFzac.webp                                 31.13 kB
+dist/assets/onest-latin-wght-normal-CUIqqgP9.woff2               32.23 kB
+dist/assets/23-720-DD4NrG6x.webp                                 32.31 kB
+dist/assets/07-360-j8cKaZGC.webp                                 32.70 kB
+dist/assets/27-360-DcTJdNi3.webp                                 33.10 kB
+dist/assets/26-720-DGuuMkHj.webp                                 33.99 kB
+dist/assets/21-720-CmQ9uNd6.webp                                 35.25 kB
+dist/assets/19-720-BfzR-ySU.webp                                 37.47 kB
+dist/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2          37.91 kB
+dist/assets/08-360-C6_Umhe1.webp                                 38.96 kB
+dist/assets/06-360-Br8dKprw.webp                                 43.03 kB
+dist/assets/18-720-BTK0WROt.webp                                 43.64 kB
+dist/assets/01-720-QP7hiXmJ.webp                                 43.80 kB
+dist/assets/17-720-BklGRw3k.webp                                 46.57 kB
+dist/assets/design-480-tbzASUBN.webp                             48.89 kB
+dist/assets/hero-480-C6hdW779.webp                               50.14 kB
+dist/assets/service-commissioning-hero-CL-Eq-Qm.jpg              50.72 kB
+dist/assets/04-720-DVYJITch.webp                                 51.94 kB
+dist/assets/13-360-D8qdrrb6.webp                                 53.63 kB
+dist/assets/33-DiDBjxPP.jpg                                      54.24 kB
+dist/assets/24-720-DxeqxY7D.webp                                 54.38 kB
+dist/assets/09-720-BE2N6GKl.webp                                 54.38 kB
+dist/assets/15-360-Bq9YUADP.webp                                 55.23 kB
+dist/assets/energoeffect-logo-orange-ROjhfbeo.svg                55.77 kB │ gzip:  11.63 kB
+dist/assets/dsc05801-page-gKTq4K5W.webp                          57.78 kB
+dist/assets/23-1080-DDPSzcch.webp                                58.89 kB
+dist/assets/11-720-CQ6Tmz0W.webp                                 59.40 kB
+dist/assets/03-720-8eU2ligU.webp                                 59.54 kB
+dist/assets/01-paZ0mQxh.jpg                                      59.69 kB
+dist/assets/21-1080-jwFYEinx.webp                                60.40 kB
+dist/assets/11-CyXhnWqR.jpg                                      61.94 kB
+dist/assets/02-720-DAGlN1e9.webp                                 62.85 kB
+dist/assets/19-1080-DuP8_bPU.webp                                63.41 kB
+dist/assets/25-720-jiLgCJJk.webp                                 64.53 kB
+dist/assets/10-720-Bj50JScx.webp                                 66.45 kB
+dist/assets/22-720-BRGYTsOx.webp                                 67.74 kB
+dist/assets/12-720-4I4ZvSLj.webp                                 68.45 kB
+dist/assets/18-1080-BBk97CIS.webp                                71.23 kB
+dist/assets/01-1080-B5jrCH-A.webp                                78.68 kB
+dist/assets/automation-cabinets-new-SC4dINE_.webp                79.80 kB
+dist/assets/logo-gigaterm-WNPT5sAP.png                           79.90 kB
+dist/assets/26-1080-CCT-iyHO.webp                                80.45 kB
+dist/assets/logo-aquarus-D4qls-DC.png                            84.95 kB
+dist/assets/logo-energolain--kIeBlDp.png                         85.15 kB
+dist/assets/17-1080-CQtDfYTS.webp                                85.47 kB
+dist/assets/31-BrRSwCtp.jpg                                      87.55 kB
+dist/assets/12-BMlzjATo.jpg                                      87.56 kB
+dist/assets/16-720-CRIFjUSS.webp                                 87.86 kB
+dist/assets/20-720-Rk-73VDP.webp                                 92.61 kB
+dist/assets/07-DdcwTi4A.jpg                                      96.56 kB
+dist/assets/05-720-YEU3tRHc.webp                                 96.74 kB
+dist/assets/04-DkE_1HVL.jpg                                      96.78 kB
+dist/assets/04-1080-CuoZdb5M.webp                                96.91 kB
+dist/assets/14-720-CrEPnFw8.webp                                 99.77 kB
+dist/assets/service-smr-hero-vN4u5iFb.jpg                       101.52 kB
+dist/assets/09-1080-CXOwsWa8.webp                               101.60 kB
+dist/assets/29-D81JkwKG.jpg                                     101.77 kB
+dist/assets/07-720-BWu8w_UX.webp                                103.17 kB
+dist/assets/25-1080-CBOWoyva.webp                               106.05 kB
+dist/assets/vns-aquarus-new-DP7umMxq.webp                       106.96 kB
+dist/assets/cover-m2kAnsTs.jpg                                  106.97 kB
+dist/assets/hero-780-DkQw1VXI.webp                              109.97 kB
+dist/assets/05-BB420enN.jpg                                     111.35 kB
+dist/assets/01-B9yTs2GR.jpg                                     114.38 kB
+dist/assets/10-1080-DAH5i7Gx.webp                               115.81 kB
+dist/assets/22-1080-BvXErKej.webp                               117.09 kB
+dist/assets/02-1080-Y6FT4OEK.webp                               117.19 kB
+dist/assets/02-Bt6NZ0BT.jpg                                     117.97 kB
+dist/assets/11-1080-BZFDcnSJ.webp                               119.65 kB
+dist/assets/27-jn712RzU.jpg                                     121.51 kB
+dist/assets/08-720-CZpqAh6j.webp                                124.83 kB
+dist/assets/pns-fire-new-BzXSypuo.webp                          125.46 kB
+dist/assets/06-720-B6Y9ZHzI.webp                                130.63 kB
+dist/assets/03-1080-DodXj7wq.webp                               138.49 kB
+dist/assets/24-1080-CYxe7OtY.webp                               144.78 kB
+dist/assets/12-1080-OsiRa6QT.webp                               145.34 kB
+dist/assets/design-960-x9Vlc32N.webp                            147.12 kB
+dist/assets/01-BzxyFbSx.webp                                    147.94 kB
+dist/assets/06-BH-4nY3t.jpg                                     148.64 kB
+dist/assets/02-CzyFqccs.webp                                    152.23 kB
+dist/assets/27-720-trRl6oMO.webp                                152.79 kB
+dist/assets/bmk-card-e85o9bQ4.webp                              154.60 kB
+dist/assets/13-720-tg1y-LFN.webp                                157.27 kB
+dist/assets/16-1080-B29TBMa-.webp                               159.98 kB
+dist/assets/cover-DuI_CXZh.webp                                 161.72 kB
+dist/assets/15-720-BJK4jUlC.webp                                167.64 kB
+dist/assets/20-1080-COXwRjGL.webp                               173.93 kB
+dist/assets/14-1080-CINHFcFV.webp                               175.57 kB
+dist/assets/03-DesX4QAX.webp                                    177.57 kB
+dist/assets/05-1080-C7M8-FsZ.webp                               179.95 kB
+dist/assets/08-BVH0-KjC.webp                                    183.04 kB
+dist/assets/05-CZSVwg67.webp                                    184.25 kB
+dist/assets/07-1080-CGDoeF2c.webp                               185.84 kB
+dist/assets/01-ByIWjZQ_.webp                                    189.94 kB
+dist/assets/cover-C7ZEb9L5.webp                                 208.15 kB
+dist/assets/04-C2jpOQZl.webp                                    210.25 kB
+dist/assets/08-1080-DtNWoxof.webp                               224.53 kB
+dist/assets/06-1080-D4xVxp0p.webp                               227.87 kB
+dist/assets/13-941-Cp_wi5R5.webp                                230.69 kB
+dist/assets/09-ByDqzLIL.webp                                    233.65 kB
+dist/assets/cover-CmaETF5L.webp                                 237.21 kB
+dist/assets/08-C4K66DUS.webp                                    239.50 kB
+dist/assets/07-Dlpt9-dC.webp                                    240.73 kB
+dist/assets/06-CW9yiPJ-.webp                                    241.73 kB
+dist/assets/15-941-KEgHBNWT.webp                                242.43 kB
+dist/assets/06-CeXJPhhc.webp                                    244.18 kB
+dist/assets/02-uRXbZ_oR.webp                                    250.66 kB
+dist/assets/04-BPejKo5a.webp                                    265.50 kB
+dist/assets/cover-JY6DwVaW.webp                                 281.49 kB
+dist/assets/05-MXULpsm-.webp                                    291.89 kB
+dist/assets/03-udME4XuU.webp                                    296.26 kB
+dist/assets/07-Dh3GRWCC.webp                                    296.88 kB
+dist/assets/btp-energolain-new-BWpIvwfb.webp                    298.89 kB
+dist/assets/design-1536-Bzz_i0r8.webp                           300.45 kB
+dist/assets/hero-CUcjjy4c.webp                                  301.22 kB
+dist/assets/27-1080-CHfaq8CO.webp                               313.18 kB
+dist/assets/01-C9L3A_4w.webp                                    313.27 kB
+dist/assets/02-D9YfM1GG.webp                                    322.51 kB
+dist/assets/main-BnLl1ckc.css                                   104.36 kB │ gzip:  20.09 kB
+dist/assets/analytics-frame-D-bOGn97.js                           1.37 kB │ gzip:   0.78 kB
+dist/assets/policy-CHE34qw-.js                                    3.52 kB │ gzip:   1.63 kB
+dist/assets/QuestionnaireEditor-CaF4JW32.js                      10.32 kB │ gzip:   4.11 kB
+dist/assets/main-ygk0E5ov.js                                    513.08 kB │ gzip: 137.80 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 771ms
+vite v8.3.5 building ssr environment for production...
+transforming...
+✓ 239 modules transformed.
+rendering chunks...
+computing gzip size...
+node_modules/.ee-prerender-u2e3tY/assets/QuestionnaireEditor-CyQm-yVG.js   16.97 kB │ gzip:  5.19 kB
+node_modules/.ee-prerender-u2e3tY/entry.mjs                               382.58 kB │ gzip: 79.02 kB
+
+✓ built in 244ms
+Prerender: 20 public pages + 404, validated in 1526ms

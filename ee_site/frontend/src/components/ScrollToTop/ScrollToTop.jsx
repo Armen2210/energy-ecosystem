@@ -122,6 +122,14 @@ function ScrollToTop() {
       });
     }
 
+    // Resolve entry states before any jump/animation; retain direct/hash/modal returns.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        ["lead-card-then-top", "products-then-top", "services-then-top", "contacts-then-top", "top-smooth"].includes(state?.entryScroll)) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      clearEntryScrollState();
+      return;
+    }
+
     /*
       CASE MODAL / МОДАЛЬНЫЙ КЕЙС
 
@@ -360,7 +368,7 @@ function ScrollToTop() {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
       });
 
       clearEntryScrollState();
@@ -381,7 +389,7 @@ function ScrollToTop() {
         window.scrollTo({
           top: getSectionScrollTop(sectionId),
           left: 0,
-          behavior: "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
         });
       }, 80);
 

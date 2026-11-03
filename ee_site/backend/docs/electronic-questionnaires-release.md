@@ -1,4 +1,8 @@
-# Электронные ОЛ: внедрение и восстановление
+# Выпуск ЭЭ с документами и электронными ОЛ: внедрение и восстановление
+
+Это актуальная точка входа для всего выпуска; `ee_site/deploy/README.md` —
+связанный подплан frontend/nginx. Исторические утверждения о frontend-only этапе
+не отменяют описанные здесь изменения backend, миграции и worker.
 
 Ветка `feature/ee-electronic-questionnaires` основана на принятом этапе документов
 `d3dafac9b703dd26bab0b97cd0b3bb0dd393e7ef`. Публичные 14 документов не меняются.
@@ -17,7 +21,7 @@ reverse migrations 0008–0010 при откате: они содержат пр
 не копировать значения в команды, Git или отчёт.
 
 Новая зависимость: `pip install -r requirements/base.txt` (файл UTF-16).
-ReportLab 4.4.10 BSD, DejaVu Sans TTF системно (`fonts-dejavu-core` на Debian).
+Django 5.2.18 (LTS), DRF 3.18.3, sqlparse 0.6.1; ReportLab 4.4.10 BSD, DejaVu Sans TTF системно (`fonts-dejavu-core` на Debian).
 Нужны subprocess/resource и права записи в закрытый `LEAD_PRIVATE_ATTACHMENT_ROOT`.
 Корневой каталог `contracts/questionnaires/v1` также входит в backend release:
 не копировать только `ee_site/backend` без него. Для воспроизведения старых
@@ -107,7 +111,13 @@ python manage.py resolve_questionnaire_job --settings=config.settings.prod --lea
 # Если требуется новая отправка, с пониманием возможного дубля:
 python manage.py resolve_questionnaire_job --settings=config.settings.prod --lead ID --decision retry --acknowledge-smtp-duplicate-risk
 ```
-Без decision команда read-only. Не менять answers/contact_snapshot/definition
+Без `--decision` команда не изменяет поля job/Lead и не отправляет почту,
+но открывает транзакцию и берёт `SELECT FOR UPDATE`: **это не строго read-only
+диагностика и не команда для read-only replica**. При необходимости только чтения
+используйте `QuestionnaireJob.objects.filter(lead_id=ID).values(...)` с выбранными
+техническими полями без answers/контактов. С `--decision` команда меняет состояния;
+обязательно расследование и явное подтверждение риска дубля.
+Не менять answers/contact_snapshot/definition
 для исправления инфраструктурных ошибок. Для ответственного сотрудника назначить права view/change Questionnaire job;
 обычный просмотр PDF/readonly снимков остаётся за leads.view_lead.
 Состояния видны в отдельном Admin jobs,
@@ -156,3 +166,29 @@ worker **оставить**, чтобы уже принятые ОЛ были д
 обычные заявки работают отдельно. После исправления — preflight, synthetic smoke,
 worker status и только затем повторное включение UI. Merge/deploy требуют
 предварительного отчёта владельцу; текущие локальные проверки не являются deploy.
+
+
+## Семантика диагностических команд
+
+| Команда | Фактические побочные эффекты |
+| --- | --- |
+| `showmigrations --plan`, `migrate --plan`, `lead_notification_status` | Чтение состояния БД; не применяют миграции/не отправляют почту |
+| `resolve_questionnaire_job --lead ID` без decision | Не меняет строки, но берёт транзакционную блокировку `SELECT FOR UPDATE`; не строго read-only |
+| `resolve_questionnaire_job ... --decision ...` | Меняет job/Lead; retry разрешает последующую отправку worker |
+| `check_questionnaire_readiness` | Чтение схемы/шрифта, `mkdir` private root и запись/удаление временного файла; не строго read-only |
+| `audit_questionnaire_files` | Читает БД/файлы и SHA, без удаления; с `--apply` удаляет orphan старше 24 часов |
+| `migrate_legacy_lead_attachments` / `--verify` | По умолчанию/verify только чтение; `--apply` пишет файлы/mapping и берёт process/advisory lock |
+| `process_questionnaires`, `process_lead_notifications` | Меняют состояния/файлы и могут отправлять почту; не диагностика только чтения |
+
+Для обеих служб обязательно сверить общий DB/private root, права владельца, temp
+и свободное место. `check_questionnaire_readiness` не доказывает живой supervisor
+или SMTP-доставку. Сохраняйте предыдущие hashed assets для старых вкладок,
+обновляйте HTML, не кешируйте API/Admin/private responses. Перед включением ОЛ
+нужен подтверждённый backup **БД и private файлов**, восстановление на отдельной
+копии и мониторинг pending age/retry/intervention/uncertain, 5xx/503 и диска.
+При откате не восстанавливать старый dump поверх новых заявок без reconciliation.
+
+Обновлённые зависимости проверяются на Python 3.12 / Node 24. Sqlparse 0.6.1 —
+последний исправленный выпуск, автор прекратил сопровождение; текущая LTS Django
+по-прежнему требует этот пакет. Это остаточный риск сопровождения: следить за
+новыми advisory и решением Django, не считать его вечно поддерживаемым.

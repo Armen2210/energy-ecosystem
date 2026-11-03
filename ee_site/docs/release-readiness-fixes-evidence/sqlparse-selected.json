@@ -1,0 +1,10 @@
+{
+  "version": "0.6.1",
+  "requires_python": ">=3.10",
+  "requires_dist": [
+    "build; extra == \"dev\"",
+    "furo; extra == \"doc\"",
+    "sphinx; extra == \"doc\""
+  ],
+  "vulnerabilities": []
+}

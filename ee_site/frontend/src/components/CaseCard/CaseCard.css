@@ -64,7 +64,7 @@
   display: inline-flex;
   width: fit-content;
   margin-bottom: 28px;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   font-size: 12px;
   font-weight: 950;
   line-height: 1;
@@ -95,7 +95,7 @@
   margin-top: auto;
   margin-bottom: 0;
   padding-top: 20px;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
@@ -140,7 +140,7 @@
 
   .case-card span {
     margin-bottom: 8px;
-    color: var(--color-red);
+    color: var(--color-accent-text);
     font-family: var(--font-heading);
     font-size: 14px;
     font-weight: 750;

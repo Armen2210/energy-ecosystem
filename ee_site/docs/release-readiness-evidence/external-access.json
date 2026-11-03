@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://www.energoeffekt-rostov.ru/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.energoeffekt-rostov.ru/robots.txt",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.energoeffekt-rostov.ru/sitemap.xml",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://platform.openai.com/docs/bots",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://yandex.ru/support/webmaster/robot-workings/check-yandex-robots.html",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://developers.sber.ru/docs/ru/gigachat/overview",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

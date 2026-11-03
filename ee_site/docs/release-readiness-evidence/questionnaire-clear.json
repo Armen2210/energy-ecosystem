@@ -1,0 +1,9 @@
+{
+  "scenario": "questionnaire answer entered before contact fields; explicit Clear clicked",
+  "questionnairesBefore": [
+    "vns"
+  ],
+  "startedBefore": false,
+  "dialogs": 0,
+  "storageAfter": null
+}

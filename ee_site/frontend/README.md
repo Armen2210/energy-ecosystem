@@ -87,6 +87,13 @@ VITE_EE_ANALYTICS_ENABLED=false
 `npm ci` использует существующий lockfile; `npm install` нужен при намеренном
 обновлении зависимостей. Backend запускается отдельно по [его README](../backend/README.md).
 
+Security-обновление сохраняет Vite 8 / ESLint 10. В `package.json` есть два узких
+override minimatch 11.0.1 для ESLint и `@eslint/config-array`: их upstream ranges
+пока ограничены уязвимой 10.x. Потребители используют сохранённые `Minimatch` /
+`match()` API; traversal/ignore проверяются `scripts/toolchain.test.mjs` внутри
+`npm test`. Удалить overrides можно после исправления upstream ranges с повторной
+проверкой lockfile, lint и Windows paths; не заменять их слепым `audit fix --force`.
+
 ### Приоритет переменных Vite в dev/preview
 
 От высокого приоритета к низкому: переменные процесса → `.env.[mode].local` →

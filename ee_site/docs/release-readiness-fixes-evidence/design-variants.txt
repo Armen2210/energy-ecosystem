@@ -1,0 +1,3 @@
+design-480.webp: 480x339, 48898 bytes
+design-960.webp: 960x679, 147120 bytes
+design-1536.webp: 1536x1086, 300456 bytes

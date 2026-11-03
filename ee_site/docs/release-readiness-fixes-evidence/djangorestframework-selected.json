@@ -1,0 +1,8 @@
+{
+  "version": "3.18.3",
+  "requires_python": ">=3.10",
+  "requires_dist": [
+    "django>=5.2"
+  ],
+  "vulnerabilities": []
+}

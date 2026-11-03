@@ -6,6 +6,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { leadDraft } from "../../api/leadDraft.js";
+import { hasDraftContent } from "../../api/leadDraftContent.js";
 import { Link, useLocation } from "react-router-dom";
 import { useClientReady } from "../../hooks/useClientReady";
 
@@ -84,7 +85,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   function handleClear() {
     const current = leadDraft.get();
     if (current.submitting) return;
-    const nonempty = current.started || current.files.length > 0 || Object.values(current.fields).some(Boolean);
+    const nonempty = hasDraftContent(current);
     if (nonempty && !window.confirm("Очистить форму? Введённые данные и прикреплённые файлы будут удалены")) return;
     for (const id of current.retryIds) analytics.forgetSubmission(id);
     if (current.snapshot) analytics.release(current.snapshot);

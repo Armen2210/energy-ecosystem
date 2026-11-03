@@ -1,0 +1,31 @@
+{
+  "accept": 201,
+  "duplicate": 200,
+  "changed_conflict": 409,
+  "job": "done",
+  "locmem_messages": 1,
+  "attachments": [
+    {
+      "product": "bmk",
+      "bytes": 30205,
+      "sha256_matches": true
+    },
+    {
+      "product": "btp",
+      "bytes": 55954,
+      "sha256_matches": true
+    },
+    {
+      "product": "pns",
+      "bytes": 28600,
+      "sha256_matches": true
+    },
+    {
+      "product": "vns",
+      "bytes": 28273,
+      "sha256_matches": true
+    }
+  ],
+  "subject_mentions_lead": true,
+  "smtp_delivery": "not tested"
+}

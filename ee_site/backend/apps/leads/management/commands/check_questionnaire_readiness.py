@@ -8,7 +8,7 @@ from apps.leads.models import LeadQuestionnaire, QuestionnaireJob
 
 
 class Command(BaseCommand):
-    help = "Read-only DB/config preflight plus a temporary private-storage write; does not send mail."
+    help = "DB/config preflight with a temporary private-storage write; not strictly read-only; does not send mail."
 
     def handle(self, *args, **options):
         executor = MigrationExecutor(connection)

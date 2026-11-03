@@ -89,12 +89,12 @@
 }
 
 .entity-switcher__item:hover {
-  color: var(--entity-accent);
+  color: var(--color-accent-text);
   background: rgba(249, 115, 22, 0.04);
 }
 
 .entity-switcher__item--active {
-  color: var(--entity-accent);
+  color: var(--color-accent-text);
   font-weight: 750;
   cursor: default;
 }

@@ -1,0 +1,33 @@
+{
+  "original_unchanged": true,
+  "images": [
+    {
+      "file": "ee_site/frontend/src/assets/service-design-hero.jpg",
+      "width": 2482,
+      "height": 1755,
+      "bytes": 1535785,
+      "sha256": "54a42986eca7024f5237769db0782a94f278ff3df91b260eaaf4661a928b4ad8"
+    },
+    {
+      "file": "ee_site/frontend/src/assets/services/design/design-1536.webp",
+      "width": 1536,
+      "height": 1086,
+      "bytes": 300456,
+      "sha256": "763a86f44a1b6b9de98093b4c5b338ae5d6df430a1916fe15ab463a3f42437a6"
+    },
+    {
+      "file": "ee_site/frontend/src/assets/services/design/design-480.webp",
+      "width": 480,
+      "height": 339,
+      "bytes": 48898,
+      "sha256": "0266cebabcdc07dc5d7e18aa9ac72e4225d6350410881f082ac743db38edb76e"
+    },
+    {
+      "file": "ee_site/frontend/src/assets/services/design/design-960.webp",
+      "width": 960,
+      "height": 679,
+      "bytes": 147120,
+      "sha256": "800fb42ba0b190f3ef6c6bedbc7d2b594540b1a277d9c864719daae65bb9011c"
+    }
+  ]
+}

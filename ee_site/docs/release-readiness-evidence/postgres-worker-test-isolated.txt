@@ -1,0 +1,29 @@
+Creating test database for alias 'default'...
+Worker error lead_id=none stage=select_batch code=database_error exception_type=OperationalError
+E
+======================================================================
+ERROR: test_one_shot_processes_only_pending_and_can_be_run_again (apps.leads.tests_worker.BackgroundNotificationTests.test_one_shot_processes_only_pending_and_can_be_run_again)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/mock.py", line 1396, in patched
+    return func(*newargs, **newkeywargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-release-audit/target/ee_site/backend/apps/leads/tests_worker.py", line 51, in test_one_shot_processes_only_pending_and_can_be_run_again
+    call_command("process_lead_notifications", limit=1)
+  File "/tmp/ee-release-audit/venv/lib/python3.12/site-packages/django/core/management/__init__.py", line 194, in call_command
+    return command.execute(*args, **defaults)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-release-audit/venv/lib/python3.12/site-packages/django/core/management/base.py", line 464, in execute
+    output = self.handle(*args, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ee-release-audit/target/ee_site/backend/apps/leads/management/commands/process_lead_notifications.py", line 111, in handle
+    raise CommandError("Lead notification queue cycle failed.")
+django.core.management.base.CommandError: Lead notification queue cycle failed.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.009s
+
+FAILED (errors=1)
+Destroying test database for alias 'default'...
+Found 1 test(s).
+System check identified no issues (0 silenced).

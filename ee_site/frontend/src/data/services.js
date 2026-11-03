@@ -11,7 +11,9 @@
 // цветовой настройки сервисных страниц.
 // =========================================================
 
-import serviceDesignHero from "../assets/service-design-hero.jpg";
+import serviceDesignSmall from "../assets/services/design/design-480.webp";
+import serviceDesignHero from "../assets/services/design/design-960.webp";
+import serviceDesignLarge from "../assets/services/design/design-1536.webp";
 import serviceSmrHero from "../assets/service-smr-hero.jpg";
 import serviceCommissioningHero from "../assets/service-commissioning-hero.jpg";
 
@@ -32,6 +34,11 @@ export const services = [
   switcherTitle: "Проект",
   theme: { ...defaultServiceTheme },
   heroImage: serviceDesignHero,
+  heroImageSrcSet: `${serviceDesignSmall} 480w, ${serviceDesignHero} 960w, ${serviceDesignLarge} 1536w`,
+  // The contain drawing is constrained by both column width and visual height.
+  heroImageSizes: "(max-width: 640px) min(calc(100vw - 64px), 331px), (max-width: 960px) min(calc(100vw - 72px), 419px), 487px",
+  heroImageWidth: 960,
+  heroImageHeight: 679,
   heroImageMode: "document",
   heroImageAlt:
       "Проектная документация инженерного объекта с изометрическим видом трубопроводов",

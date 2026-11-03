@@ -190,6 +190,12 @@ function ServicePage() {
                 <div className="product-hero__visual">
                   <img
                     src={service.heroImage}
+                    srcSet={service.heroImageSrcSet}
+                    sizes={service.heroImageSizes}
+                    width={service.heroImageWidth}
+                    height={service.heroImageHeight}
+                    loading="eager"
+                    fetchPriority={service.slug === "design" ? "high" : undefined}
                     alt={service.heroImageAlt || service.title}
                   />
                 </div>

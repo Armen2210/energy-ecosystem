@@ -13,6 +13,9 @@
   /* Фирменный акцент сайта: промышленный оранжевый */
   --color-red: #f97316;
   --color-red-dark: #ea580c;
+  --color-accent-text: #9a3412;
+  --color-action-bg: #c2410c;
+  --color-action-hover: #9a3412;
 
   --color-dark: #15171a;
   --container: 1180px;

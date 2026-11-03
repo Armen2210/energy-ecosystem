@@ -142,7 +142,7 @@
 .ql-field input:focus,
 .ql-field select:focus,
 .ql-field textarea:focus {
-  outline: 2px solid var(--color-red);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 2px;
 }
 .ql-quantity {
@@ -215,7 +215,7 @@
   transition: transform 0.15s;
 }
 .ql-switch[aria-checked="true"] .ql-switch__track {
-  background: var(--color-red);
+  background: var(--color-action-bg);
 }
 .ql-switch[aria-checked="true"] .ql-switch__track > span {
   transform: translateX(17px);
@@ -223,7 +223,7 @@
 .ql-switch:focus-visible,
 .ql-summary button:focus-visible,
 .ql-nav button:focus-visible {
-  outline: 2px solid var(--color-red);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 3px;
 }
 .ql-desktop-switch {
@@ -264,7 +264,7 @@
 .ql-composition input {
   width: 18px;
   height: 18px;
-  accent-color: var(--color-red);
+  accent-color: var(--color-accent-text);
 }
 .ql-outlet {
   border: 1px solid var(--color-border);
@@ -448,7 +448,7 @@
   border: 0;
   background: transparent;
   border-radius: 12px;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   padding: 8px;
   cursor: pointer;
 }
@@ -484,7 +484,7 @@
 }
 .ql-expand:focus-visible,
 .ql-section-select select:focus-visible {
-  outline: 2px solid var(--color-red);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 2px;
 }
 .ql-summary {
@@ -562,7 +562,7 @@
   border: 0;
   padding: 0;
   background: transparent;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   font: inherit;
   font-weight: 600;
   text-align: left;
@@ -586,14 +586,14 @@
   text-underline-offset: 3px;
 }
 .ql-downloads a:hover {
-  color: var(--color-red);
+  color: var(--color-accent-text);
 }
 .ql-downloads__mobile {
   display: none;
 }
 .ql-online-action:focus-visible,
 .ql-downloads a:focus-visible {
-  outline: 2px solid var(--color-red);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 3px;
 }
 .ql-panel > .ql-unavailable {

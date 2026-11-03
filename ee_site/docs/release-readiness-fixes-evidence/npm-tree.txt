@@ -1,0 +1,19 @@
+frontend@0.0.0 /workspace/energy-ecosystem/ee_site/frontend
+├─┬ @eslint/js@10.0.1
+│ └── eslint@10.14.0 deduped
+├─┬ @vitejs/plugin-react@6.0.2
+│ └── vite@8.3.5 deduped
+├─┬ eslint-plugin-react-hooks@7.1.1
+│ ├── eslint@10.14.0 deduped
+│ ├─┬ zod-validation-error@4.0.2
+│ │ └── zod@4.6.7 deduped
+│ └── zod@4.6.7
+├─┬ eslint-plugin-react-refresh@0.5.2
+│ └── eslint@10.14.0 deduped
+├─┬ eslint@10.14.0
+│ ├─┬ @eslint-community/eslint-utils@4.9.1
+│ │ └── eslint@10.14.0 deduped
+│ ├─┬ @eslint/config-array@0.23.5
+│ │ └── minimatch@11.0.1 deduped
+│ └── minimatch@11.0.1 overridden
+└── vite@8.3.5

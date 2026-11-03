@@ -1,0 +1,192 @@
+[
+  {
+    "path": "ee_site/backend/README.md",
+    "bytes": 29179,
+    "sha256": "2c872b8153b98d5b9a99b129cb9e13759d18bcd2a37aecfc321f895abbded379"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/management/commands/check_questionnaire_readiness.py",
+    "bytes": 1294,
+    "sha256": "343ec3ed558af9dd872c573a8da6fee2a1c065252e5a159b1f451a889117ba50"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/management/commands/resolve_questionnaire_job.py",
+    "bytes": 1993,
+    "sha256": "bbf8c88b747d4613482698ec45056825571a494a34e05203954b0f389c734819"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/tests.py",
+    "bytes": 54137,
+    "sha256": "b516ce69b33f48670b7b5eafb727b9040801d073bbe9348fe2fbaabb102aa878"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/tests_legacy_migration.py",
+    "bytes": 15304,
+    "sha256": "81bfc2d811a746c3668e734ca5cafbc25ce0b17cc253bceefe3c4b91cca1b50e"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/tests_protection.py",
+    "bytes": 16446,
+    "sha256": "a472f68c7b1e9fd58ae40451fa14d8e206f3b4b1c9806186ae67acb2e112fcc8"
+  },
+  {
+    "path": "ee_site/backend/apps/leads/tests_worker.py",
+    "bytes": 10695,
+    "sha256": "3f12e850e536246006e07f50ae9435abdadc58de88bbad12e267490ae7fa0d0b"
+  },
+  {
+    "path": "ee_site/backend/docs/electronic-questionnaires-release.md",
+    "bytes": 18079,
+    "sha256": "49b894b4054c09220330fccb706882f2b2391a4ef25e22df6f7b9f2eaad38fc5"
+  },
+  {
+    "path": "ee_site/backend/requirements/base.txt",
+    "bytes": 524,
+    "sha256": "e2218882577b1c95ab57d221ea1a88d5a35145cb78a2b2bdcfd845cbe958b739"
+  },
+  {
+    "path": "ee_site/deploy/README.md",
+    "bytes": 5891,
+    "sha256": "ca949b24d0e1156f4a2fdd406f60509069d22e33cf821a3310bcdb1281ab0df6"
+  },
+  {
+    "path": "ee_site/frontend/README.md",
+    "bytes": 82559,
+    "sha256": "07369304ca8431db6a489d2013f388859bc9883ec501dce33c1aa5e3374a184e"
+  },
+  {
+    "path": "ee_site/frontend/package-lock.json",
+    "bytes": 88345,
+    "sha256": "13ae17ac73061b7c4dd656d3e87d24418496180983a7e274ef7a7396d000e4c4"
+  },
+  {
+    "path": "ee_site/frontend/package.json",
+    "bytes": 1157,
+    "sha256": "c266b0ee75d48a9f8002efe225f9c9afff24b9c33ba4501d086670f2973b59aa"
+  },
+  {
+    "path": "ee_site/frontend/scripts/prepare-design-hero.py",
+    "bytes": 1018,
+    "sha256": "4398c7aa91eb5581aebed467946894d49a8dc71ab84a4f21d0222839665dce8e"
+  },
+  {
+    "path": "ee_site/frontend/scripts/release-fixes-browser.mjs",
+    "bytes": 7149,
+    "sha256": "e93209ff4dd97df373a23809d087cd56e57191d50b7659bd1f3fe3bf22906cec"
+  },
+  {
+    "path": "ee_site/frontend/scripts/toolchain.test.mjs",
+    "bytes": 1474,
+    "sha256": "fdf972dfa718a14e17041bb6cf5cdd016ccdd572f5e0d85d5a27999b90a72523"
+  },
+  {
+    "path": "ee_site/frontend/src/api/leadDraftContent.js",
+    "bytes": 760,
+    "sha256": "8855b730cbcaccff245188ab6f8a6ae3c90747fbd347c4b6bd7e021d6dfbbfe9"
+  },
+  {
+    "path": "ee_site/frontend/src/api/leadDraftContent.test.js",
+    "bytes": 1991,
+    "sha256": "9c2a37cba22e33fb57c8464076f37193b3bf8c604800d2cdf0980aa8a16b86c8"
+  },
+  {
+    "path": "ee_site/frontend/src/assets/services/design/design-1536.webp",
+    "bytes": 300456,
+    "sha256": "763a86f44a1b6b9de98093b4c5b338ae5d6df430a1916fe15ab463a3f42437a6"
+  },
+  {
+    "path": "ee_site/frontend/src/assets/services/design/design-480.webp",
+    "bytes": 48898,
+    "sha256": "0266cebabcdc07dc5d7e18aa9ac72e4225d6350410881f082ac743db38edb76e"
+  },
+  {
+    "path": "ee_site/frontend/src/assets/services/design/design-960.webp",
+    "bytes": 147120,
+    "sha256": "800fb42ba0b190f3ef6c6bedbc7d2b594540b1a277d9c864719daae65bb9011c"
+  },
+  {
+    "path": "ee_site/frontend/src/components/AiSummary/AiSummary.css",
+    "bytes": 2600,
+    "sha256": "ac77dd5c49bdcf35590e17d3e47d5f9bdbd4f932e0d2de9fca38b49babe02d68"
+  },
+  {
+    "path": "ee_site/frontend/src/components/CaseCard/CaseCard.css",
+    "bytes": 7371,
+    "sha256": "8272d9c585e622ba5a5e2b7c23482fd73648f618f6bd9e211bd5745083efdc34"
+  },
+  {
+    "path": "ee_site/frontend/src/components/EntitySwitcher/EntitySwitcher.css",
+    "bytes": 7513,
+    "sha256": "4c3c7bbc8c9446eeea5176422d412bd173017f07ce6325e48c56736f341cd559"
+  },
+  {
+    "path": "ee_site/frontend/src/components/FileSelect/FileSelect.css",
+    "bytes": 7617,
+    "sha256": "e3a1c55c273f094e43874ab89dc93dcee7e4e19a14806b7f3478ef04cb390dfa"
+  },
+  {
+    "path": "ee_site/frontend/src/components/FileSelect/FileSelect.jsx",
+    "bytes": 6561,
+    "sha256": "72e0e163762edd9a632f3567a4877e5669f8dc67576c23c63a97ccf59ccb8f5b"
+  },
+  {
+    "path": "ee_site/frontend/src/components/Header/Header.css",
+    "bytes": 4413,
+    "sha256": "58b3445191f22a454a60621fd87703c76398bf814f70ce8f3f760561eb494dbd"
+  },
+  {
+    "path": "ee_site/frontend/src/components/LeadForm/LeadForm.css",
+    "bytes": 10716,
+    "sha256": "6f84c78ada17f5989e52342e4868951104b4b4354dacf13ccd4386e99483b856"
+  },
+  {
+    "path": "ee_site/frontend/src/components/LeadForm/LeadForm.jsx",
+    "bytes": 14355,
+    "sha256": "2ad6069045bde67543122259593c0cbac1354646fbe1b1db52237919b860f521"
+  },
+  {
+    "path": "ee_site/frontend/src/components/ScrollToTop/ScrollToTop.jsx",
+    "bytes": 12453,
+    "sha256": "873c47a9a83cd59282742089fa4280e64856a9a29d6c71840afcea0352d25e14"
+  },
+  {
+    "path": "ee_site/frontend/src/components/SectionHeader/SectionHeader.css",
+    "bytes": 3131,
+    "sha256": "0dced9d27b30b6954f8f682943c01cd12dfd58b0df248a3412526da7d619a758"
+  },
+  {
+    "path": "ee_site/frontend/src/data/services.js",
+    "bytes": 28347,
+    "sha256": "aa86756945e34f8e5b478ec19a82c6e16ba1dca698089dd782b5321cb9ec79e5"
+  },
+  {
+    "path": "ee_site/frontend/src/pages/HomePage/HomePage.css",
+    "bytes": 3589,
+    "sha256": "838801431254e43ca92b614a395fe5dff09b25f9263e9ba1eda4449b7f980e31"
+  },
+  {
+    "path": "ee_site/frontend/src/pages/ServicePage/ServicePage.jsx",
+    "bytes": 19850,
+    "sha256": "4146aceb1c230c0a07107e83b28f91a6b88949833649388c8e1ec505c3191544"
+  },
+  {
+    "path": "ee_site/frontend/src/questionnaires/QuestionnaireEditor.css",
+    "bytes": 11899,
+    "sha256": "38d14d6150075b30bca6b75c48cc8b0b90a3b0b52ced7a5ac715198891a089fc"
+  },
+  {
+    "path": "ee_site/frontend/src/styles/buttons.css",
+    "bytes": 919,
+    "sha256": "7b96add1c48a3c5f41920bcda6049ddafee39ff3473eb818bef7caad92c7529f"
+  },
+  {
+    "path": "ee_site/frontend/src/styles/cases.css",
+    "bytes": 927,
+    "sha256": "86f8c2c10f3fcef19944995ae29b098a3cac5e41b868f84003b8a31450a6d3a4"
+  },
+  {
+    "path": "ee_site/frontend/src/styles/variables.css",
+    "bytes": 775,
+    "sha256": "5517e79a3cacf632b3351035dfa467378f7f72519c6aa852a558fb9cc4815120"
+  }
+]

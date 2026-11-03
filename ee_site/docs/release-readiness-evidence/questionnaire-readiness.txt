@@ -1,0 +1,1 @@
+Questionnaire DB/schema/font/private storage: ready. Confirm supervised worker separately. No SMTP sent.

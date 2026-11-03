@@ -1,0 +1,1325 @@
+{
+  "conditions": {
+    "viewport": "390x900",
+    "cpu": 4,
+    "latency_ms": 100,
+    "download_bytes_s": 200000,
+    "cache": "cold",
+    "gzip": "off in local fixture",
+    "browser": "154.0.8037.57"
+  },
+  "rows": [
+    {
+      "lcp": 2212,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        117,
+        106
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/hero-480-C6hdW779.webp",
+          "transfer": 50448,
+          "decoded": 50148,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/assets/bmk-card-e85o9bQ4.webp",
+          "transfer": 154906,
+          "decoded": 154606,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-gigaterm-WNPT5sAP.png",
+          "transfer": 80204,
+          "decoded": 79904,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "img"
+        },
+        {
+          "url": "/assets/vns-aquarus-new-DP7umMxq.webp",
+          "transfer": 107266,
+          "decoded": 106966,
+          "type": "img"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "img"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 8311.5,
+        "navigationId": 9698,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.6999999999534339,
+        "domainLookupStart": 0.6999999999534339,
+        "domainLookupEnd": 0.6999999999534339,
+        "connectStart": 0.6999999999534339,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.6999999999534339,
+        "requestStart": 14.900000000139698,
+        "responseStart": 15.400000000139698,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 15.400000000139698,
+        "responseEnd": 358,
+        "transferSize": 37415,
+        "encodedBodySize": 37115,
+        "decodedBodySize": 37115,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 364.69999999995343,
+        "domContentLoadedEventStart": 8303.300000000047,
+        "domContentLoadedEventEnd": 8305,
+        "domComplete": 8311.40000000014,
+        "loadEventStart": 8311.5,
+        "loadEventEnd": 8311.5,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      },
+      "route": "/",
+      "run": 1
+    },
+    {
+      "lcp": 2268,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        87,
+        181,
+        99,
+        72,
+        62
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/hero-480-C6hdW779.webp",
+          "transfer": 50448,
+          "decoded": 50148,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/assets/bmk-card-e85o9bQ4.webp",
+          "transfer": 154906,
+          "decoded": 154606,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-gigaterm-WNPT5sAP.png",
+          "transfer": 80204,
+          "decoded": 79904,
+          "type": "img"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "img"
+        },
+        {
+          "url": "/assets/vns-aquarus-new-DP7umMxq.webp",
+          "transfer": 107266,
+          "decoded": 106966,
+          "type": "img"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 8451.5,
+        "navigationId": 8611,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 1.3999999999068677,
+        "domainLookupStart": 1.3999999999068677,
+        "domainLookupEnd": 1.3999999999068677,
+        "connectStart": 1.3999999999068677,
+        "secureConnectionStart": 0,
+        "connectEnd": 1.3999999999068677,
+        "requestStart": 7.199999999953434,
+        "responseStart": 7.600000000093132,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 7.600000000093132,
+        "responseEnd": 371.69999999995343,
+        "transferSize": 37415,
+        "encodedBodySize": 37115,
+        "decodedBodySize": 37115,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 376.5,
+        "domContentLoadedEventStart": 8323.800000000047,
+        "domContentLoadedEventEnd": 8324.600000000093,
+        "domComplete": 8451.5,
+        "loadEventStart": 8451.5,
+        "loadEventEnd": 8451.5,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      },
+      "route": "/",
+      "run": 2
+    },
+    {
+      "lcp": 2372,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        134,
+        176
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/hero-480-C6hdW779.webp",
+          "transfer": 50448,
+          "decoded": 50148,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/assets/bmk-card-e85o9bQ4.webp",
+          "transfer": 154906,
+          "decoded": 154606,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-gigaterm-WNPT5sAP.png",
+          "transfer": 80204,
+          "decoded": 79904,
+          "type": "img"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "img"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "img"
+        },
+        {
+          "url": "/assets/vns-aquarus-new-DP7umMxq.webp",
+          "transfer": 107266,
+          "decoded": 106966,
+          "type": "img"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 8483.899999999907,
+        "navigationId": 2805,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.5,
+        "domainLookupStart": 0.5,
+        "domainLookupEnd": 0.5,
+        "connectStart": 0.5,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.5,
+        "requestStart": 6.800000000046566,
+        "responseStart": 7.899999999906868,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 7.899999999906868,
+        "responseEnd": 293.60000000009313,
+        "transferSize": 37415,
+        "encodedBodySize": 37115,
+        "decodedBodySize": 37115,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 360.89999999990687,
+        "domContentLoadedEventStart": 8475.600000000093,
+        "domContentLoadedEventEnd": 8475.699999999953,
+        "domComplete": 8483.800000000047,
+        "loadEventStart": 8483.800000000047,
+        "loadEventEnd": 8483.899999999907,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      },
+      "route": "/",
+      "run": 3
+    },
+    {
+      "lcp": 11980,
+      "cls": 0.0015643304843304844,
+      "longTasks": [
+        56,
+        140,
+        80
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/service-design-hero-BpEm7DTg.jpg",
+          "transfer": 1536085,
+          "decoded": 1535785,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/services/design",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 11956.800000000047,
+        "navigationId": 6320,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.30000000004656613,
+        "domainLookupStart": 0.30000000004656613,
+        "domainLookupEnd": 0.30000000004656613,
+        "connectStart": 0.30000000004656613,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.30000000004656613,
+        "requestStart": 6.300000000046566,
+        "responseStart": 7,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 7,
+        "responseEnd": 380.5999999998603,
+        "transferSize": 38906,
+        "encodedBodySize": 38606,
+        "decodedBodySize": 38606,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 384.39999999990687,
+        "domContentLoadedEventStart": 6989.899999999907,
+        "domContentLoadedEventEnd": 6990.199999999953,
+        "domComplete": 11956.800000000047,
+        "loadEventStart": 11956.800000000047,
+        "loadEventEnd": 11956.800000000047,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      },
+      "route": "/services/design",
+      "run": 1
+    },
+    {
+      "lcp": 11992,
+      "cls": 0.0015643304843304844,
+      "longTasks": [
+        199,
+        99
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/service-design-hero-BpEm7DTg.jpg",
+          "transfer": 1536085,
+          "decoded": 1535785,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/services/design",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 11965,
+        "navigationId": 2592,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.39999999990686774,
+        "domainLookupStart": 0.39999999990686774,
+        "domainLookupEnd": 0.39999999990686774,
+        "connectStart": 0.39999999990686774,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.39999999990686774,
+        "requestStart": 6,
+        "responseStart": 6.399999999906868,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 6.399999999906868,
+        "responseEnd": 425.19999999995343,
+        "transferSize": 38906,
+        "encodedBodySize": 38606,
+        "decodedBodySize": 38606,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 431.0999999998603,
+        "domContentLoadedEventStart": 7079.09999999986,
+        "domContentLoadedEventEnd": 7079.59999999986,
+        "domComplete": 11964.5,
+        "loadEventStart": 11965,
+        "loadEventEnd": 11965,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      },
+      "route": "/services/design",
+      "run": 2
+    },
+    {
+      "lcp": 11980,
+      "cls": 0.0015643304843304844,
+      "longTasks": [
+        162,
+        127,
+        61
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/service-design-hero-BpEm7DTg.jpg",
+          "transfer": 1536085,
+          "decoded": 1535785,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/services/design",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 11959.399999999907,
+        "navigationId": 500,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.5,
+        "domainLookupStart": 0.5,
+        "domainLookupEnd": 0.5,
+        "connectStart": 0.5,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.5,
+        "requestStart": 5.300000000046566,
+        "responseStart": 6.899999999906868,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 6.899999999906868,
+        "responseEnd": 323.5,
+        "transferSize": 38906,
+        "encodedBodySize": 38606,
+        "decodedBodySize": 38606,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 328.10000000009313,
+        "domContentLoadedEventStart": 7027.199999999953,
+        "domContentLoadedEventEnd": 7028,
+        "domComplete": 11959.300000000047,
+        "loadEventStart": 11959.399999999907,
+        "loadEventEnd": 11959.399999999907,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      },
+      "route": "/services/design",
+      "run": 3
+    },
+    {
+      "lcp": 5140,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        164,
+        122,
+        62
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "link"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/api/leads/questionnaire-capabilities/",
+          "transfer": 365,
+          "decoded": 65,
+          "type": "fetch"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/solutions/btp",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 6391.699999999953,
+        "navigationId": 4058,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.5999999998603016,
+        "domainLookupStart": 0.5999999998603016,
+        "domainLookupEnd": 0.5999999998603016,
+        "connectStart": 0.5999999998603016,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.5999999998603016,
+        "requestStart": 21.5999999998603,
+        "responseStart": 22.699999999953434,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 22.699999999953434,
+        "responseEnd": 396.79999999981374,
+        "transferSize": 37541,
+        "encodedBodySize": 37241,
+        "decodedBodySize": 37241,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 404.5,
+        "domContentLoadedEventStart": 6381.699999999953,
+        "domContentLoadedEventEnd": 6382.5,
+        "domComplete": 6391.59999999986,
+        "loadEventStart": 6391.699999999953,
+        "loadEventEnd": 6391.699999999953,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      },
+      "route": "/solutions/btp",
+      "run": 1
+    },
+    {
+      "lcp": 5140,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        56,
+        119,
+        88
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "link"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/api/leads/questionnaire-capabilities/",
+          "transfer": 365,
+          "decoded": 65,
+          "type": "fetch"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/solutions/btp",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 6347.200000000186,
+        "navigationId": 6836,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.8000000000465661,
+        "domainLookupStart": 0.8000000000465661,
+        "domainLookupEnd": 0.8000000000465661,
+        "connectStart": 0.8000000000465661,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.8000000000465661,
+        "requestStart": 18.600000000093132,
+        "responseStart": 18.9000000001397,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 18.9000000001397,
+        "responseEnd": 422.5,
+        "transferSize": 37541,
+        "encodedBodySize": 37241,
+        "decodedBodySize": 37241,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 428.10000000009313,
+        "domContentLoadedEventStart": 6338.800000000047,
+        "domContentLoadedEventEnd": 6339.90000000014,
+        "domComplete": 6347.200000000186,
+        "loadEventStart": 6347.200000000186,
+        "loadEventEnd": 6347.200000000186,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      },
+      "route": "/solutions/btp",
+      "run": 2
+    },
+    {
+      "lcp": 5140,
+      "cls": 0.00013444444444444444,
+      "longTasks": [
+        117,
+        89
+      ],
+      "resources": [
+        {
+          "url": "/assets/policy-DuWXjjRp.js",
+          "transfer": 3850,
+          "decoded": 3550,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Dkp5zjgz.js",
+          "transfer": 515580,
+          "decoded": 515280,
+          "type": "script"
+        },
+        {
+          "url": "/assets/main-Db7SbTMQ.css",
+          "transfer": 104334,
+          "decoded": 104034,
+          "type": "link"
+        },
+        {
+          "url": "/assets/energoeffect-logo-orange-ROjhfbeo.svg",
+          "transfer": 56073,
+          "decoded": 55773,
+          "type": "link"
+        },
+        {
+          "url": "/assets/btp-energolain-new-BWpIvwfb.webp",
+          "transfer": 299192,
+          "decoded": 298892,
+          "type": "link"
+        },
+        {
+          "url": "/assets/logo-energolain--kIeBlDp.png",
+          "transfer": 85455,
+          "decoded": 85155,
+          "type": "link"
+        },
+        {
+          "url": "/assets/golos-text-cyrillic-wght-normal-mKek_fSS.woff2",
+          "transfer": 22332,
+          "decoded": 22032,
+          "type": "css"
+        },
+        {
+          "url": "/assets/golos-text-latin-wght-normal-BS5oQT7X.woff2",
+          "transfer": 38216,
+          "decoded": 37916,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-cyrillic-wght-normal-DXI_y_WF.woff2",
+          "transfer": 14528,
+          "decoded": 14228,
+          "type": "css"
+        },
+        {
+          "url": "/assets/onest-latin-wght-normal-CUIqqgP9.woff2",
+          "transfer": 32536,
+          "decoded": 32236,
+          "type": "css"
+        },
+        {
+          "url": "/api/leads/questionnaire-capabilities/",
+          "transfer": 365,
+          "decoded": 65,
+          "type": "fetch"
+        },
+        {
+          "url": "/favicon.svg",
+          "transfer": 38423,
+          "decoded": 38123,
+          "type": "other"
+        },
+        {
+          "url": "/favicon.ico",
+          "transfer": 0,
+          "decoded": 0,
+          "type": "other"
+        }
+      ],
+      "navigation": {
+        "name": "http://127.0.0.1:8088/solutions/btp",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 6326.5,
+        "navigationId": 1166,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.39999999990686774,
+        "domainLookupStart": 0.39999999990686774,
+        "domainLookupEnd": 0.39999999990686774,
+        "connectStart": 0.39999999990686774,
+        "secureConnectionStart": 0,
+        "connectEnd": 0.39999999990686774,
+        "requestStart": 6.300000000046566,
+        "responseStart": 7,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 7,
+        "responseEnd": 345.60000000009313,
+        "transferSize": 37541,
+        "encodedBodySize": 37241,
+        "decodedBodySize": 37241,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 350.39999999990687,
+        "domContentLoadedEventStart": 6318.699999999953,
+        "domContentLoadedEventEnd": 6319.600000000093,
+        "domComplete": 6326.399999999907,
+        "loadEventStart": 6326.5,
+        "loadEventEnd": 6326.5,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      },
+      "route": "/solutions/btp",
+      "run": 3
+    }
+  ]
+}

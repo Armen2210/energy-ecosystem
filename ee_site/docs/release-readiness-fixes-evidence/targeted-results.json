@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "360: empty clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "360: enabled clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "360: disabled-answers clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "360: mixed-retry clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "360: reduced-motion entryScroll stays at top without animated frames",
+    "360: responsive WebP drawing loads with intrinsic dimensions",
+    "1440: empty clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "1440: enabled clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "1440: disabled-answers clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "1440: mixed-retry clear/cancel/confirm preserves draft/files/retry until confirmation",
+    "1440: reduced-motion entryScroll stays at top without animated frames",
+    "1440: responsive WebP drawing loads with intrinsic dimensions"
+  ],
+  "errors": [],
+  "blocked": []
+}

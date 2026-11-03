@@ -1,0 +1,23 @@
+
+> frontend@0.0.0 test:prerender
+> node --test scripts/prerender.test.mjs scripts/final-package.test.mjs
+
+✔ catalog HTML and detail breadcrumbs preserve distinct header/footer/home returns (37.989827ms)
+✔ 27 ordered images have optimized responsive assets and no old hidden content/viewer (18.534439ms)
+✔ product prerender includes registry downloads in the lightweight questionnaire header (33.376819ms)
+✔ build options preserve quoted paths and reject unsupported or malformed arguments (1298.075441ms)
+✔ custom output with spaces contains all artifacts and leaves dist unchanged (1471.862951ms)
+✔ prerender checks registered files and rejects unregistered file-looking links (14.789046ms)
+✔ all declared artifacts pass the mandatory content/metadata/isolation checks (50.140082ms)
+✔ mandatory validation rejects a shell instead of public content (1.717983ms)
+✔ mandatory validation rejects missing metadata, dead links and stale consent (9.141198ms)
+✔ mandatory validation rejects visitor fields and an enabled pre-hydration form (6.254609ms)
+✔ mandatory validation rejects FAQ JSON-LD that differs from visible answers (4.926704ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2953.487259

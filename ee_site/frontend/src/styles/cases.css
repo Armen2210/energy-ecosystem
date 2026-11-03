@@ -8,7 +8,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  color: var(--color-red);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 650;

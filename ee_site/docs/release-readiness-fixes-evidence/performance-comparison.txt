@@ -1,0 +1,6 @@
+before /services/design 1 LCP 12200 CLS 0.0015643304843304844 longTasks 9
+before /services/design 2 LCP 13116 CLS 0.0015643304843304844 longTasks 7
+before /services/design 3 LCP 11988 CLS 0.0015643304843304844 longTasks 4
+after /services/design 1 LCP 2280 CLS 0.0015643304843304844 longTasks 3
+after /services/design 2 LCP 2304 CLS 0.0015643304843304844 longTasks 2
+after /services/design 3 LCP 2248 CLS 0.0015643304843304844 longTasks 4

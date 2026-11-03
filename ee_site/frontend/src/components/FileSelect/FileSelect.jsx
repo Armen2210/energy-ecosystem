@@ -157,6 +157,7 @@ function FileSelect({
         className="file-select__input"
         type="file"
         name="attachments"
+        aria-label="Документы к заявке"
         multiple
         disabled={disabled}
         onChange={handleFileChange}

@@ -12,7 +12,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import CommandError, call_command
 from django.db import DatabaseError
 from django.db.models.query import QuerySet
-from django.test import RequestFactory, TestCase, override_settings
+from django.test import RequestFactory, TransactionTestCase, override_settings
 
 from apps.leads.admin import LeadAdmin
 from apps.leads.email_notifications import _send_email
@@ -27,7 +27,7 @@ def unlocked_migration(_apply):
     yield
 
 
-class LegacyAttachmentMigrationTests(TestCase):
+class LegacyAttachmentMigrationTests(TransactionTestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
@@ -88,8 +88,11 @@ class LegacyAttachmentMigrationTests(TestCase):
             with patch("builtins.__import__", side_effect=without_fcntl):
                 output, _ = self.run_command()
                 self.assertIn("DRY-RUN", output)
-                with self.assertRaisesMessage(CommandError, "unsupported"):
-                    self.run_command("--apply")
+                # The unsupported-platform guard is SQLite-specific. Exercise it
+                # even when the suite itself uses PostgreSQL advisory locks.
+                with patch.object(migrate_legacy_lead_attachments.connection, "vendor", "sqlite"):
+                    with self.assertRaisesMessage(CommandError, "unsupported"):
+                        self.run_command("--apply")
             self.assertFalse(LeadAttachment.objects.exists())
             private_root = Path(self.temporary.name) / "private"
             self.assertFalse(private_root.exists())

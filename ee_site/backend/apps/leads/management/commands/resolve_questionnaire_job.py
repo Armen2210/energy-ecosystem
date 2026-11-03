@@ -5,7 +5,7 @@ from apps.leads.models import QuestionnaireJob, Lead
 
 
 class Command(BaseCommand):
-    help = "Resolve an uncertain SMTP result only after operator investigation; default is read-only."
+    help = "Resolve an uncertain SMTP result only after operator investigation; inspection does not change rows but takes a transaction row lock."
 
     def add_arguments(self, parser):
         parser.add_argument("--lead", type=int, required=True)
