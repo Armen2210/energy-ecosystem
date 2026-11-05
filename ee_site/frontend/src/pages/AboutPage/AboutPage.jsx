@@ -57,20 +57,21 @@ export default function AboutPage() {
               );
 
               // Ширина пропорциональна форме кадра.
-              const photoShare = pair.length === 1 ? 0.5 : ratio / pairRatio;
+              const mobileShare = pair.length === 1 ? 0.5 : ratio / pairRatio;
 
               return (
                 <li
                   key={photo.number}
                   data-photo={photo.number}
                   style={{
-                    "--photo-share": photoShare,
+                    "--photo-ratio": ratio,
+                    "--mobile-photo-share": mobileShare,
                   }}
                 >
                   <img
                     src={photo.src}
                     srcSet={photo.srcSet}
-                    sizes={`calc((100vw - 44px) * ${photoShare})`}
+                    sizes={`(max-width: 640px) calc((100vw - 44px) * ${mobileShare}), (max-width: 960px) 45vw, 40vw`}
                     width={photo.width}
                     height={photo.height}
                     alt={photo.alt}

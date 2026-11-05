@@ -1,0 +1,66 @@
+[
+  {
+    "mode": "capability",
+    "result": "editor opened; answers/contacts preserved",
+    "files": "preserved"
+  },
+  {
+    "mode": "module",
+    "result": "editor opened; answers/contacts preserved",
+    "files": "reselect after reload, as warned"
+  },
+  {
+    "from": "/",
+    "reducedMotion": "no-preference",
+    "calls": [
+      {
+        "top": 685.265625,
+        "left": 0,
+        "behavior": "smooth"
+      }
+    ]
+  },
+  {
+    "from": "/about",
+    "reducedMotion": "no-preference",
+    "calls": [
+      {
+        "top": 685.265625,
+        "left": 0,
+        "behavior": "smooth"
+      }
+    ]
+  },
+  {
+    "from": "/",
+    "reducedMotion": "reduce",
+    "calls": [
+      {
+        "top": 685.265625,
+        "left": 0,
+        "behavior": "instant"
+      }
+    ]
+  },
+  {
+    "from": "/about",
+    "reducedMotion": "reduce",
+    "calls": [
+      {
+        "top": 685.265625,
+        "left": 0,
+        "behavior": "instant"
+      }
+    ]
+  },
+  {
+    "metrika": "blocked",
+    "requests": 2,
+    "result": "no request before consent/after denial; consent starts, navigation works, revoke removes iframe"
+  },
+  {
+    "metrika": "slow",
+    "requests": 1,
+    "result": "no request before consent/after denial; consent starts, navigation works, revoke removes iframe"
+  }
+]

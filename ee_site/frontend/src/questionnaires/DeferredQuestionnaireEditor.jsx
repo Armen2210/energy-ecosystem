@@ -22,7 +22,6 @@ export default function DeferredQuestionnaireEditor(props) {
   const [near, setNear] = useState(false);
   const [Editor, setEditor] = useState(null);
   const [error, setError] = useState(false);
-  const [attempt, setAttempt] = useState(0);
   const needed =
     supported && backend === "ready" && (near || !!draft.questionnaires[product]?.enabled);
   useEffect(() => {
@@ -60,7 +59,7 @@ export default function DeferredQuestionnaireEditor(props) {
     return () => {
       current = false;
     };
-  }, [needed, Editor, attempt]);
+  }, [needed, Editor]);
   useEffect(() => {
     const header = document.querySelector(".header");
     const panel = target.current;
@@ -101,12 +100,14 @@ export default function DeferredQuestionnaireEditor(props) {
                 )
           ) : error ? (
             <>
-              Не удалось загрузить редактор. Ответы и данные заявки сохранены;
-              включённые ОЛ остаются в составе отправки.{" "}
-              <button type="button" className="lead-form__clear" onClick={() => {
-                setError(false);
-                setAttempt((value) => value + 1);
-              }}>Повторить загрузку</button>
+              Не удалось загрузить файл редактора. Для новой попытки обновите страницу.
+              Включённые ОЛ остаются в составе заявки и не будут исключены из отправки.{" "}
+              {draft.storageNotice.includes("недоступно") || draft.storageNotice.includes("Не удалось")
+                ? "Хранилище недоступно: обновление может удалить ответы и контакты. Сначала скопируйте их."
+                : "Ответы и контакты сохраняются в этой вкладке на 24 часа без изменений. После обновления подтвердите согласие и выберите файлы заново."}{" "}
+              <button type="button" className="lead-form__clear" onClick={() => window.location.reload()}>
+                Обновить страницу
+              </button>
             </>
           ) : needed ? "Загружаем редактор опросного листа…" : "Электронный опросный лист доступен ниже."}
         </div>
