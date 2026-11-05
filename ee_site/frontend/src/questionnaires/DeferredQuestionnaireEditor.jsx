@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { leadDraft } from "../api/leadDraft.js";
 import { selectedProduct } from "./state.js";
 import QuestionnaireHeader from "./QuestionnaireHeader.jsx";
-import { useQuestionnaireBackend } from "./capabilities.js";
+import { retryQuestionnaireBackend, useQuestionnaireBackend } from "./capabilities.js";
 import { useViewportAnchor } from "./useViewportAnchor.js";
 import { initialQuestionnaire, contract } from "./domain.js";
 
@@ -69,6 +69,7 @@ export default function DeferredQuestionnaireEditor(props) {
       "--ql-sticky-top", `${header.getBoundingClientRect().height}px`,
     );
     measure();
+    if (!("ResizeObserver" in window)) return;
     const observer = new ResizeObserver(measure);
     observer.observe(header, { box: "border-box" });
     return () => observer.disconnect();
@@ -90,7 +91,14 @@ export default function DeferredQuestionnaireEditor(props) {
           {backend !== "ready" ? (
             backend === "loading"
               ? "Проверяем доступность электронных опросных листов…"
-              : "Электронные опросные листы временно недоступны. Сохранённые ответы не удалены."
+              : (
+                  <>
+                    Электронные опросные листы временно недоступны. Сохранённые ответы не удалены.{" "}
+                    <button type="button" className="lead-form__clear" onClick={retryQuestionnaireBackend}>
+                      Проверить снова
+                    </button>
+                  </>
+                )
           ) : error ? (
             <>
               Не удалось загрузить редактор. Ответы и данные заявки сохранены;

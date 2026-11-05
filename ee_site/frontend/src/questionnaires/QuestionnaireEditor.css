@@ -582,7 +582,9 @@
 }
 .ql-downloads a {
   display: inline-block;
-  color: var(--color-text);
+  color: var(--color-red-dark);
+  font-weight: 650;
+  text-decoration: underline;
   text-underline-offset: 3px;
 }
 .ql-downloads a:hover {

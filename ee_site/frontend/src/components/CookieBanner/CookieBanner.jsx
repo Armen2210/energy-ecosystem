@@ -56,8 +56,8 @@ export default function CookieBanner() {
           {opened && <p className="cookie-banner__status">Сейчас аналитика: {choice === "allowed" ? "разрешена" : "выключена"}.</p>}
         </div>
         <div className="cookie-banner__actions">
-          <button ref={accept} type="button" onClick={() => choose("allowed")}>Разрешить аналитику</button>
-          <button type="button" onClick={() => choose("denied")}>Без аналитики</button>
+          <button className="cookie-banner__decline" type="button" onClick={() => choose("denied")}>Без аналитики</button>
+          <button className="cookie-banner__accept" ref={accept} type="button" onClick={() => choose("allowed")}>Разрешить аналитику</button>
           {opened && choice !== "unknown" && <button type="button" onClick={() => { setOpened(false); returnFocus.current?.focus(); }}>Закрыть</button>}
         </div>
       </div>

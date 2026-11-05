@@ -35,3 +35,7 @@
   .documents-page .page-navigation__breadcrumb { flex: 0 1 auto; flex-wrap: wrap; white-space: normal; }
   .documents-page .page-navigation__breadcrumb-item:last-child { display: inline-flex; }
 }
+
+@media (min-width: 961px) {
+  .documents-page h3 { color: var(--color-text); font-weight: 400; }
+}

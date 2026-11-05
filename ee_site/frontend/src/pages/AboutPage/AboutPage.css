@@ -68,23 +68,24 @@
 .about-page__gallery-section {
   margin-block: 44px;
 }
-/* Row flex flow keeps numeric DOM and visual reading order. No columns/dense/order or cropping. */
+/* Consecutive pairs share each row in proportion to their native aspect ratios. */
 .about-page__gallery {
+  --gallery-gap: 20px;
   display: flex;
   flex-wrap: wrap;
-  align-items: start;
-  gap: 20px;
+  align-items: flex-start;
+  gap: var(--gallery-gap);
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .about-page__gallery li {
-  --photo-ratio: 1;
   min-width: 0;
-  flex: var(--photo-ratio) 1 calc(var(--photo-ratio) * 210px);
+  flex: 0 0 calc((100% - var(--gallery-gap) - 1px) * var(--photo-share, .5));
 }
 .about-page__gallery li:last-child {
   max-width: 480px;
+  margin-inline: auto;
 }
 .about-page__gallery img {
   display: block;
@@ -110,10 +111,7 @@
     max-width: 440px;
   }
   .about-page__gallery {
-    gap: 16px;
-  }
-  .about-page__gallery li {
-    flex-basis: calc(var(--photo-ratio) * 160px);
+    --gallery-gap: 16px;
   }
 }
 @media (max-width: 640px) {
@@ -139,23 +137,7 @@
     margin-block: 28px;
   }
   .about-page__gallery {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .about-page__gallery li {
-    --mobile-photo-share: 0.5;
-    flex: 0 0 calc((100% - 12px) * var(--mobile-photo-share));
-    width: auto;
-    min-width: 0;
-    max-width: none;
-  }
-
-  /* Последнюю непарную фотографию располагаем по центру. */
-  .about-page__gallery li:last-child {
-    margin-inline: auto;
+    --gallery-gap: 12px;
   }
 
   .about-page__gallery img {
