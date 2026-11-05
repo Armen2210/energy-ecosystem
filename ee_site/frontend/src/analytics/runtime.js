@@ -2,10 +2,10 @@ import { CONSENT_DAYS, DAY, GOALS, KEYS, ORIGIN, campaign, pageParams, permitted
 import { createStore } from "./store.js";
 import { createPending } from "./pending.js";
 
-export function createAnalytics({ window: win, document: doc, production, enabled, now = Date.now }) {
+export function createAnalytics({ window: win, document: doc, production, enabled, now = Date.now, consentVersion = import.meta.env?.VITE_CALLTOUCH_ENABLED === "true" ? 2 : 1 }) {
   let storage;
   try { storage = win?.localStorage; } catch { /* fail closed */ }
-  const store = createStore(storage, now);
+  const store = createStore(storage, now, consentVersion);
   let sessionStorage;
   try { sessionStorage = win?.sessionStorage; } catch { /* memory-only retry */ }
   const pending = createPending(sessionStorage, now);

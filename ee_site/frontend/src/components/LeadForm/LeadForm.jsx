@@ -1,3 +1,4 @@
+import { calltouch } from "../../analytics/calltouch.js";
 // =========================================================
 // LEAD FORM / ФОРМА ЗАЯВКИ
 // MVP-форма заявки.
@@ -119,6 +120,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     setLeadAttachments(formData, leadDraft.get().files);
 
     // Acquire the tab-wide lock before hashing; unmounting never releases it.
+    const calltouchSnapshot = calltouch.snapshot();
     const operation = {};
     leadDraft.update({ submitting: true, operation, status: "idle", message: "" });
     const ownsDraft = () => leadDraft.get().operation === operation;
@@ -150,7 +152,10 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       analytics.rememberSubmission(submission, snapshot);
       if (attribution) formData.set("campaign_attribution", JSON.stringify(attribution));
       formData.set("submission_id", submission.id);
-      await createLead(formData);
+      const savedLead = await createLead(formData);
+      // Optional reporting starts only after the API has confirmed all included OL.
+      // It cannot turn a saved Lead into a form error or delay the success UI.
+      try { calltouch.confirmed(savedLead, submission.id, calltouchSnapshot); } catch { /* optional */ }
       leadDraft.update({ indeterminate: false });
       analytics.success(submission.id, snapshot);
       for (const id of retryIds) analytics.forgetSubmission(id);

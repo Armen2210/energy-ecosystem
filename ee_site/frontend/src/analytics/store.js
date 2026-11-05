@@ -1,6 +1,6 @@
 import { ATTRIBUTION_DAYS, CONSENT_DAYS, DAY, KEYS, VERSION, campaign, validAttribution } from "./policy.js";
 
-export function createStore(storage, now = Date.now) {
+export function createStore(storage, now = Date.now, consentVersion = VERSION) {
   const read = key => { try { const raw = storage?.getItem(key); return raw && raw.length <= 20000 ? JSON.parse(raw) : null; } catch { return null; } };
   const write = (key, value) => { try { if (!storage) return false; storage.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
   const remove = key => { try { storage?.removeItem(key); } catch { /* inaccessible storage */ } };
@@ -10,13 +10,13 @@ export function createStore(storage, now = Date.now) {
   return {
     consent() {
       const value = read(KEYS.consent);
-      return value?.version === VERSION && ["allowed", "denied"].includes(value.choice)
+      return value?.version === consentVersion && ["allowed", "denied"].includes(value.choice)
         && Number.isSafeInteger(value.at) && value.at <= now() && value.at > now() - CONSENT_DAYS * DAY ? value.choice : "unknown";
     },
     consentExpiresAt() { const value = read(KEYS.consent); return value?.at ? value.at + CONSENT_DAYS * DAY : null; },
     consentAt() { return read(KEYS.consent)?.at || null; },
     choose(choice) {
-      const saved = write(KEYS.consent, { version: VERSION, choice, at: now() });
+      const saved = write(KEYS.consent, { version: consentVersion, choice, at: now() });
       // Never retain an older persisted permission after a failed new decision.
       if (!saved) remove(KEYS.consent);
       return saved;

@@ -1,0 +1,51 @@
+[
+  {
+    "scenario": "success",
+    "visits": 1,
+    "leads": 1,
+    "registrations": 1,
+    "result": "passed"
+  },
+  {
+    "scenario": "several-OL",
+    "visits": 1,
+    "leads": 1,
+    "registrations": 1,
+    "result": "passed"
+  },
+  {
+    "scenario": "invalid",
+    "visits": 1,
+    "leads": 0,
+    "registrations": 0,
+    "result": "passed"
+  },
+  {
+    "scenario": "duplicate",
+    "visits": 1,
+    "leads": 1,
+    "registrations": 0,
+    "result": "passed"
+  },
+  {
+    "scenario": "denied",
+    "visits": 0,
+    "leads": 1,
+    "registrations": 0,
+    "result": "passed"
+  },
+  {
+    "scenario": "revoke",
+    "visits": 1,
+    "leads": 1,
+    "registrations": 0,
+    "result": "passed"
+  },
+  {
+    "scenario": "blocked",
+    "visits": 1,
+    "leads": 1,
+    "registrations": 1,
+    "result": "passed"
+  }
+]

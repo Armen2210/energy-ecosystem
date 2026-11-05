@@ -1,10 +1,17 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { calltouch } from "./calltouch.js";
 import { analytics } from "./runtime.js";
 import { CASES, pageParams } from "./policy.js";
 
 export default function AnalyticsBridge() {
   const location = useLocation();
+  useEffect(() => {
+    const sync = () => calltouch.sync(analytics.getChoice());
+    sync();
+    const unsubscribe = analytics.subscribe(sync);
+    return () => { unsubscribe(); calltouch.stop(); };
+  }, []);
   useEffect(() => {
     // All page Seo effects complete before this task. StrictMode cancels its first task.
     const task = setTimeout(() => {
