@@ -197,7 +197,8 @@ test("required field totals follow applicable sections and choices, not completi
   assert.equal(requiredFieldCount("pns", { technical: { jockey: "Да", flow: "1" } }), 5);
   assert.equal(requiredFieldCount("pns", { technical: { jockey: "Нет", jockey_flow: "1" } }), 3);
   assert.equal(requiredFieldCount("vns", {}), 2);
-  assert.equal(requiredFieldCount("bmk", {}), 12);
+  assert.equal(requiredFieldCount("bmk", {}), 11);
+  assert.equal(requiredFieldCount("bmk", { fuel: { main: "Газ" } }), 12);
   assert.equal(requiredFieldCount("btp", { selectedSections: ["heating"] }), 13);
   assert.equal(requiredFieldCount("btp", { heating: { power: "1" } }), 7);
 });
