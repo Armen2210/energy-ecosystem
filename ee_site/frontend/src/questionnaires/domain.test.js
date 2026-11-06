@@ -7,6 +7,7 @@ import {
   serializeQuestionnaires,
   validateQuestionnaires,
   numberValue,
+  requiredFieldCount,
 } from "./domain.js";
 import {
   saveDraft,
@@ -189,4 +190,15 @@ test("unit toggles serialize exact source pairs in fields and outlets, including
     { value: "3.5", unit: "Гкал/ч" },
   );
   assert.notDeepEqual(changed, baseline);
+});
+
+test("required field totals follow applicable sections and choices, not completion", () => {
+  assert.equal(requiredFieldCount("pns", {}), 3);
+  assert.equal(requiredFieldCount("pns", { technical: { jockey: "Да", flow: "1" } }), 5);
+  assert.equal(requiredFieldCount("pns", { technical: { jockey: "Нет", jockey_flow: "1" } }), 3);
+  assert.equal(requiredFieldCount("vns", {}), 2);
+  assert.equal(requiredFieldCount("bmk", {}), 11);
+  assert.equal(requiredFieldCount("bmk", { fuel: { main: "Газ" } }), 12);
+  assert.equal(requiredFieldCount("btp", { selectedSections: ["heating"] }), 13);
+  assert.equal(requiredFieldCount("btp", { heating: { power: "1" } }), 7);
 });

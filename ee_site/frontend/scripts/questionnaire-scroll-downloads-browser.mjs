@@ -119,6 +119,31 @@ async function downloads(p, product, nativeDownload = false) {
   }
 }
 try {
+  for (const width of [390, 1440]) {
+    const { c, p } = await context(width, 844);
+    try {
+      await open(p, "bmk");
+      await p.getByRole("button", { name: "Заполнить онлайн", exact: false }).click();
+      const opener = p.getByRole("button", { name: "На весь экран" });
+      await opener.click();
+      const workspace = p.getByRole("dialog", { name: /Опросный лист/ });
+      const section = workspace.getByRole("combobox", { name: "Раздел опросного листа" });
+      const initial = await section.inputValue();
+      const field = workspace.locator(".ql-fields input").first();
+      await field.fill("17");
+      await workspace.getByRole("button", { name: "Следующий лист" }).click();
+      assert.notEqual(await section.inputValue(), initial);
+      await workspace.getByRole("button", { name: "Предыдущий лист" }).click();
+      assert.equal(await field.inputValue(), "17");
+      if (width < 961) await workspace.getByRole("button", { name: "Свернуть опросный лист" }).click();
+      else await p.keyboard.press("Escape");
+      await workspace.waitFor({ state: "hidden" });
+      assert.equal(await p.locator(".ql-fields input").first().inputValue(), "17");
+      assert.equal(await opener.evaluate(button => document.activeElement === button), true);
+    } finally {
+      await c.close();
+    }
+  }
   for (const width of [360, 390]) for (const restored of [false, true]) for (const product of Object.keys(titles)) {
     console.log(`Checking ${width}/${product}/restored=${restored}`);
     const { c, p } = await context(width, 844, { restored, product });

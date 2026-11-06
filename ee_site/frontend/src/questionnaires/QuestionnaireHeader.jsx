@@ -1,5 +1,5 @@
 import { documents } from "../data/documents.js";
-import { contract, initialQuestionnaire } from "./domain.js";
+import { contract, initialQuestionnaire, requiredFieldCount } from "./domain.js";
 import { updateQuestionnaire } from "./state.js";
 import { QuestionnaireSwitch } from "./QuestionnaireControls.jsx";
 
@@ -17,7 +17,7 @@ export default function QuestionnaireHeader({ product, backend, draft, anchor })
       <strong>Опросный лист {definition.title}</strong>
       <div className="ql-online">
         {q.enabled ? (
-          <small>Включён в заявку</small>
+          <small>Включён в заявку · обязательных полей: <span className="ql-required-count">{requiredFieldCount(product, q.answers)}</span></small>
         ) : (
           <button
             type="button"
