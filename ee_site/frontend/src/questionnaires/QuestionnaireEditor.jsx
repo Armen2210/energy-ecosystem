@@ -12,6 +12,7 @@ import {
   applicable,
   activeSheets,
   initialQuestionnaire,
+  requiredFieldCount,
   changeUnit,
   blank,
 } from "./domain.js";
@@ -85,7 +86,7 @@ function AnswerField({ field, value, onChange, path, errors, focusKey }) {
       if (!field) return;
       field.scrollIntoView({ block: "nearest", behavior: "instant" });
       field.querySelector("input,select,textarea")?.focus({ preventScroll: true });
-      if (window.matchMedia("(max-width: 960px)").matches) {
+      if (!field.closest("dialog:modal") && window.matchMedia("(max-width: 960px)").matches) {
         const header = document.querySelector(".header")?.getBoundingClientRect().height || 0;
         const nav = field.closest(".ql-panel")?.querySelector(".ql-nav");
         const visibleTop = header + (nav?.getBoundingClientRect().height || 0) + 12;
@@ -171,6 +172,13 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
   );
   const product = selectedProduct(d, products, initialTopic);
   const definition = contract.products[product];
+  const workspace = useRef(null);
+  const container = useRef(null);
+  const expandButton = useRef(null);
+  const closeButton = useRef(null);
+  const titleId = useId();
+  const restoreFocus = useRef(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const navigation = useRef(null);
   const anchor = useViewportAnchor();
   const body = useRef(null);
@@ -180,10 +188,10 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
     d.questionnaires[product]?.sheet || definition?.sheets[0]?.key;
   const currentScroll = d.questionnaires[product]?.scroll?.[currentSheet] || 0;
   useEffect(() => {
-    if (body.current && window.matchMedia("(min-width: 961px)").matches) {
+    if (body.current && (fullscreen || window.matchMedia("(min-width: 961px)").matches)) {
       body.current.scrollTop = currentScroll;
     }
-  }, [product, currentSheet, currentScroll]);
+  }, [product, currentSheet, currentScroll, fullscreen]);
   const q = d.questionnaires[product] || initialQuestionnaire();
   const answers = q.answers;
   const sheets = activeSheets(product, answers);
@@ -200,7 +208,7 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
   }
   function navigate(i) {
     if (i < 0 || i >= sheets.length) return;
-    anchor(navigation.current);
+    if (!fullscreen) anchor(navigation.current);
     const scroll = { ...q.scroll, [sheet.key]: body.current?.scrollTop || 0 };
     updateQuestionnaire(
       product,
@@ -208,11 +216,62 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
       { content: false },
     );
   }
+  function openWorkspace() {
+    const dialog = workspace.current;
+    if (!dialog?.showModal || dialog.matches(":modal")) return;
+    // Keep the same inputs mounted, including unfinished numeric edits.
+    container.current.style.minBlockSize = `${container.current.offsetHeight}px`;
+    dialog.removeAttribute("open");
+    try {
+      dialog.showModal();
+    } catch {
+      dialog.setAttribute("open", "");
+      container.current.style.minBlockSize = "";
+      return;
+    }
+    setFullscreen(true);
+  }
+  function closeWorkspace() {
+    const dialog = workspace.current;
+    if (!dialog?.matches(":modal")) return;
+    dialog.close();
+    dialog.setAttribute("open", "");
+    container.current.style.minBlockSize = "";
+    restoreFocus.current = true;
+    setFullscreen(false);
+  }
+  useEffect(() => {
+    if (fullscreen) closeButton.current?.focus({ preventScroll: true });
+    else if (restoreFocus.current) {
+      restoreFocus.current = false;
+      expandButton.current?.focus({ preventScroll: true });
+    }
+  }, [fullscreen]);
   const errors = d.questionnaireErrors || {};
   const rowFields = sheet.outletFields;
   const rows = data.outlets || [{ id: "outlet-1" }];
   return (
-    <div className="ql-content">
+    <div className="ql-content" ref={container}>
+      <dialog
+        open
+        role={fullscreen ? undefined : "presentation"}
+        aria-labelledby={fullscreen ? titleId : undefined}
+        className="ql-workspace"
+        ref={workspace}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeWorkspace();
+        }}
+      >
+      {fullscreen && (
+        <header className="ql-workspace__header">
+          <div>
+            <h2 id={titleId}>Опросный лист {definition.title}</h2>
+            <small>Обязательных полей: <span className="ql-required-count">{requiredFieldCount(product, answers)}</span></small>
+          </div>
+          <button ref={closeButton} type="button" onClick={closeWorkspace}>Свернуть</button>
+        </header>
+      )}
       <nav ref={navigation} className="ql-nav" aria-label="Листы опросника">
         <label className="ql-section-select">
           <select
@@ -258,11 +317,18 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
             </svg>
           </button>
         </div>
+        {!fullscreen && q.enabled && (
+          <button ref={expandButton} type="button" className="ql-workspace__open"
+            onClick={openWorkspace} disabled={d.submitting}>
+            На весь экран
+          </button>
+        )}
       </nav>
       <div
         className="ql-body"
         ref={body}
         onScroll={(e) => {
+          if (!fullscreen && window.matchMedia("(max-width: 960px)").matches) return;
           const top = e.currentTarget.scrollTop;
           if (top !== (q.scroll?.[sheet.key] || 0))
             updateQuestionnaire(
@@ -452,6 +518,7 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
           )}
         </fieldset>
       </div>
+      </dialog>
     </div>
   );
 }

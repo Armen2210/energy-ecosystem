@@ -50,6 +50,13 @@ export function activeSheets(product, answers) {
     (s) => !s.optional || answers.selectedSections?.includes(s.key),
   );
 }
+// Count fields marked «Обязательно», across all currently applicable sections.
+export function requiredFieldCount(product, answers) {
+  return activeSheets(product, answers).reduce((total, sheet) => {
+    const data = answers[sheet.key] || {};
+    return total + sheet.fields.filter((field) => field.required && applicable(field, data)).length;
+  }, 0);
+}
 export function serializeQuestionnaires(drafts) {
   const items = [];
   for (const [product, draft] of Object.entries(drafts || {})) {
