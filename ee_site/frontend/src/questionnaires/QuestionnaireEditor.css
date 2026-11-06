@@ -683,6 +683,11 @@
   block-size: min(740px, calc(100dvh - 56px));
   max-inline-size: 100%;
   max-block-size: 100dvh;
+  border: 1px solid rgb(17 17 17 / 10%);
+  border-radius: 30px;
+  background: rgb(255 255 255 / 98%);
+  box-shadow: 0 30px 84px rgb(15 47 74 / 22%);
+  outline: none;
   overflow: hidden;
   margin: auto;
 }
@@ -691,6 +696,7 @@
   .ql-workspace:modal {
     inline-size: calc(100% - 20px);
     block-size: calc(100dvh - 20px);
+    border-radius: 24px;
   }
 }
 
@@ -726,4 +732,19 @@ html:has(.ql-workspace:modal) {
   overflow: auto;
   overscroll-behavior: contain;
   padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+.ql-workspace::backdrop {
+  background: rgb(15 47 74 / 50%);
+  backdrop-filter: blur(5px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ql-workspace:modal {
+    animation: case-modal-panel-in 0.24s ease both;
+  }
+
+  .ql-workspace::backdrop {
+    animation: case-modal-backdrop-in 0.2s ease both;
+  }
 }
