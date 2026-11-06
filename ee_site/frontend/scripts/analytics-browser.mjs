@@ -78,9 +78,9 @@ async function scenario({ width = 1440, seed = {}, failStorage = false, tagDelay
  await page.goto(`https://${hostname}${url}`, referrer ? { referer:referrer } : {}); await page.waitForSelector('footer');
  return { ctx, page, calls, network, responses, mode(value) { mode = value; }, async settle() { await page.waitForTimeout(850); }, goals: () => calls.filter(c => c.method === 'reachGoal'), hits: () => calls.filter(c => c.method === 'hit') };
 }
-const accept = async s => { const name = new URL(s.page.url()).pathname === '/privacy' ? 'Включить аналитику' : 'Понятно'; await s.page.getByRole('button', { name, exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
+const accept = async s => { const name = await s.page.getByRole('dialog', { name: 'Настройки cookies' }).isVisible() ? 'Включить аналитику' : 'Понятно'; await s.page.getByRole('button', { name, exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
 const settings = s => openCookieSettings(s.page);
-const deny = async (s, returnToPage = true) => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); if (returnToPage) await s.page.goBack(); await s.settle(); };
+const deny = async s => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); await s.settle(); };
 const form = s => s.page.locator('.lead-form');
 const fill = async (s, name='Synthetic person') => {
  await form(s).locator('[name=name]').fill(name); await form(s).locator('[name=phone]').fill('+70000000000'); await form(s).locator('[name=consent]').check();
@@ -94,14 +94,23 @@ try {
  const denied = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment', seed: { ee_cookie_consent: 'accepted' } });
  await denied.settle(); assert.equal(denied.network.length, 0); assert.equal(await denied.page.locator('iframe').count(), 0);
  assert.equal(await denied.page.evaluate(() => localStorage.getItem('ee_campaign_v1')), null);
- assert.equal(await denied.page.locator('.cookie-banner button').count(), 1);
+ assert.equal(await denied.page.getByRole('button', { name: 'Понятно', exact: true }).count(), 1);
  await fill(denied);
+ const beforeSettings = denied.page.url();
  await openCookieSettings(denied.page, true);
- await deny(denied, false);
- await denied.page.goBack();
+ await denied.page.keyboard.press('Escape');
+ assert.equal(await denied.page.locator('.cookie-banner').isVisible(), true);
+ await openCookieSettings(denied.page, true);
+ await deny(denied);
+ assert.equal(denied.page.url(), beforeSettings);
+ assert.equal(await denied.page.locator('.cookie-banner').count(), 0);
  assert.equal(await form(denied).locator('[name=name]').inputValue(), 'Synthetic person');
  assert.equal(denied.network.length, 0);
- pass('no collection before choice or after refusal through the policy; draft retained');
+ await denied.page.reload();
+ await denied.settle();
+ assert.equal(await denied.page.locator('.cookie-banner').count(), 0);
+ assert.equal(denied.network.length, 0);
+ pass('settings stay on the same page; Escape leaves choice unchanged, refusal survives reload and retains draft');
  const basic = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment' });
  await accept(basic);
  assert.equal(basic.calls.filter(c=>c.method==='init').length,1); assert.equal(basic.hits().length,1);

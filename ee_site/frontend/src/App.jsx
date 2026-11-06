@@ -4,7 +4,7 @@
 // Header, маршруты страниц и Footer.
 // =========================================================
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import {
   useNavigate,
@@ -42,6 +42,7 @@ import AnalyticsBridge from "./analytics/AnalyticsBridge";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const cookieSettings = useRef(null);
 
   // Render home immediately at the alias, avoiding a footer-only frame.
   useEffect(() => {
@@ -81,8 +82,8 @@ function App() {
         </Routes>
       )}
 
-      <Footer navigation={navigation} />
-      <CookieBanner />
+      <Footer navigation={navigation} onCookieSettings={() => cookieSettings.current?.showModal()} />
+      <CookieBanner settingsRef={cookieSettings} />
     </div>
     </SeoLocationContext.Provider>
   );

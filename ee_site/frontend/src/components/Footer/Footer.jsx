@@ -6,7 +6,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 
-function Footer({ navigation }) {
+function Footer({ navigation, onCookieSettings }) {
   const location = useLocation();
   const footerNavigation = navigation.map(item => ({...item, url: item.url === "/#products" ? "/solutions" : item.url === "/#services" ? "/services" : item.url})).flatMap(item => item.url === '/about'
     ? [item, { title: 'Документы', url: '/documents', id: 'footer-documents' }] : [item]);
@@ -56,7 +56,7 @@ function Footer({ navigation }) {
           <span>© ООО «Энергоэффект»</span>
           <span>ИНН: 6161070112</span>
           <div className="footer__legal-links">
-            <Link to="/privacy#cookies">Настройки cookies</Link>
+            <button type="button" onClick={onCookieSettings}>Настройки cookies</button>
             <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
               Политика обработки персональных данных
             </Link>

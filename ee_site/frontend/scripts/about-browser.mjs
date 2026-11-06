@@ -162,7 +162,6 @@ try {
   assert.equal(await form.locator('[name=description]').inputValue(), 'Synthetic local task');
   await openCookieSettings(page);
   await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
-  await page.goBack();
   assert.equal(await form.locator('[name=name]').inputValue(), 'Synthetic about visitor');
   await form.locator('.file-select__toggle').click();
   assert.deepEqual(await form.locator('.file-select__name').allTextContents(), ['first.txt', 'second.txt']); await page.keyboard.press('Escape');

@@ -1,3 +1,4 @@
+import { downloadWorkbook } from "../../data/downloadWorkbook.js";
 import PageNavigation from '../../components/PageNavigation';
 import Seo from '../../components/Seo';
 import { formatDocumentSize, populatedDocumentCategories } from '../../data/documents';
@@ -30,7 +31,7 @@ export default function DocumentsPage() {
                 const action = `${opens ? 'Открыть' : 'Скачать'} ${formatLabel}`;
                 const descriptionId = `${document.id}-${file.format}`;
                 return <li key={file.url}>
-                  <a className="documents-page__file" href={file.url}
+                  <a className="documents-page__file" href={file.url} onClick={(event) => downloadWorkbook(event, file)}
                     download={opens ? undefined : ''} target={opens ? '_blank' : undefined}
                     rel={opens ? 'noopener noreferrer' : undefined}
                     aria-label={`${action} — ${document.title}${opens ? ', в новой вкладке' : ''}`}

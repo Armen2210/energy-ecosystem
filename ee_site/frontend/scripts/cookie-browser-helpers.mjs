@@ -1,9 +1,9 @@
 export async function openCookieSettings(page, fromBanner = false) {
-  await page.getByRole("link", {
+  await page.getByRole("button", {
     name: fromBanner ? "Подробнее и настройки" : "Настройки cookies",
     exact: true,
   }).click();
-  await page.waitForURL("**/privacy#cookies");
+  await page.getByRole("dialog", { name: "Настройки cookies" }).waitFor();
 }
 
 export async function dismissCookies(page) {
@@ -11,6 +11,5 @@ export async function dismissCookies(page) {
   if (!(await banner.isVisible())) return;
   await openCookieSettings(page, true);
   await page.getByRole("button", { name: "Без аналитики", exact: true }).click();
-  await page.goBack();
   await banner.waitFor({ state: "hidden" });
 }

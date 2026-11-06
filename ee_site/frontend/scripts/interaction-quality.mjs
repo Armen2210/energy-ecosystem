@@ -17,7 +17,7 @@ try {
     await page.route('**/*', route => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort());
     await page.route('**/api/leads/',route=>route.fulfill({status:201,contentType:'application/json',body:'{"id":1}'}));
     await page.goto(base+'/');
-    await page.locator('.cookie-banner button').click();
+    await page.getByRole('button', { name: 'Понятно', exact: true }).click();
     await page.evaluate(()=>document.fonts.ready);
     await page.waitForTimeout(800);
     async function measure(name, selector, predicate) {
