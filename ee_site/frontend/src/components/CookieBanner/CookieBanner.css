@@ -103,3 +103,24 @@
 @media (max-width: 640px) {
   .cookie-banner h2 { font-size: 17px; }
 }
+
+/* Keep both choices equally legible and reachable. */
+.cookie-banner__actions .cookie-banner__accept {
+  color: #fff;
+  background: #9c3c0a;
+  border-color: #9c3c0a;
+}
+.cookie-banner__actions .cookie-banner__accept:hover,
+.cookie-banner__actions .cookie-banner__accept:active {
+  background: #7d3009;
+  border-color: #7d3009;
+}
+.cookie-banner__actions .cookie-banner__decline {
+  color: #0f2f4a;
+  background: #eef3f8;
+  border-color: #8295aa;
+}
+.cookie-banner__actions .cookie-banner__decline:hover,
+.cookie-banner__actions .cookie-banner__decline:active {
+  background: #e0e9f2;
+}

@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { analytics } from "../../analytics/runtime.js";
 import { useClientReady } from "../../hooks/useClientReady";
 
+const mobileQuery = "(max-width: 960px)";
+const subscribeViewport = (notify) => {
+  const query = window.matchMedia(mobileQuery);
+  query.addEventListener("change", notify);
+  return () => query.removeEventListener("change", notify);
+};
+
 export default function CookieBanner() {
+  const mobile = useSyncExternalStore(subscribeViewport, () => window.matchMedia(mobileQuery).matches, () => false);
   const ready = useClientReady();
   const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
   const [opened, setOpened] = useState(false);
@@ -44,7 +52,7 @@ export default function CookieBanner() {
             </p>
             <p>
               Отказ от аналитики не отключает техническое хранение для работы сайта.
-              Поля формы и выбранные файлы в хранилище браузера не сохраняются.
+              Черновик формы и ответы ОЛ сохраняются в этой вкладке на 24 часа без изменений. Выбранные файлы после обновления нужно прикрепить заново.
             </p>
             <p>
               Изменить решение или отозвать разрешение можно через “Настройки cookies”
@@ -56,8 +64,12 @@ export default function CookieBanner() {
           {opened && <p className="cookie-banner__status">Сейчас аналитика: {choice === "allowed" ? "разрешена" : "выключена"}.</p>}
         </div>
         <div className="cookie-banner__actions">
-          <button ref={accept} type="button" onClick={() => choose("allowed")}>Разрешить аналитику</button>
-          <button type="button" onClick={() => choose("denied")}>Без аналитики</button>
+          {(mobile ? ["denied", "allowed"] : ["allowed", "denied"]).map((value) => (
+            <button key={value} className={value === "allowed" ? "cookie-banner__accept" : "cookie-banner__decline"}
+              ref={value === "allowed" ? accept : undefined} type="button" onClick={() => choose(value)}>
+              {value === "allowed" ? "Разрешить аналитику" : "Без аналитики"}
+            </button>
+          ))}
           {opened && choice !== "unknown" && <button type="button" onClick={() => { setOpened(false); returnFocus.current?.focus(); }}>Закрыть</button>}
         </div>
       </div>

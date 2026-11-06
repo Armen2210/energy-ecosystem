@@ -1,0 +1,7150 @@
+{
+  "performance": [
+    {
+      "version": "release",
+      "route": "/",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 465,
+      "failures": [],
+      "html": {
+        "ttfb": 18.300000000046566,
+        "htmlMs": 16.599999999976717
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 24.599999999976717,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 27.699999999953434,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 22.100000000093132,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 20.599999999976717,
+          "bytes": 56073
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 23.699999999953434,
+          "bytes": 110276
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 3.400000000023283,
+          "bytes": 4425
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 5,
+          "bytes": 4441
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 9.800000000046566,
+          "bytes": 4477
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 18.199999999953434,
+          "bytes": 154906
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 24.199999999953434,
+          "bytes": 299192
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 17.099999999976717,
+          "bytes": 107266
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 31.800000000046566,
+          "bytes": 125762
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 34.20000000006985,
+          "bytes": 80106
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 36.40000000002328,
+          "bytes": 147420
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 3.400000000023283,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 114,
+      "failures": [],
+      "html": {
+        "ttfb": 2.200000000069849,
+        "htmlMs": 0.40000000002328306
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 0.7999999999301508,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 3100,
+      "failures": [],
+      "html": {
+        "ttfb": 2.800000000046566,
+        "htmlMs": 150.59999999997672
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 138.09999999997672,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 2894.1999999999534,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 610.8000000000466,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 420.30000000004657,
+          "bytes": 56073
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 630.0999999999767,
+          "bytes": 110276
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 119.39999999990687,
+          "bytes": 4425
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 123.19999999995343,
+          "bytes": 4441
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 124.59999999997672,
+          "bytes": 4477
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 1174.5999999999767,
+          "bytes": 154906
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 2410.9000000000233,
+          "bytes": 299192
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 1496.2000000000698,
+          "bytes": 107266
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 2193.899999999907,
+          "bytes": 125762
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 1880.2999999999302,
+          "bytes": 80106
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 2404.5,
+          "bytes": 147420
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 153.59999999997672,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 114,
+      "failures": [],
+      "html": {
+        "ttfb": 1.1999999999534339,
+        "htmlMs": 0.2000000000698492
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/about",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 283,
+      "failures": [],
+      "html": {
+        "ttfb": 4.600000000093132,
+        "htmlMs": 7.399999999906868
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 20.699999999953434,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 21.599999999976717,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 19.400000000023283,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 19.900000000023283,
+          "bytes": 56073
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 20.099999999976717,
+          "bytes": 13808
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 21.199999999953434,
+          "bytes": 44108
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 21.29999999993015,
+          "bytes": 63156
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 21.400000000023283,
+          "bytes": 59842
+        },
+        {
+          "file": "04-720-DVYJITch.webp",
+          "ms": 21.599999999976717,
+          "bytes": 52240
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 29.099999999976717,
+          "bytes": 97048
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 29.099999999976717,
+          "bytes": 130930
+        },
+        {
+          "file": "07-720-BWu8w_UX.webp",
+          "ms": 35.40000000002328,
+          "bytes": 103478
+        },
+        {
+          "file": "08-720-CZpqAh6j.webp",
+          "ms": 35.40000000002328,
+          "bytes": 125130
+        },
+        {
+          "file": "09-720-BE2N6GKl.webp",
+          "ms": 34.60000000009313,
+          "bytes": 54684
+        },
+        {
+          "file": "10-720-Bj50JScx.webp",
+          "ms": 34.79999999993015,
+          "bytes": 66756
+        },
+        {
+          "file": "11-720-CQ6Tmz0W.webp",
+          "ms": 34.89999999990687,
+          "bytes": 59704
+        },
+        {
+          "file": "12-720-4I4ZvSLj.webp",
+          "ms": 35,
+          "bytes": 68750
+        },
+        {
+          "file": "13-720-tg1y-LFN.webp",
+          "ms": 42.300000000046566,
+          "bytes": 157576
+        },
+        {
+          "file": "14-720-CrEPnFw8.webp",
+          "ms": 41.199999999953434,
+          "bytes": 100078
+        },
+        {
+          "file": "15-720-BJK4jUlC.webp",
+          "ms": 42.800000000046566,
+          "bytes": 167944
+        },
+        {
+          "file": "16-720-CRIFjUSS.webp",
+          "ms": 42,
+          "bytes": 88164
+        },
+        {
+          "file": "17-720-BklGRw3k.webp",
+          "ms": 42.300000000046566,
+          "bytes": 46872
+        },
+        {
+          "file": "18-720-BTK0WROt.webp",
+          "ms": 42.5,
+          "bytes": 43942
+        },
+        {
+          "file": "19-720-BfzR-ySU.webp",
+          "ms": 46,
+          "bytes": 37770
+        },
+        {
+          "file": "20-720-Rk-73VDP.webp",
+          "ms": 47.40000000002328,
+          "bytes": 92910
+        },
+        {
+          "file": "21-720-CmQ9uNd6.webp",
+          "ms": 46.699999999953434,
+          "bytes": 35554
+        },
+        {
+          "file": "22-720-BRGYTsOx.webp",
+          "ms": 45.90000000002328,
+          "bytes": 68040
+        },
+        {
+          "file": "23-720-DD4NrG6x.webp",
+          "ms": 45.90000000002328,
+          "bytes": 32618
+        },
+        {
+          "file": "24-720-DxeqxY7D.webp",
+          "ms": 46.800000000046566,
+          "bytes": 54680
+        },
+        {
+          "file": "25-720-jiLgCJJk.webp",
+          "ms": 54.5,
+          "bytes": 64838
+        },
+        {
+          "file": "26-720-DGuuMkHj.webp",
+          "ms": 54.59999999997672,
+          "bytes": 34292
+        },
+        {
+          "file": "27-720-trRl6oMO.webp",
+          "ms": 61.60000000009313,
+          "bytes": 153092
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 3.599999999976717,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/about",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 78,
+      "failures": [],
+      "html": {
+        "ttfb": 1.3000000000465661,
+        "htmlMs": 0.2999999999301508
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "04-720-DVYJITch.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "07-720-BWu8w_UX.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "08-720-CZpqAh6j.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "09-720-BE2N6GKl.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "10-720-Bj50JScx.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "11-720-CQ6Tmz0W.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "12-720-4I4ZvSLj.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "13-720-tg1y-LFN.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "14-720-CrEPnFw8.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "15-720-BJK4jUlC.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "16-720-CRIFjUSS.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "17-720-BklGRw3k.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "18-720-BTK0WROt.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "19-720-BfzR-ySU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "20-720-Rk-73VDP.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "21-720-CmQ9uNd6.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "22-720-BRGYTsOx.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "23-720-DD4NrG6x.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "24-720-DxeqxY7D.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "25-720-jiLgCJJk.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "26-720-DGuuMkHj.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "27-720-trRl6oMO.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/about",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 2859,
+      "failures": [],
+      "html": {
+        "ttfb": 6.700000000069849,
+        "htmlMs": 140
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 131,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 2632.3000000000466,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 491.5999999999767,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 354.0999999999767,
+          "bytes": 56073
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 186,
+          "bytes": 13808
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 438.5999999999767,
+          "bytes": 44108
+        },
+        {
+          "file": "04-720-DVYJITch.webp",
+          "ms": 512.4000000000233,
+          "bytes": 52240
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 553.3000000000466,
+          "bytes": 59842
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 577.4000000000233,
+          "bytes": 63156
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 759.8999999999069,
+          "bytes": 97048
+        },
+        {
+          "file": "07-720-BWu8w_UX.webp",
+          "ms": 1583.2999999999302,
+          "bytes": 103478
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 1649.2999999999302,
+          "bytes": 130930
+        },
+        {
+          "file": "08-720-CZpqAh6j.webp",
+          "ms": 1747.5,
+          "bytes": 125130
+        },
+        {
+          "file": "09-720-BE2N6GKl.webp",
+          "ms": 1369.1000000000931,
+          "bytes": 54684
+        },
+        {
+          "file": "10-720-Bj50JScx.webp",
+          "ms": 1483.4000000000233,
+          "bytes": 66756
+        },
+        {
+          "file": "11-720-CQ6Tmz0W.webp",
+          "ms": 1866,
+          "bytes": 59704
+        },
+        {
+          "file": "12-720-4I4ZvSLj.webp",
+          "ms": 2050.79999999993,
+          "bytes": 68750
+        },
+        {
+          "file": "14-720-CrEPnFw8.webp",
+          "ms": 2466.4000000000233,
+          "bytes": 100078
+        },
+        {
+          "file": "13-720-tg1y-LFN.webp",
+          "ms": 2725.4000000000233,
+          "bytes": 157576
+        },
+        {
+          "file": "16-720-CRIFjUSS.webp",
+          "ms": 2575.0999999999767,
+          "bytes": 88164
+        },
+        {
+          "file": "15-720-BJK4jUlC.webp",
+          "ms": 2945.5,
+          "bytes": 167944
+        },
+        {
+          "file": "17-720-BklGRw3k.webp",
+          "ms": 2517.3000000000466,
+          "bytes": 46872
+        },
+        {
+          "file": "18-720-BTK0WROt.webp",
+          "ms": 2529.3000000000466,
+          "bytes": 43942
+        },
+        {
+          "file": "19-720-BfzR-ySU.webp",
+          "ms": 2798.3000000000466,
+          "bytes": 37770
+        },
+        {
+          "file": "21-720-CmQ9uNd6.webp",
+          "ms": 2869.399999999907,
+          "bytes": 35554
+        },
+        {
+          "file": "20-720-Rk-73VDP.webp",
+          "ms": 3217.5999999999767,
+          "bytes": 92910
+        },
+        {
+          "file": "23-720-DD4NrG6x.webp",
+          "ms": 3027.5,
+          "bytes": 32618
+        },
+        {
+          "file": "22-720-BRGYTsOx.webp",
+          "ms": 3121.4000000000233,
+          "bytes": 68040
+        },
+        {
+          "file": "24-720-DxeqxY7D.webp",
+          "ms": 3249.9000000000233,
+          "bytes": 54680
+        },
+        {
+          "file": "26-720-DGuuMkHj.webp",
+          "ms": 3262.0999999999767,
+          "bytes": 34292
+        },
+        {
+          "file": "25-720-jiLgCJJk.webp",
+          "ms": 3314.0999999999767,
+          "bytes": 64838
+        },
+        {
+          "file": "27-720-trRl6oMO.webp",
+          "ms": 3465.1999999999534,
+          "bytes": 153092
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 153.30000000004657,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/about",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 116,
+      "failures": [],
+      "html": {
+        "ttfb": 1.7000000000698492,
+        "htmlMs": 0.2999999999301508
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "04-720-DVYJITch.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "07-720-BWu8w_UX.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "08-720-CZpqAh6j.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "09-720-BE2N6GKl.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "10-720-Bj50JScx.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "11-720-CQ6Tmz0W.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "12-720-4I4ZvSLj.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "13-720-tg1y-LFN.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "14-720-CrEPnFw8.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "15-720-BJK4jUlC.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "16-720-CRIFjUSS.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "17-720-BklGRw3k.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "18-720-BTK0WROt.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "19-720-BfzR-ySU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "20-720-Rk-73VDP.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "21-720-CmQ9uNd6.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "22-720-BRGYTsOx.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "23-720-DD4NrG6x.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "24-720-DxeqxY7D.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "25-720-jiLgCJJk.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "26-720-DGuuMkHj.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "27-720-trRl6oMO.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 0.6999999999534339,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/solutions/bmk",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 471,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/",
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 1.6999999999534339,
+        "htmlMs": 1.2000000000698492
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 15.599999999976717,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 17,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 11.300000000046566,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 15.199999999953434,
+          "bytes": 56073
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 12.099999999976717,
+          "bytes": 154906
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 5,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/solutions/bmk",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 235,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 3.699999999953434,
+        "htmlMs": 0.40000000002328306
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1.1999999999534339,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/solutions/bmk",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 1767,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/",
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 5.299999999930151,
+        "htmlMs": 153.69999999995343
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 154.5,
+          "bytes": 3820
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 1513.9000000000233,
+          "bytes": 513522
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 734.4000000000233,
+          "bytes": 104660
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 508.29999999993015,
+          "bytes": 56073
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 868.8000000000466,
+          "bytes": 154906
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 160.80000000004657,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "route": "/solutions/bmk",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 87,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 1.1999999999534339,
+        "htmlMs": 0.40000000002328306
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-fY_a0PuL.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-BnLl1ckc.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 0.8000000000465661,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 409,
+      "failures": [],
+      "html": {
+        "ttfb": 5.699999999953434,
+        "htmlMs": 1.8000000000465661
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 16.900000000023283,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 19.400000000023283,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 16.5,
+          "bytes": 105173
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 17.100000000093132,
+          "bytes": 56073
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 18.400000000023283,
+          "bytes": 110276
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 9.199999999953434,
+          "bytes": 4425
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 8.79999999993015,
+          "bytes": 4441
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 9.5,
+          "bytes": 4477
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 17.20000000006985,
+          "bytes": 154906
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 21.800000000046566,
+          "bytes": 299192
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 20.5,
+          "bytes": 107266
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 30.599999999976717,
+          "bytes": 125762
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 30.5,
+          "bytes": 80106
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 30.600000000093132,
+          "bytes": 147420
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1.7999999999301508,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 98,
+      "failures": [],
+      "html": {
+        "ttfb": 1,
+        "htmlMs": 0.2999999999301508
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 3102,
+      "failures": [],
+      "html": {
+        "ttfb": 4.699999999953434,
+        "htmlMs": 152.59999999997672
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 143.20000000006985,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 2891.0999999999767,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 622.2000000000698,
+          "bytes": 105173
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 422.4000000000233,
+          "bytes": 56073
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 633.5999999999767,
+          "bytes": 110276
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 118.79999999993015,
+          "bytes": 4425
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 123,
+          "bytes": 4441
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 124.09999999997672,
+          "bytes": 4477
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 1174.6000000000931,
+          "bytes": 154906
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 2405.29999999993,
+          "bytes": 299192
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 1489.0999999999767,
+          "bytes": 107266
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 1882.3000000000466,
+          "bytes": 80106
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 2189.100000000093,
+          "bytes": 125762
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 2400.1999999999534,
+          "bytes": 147420
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 153,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 109,
+      "failures": [],
+      "html": {
+        "ttfb": 1.3000000000465661,
+        "htmlMs": 0.5
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "hero-780-DkQw1VXI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "btp-energolain-new-BWpIvwfb.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "vns-aquarus-new-DP7umMxq.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "pns-fire-new-BzXSypuo.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "automation-cabinets-new-SC4dINE_.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "design-960-x9Vlc32N.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-design-bg-C_rNq5vL.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-construction-bg-CY-mh4lD.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "service-commissioning-bg-DoquNYfE.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/about",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 246,
+      "failures": [],
+      "html": {
+        "ttfb": 5.700000000069849,
+        "htmlMs": 3.5
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 16.199999999953434,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 21.800000000046566,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 15.699999999953434,
+          "bytes": 105173
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 20.099999999976717,
+          "bytes": 56073
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 20.100000000093132,
+          "bytes": 13808
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 6,
+          "bytes": 44108
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 21.600000000093132,
+          "bytes": 63156
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 21.70000000006985,
+          "bytes": 59842
+        },
+        {
+          "file": "04-1080-CuoZdb5M.webp",
+          "ms": 21.899999999906868,
+          "bytes": 97210
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 22.099999999976717,
+          "bytes": 97048
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 32.09999999997672,
+          "bytes": 130930
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 7.199999999953434,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/about",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 72,
+      "failures": [],
+      "html": {
+        "ttfb": 1.400000000023283,
+        "htmlMs": 0.2999999999301508
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "04-1080-CuoZdb5M.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 1.599999999976717,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/about",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 2043,
+      "failures": [],
+      "html": {
+        "ttfb": 3.799999999930151,
+        "htmlMs": 137.69999999995343
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 141.79999999993015,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 1857.9000000000233,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 501.4000000000233,
+          "bytes": 105173
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 356.80000000004657,
+          "bytes": 56073
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 188.09999999997672,
+          "bytes": 13808
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 446.20000000006985,
+          "bytes": 44108
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 561.1000000000931,
+          "bytes": 59842
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 586.7000000000698,
+          "bytes": 63156
+        },
+        {
+          "file": "04-1080-CuoZdb5M.webp",
+          "ms": 792.2999999999302,
+          "bytes": 97210
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 797,
+          "bytes": 97048
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 1248.6999999999534,
+          "bytes": 130930
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 153.59999999997672,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/about",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 55,
+      "failures": [],
+      "html": {
+        "ttfb": 1.2000000000698492,
+        "htmlMs": 0.19999999995343387
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "dsc05801-small-nsFj8Dp0.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "01-720-QP7hiXmJ.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "02-720-DAGlN1e9.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "03-720-8eU2ligU.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "04-1080-CuoZdb5M.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "05-720-YEU3tRHc.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "06-720-B6Y9ZHzI.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 0.6999999999534339,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/solutions/bmk",
+      "slow": false,
+      "cache": "cold",
+      "interactive": 564,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/",
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 3.099999999976717,
+        "htmlMs": 1.599999999976717
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 17.400000000023283,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 28.099999999976717,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 23.099999999976717,
+          "bytes": 105173
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 26.900000000023283,
+          "bytes": 154906
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 25.900000000023283,
+          "bytes": 56073
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 3.400000000023283,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/solutions/bmk",
+      "slow": false,
+      "cache": "warm",
+      "interactive": 89,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 1.3999999999068677,
+        "htmlMs": 0.30000000004656613
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 0.8000000000465661,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/solutions/bmk",
+      "slow": true,
+      "cache": "cold",
+      "interactive": 1673,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/",
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 3.6000000000931323,
+        "htmlMs": 152.59999999997672
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 114,
+          "bytes": 3820
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 1471.4000000000233,
+          "bytes": 514786
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 709.9000000000233,
+          "bytes": 105173
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 475.30000000004657,
+          "bytes": 56073
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 845.3000000000466,
+          "bytes": 154906
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 153.5,
+          "bytes": 38423
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "route": "/solutions/bmk",
+      "slow": true,
+      "cache": "warm",
+      "interactive": 79,
+      "failures": [
+        "http://127.0.0.1:8000/api/leads/questionnaire-capabilities/"
+      ],
+      "html": {
+        "ttfb": 2.200000000069849,
+        "htmlMs": 0.2999999999301508
+      },
+      "resources": [
+        {
+          "file": "policy-CHE34qw-.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-C1V7tFyN.js",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "main-22mmQtM2.css",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "energoeffect-logo-orange-ROjhfbeo.svg",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "bmk-card-e85o9bQ4.webp",
+          "ms": 0,
+          "bytes": 0
+        },
+        {
+          "file": "favicon.svg",
+          "ms": 2.699999999953434,
+          "bytes": 0
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "version": "release",
+      "width": 360,
+      "maxShift": 0.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1312.703125,
+          "w": 158,
+          "h": 118.5,
+          "ratio": 1.3277310924369747,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 186,
+          "y": 1312.703125,
+          "w": 158,
+          "h": 118.5,
+          "ratio": 1.3277310924369747,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1443.203125,
+          "w": 126.390625,
+          "h": 94.78125,
+          "ratio": 1.3263157894736841,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 154.390625,
+          "y": 1443.203125,
+          "w": 189.59375,
+          "h": 94.796875,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1550,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 186,
+          "y": 1550,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1772.65625,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 186,
+          "y": 1772.65625,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 1995.3125,
+          "w": 202.234375,
+          "h": 151.671875,
+          "ratio": 1.3289473684210527,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 230.234375,
+          "y": 1995.3125,
+          "w": 113.75,
+          "h": 151.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2158.984375,
+          "w": 234.046875,
+          "h": 109.21875,
+          "ratio": 2.146788990825688,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 262.046875,
+          "y": 2158.984375,
+          "w": 81.9375,
+          "h": 109.25,
+          "ratio": 0.7522935779816514,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2280.234375,
+          "w": 135.46875,
+          "h": 240.828125,
+          "ratio": 0.5601659751037344,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 163.46875,
+          "y": 2280.234375,
+          "w": 180.515625,
+          "h": 240.6875,
+          "ratio": 0.7510373443983402,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2533.0625,
+          "w": 135.46875,
+          "h": 240.828125,
+          "ratio": 0.5601659751037344,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 163.46875,
+          "y": 2533.0625,
+          "w": 180.515625,
+          "h": 240.6875,
+          "ratio": 0.7510373443983402,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2785.890625,
+          "w": 202.234375,
+          "h": 151.671875,
+          "ratio": 1.3289473684210527,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 230.234375,
+          "y": 2785.890625,
+          "w": 113.75,
+          "h": 151.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2949.5625,
+          "w": 202.234375,
+          "h": 151.671875,
+          "ratio": 1.3289473684210527,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 230.234375,
+          "y": 2949.5625,
+          "w": 113.75,
+          "h": 151.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 3113.234375,
+          "w": 202.234375,
+          "h": 151.671875,
+          "ratio": 1.3289473684210527,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 230.234375,
+          "y": 3113.234375,
+          "w": 113.75,
+          "h": 151.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3276.90625,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 186,
+          "y": 3276.90625,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3499.5625,
+          "w": 158,
+          "h": 118.5,
+          "ratio": 1.3277310924369747,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 186,
+          "y": 3499.5625,
+          "w": 158,
+          "h": 118.5,
+          "ratio": 1.3277310924369747,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 101,
+          "y": 3630.0625,
+          "w": 158,
+          "h": 210.65625,
+          "ratio": 0.7488151658767772,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 360,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1525.3125,
+          "w": 122,
+          "h": 91.5,
+          "ratio": 1.326086956521739,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 150,
+          "y": 1525.3125,
+          "w": 122,
+          "h": 91.5,
+          "ratio": 1.326086956521739,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1628.8125,
+          "w": 97.59375,
+          "h": 73.1875,
+          "ratio": 1.3424657534246576,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 125.59375,
+          "y": 1628.8125,
+          "w": 146.390625,
+          "h": 73.1875,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1714,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 150,
+          "y": 1714,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1888.65625,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 150,
+          "y": 1888.65625,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2063.3125,
+          "w": 156.15625,
+          "h": 117.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 184.15625,
+          "y": 2063.3125,
+          "w": 87.828125,
+          "h": 117.09375,
+          "ratio": 0.7521367521367521,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2192.421875,
+          "w": 180.71875,
+          "h": 84.328125,
+          "ratio": 2.1547619047619047,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 208.71875,
+          "y": 2192.421875,
+          "w": 63.265625,
+          "h": 84.34375,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2288.765625,
+          "w": 104.59375,
+          "h": 185.9375,
+          "ratio": 0.5645161290322581,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 132.59375,
+          "y": 2288.765625,
+          "w": 139.390625,
+          "h": 185.84375,
+          "ratio": 0.7473118279569892,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2486.703125,
+          "w": 104.59375,
+          "h": 185.9375,
+          "ratio": 0.5645161290322581,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 132.59375,
+          "y": 2486.703125,
+          "w": 139.390625,
+          "h": 185.84375,
+          "ratio": 0.7473118279569892,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2684.640625,
+          "w": 156.15625,
+          "h": 117.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 184.15625,
+          "y": 2684.640625,
+          "w": 87.828125,
+          "h": 117.09375,
+          "ratio": 0.7521367521367521,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2813.75,
+          "w": 156.15625,
+          "h": 117.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 184.15625,
+          "y": 2813.75,
+          "w": 87.828125,
+          "h": 117.09375,
+          "ratio": 0.7521367521367521,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 2942.859375,
+          "w": 156.15625,
+          "h": 117.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 184.15625,
+          "y": 2942.859375,
+          "w": 87.828125,
+          "h": 117.09375,
+          "ratio": 0.7521367521367521,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3071.96875,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 150,
+          "y": 3071.96875,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3246.625,
+          "w": 122,
+          "h": 91.5,
+          "ratio": 1.326086956521739,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 150,
+          "y": 3246.625,
+          "w": 122,
+          "h": 91.5,
+          "ratio": 1.326086956521739,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 83,
+          "y": 3350.125,
+          "w": 122,
+          "h": 162.65625,
+          "ratio": 0.7484662576687117,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 390,
+      "maxShift": 0.28125,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1279.921875,
+          "w": 173,
+          "h": 129.75,
+          "ratio": 1.3307692307692307,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 201,
+          "y": 1279.921875,
+          "w": 173,
+          "h": 129.75,
+          "ratio": 1.3307692307692307,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1421.671875,
+          "w": 138.390625,
+          "h": 103.78125,
+          "ratio": 1.3269230769230769,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 166.390625,
+          "y": 1421.671875,
+          "w": 207.59375,
+          "h": 103.796875,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1537.46875,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 201,
+          "y": 1537.46875,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1780.125,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 201,
+          "y": 1780.125,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2022.78125,
+          "w": 221.4375,
+          "h": 166.078125,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 249.4375,
+          "y": 2022.78125,
+          "w": 124.546875,
+          "h": 166.0625,
+          "ratio": 0.7530120481927711,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2200.859375,
+          "w": 256.265625,
+          "h": 119.578125,
+          "ratio": 2.1333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 284.265625,
+          "y": 2200.859375,
+          "w": 89.71875,
+          "h": 119.625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2332.484375,
+          "w": 148.328125,
+          "h": 263.6875,
+          "ratio": 0.5606060606060606,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 176.328125,
+          "y": 2332.484375,
+          "w": 197.65625,
+          "h": 263.53125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2608.171875,
+          "w": 148.328125,
+          "h": 263.6875,
+          "ratio": 0.5606060606060606,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 176.328125,
+          "y": 2608.171875,
+          "w": 197.65625,
+          "h": 263.53125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2883.859375,
+          "w": 221.4375,
+          "h": 166.078125,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 249.4375,
+          "y": 2883.859375,
+          "w": 124.546875,
+          "h": 166.0625,
+          "ratio": 0.7530120481927711,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 3061.9375,
+          "w": 221.4375,
+          "h": 166.078125,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 249.4375,
+          "y": 3061.9375,
+          "w": 124.546875,
+          "h": 166.0625,
+          "ratio": 0.7530120481927711,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 3240.015625,
+          "w": 221.4375,
+          "h": 166.078125,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 249.4375,
+          "y": 3240.015625,
+          "w": 124.546875,
+          "h": 166.0625,
+          "ratio": 0.7530120481927711,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3418.09375,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 201,
+          "y": 3418.09375,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3660.75,
+          "w": 173,
+          "h": 129.75,
+          "ratio": 1.3307692307692307,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 201,
+          "y": 3660.75,
+          "w": 173,
+          "h": 129.75,
+          "ratio": 1.3307692307692307,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 108.5,
+          "y": 3802.5,
+          "w": 173,
+          "h": 230.65625,
+          "ratio": 0.7489177489177489,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 390,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1386.265625,
+          "w": 134,
+          "h": 100.5,
+          "ratio": 1.3267326732673268,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 162,
+          "y": 1386.265625,
+          "w": 134,
+          "h": 100.5,
+          "ratio": 1.3267326732673268,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1498.765625,
+          "w": 107.1875,
+          "h": 80.390625,
+          "ratio": 1.3375,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 135.1875,
+          "y": 1498.765625,
+          "w": 160.796875,
+          "h": 80.390625,
+          "ratio": 2.0125,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1591.15625,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 162,
+          "y": 1591.15625,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1781.8125,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 162,
+          "y": 1781.8125,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 1972.46875,
+          "w": 171.515625,
+          "h": 128.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 199.515625,
+          "y": 1972.46875,
+          "w": 96.46875,
+          "h": 128.625,
+          "ratio": 0.7441860465116279,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2113.09375,
+          "w": 198.5,
+          "h": 92.625,
+          "ratio": 2.139784946236559,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 226.5,
+          "y": 2113.09375,
+          "w": 69.484375,
+          "h": 92.640625,
+          "ratio": 0.7419354838709677,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2217.734375,
+          "w": 114.890625,
+          "h": 204.25,
+          "ratio": 0.5637254901960784,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 142.890625,
+          "y": 2217.734375,
+          "w": 153.09375,
+          "h": 204.125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2433.984375,
+          "w": 114.890625,
+          "h": 204.25,
+          "ratio": 0.5637254901960784,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 142.890625,
+          "y": 2433.984375,
+          "w": 153.09375,
+          "h": 204.125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2650.234375,
+          "w": 171.515625,
+          "h": 128.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 199.515625,
+          "y": 2650.234375,
+          "w": 96.46875,
+          "h": 128.625,
+          "ratio": 0.7441860465116279,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2790.859375,
+          "w": 171.515625,
+          "h": 128.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 199.515625,
+          "y": 2790.859375,
+          "w": 96.46875,
+          "h": 128.625,
+          "ratio": 0.7441860465116279,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 2931.484375,
+          "w": 171.515625,
+          "h": 128.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 199.515625,
+          "y": 2931.484375,
+          "w": 96.46875,
+          "h": 128.625,
+          "ratio": 0.7441860465116279,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3072.109375,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 162,
+          "y": 3072.109375,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3262.765625,
+          "w": 134,
+          "h": 100.5,
+          "ratio": 1.3267326732673268,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 162,
+          "y": 3262.765625,
+          "w": 134,
+          "h": 100.5,
+          "ratio": 1.3267326732673268,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 89,
+          "y": 3375.265625,
+          "w": 134,
+          "h": 178.65625,
+          "ratio": 0.7486033519553073,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 768,
+      "maxShift": 0,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1055.578125,
+          "w": 234.65625,
+          "h": 175.984375,
+          "ratio": 1.3352272727272727,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 266.65625,
+          "y": 1055.578125,
+          "w": 234.671875,
+          "h": 176,
+          "ratio": 1.3352272727272727,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 517.328125,
+          "y": 1055.578125,
+          "w": 234.671875,
+          "h": 176,
+          "ratio": 1.3352272727272727,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 16,
+          "y": 1247.578125,
+          "w": 323.765625,
+          "h": 161.875,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 355.765625,
+          "y": 1247.578125,
+          "w": 121.421875,
+          "h": 161.890625,
+          "ratio": 0.7469135802469136,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 493.1875,
+          "y": 1247.578125,
+          "w": 121.40625,
+          "h": 161.875,
+          "ratio": 0.7469135802469136,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 630.59375,
+          "y": 1247.578125,
+          "w": 121.40625,
+          "h": 161.875,
+          "ratio": 0.7469135802469136,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 16,
+          "y": 1425.46875,
+          "w": 186.359375,
+          "h": 248.46875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 218.359375,
+          "y": 1425.46875,
+          "w": 331.28125,
+          "h": 248.453125,
+          "ratio": 1.3346774193548387,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 565.640625,
+          "y": 1425.46875,
+          "w": 186.359375,
+          "h": 248.46875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 1689.9375,
+          "w": 350.515625,
+          "h": 163.5625,
+          "ratio": 2.1402439024390243,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 382.515625,
+          "y": 1689.9375,
+          "w": 122.703125,
+          "h": 163.59375,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 521.21875,
+          "y": 1689.9375,
+          "w": 92.078125,
+          "h": 163.6875,
+          "ratio": 0.5609756097560976,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 629.296875,
+          "y": 1689.9375,
+          "w": 122.703125,
+          "h": 163.59375,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 1869.625,
+          "w": 114.015625,
+          "h": 202.6875,
+          "ratio": 0.5615763546798029,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 146.015625,
+          "y": 1869.625,
+          "w": 151.9375,
+          "h": 202.578125,
+          "ratio": 0.7487684729064039,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 313.953125,
+          "y": 1869.625,
+          "w": 270.109375,
+          "h": 202.578125,
+          "ratio": 1.3300492610837438,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 600.0625,
+          "y": 1869.625,
+          "w": 151.9375,
+          "h": 202.578125,
+          "ratio": 0.7487684729064039,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2088.3125,
+          "w": 220.15625,
+          "h": 165.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 252.15625,
+          "y": 2088.3125,
+          "w": 123.84375,
+          "h": 165.125,
+          "ratio": 0.7515151515151515,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 392,
+          "y": 2088.3125,
+          "w": 220.15625,
+          "h": 165.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 628.15625,
+          "y": 2088.3125,
+          "w": 123.84375,
+          "h": 165.125,
+          "ratio": 0.7515151515151515,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 2269.4375,
+          "w": 123.84375,
+          "h": 165.125,
+          "ratio": 0.7515151515151515,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 155.84375,
+          "y": 2269.4375,
+          "w": 123.84375,
+          "h": 165.125,
+          "ratio": 0.7515151515151515,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 295.6875,
+          "y": 2269.4375,
+          "w": 220.15625,
+          "h": 165.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 531.84375,
+          "y": 2269.4375,
+          "w": 220.15625,
+          "h": 165.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 16,
+          "y": 2450.5625,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 768,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1072.015625,
+          "w": 285,
+          "h": 213.75,
+          "ratio": 1.3317757009345794,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 313,
+          "y": 1072.015625,
+          "w": 285,
+          "h": 213.75,
+          "ratio": 1.3317757009345794,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1297.765625,
+          "w": 228,
+          "h": 171,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 256,
+          "y": 1297.765625,
+          "w": 342,
+          "h": 171,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1480.765625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 313,
+          "y": 1480.765625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1872.765625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 313,
+          "y": 1872.765625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2264.765625,
+          "w": 364.796875,
+          "h": 273.59375,
+          "ratio": 1.332116788321168,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 392.796875,
+          "y": 2264.765625,
+          "w": 205.1875,
+          "h": 273.578125,
+          "ratio": 0.7481751824817519,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2550.359375,
+          "w": 422.1875,
+          "h": 197.015625,
+          "ratio": 2.1421319796954315,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 450.1875,
+          "y": 2550.359375,
+          "w": 147.796875,
+          "h": 197.0625,
+          "ratio": 0.751269035532995,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2759.421875,
+          "w": 244.359375,
+          "h": 434.40625,
+          "ratio": 0.5622119815668203,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 272.359375,
+          "y": 2759.421875,
+          "w": 325.625,
+          "h": 434.15625,
+          "ratio": 0.7511520737327189,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 3205.828125,
+          "w": 244.359375,
+          "h": 434.40625,
+          "ratio": 0.5622119815668203,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 272.359375,
+          "y": 3205.828125,
+          "w": 325.625,
+          "h": 434.15625,
+          "ratio": 0.7511520737327189,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 3652.234375,
+          "w": 364.796875,
+          "h": 273.59375,
+          "ratio": 1.332116788321168,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 392.796875,
+          "y": 3652.234375,
+          "w": 205.1875,
+          "h": 273.578125,
+          "ratio": 0.7481751824817519,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 3937.828125,
+          "w": 364.796875,
+          "h": 273.59375,
+          "ratio": 1.332116788321168,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 392.796875,
+          "y": 3937.828125,
+          "w": 205.1875,
+          "h": 273.578125,
+          "ratio": 0.7481751824817519,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 4223.421875,
+          "w": 364.796875,
+          "h": 273.59375,
+          "ratio": 1.332116788321168,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 392.796875,
+          "y": 4223.421875,
+          "w": 205.1875,
+          "h": 273.578125,
+          "ratio": 0.7481751824817519,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 4509.015625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 313,
+          "y": 4509.015625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 4901.015625,
+          "w": 285,
+          "h": 213.75,
+          "ratio": 1.3317757009345794,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 313,
+          "y": 4901.015625,
+          "w": 285,
+          "h": 213.75,
+          "ratio": 1.3317757009345794,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 164.5,
+          "y": 5126.765625,
+          "w": 285,
+          "h": 380,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 1024,
+      "maxShift": 0.015625,
+      "photos": [
+        {
+          "n": "1",
+          "x": 20,
+          "y": 816.546875,
+          "w": 314.65625,
+          "h": 235.984375,
+          "ratio": 1.3347457627118644,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 354.65625,
+          "y": 816.546875,
+          "w": 314.671875,
+          "h": 236,
+          "ratio": 1.3347457627118644,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 689.328125,
+          "y": 816.546875,
+          "w": 314.671875,
+          "h": 236,
+          "ratio": 1.3347457627118644,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 20,
+          "y": 1072.546875,
+          "w": 434.8125,
+          "h": 217.40625,
+          "ratio": 2.0046082949308754,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 474.8125,
+          "y": 1072.546875,
+          "w": 163.0625,
+          "h": 217.40625,
+          "ratio": 0.7511520737327189,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 657.875,
+          "y": 1072.546875,
+          "w": 163.0625,
+          "h": 217.40625,
+          "ratio": 0.7511520737327189,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 840.9375,
+          "y": 1072.546875,
+          "w": 163.0625,
+          "h": 217.40625,
+          "ratio": 0.7511520737327189,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 20,
+          "y": 1309.953125,
+          "w": 249.890625,
+          "h": 333.1875,
+          "ratio": 0.7507507507507507,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 289.890625,
+          "y": 1309.953125,
+          "w": 444.234375,
+          "h": 333.171875,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 754.125,
+          "y": 1309.953125,
+          "w": 249.875,
+          "h": 333.15625,
+          "ratio": 0.7507507507507507,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 20,
+          "y": 1663.140625,
+          "w": 470.734375,
+          "h": 219.671875,
+          "ratio": 2.140909090909091,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 510.734375,
+          "y": 1663.140625,
+          "w": 164.796875,
+          "h": 219.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 695.53125,
+          "y": 1663.140625,
+          "w": 123.671875,
+          "h": 219.6875,
+          "ratio": 0.5636363636363636,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 839.203125,
+          "y": 1663.140625,
+          "w": 164.796875,
+          "h": 219.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 20,
+          "y": 1902.859375,
+          "w": 153.125,
+          "h": 272,
+          "ratio": 0.5625,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 193.125,
+          "y": 1902.859375,
+          "w": 204.046875,
+          "h": 272.0625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 417.171875,
+          "y": 1902.859375,
+          "w": 362.765625,
+          "h": 272.0625,
+          "ratio": 1.3345588235294117,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 799.9375,
+          "y": 1902.859375,
+          "w": 204.0625,
+          "h": 272.078125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 20,
+          "y": 2194.9375,
+          "w": 295.6875,
+          "h": 221.765625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 335.6875,
+          "y": 2194.9375,
+          "w": 166.3125,
+          "h": 221.75,
+          "ratio": 0.7477477477477478,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 522,
+          "y": 2194.9375,
+          "w": 295.6875,
+          "h": 221.765625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 837.6875,
+          "y": 2194.9375,
+          "w": 166.3125,
+          "h": 221.75,
+          "ratio": 0.7477477477477478,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 20,
+          "y": 2436.703125,
+          "w": 166.3125,
+          "h": 221.75,
+          "ratio": 0.7477477477477478,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 206.3125,
+          "y": 2436.703125,
+          "w": 166.328125,
+          "h": 221.765625,
+          "ratio": 0.7477477477477478,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 392.640625,
+          "y": 2436.703125,
+          "w": 295.671875,
+          "h": 221.75,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 708.3125,
+          "y": 2436.703125,
+          "w": 295.6875,
+          "h": 221.765625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 20,
+          "y": 2678.46875,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 1024,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1055.578125,
+          "w": 251.65625,
+          "h": 188.734375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 283.65625,
+          "y": 1055.578125,
+          "w": 251.671875,
+          "h": 188.75,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 551.328125,
+          "y": 1055.578125,
+          "w": 251.671875,
+          "h": 188.75,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 16,
+          "y": 1260.328125,
+          "w": 347.765625,
+          "h": 173.875,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 379.765625,
+          "y": 1260.328125,
+          "w": 130.421875,
+          "h": 173.890625,
+          "ratio": 0.7471264367816092,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 526.1875,
+          "y": 1260.328125,
+          "w": 130.40625,
+          "h": 173.875,
+          "ratio": 0.7471264367816092,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 672.59375,
+          "y": 1260.328125,
+          "w": 130.40625,
+          "h": 173.875,
+          "ratio": 0.7471264367816092,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 16,
+          "y": 1450.21875,
+          "w": 199.859375,
+          "h": 266.46875,
+          "ratio": 0.7518796992481203,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 231.859375,
+          "y": 1450.21875,
+          "w": 355.28125,
+          "h": 266.453125,
+          "ratio": 1.3345864661654134,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 603.140625,
+          "y": 1450.21875,
+          "w": 199.859375,
+          "h": 266.46875,
+          "ratio": 0.7518796992481203,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 1732.6875,
+          "w": 376.484375,
+          "h": 175.6875,
+          "ratio": 2.1363636363636362,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 408.484375,
+          "y": 1732.6875,
+          "w": 131.796875,
+          "h": 175.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 556.28125,
+          "y": 1732.6875,
+          "w": 98.90625,
+          "h": 175.6875,
+          "ratio": 0.5625,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 671.1875,
+          "y": 1732.6875,
+          "w": 131.8125,
+          "h": 175.75,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 1924.4375,
+          "w": 122.46875,
+          "h": 217.546875,
+          "ratio": 0.5596330275229358,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 154.46875,
+          "y": 1924.4375,
+          "w": 163.203125,
+          "h": 217.59375,
+          "ratio": 0.7477064220183486,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 333.671875,
+          "y": 1924.4375,
+          "w": 290.125,
+          "h": 217.59375,
+          "ratio": 1.3302752293577982,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 639.796875,
+          "y": 1924.4375,
+          "w": 163.203125,
+          "h": 217.59375,
+          "ratio": 0.7477064220183486,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2158.03125,
+          "w": 236.484375,
+          "h": 177.359375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 268.484375,
+          "y": 2158.03125,
+          "w": 133.015625,
+          "h": 177.34375,
+          "ratio": 0.751412429378531,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 417.5,
+          "y": 2158.03125,
+          "w": 236.484375,
+          "h": 177.359375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 669.984375,
+          "y": 2158.03125,
+          "w": 133.015625,
+          "h": 177.34375,
+          "ratio": 0.751412429378531,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 2351.390625,
+          "w": 133.015625,
+          "h": 177.34375,
+          "ratio": 0.751412429378531,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 165.015625,
+          "y": 2351.390625,
+          "w": 133.03125,
+          "h": 177.375,
+          "ratio": 0.751412429378531,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 314.046875,
+          "y": 2351.390625,
+          "w": 236.46875,
+          "h": 177.34375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 566.515625,
+          "y": 2351.390625,
+          "w": 236.484375,
+          "h": 177.359375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 16,
+          "y": 2544.765625,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 1440,
+      "maxShift": 0,
+      "photos": [
+        {
+          "n": "1",
+          "x": 130,
+          "y": 748.0625,
+          "w": 380,
+          "h": 285,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 530,
+          "y": 748.0625,
+          "w": 380,
+          "h": 285,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 930,
+          "y": 748.0625,
+          "w": 380,
+          "h": 285,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 130,
+          "y": 1053.0625,
+          "w": 440,
+          "h": 220,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 590,
+          "y": 1053.0625,
+          "w": 165,
+          "h": 220,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 775,
+          "y": 1053.0625,
+          "w": 165,
+          "h": 220,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 960,
+          "y": 1053.0625,
+          "w": 165,
+          "h": 220,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 1145,
+          "y": 1053.0625,
+          "w": 165,
+          "h": 220,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 130,
+          "y": 1293.0625,
+          "w": 300.125,
+          "h": 225.09375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 450.125,
+          "y": 1293.0625,
+          "w": 168.8125,
+          "h": 225.078125,
+          "ratio": 0.7511111111111111,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 638.9375,
+          "y": 1293.0625,
+          "w": 482.234375,
+          "h": 225.03125,
+          "ratio": 2.1422222222222222,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 1141.171875,
+          "y": 1293.0625,
+          "w": 168.828125,
+          "h": 225.09375,
+          "ratio": 0.7511111111111111,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 130,
+          "y": 1538.15625,
+          "w": 129.078125,
+          "h": 229.28125,
+          "ratio": 0.5633187772925764,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 279.078125,
+          "y": 1538.15625,
+          "w": 172.015625,
+          "h": 229.34375,
+          "ratio": 0.7510917030567685,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 471.09375,
+          "y": 1538.15625,
+          "w": 129.078125,
+          "h": 229.28125,
+          "ratio": 0.5633187772925764,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 620.171875,
+          "y": 1538.15625,
+          "w": 172.015625,
+          "h": 229.34375,
+          "ratio": 0.7510917030567685,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 812.1875,
+          "y": 1538.15625,
+          "w": 305.796875,
+          "h": 229.34375,
+          "ratio": 1.3362445414847162,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 1137.984375,
+          "y": 1538.15625,
+          "w": 172.015625,
+          "h": 229.34375,
+          "ratio": 0.7510917030567685,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 130,
+          "y": 1787.5,
+          "w": 298.296875,
+          "h": 223.71875,
+          "ratio": 1.3303571428571428,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 448.296875,
+          "y": 1787.5,
+          "w": 167.796875,
+          "h": 223.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 636.09375,
+          "y": 1787.5,
+          "w": 298.3125,
+          "h": 223.734375,
+          "ratio": 1.3303571428571428,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 954.40625,
+          "y": 1787.5,
+          "w": 167.796875,
+          "h": 223.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 1142.203125,
+          "y": 1787.5,
+          "w": 167.796875,
+          "h": 223.71875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 130,
+          "y": 2031.234375,
+          "w": 201.59375,
+          "h": 268.78125,
+          "ratio": 0.7509293680297398,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 351.59375,
+          "y": 2031.234375,
+          "w": 358.40625,
+          "h": 268.796875,
+          "ratio": 1.3308550185873607,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 730,
+          "y": 2031.234375,
+          "w": 358.40625,
+          "h": 268.796875,
+          "ratio": 1.3308550185873607,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 1108.40625,
+          "y": 2031.234375,
+          "w": 201.59375,
+          "h": 268.78125,
+          "ratio": 0.7509293680297398,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "release",
+      "width": 1440,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 20,
+          "y": 768.1875,
+          "w": 357.328125,
+          "h": 267.984375,
+          "ratio": 1.3320895522388059,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 397.328125,
+          "y": 768.1875,
+          "w": 357.34375,
+          "h": 268,
+          "ratio": 1.3320895522388059,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 774.671875,
+          "y": 768.1875,
+          "w": 357.328125,
+          "h": 267.984375,
+          "ratio": 1.3320895522388059,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 20,
+          "y": 1056.1875,
+          "w": 495.0625,
+          "h": 247.53125,
+          "ratio": 1.9959677419354838,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 535.0625,
+          "y": 1056.1875,
+          "w": 185.640625,
+          "h": 247.515625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 740.703125,
+          "y": 1056.1875,
+          "w": 185.65625,
+          "h": 247.53125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 946.359375,
+          "y": 1056.1875,
+          "w": 185.640625,
+          "h": 247.515625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 20,
+          "y": 1323.71875,
+          "w": 158.5625,
+          "h": 211.40625,
+          "ratio": 0.7535545023696683,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 198.5625,
+          "y": 1323.71875,
+          "w": 281.90625,
+          "h": 211.421875,
+          "ratio": 1.3364928909952607,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 500.46875,
+          "y": 1323.71875,
+          "w": 158.578125,
+          "h": 211.4375,
+          "ratio": 0.7535545023696683,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 679.046875,
+          "y": 1323.71875,
+          "w": 452.953125,
+          "h": 211.375,
+          "ratio": 2.146919431279621,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 20,
+          "y": 1555.15625,
+          "w": 161.171875,
+          "h": 214.890625,
+          "ratio": 0.7488372093023256,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 201.171875,
+          "y": 1555.15625,
+          "w": 120.953125,
+          "h": 214.859375,
+          "ratio": 0.5627906976744186,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 342.125,
+          "y": 1555.15625,
+          "w": 161.1875,
+          "h": 214.90625,
+          "ratio": 0.7488372093023256,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 523.3125,
+          "y": 1555.15625,
+          "w": 120.953125,
+          "h": 214.859375,
+          "ratio": 0.5627906976744186,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 664.265625,
+          "y": 1555.15625,
+          "w": 161.1875,
+          "h": 214.90625,
+          "ratio": 0.7488372093023256,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 845.453125,
+          "y": 1555.15625,
+          "w": 286.546875,
+          "h": 214.90625,
+          "ratio": 1.3348837209302327,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 20,
+          "y": 1790.0625,
+          "w": 189.359375,
+          "h": 252.46875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 229.359375,
+          "y": 1790.0625,
+          "w": 336.640625,
+          "h": 252.46875,
+          "ratio": 1.3373015873015872,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 586,
+          "y": 1790.0625,
+          "w": 189.359375,
+          "h": 252.46875,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 795.359375,
+          "y": 1790.0625,
+          "w": 336.640625,
+          "h": 252.46875,
+          "ratio": 1.3373015873015872,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 20,
+          "y": 2062.53125,
+          "w": 220.1875,
+          "h": 293.578125,
+          "ratio": 0.7482993197278912,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 260.1875,
+          "y": 2062.53125,
+          "w": 220.1875,
+          "h": 293.578125,
+          "ratio": 0.7482993197278912,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 500.375,
+          "y": 2062.53125,
+          "w": 220.1875,
+          "h": 293.578125,
+          "ratio": 0.7482993197278912,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 740.5625,
+          "y": 2062.53125,
+          "w": 391.4375,
+          "h": 293.578125,
+          "ratio": 1.3299319727891157,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 20,
+          "y": 2376.109375,
+          "w": 698.875,
+          "h": 524.15625,
+          "ratio": 1.333969465648855,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 738.875,
+          "y": 2376.109375,
+          "w": 393.125,
+          "h": 524.15625,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 360,
+      "maxShift": 0.21875,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1312.703125,
+          "w": 157.5,
+          "h": 118.125,
+          "ratio": 1.3389830508474576,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 185.5,
+          "y": 1312.703125,
+          "w": 157.5,
+          "h": 118.125,
+          "ratio": 1.3389830508474576,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1442.828125,
+          "w": 126,
+          "h": 94.5,
+          "ratio": 1.3263157894736841,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 154,
+          "y": 1442.828125,
+          "w": 189,
+          "h": 94.5,
+          "ratio": 1.9894736842105263,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1549.328125,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 185.5,
+          "y": 1549.328125,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1771.328125,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 185.5,
+          "y": 1771.328125,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 1993.328125,
+          "w": 201.59375,
+          "h": 151.1875,
+          "ratio": 1.3377483443708609,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 229.59375,
+          "y": 1993.328125,
+          "w": 113.390625,
+          "h": 151.1875,
+          "ratio": 0.7483443708609272,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2156.515625,
+          "w": 233.3125,
+          "h": 108.875,
+          "ratio": 2.1376146788990824,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 261.3125,
+          "y": 2156.515625,
+          "w": 81.671875,
+          "h": 108.890625,
+          "ratio": 0.7522935779816514,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2277.40625,
+          "w": 135.03125,
+          "h": 240.046875,
+          "ratio": 0.5625,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 163.03125,
+          "y": 2277.40625,
+          "w": 179.953125,
+          "h": 239.9375,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2529.453125,
+          "w": 135.03125,
+          "h": 240.046875,
+          "ratio": 0.5625,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 163.03125,
+          "y": 2529.453125,
+          "w": 179.953125,
+          "h": 239.9375,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2781.5,
+          "w": 201.59375,
+          "h": 151.1875,
+          "ratio": 1.3377483443708609,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 229.59375,
+          "y": 2781.5,
+          "w": 113.390625,
+          "h": 151.1875,
+          "ratio": 0.7483443708609272,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2944.6875,
+          "w": 201.59375,
+          "h": 151.1875,
+          "ratio": 1.3377483443708609,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 229.59375,
+          "y": 2944.6875,
+          "w": 113.390625,
+          "h": 151.1875,
+          "ratio": 0.7483443708609272,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 3107.875,
+          "w": 201.59375,
+          "h": 151.1875,
+          "ratio": 1.3377483443708609,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 229.59375,
+          "y": 3107.875,
+          "w": 113.390625,
+          "h": 151.1875,
+          "ratio": 0.7483443708609272,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3271.0625,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 185.5,
+          "y": 3271.0625,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3493.0625,
+          "w": 157.5,
+          "h": 118.125,
+          "ratio": 1.3389830508474576,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 185.5,
+          "y": 3493.0625,
+          "w": 157.5,
+          "h": 118.125,
+          "ratio": 1.3389830508474576,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 101.25,
+          "y": 3623.1875,
+          "w": 157.5,
+          "h": 210,
+          "ratio": 0.7523809523809524,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 360,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1525.3125,
+          "w": 121.5,
+          "h": 91.125,
+          "ratio": 1.3406593406593406,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 149.5,
+          "y": 1525.3125,
+          "w": 121.5,
+          "h": 91.125,
+          "ratio": 1.3406593406593406,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1628.4375,
+          "w": 97.1875,
+          "h": 72.890625,
+          "ratio": 1.3287671232876712,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 125.1875,
+          "y": 1628.4375,
+          "w": 145.796875,
+          "h": 72.890625,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1713.328125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 149.5,
+          "y": 1713.328125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1887.328125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 149.5,
+          "y": 1887.328125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2061.328125,
+          "w": 155.515625,
+          "h": 116.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 183.515625,
+          "y": 2061.328125,
+          "w": 87.46875,
+          "h": 116.625,
+          "ratio": 0.7435897435897436,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2189.953125,
+          "w": 179.984375,
+          "h": 83.984375,
+          "ratio": 2.142857142857143,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 207.984375,
+          "y": 2189.953125,
+          "w": 63,
+          "h": 84,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2285.953125,
+          "w": 104.171875,
+          "h": 185.1875,
+          "ratio": 0.5621621621621622,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 132.171875,
+          "y": 2285.953125,
+          "w": 138.8125,
+          "h": 185.078125,
+          "ratio": 0.7513513513513513,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2483.140625,
+          "w": 104.171875,
+          "h": 185.1875,
+          "ratio": 0.5621621621621622,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 132.171875,
+          "y": 2483.140625,
+          "w": 138.8125,
+          "h": 185.078125,
+          "ratio": 0.7513513513513513,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2680.328125,
+          "w": 155.515625,
+          "h": 116.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 183.515625,
+          "y": 2680.328125,
+          "w": 87.46875,
+          "h": 116.625,
+          "ratio": 0.7435897435897436,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2808.953125,
+          "w": 155.515625,
+          "h": 116.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 183.515625,
+          "y": 2808.953125,
+          "w": 87.46875,
+          "h": 116.625,
+          "ratio": 0.7435897435897436,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 2937.578125,
+          "w": 155.515625,
+          "h": 116.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 183.515625,
+          "y": 2937.578125,
+          "w": 87.46875,
+          "h": 116.625,
+          "ratio": 0.7435897435897436,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3066.203125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 149.5,
+          "y": 3066.203125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3240.203125,
+          "w": 121.5,
+          "h": 91.125,
+          "ratio": 1.3406593406593406,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 149.5,
+          "y": 3240.203125,
+          "w": 121.5,
+          "h": 91.125,
+          "ratio": 1.3406593406593406,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 83.25,
+          "y": 3343.328125,
+          "w": 121.5,
+          "h": 162,
+          "ratio": 0.7530864197530864,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 390,
+      "maxShift": 0.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1279.921875,
+          "w": 172.5,
+          "h": 129.375,
+          "ratio": 1.3410852713178294,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 200.5,
+          "y": 1279.921875,
+          "w": 172.5,
+          "h": 129.375,
+          "ratio": 1.3410852713178294,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1421.296875,
+          "w": 138,
+          "h": 103.5,
+          "ratio": 1.3269230769230769,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 166,
+          "y": 1421.296875,
+          "w": 207,
+          "h": 103.5,
+          "ratio": 1.9903846153846154,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1536.796875,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 200.5,
+          "y": 1536.796875,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1778.796875,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 200.5,
+          "y": 1778.796875,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2020.796875,
+          "w": 220.796875,
+          "h": 165.59375,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 248.796875,
+          "y": 2020.796875,
+          "w": 124.1875,
+          "h": 165.578125,
+          "ratio": 0.7469879518072289,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2198.390625,
+          "w": 255.53125,
+          "h": 119.234375,
+          "ratio": 2.1512605042016806,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 283.53125,
+          "y": 2198.390625,
+          "w": 89.453125,
+          "h": 119.265625,
+          "ratio": 0.7478991596638656,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2329.65625,
+          "w": 147.890625,
+          "h": 262.90625,
+          "ratio": 0.5627376425855514,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 175.890625,
+          "y": 2329.65625,
+          "w": 197.09375,
+          "h": 262.78125,
+          "ratio": 0.7490494296577946,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2604.5625,
+          "w": 147.890625,
+          "h": 262.90625,
+          "ratio": 0.5627376425855514,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 175.890625,
+          "y": 2604.5625,
+          "w": 197.09375,
+          "h": 262.78125,
+          "ratio": 0.7490494296577946,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2879.46875,
+          "w": 220.796875,
+          "h": 165.59375,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 248.796875,
+          "y": 2879.46875,
+          "w": 124.1875,
+          "h": 165.578125,
+          "ratio": 0.7469879518072289,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 3057.0625,
+          "w": 220.796875,
+          "h": 165.59375,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 248.796875,
+          "y": 3057.0625,
+          "w": 124.1875,
+          "h": 165.578125,
+          "ratio": 0.7469879518072289,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 3234.65625,
+          "w": 220.796875,
+          "h": 165.59375,
+          "ratio": 1.3313253012048192,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 248.796875,
+          "y": 3234.65625,
+          "w": 124.1875,
+          "h": 165.578125,
+          "ratio": 0.7469879518072289,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3412.25,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 200.5,
+          "y": 3412.25,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3654.25,
+          "w": 172.5,
+          "h": 129.375,
+          "ratio": 1.3410852713178294,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 200.5,
+          "y": 3654.25,
+          "w": 172.5,
+          "h": 129.375,
+          "ratio": 1.3410852713178294,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 108.75,
+          "y": 3795.625,
+          "w": 172.5,
+          "h": 230,
+          "ratio": 0.7521739130434782,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 390,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1386.265625,
+          "w": 133.5,
+          "h": 100.125,
+          "ratio": 1.34,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 161.5,
+          "y": 1386.265625,
+          "w": 133.5,
+          "h": 100.125,
+          "ratio": 1.34,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1498.390625,
+          "w": 106.796875,
+          "h": 80.09375,
+          "ratio": 1.3375,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 134.796875,
+          "y": 1498.390625,
+          "w": 160.1875,
+          "h": 80.09375,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1590.484375,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 161.5,
+          "y": 1590.484375,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1780.484375,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 161.5,
+          "y": 1780.484375,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 1970.484375,
+          "w": 170.875,
+          "h": 128.15625,
+          "ratio": 1.3359375,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 198.875,
+          "y": 1970.484375,
+          "w": 96.109375,
+          "h": 128.140625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2110.640625,
+          "w": 197.765625,
+          "h": 92.28125,
+          "ratio": 2.152173913043478,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 225.765625,
+          "y": 2110.640625,
+          "w": 69.21875,
+          "h": 92.28125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2214.921875,
+          "w": 114.453125,
+          "h": 203.46875,
+          "ratio": 0.5615763546798029,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 142.453125,
+          "y": 2214.921875,
+          "w": 152.53125,
+          "h": 203.375,
+          "ratio": 0.7536945812807881,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 2430.390625,
+          "w": 114.453125,
+          "h": 203.46875,
+          "ratio": 0.5615763546798029,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 142.453125,
+          "y": 2430.390625,
+          "w": 152.53125,
+          "h": 203.375,
+          "ratio": 0.7536945812807881,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 2645.859375,
+          "w": 170.875,
+          "h": 128.15625,
+          "ratio": 1.3359375,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 198.875,
+          "y": 2645.859375,
+          "w": 96.109375,
+          "h": 128.140625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 2786.015625,
+          "w": 170.875,
+          "h": 128.15625,
+          "ratio": 1.3359375,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 198.875,
+          "y": 2786.015625,
+          "w": 96.109375,
+          "h": 128.140625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 2926.171875,
+          "w": 170.875,
+          "h": 128.15625,
+          "ratio": 1.3359375,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 198.875,
+          "y": 2926.171875,
+          "w": 96.109375,
+          "h": 128.140625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 3066.328125,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 161.5,
+          "y": 3066.328125,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 3256.328125,
+          "w": 133.5,
+          "h": 100.125,
+          "ratio": 1.34,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 161.5,
+          "y": 3256.328125,
+          "w": 133.5,
+          "h": 100.125,
+          "ratio": 1.34,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 89.25,
+          "y": 3368.453125,
+          "w": 133.5,
+          "h": 178,
+          "ratio": 0.7528089887640449,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 768,
+      "maxShift": 0.59375,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1055.578125,
+          "w": 359.5,
+          "h": 269.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 391.5,
+          "y": 1055.578125,
+          "w": 359.5,
+          "h": 269.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1341.203125,
+          "w": 287.59375,
+          "h": 215.6875,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 319.59375,
+          "y": 1341.203125,
+          "w": 431.390625,
+          "h": 215.6875,
+          "ratio": 1.9953703703703705,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1572.890625,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 391.5,
+          "y": 1572.890625,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 2068.21875,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 391.5,
+          "y": 2068.21875,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2563.546875,
+          "w": 460.15625,
+          "h": 345.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 492.15625,
+          "y": 2563.546875,
+          "w": 258.828125,
+          "h": 345.09375,
+          "ratio": 0.7507246376811594,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2924.65625,
+          "w": 532.546875,
+          "h": 248.515625,
+          "ratio": 2.140562248995984,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 564.546875,
+          "y": 2924.65625,
+          "w": 186.4375,
+          "h": 248.578125,
+          "ratio": 0.7469879518072289,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 3189.234375,
+          "w": 308.234375,
+          "h": 547.96875,
+          "ratio": 0.5620437956204379,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 340.234375,
+          "y": 3189.234375,
+          "w": 410.75,
+          "h": 547.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 3753.203125,
+          "w": 308.234375,
+          "h": 547.96875,
+          "ratio": 0.5620437956204379,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 340.234375,
+          "y": 3753.203125,
+          "w": 410.75,
+          "h": 547.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 4317.171875,
+          "w": 460.15625,
+          "h": 345.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 492.15625,
+          "y": 4317.171875,
+          "w": 258.828125,
+          "h": 345.09375,
+          "ratio": 0.7507246376811594,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 4678.28125,
+          "w": 460.15625,
+          "h": 345.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 492.15625,
+          "y": 4678.28125,
+          "w": 258.828125,
+          "h": 345.09375,
+          "ratio": 0.7507246376811594,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 5039.390625,
+          "w": 460.15625,
+          "h": 345.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 492.15625,
+          "y": 5039.390625,
+          "w": 258.828125,
+          "h": 345.09375,
+          "ratio": 0.7507246376811594,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 5400.5,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 391.5,
+          "y": 5400.5,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 5895.828125,
+          "w": 359.5,
+          "h": 269.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 391.5,
+          "y": 5895.828125,
+          "w": 359.5,
+          "h": 269.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 204.25,
+          "y": 6181.453125,
+          "w": 359.5,
+          "h": 479.328125,
+          "ratio": 0.7515657620041754,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 768,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1072.015625,
+          "w": 284.5,
+          "h": 213.375,
+          "ratio": 1.3380281690140845,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 312.5,
+          "y": 1072.015625,
+          "w": 284.5,
+          "h": 213.375,
+          "ratio": 1.3380281690140845,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1297.390625,
+          "w": 227.59375,
+          "h": 170.6875,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 255.59375,
+          "y": 1297.390625,
+          "w": 341.390625,
+          "h": 170.6875,
+          "ratio": 1.9941520467836258,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1480.078125,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 312.5,
+          "y": 1480.078125,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 1871.40625,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 312.5,
+          "y": 1871.40625,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2262.734375,
+          "w": 364.15625,
+          "h": 273.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 392.15625,
+          "y": 2262.734375,
+          "w": 204.828125,
+          "h": 273.09375,
+          "ratio": 0.7509157509157509,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 2547.84375,
+          "w": 421.453125,
+          "h": 196.671875,
+          "ratio": 2.1370558375634516,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 449.453125,
+          "y": 2547.84375,
+          "w": 147.53125,
+          "h": 196.703125,
+          "ratio": 0.751269035532995,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 2756.546875,
+          "w": 243.921875,
+          "h": 433.625,
+          "ratio": 0.5622119815668203,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 271.921875,
+          "y": 2756.546875,
+          "w": 325.0625,
+          "h": 433.40625,
+          "ratio": 0.7505773672055427,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 3202.171875,
+          "w": 243.921875,
+          "h": 433.625,
+          "ratio": 0.5622119815668203,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 271.921875,
+          "y": 3202.171875,
+          "w": 325.0625,
+          "h": 433.40625,
+          "ratio": 0.7505773672055427,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 3647.796875,
+          "w": 364.15625,
+          "h": 273.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 392.15625,
+          "y": 3647.796875,
+          "w": 204.828125,
+          "h": 273.09375,
+          "ratio": 0.7509157509157509,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 3932.90625,
+          "w": 364.15625,
+          "h": 273.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 392.15625,
+          "y": 3932.90625,
+          "w": 204.828125,
+          "h": 273.09375,
+          "ratio": 0.7509157509157509,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 4218.015625,
+          "w": 364.15625,
+          "h": 273.109375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 392.15625,
+          "y": 4218.015625,
+          "w": 204.828125,
+          "h": 273.09375,
+          "ratio": 0.7509157509157509,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 4503.125,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 312.5,
+          "y": 4503.125,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 4894.453125,
+          "w": 284.5,
+          "h": 213.375,
+          "ratio": 1.3380281690140845,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 312.5,
+          "y": 4894.453125,
+          "w": 284.5,
+          "h": 213.375,
+          "ratio": 1.3380281690140845,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 164.75,
+          "y": 5119.828125,
+          "w": 284.5,
+          "h": 379.328125,
+          "ratio": 0.7519788918205804,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 1024,
+      "maxShift": 0,
+      "photos": [
+        {
+          "n": "1",
+          "x": 20,
+          "y": 816.546875,
+          "w": 481.5,
+          "h": 361.125,
+          "ratio": 1.335180055401662,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 521.5,
+          "y": 816.546875,
+          "w": 481.5,
+          "h": 361.125,
+          "ratio": 1.335180055401662,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 20,
+          "y": 1197.671875,
+          "w": 385.1875,
+          "h": 288.890625,
+          "ratio": 1.3321799307958477,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 425.1875,
+          "y": 1197.671875,
+          "w": 577.796875,
+          "h": 288.890625,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 20,
+          "y": 1506.5625,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 521.5,
+          "y": 1506.5625,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 20,
+          "y": 2168.5625,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 521.5,
+          "y": 2168.5625,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 20,
+          "y": 2830.5625,
+          "w": 616.3125,
+          "h": 462.234375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 656.3125,
+          "y": 2830.5625,
+          "w": 346.671875,
+          "h": 462.21875,
+          "ratio": 0.7510822510822511,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 20,
+          "y": 3312.796875,
+          "w": 713.28125,
+          "h": 332.859375,
+          "ratio": 2.141141141141141,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 753.28125,
+          "y": 3312.796875,
+          "w": 249.703125,
+          "h": 332.9375,
+          "ratio": 0.7507507507507507,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 20,
+          "y": 3665.734375,
+          "w": 412.828125,
+          "h": 733.328125,
+          "ratio": 0.5634379263301501,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 452.828125,
+          "y": 3665.734375,
+          "w": 550.15625,
+          "h": 733.53125,
+          "ratio": 0.7493188010899182,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 20,
+          "y": 4419.265625,
+          "w": 412.828125,
+          "h": 733.328125,
+          "ratio": 0.5634379263301501,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 452.828125,
+          "y": 4419.265625,
+          "w": 550.15625,
+          "h": 733.53125,
+          "ratio": 0.7493188010899182,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 20,
+          "y": 5172.796875,
+          "w": 616.3125,
+          "h": 462.234375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 656.3125,
+          "y": 5172.796875,
+          "w": 346.671875,
+          "h": 462.21875,
+          "ratio": 0.7510822510822511,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 20,
+          "y": 5655.03125,
+          "w": 616.3125,
+          "h": 462.234375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 656.3125,
+          "y": 5655.03125,
+          "w": 346.671875,
+          "h": 462.21875,
+          "ratio": 0.7510822510822511,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 20,
+          "y": 6137.265625,
+          "w": 616.3125,
+          "h": 462.234375,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 656.3125,
+          "y": 6137.265625,
+          "w": 346.671875,
+          "h": 462.21875,
+          "ratio": 0.7510822510822511,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 20,
+          "y": 6619.5,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 521.5,
+          "y": 6619.5,
+          "w": 481.5,
+          "h": 642,
+          "ratio": 0.7507788161993769,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 20,
+          "y": 7281.5,
+          "w": 481.5,
+          "h": 361.125,
+          "ratio": 1.335180055401662,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 521.5,
+          "y": 7281.5,
+          "w": 481.5,
+          "h": 361.125,
+          "ratio": 1.335180055401662,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 272,
+          "y": 7662.625,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 1024,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 16,
+          "y": 1055.578125,
+          "w": 385,
+          "h": 288.75,
+          "ratio": 1.3321799307958477,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 417,
+          "y": 1055.578125,
+          "w": 385,
+          "h": 288.75,
+          "ratio": 1.3321799307958477,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 16,
+          "y": 1360.328125,
+          "w": 308,
+          "h": 231,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 340,
+          "y": 1360.328125,
+          "w": 462,
+          "h": 231,
+          "ratio": 2,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 16,
+          "y": 1607.328125,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 417,
+          "y": 1607.328125,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 16,
+          "y": 2136.65625,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 417,
+          "y": 2136.65625,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 16,
+          "y": 2665.984375,
+          "w": 492.796875,
+          "h": 369.59375,
+          "ratio": 1.3324324324324324,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 524.796875,
+          "y": 2665.984375,
+          "w": 277.1875,
+          "h": 369.578125,
+          "ratio": 0.7486486486486487,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 16,
+          "y": 3051.578125,
+          "w": 570.328125,
+          "h": 266.140625,
+          "ratio": 2.142857142857143,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 602.328125,
+          "y": 3051.578125,
+          "w": 199.65625,
+          "h": 266.203125,
+          "ratio": 0.7518796992481203,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 16,
+          "y": 3333.78125,
+          "w": 330.09375,
+          "h": 586.359375,
+          "ratio": 0.5631399317406144,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 362.09375,
+          "y": 3333.78125,
+          "w": 439.890625,
+          "h": 586.515625,
+          "ratio": 0.7495741056218058,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 16,
+          "y": 3936.296875,
+          "w": 330.09375,
+          "h": 586.359375,
+          "ratio": 0.5631399317406144,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 362.09375,
+          "y": 3936.296875,
+          "w": 439.890625,
+          "h": 586.515625,
+          "ratio": 0.7495741056218058,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 16,
+          "y": 4538.8125,
+          "w": 492.796875,
+          "h": 369.59375,
+          "ratio": 1.3324324324324324,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 524.796875,
+          "y": 4538.8125,
+          "w": 277.1875,
+          "h": 369.578125,
+          "ratio": 0.7486486486486487,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 16,
+          "y": 4924.40625,
+          "w": 492.796875,
+          "h": 369.59375,
+          "ratio": 1.3324324324324324,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 524.796875,
+          "y": 4924.40625,
+          "w": 277.1875,
+          "h": 369.578125,
+          "ratio": 0.7486486486486487,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 16,
+          "y": 5310,
+          "w": 492.796875,
+          "h": 369.59375,
+          "ratio": 1.3324324324324324,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 524.796875,
+          "y": 5310,
+          "w": 277.1875,
+          "h": 369.578125,
+          "ratio": 0.7486486486486487,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 16,
+          "y": 5695.59375,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 417,
+          "y": 5695.59375,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 16,
+          "y": 6224.921875,
+          "w": 385,
+          "h": 288.75,
+          "ratio": 1.3321799307958477,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 417,
+          "y": 6224.921875,
+          "w": 385,
+          "h": 288.75,
+          "ratio": 1.3321799307958477,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 217,
+          "y": 6529.671875,
+          "w": 385,
+          "h": 513.328125,
+          "ratio": 0.7504873294346979,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 1440,
+      "maxShift": 0,
+      "photos": [
+        {
+          "n": "1",
+          "x": 130,
+          "y": 748.0625,
+          "w": 579.5,
+          "h": 434.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 729.5,
+          "y": 748.0625,
+          "w": 579.5,
+          "h": 434.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 130,
+          "y": 1202.6875,
+          "w": 463.59375,
+          "h": 347.6875,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 613.59375,
+          "y": 1202.6875,
+          "w": 695.390625,
+          "h": 347.6875,
+          "ratio": 1.9971264367816093,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 130,
+          "y": 1570.375,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 729.5,
+          "y": 1570.375,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 130,
+          "y": 2363.03125,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 729.5,
+          "y": 2363.03125,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 130,
+          "y": 3155.6875,
+          "w": 741.75,
+          "h": 556.3125,
+          "ratio": 1.3345323741007193,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 891.75,
+          "y": 3155.6875,
+          "w": 417.234375,
+          "h": 556.3125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 130,
+          "y": 3732,
+          "w": 858.453125,
+          "h": 400.609375,
+          "ratio": 2.1396508728179553,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 1008.453125,
+          "y": 3732,
+          "w": 300.53125,
+          "h": 400.703125,
+          "ratio": 0.7506234413965087,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 130,
+          "y": 4152.703125,
+          "w": 496.859375,
+          "h": 882.609375,
+          "ratio": 0.5628539071347678,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 646.859375,
+          "y": 4152.703125,
+          "w": 662.125,
+          "h": 882.828125,
+          "ratio": 0.7497168742921857,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 130,
+          "y": 5055.53125,
+          "w": 496.859375,
+          "h": 882.609375,
+          "ratio": 0.5628539071347678,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 646.859375,
+          "y": 5055.53125,
+          "w": 662.125,
+          "h": 882.828125,
+          "ratio": 0.7497168742921857,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 130,
+          "y": 5958.359375,
+          "w": 741.75,
+          "h": 556.3125,
+          "ratio": 1.3345323741007193,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 891.75,
+          "y": 5958.359375,
+          "w": 417.234375,
+          "h": 556.3125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 130,
+          "y": 6534.671875,
+          "w": 741.75,
+          "h": 556.3125,
+          "ratio": 1.3345323741007193,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 891.75,
+          "y": 6534.671875,
+          "w": 417.234375,
+          "h": 556.3125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 130,
+          "y": 7110.984375,
+          "w": 741.75,
+          "h": 556.3125,
+          "ratio": 1.3345323741007193,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 891.75,
+          "y": 7110.984375,
+          "w": 417.234375,
+          "h": 556.3125,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 130,
+          "y": 7687.296875,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 729.5,
+          "y": 7687.296875,
+          "w": 579.5,
+          "h": 772.65625,
+          "ratio": 0.7503234152652005,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 130,
+          "y": 8479.953125,
+          "w": 579.5,
+          "h": 434.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 729.5,
+          "y": 8479.953125,
+          "w": 579.5,
+          "h": 434.625,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 480,
+          "y": 8934.578125,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    },
+    {
+      "version": "a",
+      "width": 1440,
+      "zoom": 1.25,
+      "photos": [
+        {
+          "n": "1",
+          "x": 20,
+          "y": 768.1875,
+          "w": 545.5,
+          "h": 409.125,
+          "ratio": 1.3349633251833741,
+          "fit": "fill"
+        },
+        {
+          "n": "2",
+          "x": 585.5,
+          "y": 768.1875,
+          "w": 545.5,
+          "h": 409.125,
+          "ratio": 1.3349633251833741,
+          "fit": "fill"
+        },
+        {
+          "n": "3",
+          "x": 20,
+          "y": 1197.3125,
+          "w": 436.390625,
+          "h": 327.28125,
+          "ratio": 1.3333333333333333,
+          "fit": "fill"
+        },
+        {
+          "n": "4",
+          "x": 476.390625,
+          "y": 1197.3125,
+          "w": 654.59375,
+          "h": 327.296875,
+          "ratio": 2.003058103975535,
+          "fit": "fill"
+        },
+        {
+          "n": "5",
+          "x": 20,
+          "y": 1544.609375,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "6",
+          "x": 585.5,
+          "y": 1544.609375,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "7",
+          "x": 20,
+          "y": 2291.9375,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "8",
+          "x": 585.5,
+          "y": 2291.9375,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "9",
+          "x": 20,
+          "y": 3039.265625,
+          "w": 698.234375,
+          "h": 523.671875,
+          "ratio": 1.33206106870229,
+          "fit": "fill"
+        },
+        {
+          "n": "10",
+          "x": 738.234375,
+          "y": 3039.265625,
+          "w": 392.75,
+          "h": 523.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "11",
+          "x": 20,
+          "y": 3582.9375,
+          "w": 808.09375,
+          "h": 377.109375,
+          "ratio": 2.143236074270557,
+          "fit": "fill"
+        },
+        {
+          "n": "12",
+          "x": 848.09375,
+          "y": 3582.9375,
+          "w": 282.890625,
+          "h": 377.1875,
+          "ratio": 0.7506631299734748,
+          "fit": "fill"
+        },
+        {
+          "n": "13",
+          "x": 20,
+          "y": 3980.125,
+          "w": 467.703125,
+          "h": 830.8125,
+          "ratio": 0.5631768953068592,
+          "fit": "fill"
+        },
+        {
+          "n": "14",
+          "x": 507.703125,
+          "y": 3980.125,
+          "w": 623.28125,
+          "h": 831.03125,
+          "ratio": 0.7496991576413959,
+          "fit": "fill"
+        },
+        {
+          "n": "15",
+          "x": 20,
+          "y": 4831.15625,
+          "w": 467.703125,
+          "h": 830.8125,
+          "ratio": 0.5631768953068592,
+          "fit": "fill"
+        },
+        {
+          "n": "16",
+          "x": 507.703125,
+          "y": 4831.15625,
+          "w": 623.28125,
+          "h": 831.03125,
+          "ratio": 0.7496991576413959,
+          "fit": "fill"
+        },
+        {
+          "n": "17",
+          "x": 20,
+          "y": 5682.1875,
+          "w": 698.234375,
+          "h": 523.671875,
+          "ratio": 1.33206106870229,
+          "fit": "fill"
+        },
+        {
+          "n": "18",
+          "x": 738.234375,
+          "y": 5682.1875,
+          "w": 392.75,
+          "h": 523.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "19",
+          "x": 20,
+          "y": 6225.859375,
+          "w": 698.234375,
+          "h": 523.671875,
+          "ratio": 1.33206106870229,
+          "fit": "fill"
+        },
+        {
+          "n": "20",
+          "x": 738.234375,
+          "y": 6225.859375,
+          "w": 392.75,
+          "h": 523.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "21",
+          "x": 20,
+          "y": 6769.53125,
+          "w": 698.234375,
+          "h": 523.671875,
+          "ratio": 1.33206106870229,
+          "fit": "fill"
+        },
+        {
+          "n": "22",
+          "x": 738.234375,
+          "y": 6769.53125,
+          "w": 392.75,
+          "h": 523.65625,
+          "ratio": 0.75,
+          "fit": "fill"
+        },
+        {
+          "n": "23",
+          "x": 20,
+          "y": 7313.203125,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "24",
+          "x": 585.5,
+          "y": 7313.203125,
+          "w": 545.5,
+          "h": 727.328125,
+          "ratio": 0.7510316368638239,
+          "fit": "fill"
+        },
+        {
+          "n": "25",
+          "x": 20,
+          "y": 8060.53125,
+          "w": 545.5,
+          "h": 409.125,
+          "ratio": 1.3349633251833741,
+          "fit": "fill"
+        },
+        {
+          "n": "26",
+          "x": 585.5,
+          "y": 8060.53125,
+          "w": 545.5,
+          "h": 409.125,
+          "ratio": 1.3349633251833741,
+          "fit": "fill"
+        },
+        {
+          "n": "27",
+          "x": 336,
+          "y": 8489.65625,
+          "w": 480,
+          "h": 640,
+          "ratio": 0.75,
+          "fit": "fill"
+        }
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "width": 360,
+      "order": [
+        "Без аналитики",
+        "Разрешить аналитику"
+      ],
+      "overflow": false,
+      "enlargedOverflow": false
+    },
+    {
+      "width": 390,
+      "order": [
+        "Без аналитики",
+        "Разрешить аналитику"
+      ],
+      "overflow": false,
+      "enlargedOverflow": false
+    },
+    {
+      "width": 768,
+      "order": [
+        "Без аналитики",
+        "Разрешить аналитику"
+      ],
+      "overflow": false,
+      "enlargedOverflow": false
+    },
+    {
+      "width": 1024,
+      "order": [
+        "Разрешить аналитику",
+        "Без аналитики"
+      ],
+      "overflow": false,
+      "enlargedOverflow": false
+    },
+    {
+      "width": 1440,
+      "order": [
+        "Разрешить аналитику",
+        "Без аналитики"
+      ],
+      "overflow": false,
+      "enlargedOverflow": false
+    }
+  ],
+  "scroll": []
+}

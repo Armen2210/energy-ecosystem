@@ -18,8 +18,9 @@ import {
 import { updateQuestionnaire } from "./state.js";
 import { selectedProduct } from "./state.js";
 import NumericInput from "./NumericInput.jsx";
+import { fieldHint } from "./hints.js";
 
-function Quantity({ field, value, onChange, invalid, id, describedBy }) {
+function Quantity({ field, value, onChange, invalid, id, describedBy, placeholder }) {
   const [unitError, setUnitError] = useState("");
   const unit = value?.unit || field.unit;
   return (
@@ -27,6 +28,7 @@ function Quantity({ field, value, onChange, invalid, id, describedBy }) {
       <div className="ql-quantity">
         <NumericInput
           field={field}
+          placeholder={placeholder}
           id={id}
           value={field.units ? value?.value || "" : value || ""}
           aria-required={field.required || undefined}
@@ -72,8 +74,9 @@ function AnswerField({ field, value, onChange, path, errors, focusKey }) {
   const id = useId();
   const ref = useRef(null);
   const error = errors[path];
+  const hint = fieldHint(path);
   const describedBy =
-    [field.help ? id + "-help" : "", error ? id + "-error" : ""]
+    [field.help || hint ? id + "-help" : "", error ? id + "-error" : ""]
       .filter(Boolean)
       .join(" ") || undefined;
   useEffect(() => {
@@ -107,6 +110,7 @@ function AnswerField({ field, value, onChange, path, errors, focusKey }) {
           onChange={onChange}
           invalid={!!error}
           describedBy={describedBy}
+          placeholder={hint}
           id={id}
         />
       ) : field.type === "choice" ? (
@@ -131,6 +135,7 @@ function AnswerField({ field, value, onChange, path, errors, focusKey }) {
           aria-describedby={describedBy}
           aria-invalid={!!error}
           aria-required={field.required || undefined}
+          placeholder={hint}
           rows="3"
           maxLength={contract.limits.text}
           value={value || ""}
@@ -143,12 +148,13 @@ function AnswerField({ field, value, onChange, path, errors, focusKey }) {
           aria-invalid={!!error}
           aria-required={field.required || undefined}
           type="text"
+          placeholder={hint}
           maxLength={contract.limits.text}
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
         />
       )}{" "}
-      {field.help && <small id={id + "-help"}>{field.help}</small>}
+      {(field.help || hint) && <small id={id + "-help"}>{field.help || hint}</small>}
       {error && (
         <span id={id + "-error"} className="ql-error" role="alert">
           {error}
