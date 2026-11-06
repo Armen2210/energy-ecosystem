@@ -14,6 +14,8 @@ export default function CookieBanner() {
   const mobile = useSyncExternalStore(subscribeViewport, () => window.matchMedia(mobileQuery).matches, () => false);
   const ready = useClientReady();
   const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
+  const calltouch = analytics.calltouchAvailable();
+  const needsChoice = useSyncExternalStore(analytics.subscribe, analytics.needsCalltouchChoice, () => false);
   const [opened, setOpened] = useState(false);
   const accept = useRef(null);
   const returnFocus = useRef(null);
@@ -31,17 +33,18 @@ export default function CookieBanner() {
     setOpened(false);
     returnFocus.current?.focus();
   }
-  if (!ready || (!opened && choice !== "unknown")) return null;
+  if (!ready || (!opened && choice !== "unknown" && !needsChoice)) return null;
   return (
     <section className="cookie-banner" aria-labelledby="cookie-banner-title">
       <div className="cookie-banner__content">
         <div className="cookie-banner__copy">
           <h2 id="cookie-banner-title">Помогите нам стать удобнее</h2>
           <p>
-            С вашего разрешения мы используем cookies и Яндекс Метрику, чтобы
+            С вашего разрешения мы используем cookies и {calltouch ? "сервисы Яндекс Метрика и Calltouch" : "Яндекс Метрику"}, чтобы
             понимать, что полезно посетителям, и делать сайт удобнее. Изменить
             выбор можно в настройках cookies внизу сайта.
           </p>
+          {needsChoice && <p>Мы добавляем Calltouch. Пока действует ваш прежний выбор для Яндекс Метрики.</p>}
           <details className="cookie-banner__details">
             <summary>Подробнее</summary>
             <p>
@@ -50,6 +53,11 @@ export default function CookieBanner() {
               При разрешении также сохраняются сведения об источниках перехода на
               сайт и отметки учёта целей.
             </p>
+            {calltouch && <p>
+              Calltouch помогает определять источники обращений и отслеживать звонки.
+              После отзыва разрешения страница обновится, если Calltouch уже был запущен.
+              Выбранные файлы потребуется прикрепить заново.
+            </p>}
             <p>
               Отказ от аналитики не отключает техническое хранение для работы сайта.
               Черновик формы и ответы ОЛ сохраняются в этой вкладке на 24 часа без изменений. Выбранные файлы после обновления нужно прикрепить заново.
