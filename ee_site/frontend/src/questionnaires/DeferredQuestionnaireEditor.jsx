@@ -112,6 +112,25 @@ export default function DeferredQuestionnaireEditor(props) {
           ) : needed ? "Загружаем редактор опросного листа…" : "Электронный опросный лист доступен ниже."}
         </div>
       )}
+      {(backend === "unavailable" || error) && Object.values(draft.questionnaires).some((sheet) => sheet.enabled) && (
+        <div className="ql-unavailable">
+          Можно скачать Excel/PDF выше или отправить обычную заявку.
+          Включённые ОЛ не будут исключены автоматически.
+          <button type="button" className="lead-form__clear" disabled={draft.submitting || draft.indeterminate} onClick={() => {
+            const current = leadDraft.get();
+            if (current.submitting || current.indeterminate) return;
+            if (!window.confirm("Исключить все электронные ОЛ из отправки? Ответы, контакты и выбранные файлы останутся в черновике. Для отправки останутся обычная заявка и прикреплённые файлы.")) return;
+            leadDraft.update({
+              questionnaires: Object.fromEntries(Object.entries(current.questionnaires).map(([key, sheet]) => [key, { ...sheet, enabled: false }])),
+              questionnaireErrors: {},
+              status: "idle",
+              message: "Электронные ОЛ исключены из отправки. Ответы сохранены в черновике; обычная заявка и выбранные файлы остаются.",
+            });
+          }}>
+            Исключить ОЛ и оставить обычную заявку
+          </button>
+        </div>
+      )}
     </section>
   );
 }
