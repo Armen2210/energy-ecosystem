@@ -10,19 +10,19 @@ function storage() {
   const data = new Map();
   return { getItem: key => data.get(key) || null, setItem: (key, value) => data.set(key, value), removeItem: key => data.delete(key), key: i => [...data.keys()][i], get length() { return data.size; } };
 }
-function platform({ saved, failStorage = false, production = true, enabled = 'true', hostname = 'www.energoeffekt-rostov.ru' } = {}) {
-  const events = {}, commands = [], frames = [], timers = new Map(), delays = new Map();
-  let timerId = 0, time = 1800000000000;
+function platform({ saved, failStorage = false, production = true, enabled = 'true', calltouchEnabled, hostname = 'www.energoeffekt-rostov.ru' } = {}) {
+  const events = {}, commands = [], frames = [], scripts = [], timers = new Map(), delays = new Map();
+  let reloads = 0, timerId = 0, time = 1800000000000;
   const localStorage = saved || storage();
-  const win = { location: { protocol: 'https:', hostname, origin: `https://${hostname}`, search: '?utm_source=yandex&utm_medium=cpc' },
+  const win = { location: { protocol: 'https:', hostname, origin: `https://${hostname}`, search: '?utm_source=yandex&utm_medium=cpc', reload: () => reloads++ },
     localStorage, addEventListener: (name, fn) => { events[name] = fn; },
     setTimeout(fn, delay) { timers.set(++timerId, fn); delays.set(timerId, delay); return timerId; }, clearTimeout: id => timers.delete(id) };
   if (failStorage) Object.defineProperty(win, 'localStorage', { get() { throw Error('denied'); } });
-  const doc = { referrer: 'https://google.com/search?email=secret', cookie: '', body: { append: f => frames.push(f) }, createElement() {
+  const doc = { referrer: 'https://google.com/search?email=secret', cookie: '', head: { append: s => scripts.push(s) }, body: { append: f => frames.push(f) }, createElement() {
     return { setAttribute() {}, contentWindow: { postMessage: data => commands.push(data), eeAnalyticsStop: () => commands.push({ type: 'destruct' }) }, remove() { this.removed = true; } };
   } };
-  const app = createAnalytics({ window: win, document: doc, production, enabled, now: () => time });
-  return { app, win, events, commands, frames, localStorage, setTime: t => { time = t; }, time: () => time,
+  const app = createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now: () => time });
+  return { app, win, events, commands, frames, scripts, reloads: () => reloads, localStorage, setTime: t => { time = t; }, time: () => time,
     fireTimers(delay) { for (const [id, fn] of [...timers]) if (delays.get(id) === delay) { timers.delete(id); fn(); } },
     ready(frame = frames.at(-1), token = Number(frame.src.split('=')[1])) { events.message({ source: frame.contentWindow, origin: win.location.origin, data: { eeAnalytics: true, generation: token, type: 'ready' } }); },
     visit(path = '/', extras = {}) { app.visit({ path, title: path === '/' ? 'Home' : 'BTP', search: win.location.search, key: path, ...extras }); } };
@@ -301,4 +301,39 @@ test('privacy form entry marker never enters analytics URLs, attribution or para
   assert.deepEqual(campaign('?from=lead-form'), null);
   assert.deepEqual(safeParams({ from: 'lead-form', page_category: 'privacy' }), { page_category: 'privacy' });
   assert.ok(!JSON.stringify(p.commands).includes('lead-form'));
+});
+
+test('Calltouch requires fresh consent; legacy permission still runs Metrika', () => {
+  const old = platform();
+  old.app.choose('allowed');
+  const p = platform({ saved: old.localStorage, calltouchEnabled: 'true' });
+  p.visit();
+  assert.equal(p.frames.length, 1);
+  assert.equal(p.scripts.length, 0);
+  assert.equal(p.app.needsCalltouchChoice(), true);
+  p.app.choose('allowed');
+  p.visit('/solutions/bmk');
+  assert.equal(p.app.needsCalltouchChoice(), false);
+  assert.deepEqual(p.scripts.map(script => script.src), ['https://mod.calltouch.ru/init-min.js?id=q0fhtb2e']);
+  p.app.choose('denied');
+  assert.equal(p.reloads(), 1);
+  const reloaded = platform({ saved: p.localStorage, calltouchEnabled: 'true' });
+  reloaded.visit();
+  assert.equal(reloaded.frames.length, 0);
+  assert.equal(reloaded.scripts.length, 0);
+});
+
+test('Calltouch stays off without a choice, on first denial and off the production host', () => {
+  const p = platform({ calltouchEnabled: 'true' });
+  p.visit();
+  assert.equal(p.scripts.length, 0);
+  p.app.choose('denied');
+  assert.equal(p.scripts.length, 0);
+  assert.equal(p.reloads(), 0);
+  for (const options of [{}, { calltouchEnabled: 'true', hostname: 'localhost' }, { calltouchEnabled: 'true', failStorage: true }]) {
+    const other = platform(options);
+    other.visit();
+    other.app.choose('allowed');
+    assert.equal(other.scripts.length, 0);
+  }
 });

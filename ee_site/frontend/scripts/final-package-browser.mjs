@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import process from "node:process";
@@ -101,11 +102,7 @@ try {
     for (const catalog of ["solutions", "services"]) {
       await p.goto(origin + "/" + catalog);
       await p.locator("main h1").waitFor();
-      const deny = p.getByRole("button", {
-        name: "Без аналитики",
-        exact: true,
-      });
-      if (await deny.isVisible()) await deny.click();
+      await dismissCookies(p);
       await noOverflow(p);
       await p.screenshot({
         path: `${output}/${catalog}-${label}.png`,

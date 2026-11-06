@@ -1,3 +1,4 @@
+import { dismissCookies, openCookieSettings } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -48,7 +49,7 @@ try {
     assert.equal(await page.title(), 'О нас — команда и производство | Энергоэффект');
     assert.equal(await page.locator('main h1').count(), 1);
     assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'), 'https://www.energoeffekt-rostov.ru/about');
-    await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+    await dismissCookies(page);
     for (let i = 0; i < 7; i++) {
       await openers(page).nth(i).scrollIntoViewIfNeeded();
       await openers(page).nth(i).locator('img').evaluate(img => img.decode());
@@ -78,7 +79,7 @@ try {
     await ctx.close(); pass(`${width}px: geometry, header, seven images, responsive sources, metadata and demand-only large image`);
   }
   const ctx = await context(); const page = await ctx.newPage(); await page.goto(origin + '/about'); await ready(page);
-  await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+  await dismissCookies(page);
   for (let i = 0; i < 7; i++) {
     const button = openers(page).nth(i); await button.focus();
     const y = await page.evaluate(() => scrollY); await button.press('Enter');
@@ -122,7 +123,7 @@ try {
   const errorCtx = await context(); const errorPage = await errorCtx.newPage();
   await errorCtx.route('**/*dsc05801-large*', route => route.abort());
   await errorPage.goto(origin + '/about'); await ready(errorPage);
-  await errorPage.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+  await dismissCookies(errorPage);
   await openers(errorPage).first().click(); await errorPage.getByRole('alert').waitFor();
   await errorCtx.unroute('**/*dsc05801-large*');
   await errorPage.getByRole('button', { name: 'Попробовать ещё раз' }).click(); await errorPage.locator('.about-viewer__image').evaluate(img => img.decode());
@@ -131,7 +132,7 @@ try {
   const slowCtx = await context(); const slowPage = await slowCtx.newPage();
   await slowCtx.route('**/*dsc05801-large*', async route => { await gate; await route.fallback(); });
   await slowPage.goto(origin + '/about'); await ready(slowPage);
-  await slowPage.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+  await dismissCookies(slowPage);
   await openers(slowPage).first().click(); assert.equal(await slowPage.getByRole('status').innerText(), 'Загружаем фотографию…');
   release(); await slowPage.locator('.about-viewer__image').evaluate(img => img.decode()); await close(slowPage).click();
   await slowCtx.close(); pass('Slow image has accessible loading state');
@@ -159,8 +160,9 @@ try {
   const headerHeight = await page.locator('.header').evaluate(node => node.offsetHeight);
   assert.ok(Math.abs(contactPosition.y - (headerHeight - 12)) <= 2);
   assert.equal(await form.locator('[name=description]').inputValue(), 'Synthetic local task');
-  await page.getByRole('button', { name: 'Настройки cookies', exact: true }).click();
+  await openCookieSettings(page);
   await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+  await page.goBack();
   assert.equal(await form.locator('[name=name]').inputValue(), 'Synthetic about visitor');
   await form.locator('.file-select__toggle').click();
   assert.deepEqual(await form.locator('.file-select__name').allTextContents(), ['first.txt', 'second.txt']); await page.keyboard.press('Escape');

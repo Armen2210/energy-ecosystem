@@ -4,6 +4,8 @@
 // Визуально оформлена в стиле остальных страниц сайта.
 // =========================================================
 
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import { analytics } from "../../analytics/runtime.js";
 import { useLocation } from "react-router-dom";
 import { useClientReady } from "../../hooks/useClientReady";
 
@@ -12,8 +14,14 @@ import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
 function PrivacyPage() {
-  const { search } = useLocation();
+  const { search, hash, key } = useLocation();
   const ready = useClientReady();
+  const analyticsChoice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
+  const needsChoice = useSyncExternalStore(analytics.subscribe, analytics.needsCalltouchChoice, () => false);
+  const cookieHeading = useRef(null);
+  useEffect(() => {
+    if (ready && hash === "#cookies") cookieHeading.current?.focus({ preventScroll: true });
+  }, [ready, hash, key]);
   const fromLeadForm = ready && new URLSearchParams(search).get("from") === "lead-form";
   return (
     <main className="page privacy-page">
@@ -150,7 +158,8 @@ function PrivacyPage() {
                 для оценки посещений, источников
                 перехода и действий: обращения через форму, нажатия на контакты,
                 выбор документов и открытие объектов. Аналитика выключена до
-                явного выбора «Разрешить аналитику». «Без аналитики» сохраняет
+                нажатия «Понятно» в баннере или «Включить аналитику» ниже.
+                «Без аналитики» сохраняет
                 доступ ко всем страницам, документам, контактам и форме заявки.
                 Вебвизор и запись содержимого форм не включаются.
               </p>
@@ -161,16 +170,42 @@ function PrivacyPage() {
                 и параметры действий, без имени, телефона, email, описания
                 заявки, названий и содержимого документов.
               </p>
+              <p>
+                После нового согласия на аналитику сайт может
+                также загружать Calltouch для определения источников обращений
+                и отслеживания звонков. Сервис может получать IP-адрес, сведения
+                о браузере и устройстве, адрес страницы и параметры перехода,
+                использовать cookies и идентификаторы сеанса. Согласие, данное
+                только для Яндекс Метрики, не включает Calltouch.
+              </p>
             </section>
 
             <section className="privacy-page__section" id="cookies">
-              <h2>8. Выбор и управление аналитикой</h2>
+              <h2 ref={cookieHeading} tabIndex={-1}>8. Настройки cookies и аналитики</h2>
+              {ready && (
+                <div className="cookie-preferences">
+                  <p role="status">
+                    {needsChoice ? "Метрика разрешена. Для Calltouch нужен новый выбор."
+                      : analyticsChoice === "allowed" ? "Аналитика разрешена."
+                      : analyticsChoice === "denied" ? "Аналитика отключена."
+                        : "Выбор ещё не сделан. Аналитика выключена."}
+                  </p>
+                  <div className="cookie-preferences__actions">
+                    <button type="button" onClick={() => analytics.choose("allowed")}>Включить аналитику</button>
+                    <button type="button" onClick={() => analytics.choose("denied")}>Без аналитики</button>
+                  </div>
+                </div>
+              )}
               <p>
                 Изменить выбор или отозвать разрешение можно через «Настройки
-                аналитики» внизу сайта. Выбор хранится в браузере как техническая
+                cookies» внизу сайта или с помощью кнопок ниже. Выбор хранится в браузере как техническая
                 настройка 180 дней. При изменении версии настройки сайт вновь
                 запрашивает выбор. При недоступном хранилище он действует только
                 в текущем сеансе страницы.
+              </p>
+              <p>
+                Техническое хранение нужно для работы сайта и сохранения черновика
+                заявки. Оно продолжает работать при отказе от аналитики.
               </p>
               <p>
                 После разрешения допустимые рекламные метки UTM и yclid
@@ -181,7 +216,9 @@ function PrivacyPage() {
               </p>
               <p>
                 Отзыв прекращает дальнейший сбор, очищает доступные приложению
-                рекламные данные и cookies Метрики на домене сайта. Уже начатый
+                рекламные данные и cookies Метрики на домене сайта. Если Calltouch
+                был запущен, страница обновится без его загрузки. Выбранные
+                файлы потребуется прикрепить заново. Уже начатый
                 запрос может завершиться. Отзыв не удаляет автоматически ранее
                 переданные сервису данные или созданную заявку. Cookies на
                 сторонних доменах и недоступные приложению данные удаляются

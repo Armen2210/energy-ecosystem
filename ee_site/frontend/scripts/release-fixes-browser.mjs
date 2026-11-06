@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { pathToFileURL } from "node:url";
@@ -31,7 +32,7 @@ async function context(width, saved) {
   const page = await ctx.newPage();
   page.on("pageerror", e => report.errors.push(e.message));
   await page.goto(origin + "/solutions/vns");
-  await page.getByRole("button", { name: "Без аналитики", exact: true }).click();
+  await dismissCookies(page);
   await page.locator("#lead-form").scrollIntoViewIfNeeded();
   await page.getByRole("switch", { name: "Электронный опросный лист", exact: true }).filter({ visible: true }).waitFor();
   return { ctx, page };

@@ -1,3 +1,4 @@
+import { openCookieSettings } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -77,9 +78,9 @@ async function scenario({ width = 1440, seed = {}, failStorage = false, tagDelay
  await page.goto(`https://${hostname}${url}`, referrer ? { referer:referrer } : {}); await page.waitForSelector('footer');
  return { ctx, page, calls, network, responses, mode(value) { mode = value; }, async settle() { await page.waitForTimeout(850); }, goals: () => calls.filter(c => c.method === 'reachGoal'), hits: () => calls.filter(c => c.method === 'hit') };
 }
-const accept = async s => { await s.page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
-const settings = async s => { await s.page.getByRole('button', { name: 'Настройки cookies', exact: true }).click(); await s.page.waitForFunction(() => document.activeElement?.textContent === 'Разрешить аналитику'); };
-const deny = async s => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); await s.settle(); };
+const accept = async s => { const name = new URL(s.page.url()).pathname === '/privacy' ? 'Включить аналитику' : 'Понятно'; await s.page.getByRole('button', { name, exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
+const settings = s => openCookieSettings(s.page);
+const deny = async (s, returnToPage = true) => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); if (returnToPage) await s.page.goBack(); await s.settle(); };
 const form = s => s.page.locator('.lead-form');
 const fill = async (s, name='Synthetic person') => {
  await form(s).locator('[name=name]').fill(name); await form(s).locator('[name=phone]').fill('+70000000000'); await form(s).locator('[name=consent]').check();
@@ -90,31 +91,36 @@ try {
   const off=await scenario({url:'/?utm_source=yandex',seed:{ee_analytics_consent_v1:JSON.stringify({version:1,choice:'allowed',at:Date.now()})}}); await off.settle();
   assert.equal(await off.page.locator('iframe').count(),0); assert.equal(off.network.length,0); assert.equal(await off.page.evaluate(()=>localStorage.getItem('ee_campaign_v1')),null); pass('default build flag off: no library, requests or attribution even with saved permission on allowed hostname');
  } else if (process.env.ANALYTICS_REAL_ONLY !== 'true') {
- const basic = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment', seed: { ee_cookie_consent: 'accepted' } });
- await basic.settle(); assert.equal(basic.network.length, 0); assert.equal(await basic.page.locator('iframe').count(), 0);
- assert.equal(await basic.page.evaluate(() => localStorage.getItem('ee_campaign_v1')), null);
- pass('legacy accepted is not analytics consent; zero script, requests or campaign storage before choice');
- await fill(basic); await form(basic).locator('[type=file]').setInputFiles({ name:'secret-document.txt', mimeType:'text/plain', buffer:Buffer.from('private document contents') });
- await deny(basic); assert.equal(basic.network.length, 0); assert.equal(await form(basic).locator('[name=name]').inputValue(), 'Synthetic person');
- pass('denial keeps fields and selected documents, navigation and form available');
- await settings(basic); await basic.page.keyboard.press('Enter'); await basic.page.waitForFunction(() => document.querySelector('iframe')?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'));
+ const denied = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment', seed: { ee_cookie_consent: 'accepted' } });
+ await denied.settle(); assert.equal(denied.network.length, 0); assert.equal(await denied.page.locator('iframe').count(), 0);
+ assert.equal(await denied.page.evaluate(() => localStorage.getItem('ee_campaign_v1')), null);
+ assert.equal(await denied.page.locator('.cookie-banner button').count(), 1);
+ await fill(denied);
+ await openCookieSettings(denied.page, true);
+ await deny(denied, false);
+ await denied.page.goBack();
+ assert.equal(await form(denied).locator('[name=name]').inputValue(), 'Synthetic person');
+ assert.equal(denied.network.length, 0);
+ pass('no collection before choice or after refusal through the policy; draft retained');
+ const basic = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment' });
+ await accept(basic);
  assert.equal(basic.calls.filter(c=>c.method==='init').length,1); assert.equal(basic.hits().length,1);
  assert.match(basic.hits()[0].args[0], /utm_campaign=btp_rostov/); assert.doesNotMatch(basic.hits()[0].args[0], /private_marker|private_fragment|email=/);
- pass('keyboard settings/allow: one init, one filtered initial view with valid campaign');
+ pass('explicit banner consent: one init, one filtered initial view with valid campaign');
  await basic.page.locator('a[href="#products"]').first().click(); await basic.settle(); assert.equal(basic.hits().length,1);
  await basic.page.locator('a[href="/solutions/btp"]').first().click(); await basic.settle();
  assert.equal(basic.hits().length,2); assert.equal(basic.hits()[1].args[0],origin+'/solutions/btp'); assert.match(basic.hits()[1].args[1].title,/теплов|БТП/i);
  await basic.page.goBack(); await basic.settle(); await basic.page.goForward(); await basic.settle(); assert.equal(basic.hits().length,4);
  pass('anchors ignored; SPA transition/title and Back/Forward once each; later hit has no entry UTM');
- await settings(basic); await deny(basic); const count=basic.network.length; await basic.page.reload(); await basic.settle();
+ await openCookieSettings(basic.page); await deny(basic); const count=basic.network.length; await basic.page.reload(); await basic.settle();
  assert.equal(await basic.page.locator('iframe').count(),0); assert.equal(basic.network.length,count);
  pass('revoke calls destruct, removes context; reload remains denied, no further requests');
 
  const mobile = await scenario({ width:360 });
  assert.equal(await mobile.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),true);
- for (const label of ['Разрешить аналитику','Без аналитики']) { const box=await mobile.page.getByRole('button',{name:label,exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
+ for (const label of ['Понятно','Подробнее и настройки']) { const box=await mobile.page.getByText(label,{exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
  await mobile.page.screenshot({ path:path.join(out,'banner-360.png'),fullPage:false }); await accept(mobile);
- pass('360px banner fits viewport; accessible named actions and keyboard settings');
+ pass('360px banner fits viewport; accessible named actions and settings link');
 
  const contacts = await scenario({ url:'/contacts?utm_source=yandex#unknown' }); await accept(contacts);
  assert.equal(contacts.hits().length,1); assert.equal(new URL(contacts.page.url()).pathname,'/'); assert.equal(new URL(contacts.page.url()).hash,'#contacts');
@@ -171,13 +177,13 @@ try {
  await settings(errors); await accept(errors); assert.equal(errors.goals().filter(c=>c.args[0]==='lead_success').length,0);
  pass('denied submission still has operational direction, no campaign; later allow does not replay success');
 
- const race=await scenario({tagDelay:700}); await race.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click();
+ const race=await scenario({tagDelay:700}); await race.page.getByRole('button',{name:'Понятно',exact:true}).click();
  await race.page.waitForTimeout(100); await settings(race); await deny(race); await race.page.waitForTimeout(850);
  assert.equal(race.calls.filter(c=>c.method==='init').length,0); assert.equal(await race.page.locator('iframe').count(),0);
  await settings(race); await accept(race); assert.equal(race.calls.filter(c=>c.method==='init').length,1); assert.equal(race.hits().length,1);
  pass('revoke during delayed load, late callback cannot restart; reallow fresh context/no backlog');
 
- const blocked = await scenario({ blockTag:true }); await blocked.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await blocked.settle(); await fill(blocked); await send(blocked);
+ const blocked = await scenario({ blockTag:true }); await blocked.page.getByRole('button',{name:'Понятно',exact:true}).click(); await blocked.settle(); await fill(blocked); await send(blocked);
  assert.equal(blocked.responses.at(-1).status,201); assert.equal(blocked.goals().length,0);
  pass('blocked script does not break real API submission or falsely acknowledge analytic delivery');
  const broken = await scenario(); await accept(broken); await broken.page.frames().find(f=>f.url().includes('analytics-frame')).evaluate(()=>{ window.ym=()=>{ throw Error('Adapter exception'); }; });
@@ -196,7 +202,7 @@ try {
 
  const unknown=await scenario({url:'/private_person?email=private_marker#private_fragment'}); await accept(unknown);
  assert.equal(unknown.hits()[0].args[0],origin+'/404'); pass('unknown route is /404, no unknown slug/query/fragment exported');
- const noHost=await scenario({hostname:'staging.example.invalid'}); await noHost.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await noHost.settle(); assert.equal(noHost.network.length,0); pass('production build on staging hostname never loads real counter');
+ const noHost=await scenario({hostname:'staging.example.invalid'}); await noHost.page.getByRole('button',{name:'Понятно',exact:true}).click(); await noHost.settle(); assert.equal(noHost.network.length,0); pass('production build on staging hostname never loads real counter');
  assert.doesNotMatch(JSON.stringify(results.calls),/Synthetic person|private_marker|private_fragment|secret-document|private document|\+70000000000|submission_id|lead_id/);
  pass('all adapter/mock network payloads exclude synthetic personal values, documents and ids');
  }
@@ -204,7 +210,7 @@ try {
    const real=await scenario({realTag:true,referrer:'https://example.invalid/private_marker?email=private_marker',url:'/?utm_source=yandex&utm_campaign=btp_rostov&email=private_marker#private_fragment'});
    await real.settle(); assert.equal(real.network.length,0);
    await real.page.evaluate(()=>document.addEventListener('click',event=>{const href=event.target.closest('a')?.getAttribute('href')||'';if(href.startsWith('tel:')||href.startsWith('mailto:'))event.preventDefault();},true));
-   await real.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await real.page.waitForTimeout(2000);
+   await real.page.getByRole('button',{name:'Понятно',exact:true}).click(); await real.page.waitForTimeout(2000);
    await real.page.locator('a[href="/solutions/btp"]').first().click(); await real.page.waitForTimeout(1500);
    await real.page.locator('a[href^="tel:"]').first().click();
    await real.page.locator('footer a[href^="mailto:"]').click();
@@ -236,11 +242,11 @@ try {
      if(ref) assert.ok(ref.startsWith(origin+'/')||ref==='https://yandex.ru/'||ref==='https://www.google.com/',ref);
      assert.equal(item.referer,'');
    }
-   await settings(real); await real.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await real.page.waitForTimeout(1500);
+   await settings(real); await real.page.getByRole('button',{name:'Включить аналитику',exact:true}).click(); await real.page.waitForTimeout(1500);
    const renewed=real.network.slice(before); assert.ok(renewed.length>0); assert.equal(renewed.some(item=>item.url.includes('goal%3A')||item.url.includes('goal://')),false);
    await settings(real); await deny(real);
    results.realLibrary=real.network; pass('cached real library: actual outgoing requests captured/blocked, PII/referrer filtered; none after revoke, cookies cleared, reallow without goal backlog');
-   const delayed=await scenario({realTag:true,tagDelay:1000}); await delayed.page.getByRole('button',{name:'Разрешить аналитику',exact:true}).click(); await delayed.page.waitForTimeout(100); await settings(delayed); await deny(delayed); await delayed.page.waitForTimeout(1200);
+   const delayed=await scenario({realTag:true,tagDelay:1000}); await delayed.page.getByRole('button',{name:'Понятно',exact:true}).click(); await delayed.page.waitForTimeout(100); await settings(delayed); await deny(delayed); await delayed.page.waitForTimeout(1200);
    assert.equal(await delayed.page.locator('iframe').count(),0); assert.equal(delayed.network.filter(item=>item.type==='blocked-external').length,0);
    pass('actual library delayed load then revoke: no late counter requests');
    const standalone=await real.ctx.newPage(); const beforeStandalone=real.network.length; await standalone.goto(origin+'/analytics-frame.html'); await standalone.waitForTimeout(350); assert.equal(real.network.length,beforeStandalone);

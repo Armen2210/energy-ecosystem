@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import process from "node:process";
@@ -101,9 +102,7 @@ try {
         const context = await setup(width, height, four),
           page = await context.newPage();
         await page.goto(origin + route);
-        await page
-          .getByRole("button", { name: "Без аналитики", exact: true })
-          .click();
+        await dismissCookies(page);
         await page.waitForFunction(
           () => !document.querySelector(".lead-form [name=name]").disabled,
         );
@@ -165,9 +164,7 @@ try {
   const context = await setup(1440, 900, false),
     page = await context.newPage();
   await page.goto(origin + "/solutions/bmk");
-  await page
-    .getByRole("button", { name: "Без аналитики", exact: true })
-    .click();
+  await dismissCookies(page);
   await page.getByRole("switch").filter({ visible: true }).click();
   await page.getByLabel("Раздел опросного листа").selectOption("ov");
   const temp = page.getByLabel("Температура подачи ОВ");
