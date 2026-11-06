@@ -136,7 +136,7 @@ try {
     });
     const page = await context.newPage();
     await page.goto(origin + '/solutions/bmk');
-    await page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
+    await page.getByRole('button', { name: 'Понятно', exact: true }).click();
     await page.waitForFunction(() => document.querySelector('iframe')?.contentWindow?.ym);
     const topic = () => form(page).locator('[name=description_topic]').inputValue();
     const initial = await topic();
@@ -172,7 +172,7 @@ try {
     await page.goBack();
     await checkFields(page); await checkFiles(page, [files[1], files[0]]);
     await openCookieSettings(page);
-    await page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
+    await page.getByRole('button', { name: 'Включить аналитику', exact: true }).click();
     await page.waitForFunction(() => document.querySelector('iframe')?.contentWindow?.ym);
     await navigate(page, '/');
     await page.locator('a[data-case-slug]').filter({ visible: true }).first().click();

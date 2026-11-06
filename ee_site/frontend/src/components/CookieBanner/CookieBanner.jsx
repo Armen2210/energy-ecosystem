@@ -12,10 +12,10 @@ export default function CookieBanner() {
   return (
     <section className="cookie-banner" aria-label="Файлы cookies и аналитика">
       <div className="cookie-banner__content">
-        <p>С вашего разрешения мы используем cookies и Яндекс Метрику, чтобы улучшать сайт.</p>
+        <p>Мы используем cookies для работы сайта. Нажимая «Понятно», вы соглашаетесь на использование Яндекс Метрики.</p>
         <div className="cookie-banner__actions">
           <Link to="/privacy#cookies">Подробнее и настройки</Link>
-          <button type="button" onClick={() => analytics.choose("allowed")}>Разрешить аналитику</button>
+          <button type="button" onClick={() => analytics.choose("allowed")}>Понятно</button>
         </div>
       </div>
     </section>
