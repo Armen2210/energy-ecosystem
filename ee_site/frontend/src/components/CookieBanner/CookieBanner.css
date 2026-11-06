@@ -52,16 +52,16 @@
   min-height: 44px;
   max-width: 100%;
   padding: 8px 14px;
-  border: 1px solid #9c3c0a;
+  border: 1px solid var(--color-red);
   border-radius: 10px;
-  background: #9c3c0a;
-  color: #fff;
+  background: var(--color-red);
+  color: #171717;
   font: inherit;
   cursor: pointer;
 }
 
 .cookie-banner__actions button:hover {
-  background: #7d3009;
+  background: #fb923c;
 }
 
 .cookie-banner__actions :is(a, button):focus-visible {

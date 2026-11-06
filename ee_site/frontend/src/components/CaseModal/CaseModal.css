@@ -15,10 +15,6 @@
 .case-modal__backdrop {
   position: absolute;
   inset: 0;
-}
-
-.case-modal__backdrop,
-.ql-workspace::backdrop {
   background: rgba(15, 47, 74, 0.5);
   backdrop-filter: blur(5px);
   animation: case-modal-backdrop-in 0.2s ease both;
@@ -33,10 +29,7 @@
 
   overflow: hidden;
   padding: 24px;
-}
 
-.case-modal__panel,
-.ql-workspace:modal {
   border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 30px;
 
@@ -172,8 +165,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .case-modal__panel,
-  .ql-workspace:modal {
+  .case-modal__panel {
     border-radius: 24px;
   }
 
@@ -203,9 +195,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .case-modal__backdrop,
-  .case-modal__panel,
-  .ql-workspace::backdrop,
-  .ql-workspace:modal {
+  .case-modal__panel {
     animation: none;
   }
 }
