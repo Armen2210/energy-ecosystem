@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -42,7 +43,7 @@ try {
     });
     const page = await context.newPage();
     await page.goto(origin + '/');
-    await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+    await dismissCookies(page);
     const form = page.locator('.lead-form');
     for (const [name, value] of Object.entries(fields)) await form.locator(`[name="${name}"]`).fill(value);
     await form.locator('input[type=file]').setInputFiles(files);

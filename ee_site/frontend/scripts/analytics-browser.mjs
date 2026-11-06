@@ -1,3 +1,4 @@
+import { openCookieSettings } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -78,8 +79,8 @@ async function scenario({ width = 1440, seed = {}, failStorage = false, tagDelay
  return { ctx, page, calls, network, responses, mode(value) { mode = value; }, async settle() { await page.waitForTimeout(850); }, goals: () => calls.filter(c => c.method === 'reachGoal'), hits: () => calls.filter(c => c.method === 'hit') };
 }
 const accept = async s => { await s.page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click(); await s.page.waitForFunction(() => { const f=document.querySelector('iframe'); return f?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'); }); };
-const settings = async s => { await s.page.getByRole('button', { name: 'Настройки cookies', exact: true }).click(); await s.page.waitForFunction(() => document.activeElement?.textContent === 'Разрешить аналитику'); };
-const deny = async s => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); await s.settle(); };
+const settings = s => openCookieSettings(s.page);
+const deny = async (s, returnToPage = true) => { await s.page.getByRole('button', { name: 'Без аналитики', exact: true }).click(); if (returnToPage) await s.page.goBack(); await s.settle(); };
 const form = s => s.page.locator('.lead-form');
 const fill = async (s, name='Synthetic person') => {
  await form(s).locator('[name=name]').fill(name); await form(s).locator('[name=phone]').fill('+70000000000'); await form(s).locator('[name=consent]').check();
@@ -90,31 +91,36 @@ try {
   const off=await scenario({url:'/?utm_source=yandex',seed:{ee_analytics_consent_v1:JSON.stringify({version:1,choice:'allowed',at:Date.now()})}}); await off.settle();
   assert.equal(await off.page.locator('iframe').count(),0); assert.equal(off.network.length,0); assert.equal(await off.page.evaluate(()=>localStorage.getItem('ee_campaign_v1')),null); pass('default build flag off: no library, requests or attribution even with saved permission on allowed hostname');
  } else if (process.env.ANALYTICS_REAL_ONLY !== 'true') {
- const basic = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment', seed: { ee_cookie_consent: 'accepted' } });
- await basic.settle(); assert.equal(basic.network.length, 0); assert.equal(await basic.page.locator('iframe').count(), 0);
- assert.equal(await basic.page.evaluate(() => localStorage.getItem('ee_campaign_v1')), null);
- pass('legacy accepted is not analytics consent; zero script, requests or campaign storage before choice');
- await fill(basic); await form(basic).locator('[type=file]').setInputFiles({ name:'secret-document.txt', mimeType:'text/plain', buffer:Buffer.from('private document contents') });
- await deny(basic); assert.equal(basic.network.length, 0); assert.equal(await form(basic).locator('[name=name]').inputValue(), 'Synthetic person');
- pass('denial keeps fields and selected documents, navigation and form available');
- await settings(basic); await basic.page.keyboard.press('Enter'); await basic.page.waitForFunction(() => document.querySelector('iframe')?.contentWindow?.__mockCalls?.some(c=>c.method==='hit'));
+ const denied = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment', seed: { ee_cookie_consent: 'accepted' } });
+ await denied.settle(); assert.equal(denied.network.length, 0); assert.equal(await denied.page.locator('iframe').count(), 0);
+ assert.equal(await denied.page.evaluate(() => localStorage.getItem('ee_campaign_v1')), null);
+ assert.equal(await denied.page.locator('.cookie-banner button').count(), 1);
+ await fill(denied);
+ await openCookieSettings(denied.page, true);
+ await deny(denied, false);
+ await denied.page.goBack();
+ assert.equal(await form(denied).locator('[name=name]').inputValue(), 'Synthetic person');
+ assert.equal(denied.network.length, 0);
+ pass('no collection before choice or after refusal through the policy; draft retained');
+ const basic = await scenario({ url: '/?utm_source=yandex&utm_medium=cpc&utm_campaign=btp_rostov&email=private_marker#private_fragment' });
+ await accept(basic);
  assert.equal(basic.calls.filter(c=>c.method==='init').length,1); assert.equal(basic.hits().length,1);
  assert.match(basic.hits()[0].args[0], /utm_campaign=btp_rostov/); assert.doesNotMatch(basic.hits()[0].args[0], /private_marker|private_fragment|email=/);
- pass('keyboard settings/allow: one init, one filtered initial view with valid campaign');
+ pass('explicit banner consent: one init, one filtered initial view with valid campaign');
  await basic.page.locator('a[href="#products"]').first().click(); await basic.settle(); assert.equal(basic.hits().length,1);
  await basic.page.locator('a[href="/solutions/btp"]').first().click(); await basic.settle();
  assert.equal(basic.hits().length,2); assert.equal(basic.hits()[1].args[0],origin+'/solutions/btp'); assert.match(basic.hits()[1].args[1].title,/теплов|БТП/i);
  await basic.page.goBack(); await basic.settle(); await basic.page.goForward(); await basic.settle(); assert.equal(basic.hits().length,4);
  pass('anchors ignored; SPA transition/title and Back/Forward once each; later hit has no entry UTM');
- await settings(basic); await deny(basic); const count=basic.network.length; await basic.page.reload(); await basic.settle();
+ await openCookieSettings(basic.page); await deny(basic); const count=basic.network.length; await basic.page.reload(); await basic.settle();
  assert.equal(await basic.page.locator('iframe').count(),0); assert.equal(basic.network.length,count);
  pass('revoke calls destruct, removes context; reload remains denied, no further requests');
 
  const mobile = await scenario({ width:360 });
  assert.equal(await mobile.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),true);
- for (const label of ['Разрешить аналитику','Без аналитики']) { const box=await mobile.page.getByRole('button',{name:label,exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
+ for (const label of ['Разрешить аналитику','Подробнее и настройки']) { const box=await mobile.page.getByText(label,{exact:true}).boundingBox(); assert.ok(box.x>=0 && box.x+box.width<=360); }
  await mobile.page.screenshot({ path:path.join(out,'banner-360.png'),fullPage:false }); await accept(mobile);
- pass('360px banner fits viewport; accessible named actions and keyboard settings');
+ pass('360px banner fits viewport; accessible named actions and settings link');
 
  const contacts = await scenario({ url:'/contacts?utm_source=yandex#unknown' }); await accept(contacts);
  assert.equal(contacts.hits().length,1); assert.equal(new URL(contacts.page.url()).pathname,'/'); assert.equal(new URL(contacts.page.url()).hash,'#contacts');

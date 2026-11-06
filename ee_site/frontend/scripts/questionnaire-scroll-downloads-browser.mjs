@@ -1,5 +1,6 @@
 // Run against Vite dev: uses the existing draft module to inspect in-memory File
 // and retry identity, without adding any test hooks to the application bundle.
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
@@ -66,8 +67,7 @@ async function context(width, height, { restored = false, product = "bmk", unava
 }
 async function open(p, product) {
   await p.goto(`${origin}/solutions/${product}`);
-  const cookie = p.getByRole("button", { name: "Без аналитики", exact: true });
-  if (await cookie.isVisible()) await cookie.click();
+  await dismissCookies(p);
 }
 async function routeCommitted(p, product) {
   await p.waitForFunction(index => document.querySelectorAll(".entity-switcher__item")[index]?.getAttribute("aria-current") === "page", Object.keys(titles).indexOf(product));

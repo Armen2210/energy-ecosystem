@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import process from "node:process";
@@ -45,9 +46,7 @@ async function capture(name) {
 }
 try {
   await page.goto("http://127.0.0.1:5173/solutions/vns");
-  await page
-    .getByRole("button", { name: "Без аналитики", exact: true })
-    .click();
+  await dismissCookies(page);
   await page.getByRole("switch").filter({ visible: true }).waitFor();
   await page.locator("#lead-form").scrollIntoViewIfNeeded();
   await capture("desktop-off-1440");

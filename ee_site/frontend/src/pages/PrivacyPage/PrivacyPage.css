@@ -156,3 +156,34 @@
     line-height: 1.4;
   }
 }
+.cookie-preferences {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cookie-preferences__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cookie-preferences__actions button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid #9c3c0a;
+  border-radius: 10px;
+  background: #fff;
+  color: #9c3c0a;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cookie-preferences__actions button:hover {
+  background: #fff4eb;
+}
+
+.cookie-preferences__actions button:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}

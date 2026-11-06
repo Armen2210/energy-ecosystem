@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
@@ -93,9 +94,7 @@ async function saved502(name) {
 }
 try {
   await page.goto("http://127.0.0.1:5173/solutions/vns");
-  await page
-    .getByRole("button", { name: "Без аналитики", exact: true })
-    .click();
+  await dismissCookies(page);
   const first = await saved502("Gateway unchanged retry synthetic");
   await page.reload();
   await page.waitForFunction(

@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import process from "node:process";
@@ -100,9 +101,7 @@ async function shot(name) {
 }
 try {
   await page.goto(origin + "/solutions/vns");
-  await page
-    .getByRole("button", { name: "Без аналитики", exact: true })
-    .click();
+  await dismissCookies(page);
   await page.locator(".questionnaire-column").scrollIntoViewIfNeeded();
   await toggle().waitFor();
   assert.equal(await panel().locator(".ql-body").isVisible(), false);

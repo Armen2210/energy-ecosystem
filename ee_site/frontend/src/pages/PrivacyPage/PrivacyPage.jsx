@@ -4,6 +4,8 @@
 // Визуально оформлена в стиле остальных страниц сайта.
 // =========================================================
 
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import { analytics } from "../../analytics/runtime.js";
 import { useLocation } from "react-router-dom";
 import { useClientReady } from "../../hooks/useClientReady";
 
@@ -12,8 +14,13 @@ import SectionHeader from "../../components/SectionHeader";
 import Seo from "../../components/Seo";
 
 function PrivacyPage() {
-  const { search } = useLocation();
+  const { search, hash, key } = useLocation();
   const ready = useClientReady();
+  const analyticsChoice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
+  const cookieHeading = useRef(null);
+  useEffect(() => {
+    if (ready && hash === "#cookies") cookieHeading.current?.focus({ preventScroll: true });
+  }, [ready, hash, key]);
   const fromLeadForm = ready && new URLSearchParams(search).get("from") === "lead-form";
   return (
     <main className="page privacy-page">
@@ -164,13 +171,30 @@ function PrivacyPage() {
             </section>
 
             <section className="privacy-page__section" id="cookies">
-              <h2>8. Выбор и управление аналитикой</h2>
+              <h2 ref={cookieHeading} tabIndex={-1}>8. Настройки cookies и аналитики</h2>
+              {ready && (
+                <div className="cookie-preferences">
+                  <p role="status">
+                    {analyticsChoice === "allowed" ? "Аналитика разрешена."
+                      : analyticsChoice === "denied" ? "Аналитика отключена."
+                        : "Выбор ещё не сделан. Аналитика выключена."}
+                  </p>
+                  <div className="cookie-preferences__actions">
+                    <button type="button" onClick={() => analytics.choose("allowed")}>Разрешить аналитику</button>
+                    <button type="button" onClick={() => analytics.choose("denied")}>Без аналитики</button>
+                  </div>
+                </div>
+              )}
               <p>
                 Изменить выбор или отозвать разрешение можно через «Настройки
-                аналитики» внизу сайта. Выбор хранится в браузере как техническая
+                cookies» внизу сайта или с помощью кнопок ниже. Выбор хранится в браузере как техническая
                 настройка 180 дней. При изменении версии настройки сайт вновь
                 запрашивает выбор. При недоступном хранилище он действует только
                 в текущем сеансе страницы.
+              </p>
+              <p>
+                Техническое хранение нужно для работы сайта и сохранения черновика
+                заявки. Оно продолжает работать при отказе от аналитики.
               </p>
               <p>
                 После разрешения допустимые рекламные метки UTM и yclid

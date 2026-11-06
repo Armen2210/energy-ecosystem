@@ -165,7 +165,6 @@ export function createAnalytics({ window: win, document: doc, production, enable
     subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
     getChoice: () => choice,
     choose: setChoice,
-    openSettings() { win?.dispatchEvent(new Event("ee:analytics-settings")); },
     visit({ path, search = "", title, modal = null, key }) {
       if (modal && previousModal !== key && allowed()) this.goal("case_open", { ...pageParams(path), case: modal });
       previousModal = modal ? key : null;

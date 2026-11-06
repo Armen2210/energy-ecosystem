@@ -5,7 +5,6 @@
 // =========================================================
 
 import { Link, useLocation } from "react-router-dom";
-import { analytics } from "../../analytics/runtime.js";
 
 function Footer({ navigation }) {
   const location = useLocation();
@@ -57,7 +56,7 @@ function Footer({ navigation }) {
           <span>© ООО «Энергоэффект»</span>
           <span>ИНН: 6161070112</span>
           <div className="footer__legal-links">
-            <button className="footer__analytics-settings" type="button" onClick={() => analytics.openSettings()}>Настройки cookies</button>
+            <Link to="/privacy#cookies">Настройки cookies</Link>
             <Link to="/privacy" state={{ entryScroll: "top-smooth" }}>
               Политика обработки персональных данных
             </Link>

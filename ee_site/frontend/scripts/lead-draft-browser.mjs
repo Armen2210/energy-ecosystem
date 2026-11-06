@@ -1,3 +1,4 @@
+import { openCookieSettings } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import { stat, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -166,10 +167,11 @@ try {
     const policy = await policyOpened; await policy.waitForLoadState();
     await policy.locator('.privacy-page__return-note').waitFor();
     await policy.close(); await checkFields(page);
-    await page.getByRole('button', { name: 'Настройки cookies', exact: true }).click();
+    await openCookieSettings(page);
     await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
+    await page.goBack();
     await checkFields(page); await checkFiles(page, [files[1], files[0]]);
-    await page.getByRole('button', { name: 'Настройки cookies', exact: true }).click();
+    await openCookieSettings(page);
     await page.getByRole('button', { name: 'Разрешить аналитику', exact: true }).click();
     await page.waitForFunction(() => document.querySelector('iframe')?.contentWindow?.ym);
     await navigate(page, '/');

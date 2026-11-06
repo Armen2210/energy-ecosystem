@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -43,10 +44,7 @@ async function noOverflow() {
   assert.ok(await page.locator('main').evaluate(main => [...main.querySelectorAll('*')]
     .every(element => element.getBoundingClientRect().right <= innerWidth + 1 && element.scrollWidth <= element.clientWidth + 1)));
 }
-async function dismissCookies() {
-  const button = page.getByRole('button', { name: 'Без аналитики', exact: true });
-  if (await button.isVisible()) await button.click();
-}
+
 async function footerFocused() {
   await page.waitForFunction(() => document.activeElement?.id === 'footer-documents');
   assert.ok(await page.locator('#footer-documents').evaluate(link => {
@@ -71,7 +69,7 @@ try {
     assert.equal(new URL(page.url()).pathname, '/documents');
     assert.equal(context.pages().length, 1, 'questionnaire must not open another tab');
     results.downloads.push({ format: file.format, name: download.suggestedFilename(), sizeBytes: bytes.length, sha256 });
-    if (index === 0) { pass('download works before any cookie decision or form'); await dismissCookies(); }
+    if (index === 0) { pass('download works before any cookie decision or form'); await dismissCookies(page); }
   }
   assert.equal(results.downloads.filter(file => file.format === 'pdf').length, 4);
   assert.equal(results.downloads.filter(file => file.format === 'xlsx').length, 4);
@@ -167,7 +165,7 @@ try {
   await page.locator('#footer-documents').click(); await page.waitForURL('**/documents');
   await page.goBack(); await footerFocused(); await page.goForward(); await page.waitForURL('**/documents');
   pass('explicit footer return and Back/Forward preserve route, position and focus');
-  await page.goto(origin + '/'); await dismissCookies();
+  await page.goto(origin + '/'); await dismissCookies(page);
   await page.locator('#footer-documents').click(); await page.waitForURL('**/documents');
   await page.reload(); await settle(); await page.goBack(); await footerFocused();pass('footer-origin Back survives a documents reload');
 

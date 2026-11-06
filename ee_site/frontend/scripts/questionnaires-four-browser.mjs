@@ -1,3 +1,4 @@
+import { dismissCookies } from "./cookie-browser-helpers.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import process from "node:process";
@@ -74,7 +75,7 @@ await c.addInitScript(
 );
 try {
   await p.goto("http://127.0.0.1:5173/solutions/btp");
-  await p.getByRole("button", { name: "Без аналитики", exact: true }).click();
+  await dismissCookies(p);
   await p.locator(".ql-panel").waitFor();
   assert.equal(await p.locator(".ql-summary button").count(), 4);
   await p.locator("#lead-form").scrollIntoViewIfNeeded();
