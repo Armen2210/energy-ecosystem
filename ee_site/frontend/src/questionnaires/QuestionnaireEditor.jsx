@@ -269,7 +269,10 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
             <h2 id={titleId}>Опросный лист {definition.title}</h2>
             <small>Обязательных полей: <span className="ql-required-count">{requiredFieldCount(product, answers)}</span></small>
           </div>
-          <button ref={closeButton} type="button" onClick={closeWorkspace}>Свернуть</button>
+          <button ref={closeButton} type="button" className="ql-workspace__close"
+            aria-label="Свернуть опросный лист" onClick={closeWorkspace}>
+            <span aria-hidden="true" />
+          </button>
         </header>
       )}
       <nav ref={navigation} className="ql-nav" aria-label="Листы опросника">

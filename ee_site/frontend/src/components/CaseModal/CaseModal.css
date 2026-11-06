@@ -15,6 +15,10 @@
 .case-modal__backdrop {
   position: absolute;
   inset: 0;
+}
+
+.case-modal__backdrop,
+.ql-workspace::backdrop {
   background: rgba(15, 47, 74, 0.5);
   backdrop-filter: blur(5px);
   animation: case-modal-backdrop-in 0.2s ease both;
@@ -29,7 +33,10 @@
 
   overflow: hidden;
   padding: 24px;
+}
 
+.case-modal__panel,
+.ql-workspace:modal {
   border: 1px solid rgba(17, 17, 17, 0.1);
   border-radius: 30px;
 
@@ -45,6 +52,9 @@
   top: 22px;
   right: 22px;
   z-index: 3;
+}
+
+:is(.case-modal__close, .ql-workspace__close) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,15 +73,15 @@
     box-shadow 0.18s ease;
 }
 
-.case-modal__close span {
+:is(.case-modal__close, .ql-workspace__close) span {
   position: relative;
   display: block;
   width: 20px;
   height: 20px;
 }
 
-.case-modal__close span::before,
-.case-modal__close span::after {
+:is(.case-modal__close, .ql-workspace__close) span::before,
+:is(.case-modal__close, .ql-workspace__close) span::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -83,22 +93,22 @@
   transform-origin: center;
 }
 
-.case-modal__close span::before {
+:is(.case-modal__close, .ql-workspace__close) span::before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.case-modal__close span::after {
+:is(.case-modal__close, .ql-workspace__close) span::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.case-modal__close:hover {
+:is(.case-modal__close, .ql-workspace__close):hover {
   color: var(--color-red);
   border-color: rgba(249, 115, 22, 0.5);
   background: rgba(255, 248, 243, 0.98);
   box-shadow: 0 10px 28px rgba(249, 115, 22, 0.12);
 }
 
-.case-modal__close:focus-visible {
+:is(.case-modal__close, .ql-workspace__close):focus-visible {
   outline: 3px solid rgba(249, 115, 22, 0.28);
   outline-offset: 3px;
 }
@@ -158,35 +168,44 @@
     padding: 16px;
     overflow-x: hidden;
     overflow-y: auto;
-    border-radius: 24px;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .case-modal__panel,
+  .ql-workspace:modal {
+    border-radius: 24px;
   }
 
   .case-modal__close {
     position: absolute;
     top: 26px;
     right: 26px;
-    width: 42px;
-    height: 42px;
     margin: 0;
     z-index: 20;
   }
 
-  .case-modal__close span {
+  :is(.case-modal__close, .ql-workspace__close) {
+    width: 42px;
+    height: 42px;
+  }
+
+  :is(.case-modal__close, .ql-workspace__close) span {
     width: 18px;
     height: 18px;
   }
 
-  .case-modal__close span::before,
-  .case-modal__close span::after {
+  :is(.case-modal__close, .ql-workspace__close) span::before,
+  :is(.case-modal__close, .ql-workspace__close) span::after {
     width: 20px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .case-modal__backdrop,
-  .case-modal__panel {
+  .case-modal__panel,
+  .ql-workspace::backdrop,
+  .ql-workspace:modal {
     animation: none;
   }
 }

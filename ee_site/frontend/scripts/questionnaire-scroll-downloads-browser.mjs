@@ -135,7 +135,7 @@ try {
       assert.notEqual(await section.inputValue(), initial);
       await workspace.getByRole("button", { name: "Предыдущий лист" }).click();
       assert.equal(await field.inputValue(), "17");
-      if (width < 961) await workspace.getByRole("button", { name: "Свернуть" }).click();
+      if (width < 961) await workspace.getByRole("button", { name: "Свернуть опросный лист" }).click();
       else await p.keyboard.press("Escape");
       await workspace.waitFor({ state: "hidden" });
       assert.equal(await p.locator(".ql-fields input").first().inputValue(), "17");
