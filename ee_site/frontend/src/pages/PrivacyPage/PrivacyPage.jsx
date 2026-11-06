@@ -17,6 +17,7 @@ function PrivacyPage() {
   const { search, hash, key } = useLocation();
   const ready = useClientReady();
   const analyticsChoice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
+  const needsChoice = useSyncExternalStore(analytics.subscribe, analytics.needsCalltouchChoice, () => false);
   const cookieHeading = useRef(null);
   useEffect(() => {
     if (ready && hash === "#cookies") cookieHeading.current?.focus({ preventScroll: true });
@@ -169,6 +170,14 @@ function PrivacyPage() {
                 и параметры действий, без имени, телефона, email, описания
                 заявки, названий и содержимого документов.
               </p>
+              <p>
+                После нового согласия на аналитику сайт может
+                также загружать Calltouch для определения источников обращений
+                и отслеживания звонков. Сервис может получать IP-адрес, сведения
+                о браузере и устройстве, адрес страницы и параметры перехода,
+                использовать cookies и идентификаторы сеанса. Согласие, данное
+                только для Яндекс Метрики, не включает Calltouch.
+              </p>
             </section>
 
             <section className="privacy-page__section" id="cookies">
@@ -176,7 +185,8 @@ function PrivacyPage() {
               {ready && (
                 <div className="cookie-preferences">
                   <p role="status">
-                    {analyticsChoice === "allowed" ? "Аналитика разрешена."
+                    {needsChoice ? "Метрика разрешена. Для Calltouch нужен новый выбор."
+                      : analyticsChoice === "allowed" ? "Аналитика разрешена."
                       : analyticsChoice === "denied" ? "Аналитика отключена."
                         : "Выбор ещё не сделан. Аналитика выключена."}
                   </p>
@@ -206,7 +216,9 @@ function PrivacyPage() {
               </p>
               <p>
                 Отзыв прекращает дальнейший сбор, очищает доступные приложению
-                рекламные данные и cookies Метрики на домене сайта. Уже начатый
+                рекламные данные и cookies Метрики на домене сайта. Если Calltouch
+                был запущен, страница обновится без его загрузки. Выбранные
+                файлы потребуется прикрепить заново. Уже начатый
                 запрос может завершиться. Отзыв не удаляет автоматически ранее
                 переданные сервису данные или созданную заявку. Cookies на
                 сторонних доменах и недоступные приложению данные удаляются

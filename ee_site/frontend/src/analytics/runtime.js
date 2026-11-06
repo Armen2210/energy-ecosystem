@@ -1,8 +1,9 @@
 import { CONSENT_DAYS, DAY, GOALS, KEYS, ORIGIN, campaign, pageParams, permittedEnvironment, safeParams, safePath, safeReferrer, validTouch } from "./policy.js";
 import { createStore } from "./store.js";
+import { installCalltouch } from "./calltouch.js";
 import { createPending } from "./pending.js";
 
-export function createAnalytics({ window: win, document: doc, production, enabled, now = Date.now }) {
+export function createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now = Date.now }) {
   let storage;
   try { storage = win?.localStorage; } catch { /* fail closed */ }
   const store = createStore(storage, now);
@@ -21,6 +22,24 @@ export function createAnalytics({ window: win, document: doc, production, enable
   let pendingPages = [], lastScheduledPath = null;
   const listeners = new Set(), snapshots = new Set();
   const eligible = permittedEnvironment(production, enabled, win?.location);
+  const calltouchAvailable = eligible && calltouchEnabled === "true";
+  const blockedKey = "ee_calltouch_blocked";
+  let calltouchStarted = false;
+  function calltouchAllowed() {
+    if (!calltouchAvailable || !allowed() || !store.calltouchConsent()) return false;
+    try { return sessionStorage?.getItem(blockedKey) !== "1"; }
+    catch { return false; }
+  }
+  function syncCalltouch() {
+    if (!calltouchAllowed()) {
+      // Removing a script element cannot stop code already running in this page.
+      if (calltouchStarted) win.location.reload();
+      return;
+    }
+    if (calltouchStarted || !currentPage) return;
+    try { installCalltouch(win, doc); calltouchStarted = true; }
+    catch { /* Optional script must not interrupt the site. */ }
+  }
   const notify = () => { for (const fn of listeners) { try { fn(); } catch { /* isolated subscriber */ } } };
   const allowed = () => eligible && choice === "allowed" && now() < choiceExpires;
   const post = data => {
@@ -120,7 +139,13 @@ export function createAnalytics({ window: win, document: doc, production, enable
     const changed = choice !== next;
     choice = next;
     choiceExpires = persist ? now() + CONSENT_DAYS * DAY : store.consentExpiresAt() || 0;
-    sessionOnly = persist && !store.choose(next);
+    sessionOnly = persist && !store.choose(next, calltouchAvailable);
+    if (persist && calltouchAvailable) {
+      try {
+        if (!sessionOnly) sessionStorage?.removeItem(blockedKey);
+        else if (next !== "allowed") sessionStorage?.setItem(blockedKey, "1");
+      } catch { /* Consent is also checked in the primary store. */ }
+    }
     if (!allowed()) {
       stop(); store.clearOptional(); pending.clearOptional(); clearLibraryData();
       for (const snapshot of snapshots) { snapshot.attribution = null; snapshot.consentAt = null; snapshot.trackingEligible = false; }
@@ -130,6 +155,7 @@ export function createAnalytics({ window: win, document: doc, production, enable
     }
     notify();
     scheduleExpiry();
+    syncCalltouch();
   }
   function scheduleExpiry() {
     win?.clearTimeout(expiryTimer);
@@ -164,13 +190,15 @@ export function createAnalytics({ window: win, document: doc, production, enable
   const api = {
     subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
     getChoice: () => choice,
+    calltouchAvailable: () => calltouchAvailable,
+    needsCalltouchChoice: () => calltouchAvailable && choice === "allowed" && !sessionOnly && !calltouchAllowed(),
     choose: setChoice,
     visit({ path, search = "", title, modal = null, key }) {
       if (modal && previousModal !== key && allowed()) this.goal("case_open", { ...pageParams(path), case: modal });
       previousModal = modal ? key : null;
       currentPage = { path: safePath(path), search, title: String(title).slice(0, 200) };
       if (!allowed()) return;
-      store.capture(search); start(); schedulePage();
+      store.capture(search); start(); schedulePage(); syncCalltouch();
     },
     goal(name, params) { return GOALS.includes(name) && post({ type: "goal", name, params: safeParams(params) }); },
     recoverSubmission(signature) { return pending.get(signature); },
@@ -228,4 +256,5 @@ export const analytics = createAnalytics({
   document: typeof document === "undefined" ? undefined : document,
   production: import.meta.env?.PROD === true,
   enabled: import.meta.env?.VITE_EE_ANALYTICS_ENABLED,
+  calltouchEnabled: import.meta.env?.VITE_EE_CALLTOUCH_ENABLED,
 });
