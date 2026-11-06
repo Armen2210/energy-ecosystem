@@ -52,7 +52,7 @@ try {
   for (const phase of ['before', 'after']) {
     const { context, page } = await newPage(1440);
     await page.goto(bases[phase] + '/cases');
-    await page.locator('.cookie-banner button').click();
+    await page.getByRole('button', { name: 'Понятно', exact: true }).click();
     await page.locator(openSelector).first().click();
     const count = await page.locator('.case-modal__gallery-meta span').textContent();
     const total = Number(count.split('/')[1].trim());
@@ -78,7 +78,7 @@ try {
           }
           // Same home → anchor → case flow as the earlier general runner.
           await page.goto(bases[phase] + '/');
-          await page.locator('.cookie-banner button').click();
+          await page.getByRole('button', { name: 'Понятно', exact: true }).click();
           await page.evaluate(() => document.fonts.ready);
           await page.waitForTimeout(800);
           if (scenario === 'startup-flow') {

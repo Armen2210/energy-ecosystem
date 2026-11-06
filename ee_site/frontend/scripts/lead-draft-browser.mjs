@@ -169,7 +169,6 @@ try {
     await policy.close(); await checkFields(page);
     await openCookieSettings(page);
     await page.getByRole('button', { name: 'Без аналитики', exact: true }).click();
-    await page.goBack();
     await checkFields(page); await checkFiles(page, [files[1], files[0]]);
     await openCookieSettings(page);
     await page.getByRole('button', { name: 'Включить аналитику', exact: true }).click();

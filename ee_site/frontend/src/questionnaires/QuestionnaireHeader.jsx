@@ -1,3 +1,4 @@
+import { downloadWorkbook } from "../data/downloadWorkbook.js";
 import { documents } from "../data/documents.js";
 import { contract, initialQuestionnaire, requiredFieldCount } from "./domain.js";
 import { updateQuestionnaire } from "./state.js";
@@ -63,7 +64,7 @@ export default function QuestionnaireHeader({ product, backend, draft, anchor })
               <span key={file.url}>
                 {index > 0 && <span aria-hidden="true"> · </span>}
                 <a
-                  href={file.url}
+                  href={file.url} onClick={(event) => downloadWorkbook(event, file)}
                   download={opens ? undefined : ""}
                   target={opens ? "_blank" : undefined}
                   rel={opens ? "noopener noreferrer" : undefined}
