@@ -3,44 +3,42 @@ import { Link, useLocation } from "react-router-dom";
 import { analytics } from "../../analytics/runtime.js";
 import { useClientReady } from "../../hooks/useClientReady";
 
-export default function CookieBanner({ settingsRef }) {
+export default function CookieBanner() {
   const { pathname } = useLocation();
   const ready = useClientReady();
   const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
   const calltouch = analytics.calltouchAvailable();
   const needsChoice = useSyncExternalStore(analytics.subscribe, analytics.needsCalltouchChoice, () => false);
-  if (!ready) return null;
-
-  const showBanner = (choice === "unknown" || needsChoice) && pathname !== "/privacy";
-  const services = calltouch ? "Яндекс Метрику и Calltouch" : "Яндекс Метрику";
-  function choose(next) {
-    analytics.choose(next);
-    settingsRef.current?.close();
-  }
+  if (!ready || (choice !== "unknown" && !needsChoice) || pathname === "/privacy") return null;
 
   return (
-    <>
-    {showBanner && <section className="cookie-banner" aria-label="Файлы cookies и аналитика">
+    <section className="cookie-banner" aria-label="Файлы cookies и аналитика">
       <div className="cookie-banner__content">
-        <p>Мы используем cookies для работы сайта. Нажимая «Понятно», вы соглашаетесь на использование {calltouch ? "Яндекс Метрики и Calltouch" : "Яндекс Метрики"}.</p>
+        <p>
+          Мы используем cookies для работы сайта и повышения удобства его использования.
+          Управлять cookies и аналитикой можно через «Настройки cookies» внизу сайта.
+        </p>
         <div className="cookie-banner__actions">
-          <button className="cookie-banner__settings" type="button" onClick={() => settingsRef.current?.showModal()}>Подробнее и настройки</button>
-          <button type="button" onClick={() => analytics.choose("allowed")}>Понятно</button>
+          <details className="cookie-banner__details">
+            <summary>
+              <span className="cookie-banner__more">Подробнее</span>
+              <span className="cookie-banner__less">Скрыть</span>
+            </summary>
+            <div className="cookie-banner__explanation">
+              <p>
+                Техническое хранение помогает сайту работать и сохранять черновик заявки.
+                После нажатия «Принять» включается {calltouch ? "аналитика Яндекс Метрики и Calltouch" : "Яндекс Метрика"} для
+                оценки посещений и источников обращений.
+              </p>
+              {needsChoice && <p>Метрика уже разрешена. Для Calltouch нужен новый выбор.</p>}
+              <Link to="/privacy#cookies">Политика обработки данных</Link>
+            </div>
+          </details>
+          <button className="cookie-banner__accept" type="button" onClick={() => analytics.choose("allowed")}>
+            Принять
+          </button>
         </div>
       </div>
-    </section>}
-    <dialog className="cookie-settings" ref={settingsRef} aria-labelledby="cookie-settings-title">
-      <h2 id="cookie-settings-title">Настройки cookies</h2>
-      <button className="cookie-settings__close" type="button" aria-label="Закрыть настройки cookies"
-        onClick={() => settingsRef.current?.close()}>×</button>
-      <p>Технические cookies помогают сайту работать. С вашего согласия мы также используем {services} для аналитики.</p>
-      {needsChoice && <p>Метрика уже разрешена. Для Calltouch нужен новый выбор.</p>}
-      <Link to="/privacy#cookies" target="_blank" rel="noopener noreferrer">Политика обработки данных (новая вкладка)</Link>
-      <div className="cookie-preferences__actions">
-        <button type="button" onClick={() => choose("allowed")}>Включить аналитику</button>
-        <button type="button" onClick={() => choose("denied")}>Без аналитики</button>
-      </div>
-    </dialog>
-    </>
+    </section>
   );
 }
