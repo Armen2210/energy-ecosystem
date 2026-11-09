@@ -1,3 +1,6 @@
+> Исторический отчёт октября 2026 года. Описанная здесь схема согласия и iframe заменена.
+> Текущее поведение: [analytics.md](analytics.md); текущие проверки: [analytics-integration-validation.md](analytics-integration-validation.md).
+
 # Результат реализации и проверки — 09.10.2026
 
 ## Summary

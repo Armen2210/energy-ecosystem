@@ -15,9 +15,8 @@ export function createStore(storage, now = Date.now) {
     },
     consentExpiresAt() { const value = read(KEYS.consent); return value?.at ? value.at + CONSENT_DAYS * DAY : null; },
     consentAt() { return read(KEYS.consent)?.at || null; },
-    calltouchConsent() { return this.consent() === "allowed" && read(KEYS.consent)?.calltouch === true; },
-    choose(choice, calltouch = false) {
-      const saved = write(KEYS.consent, { version: VERSION, choice, at: now(), ...(calltouch && choice === "allowed" ? { calltouch: true } : {}) });
+    choose(choice) {
+      const saved = write(KEYS.consent, { version: VERSION, choice, at: now() });
       // Never retain an older persisted permission after a failed new decision.
       if (!saved) remove(KEYS.consent);
       return saved;

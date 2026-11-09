@@ -41,7 +41,8 @@ try {
       await page.goto(origin);
       const accept = page.getByRole("button", { name: "Принять", exact: true });
       await accept.waitFor();
-      assert.equal(calltouchRequests, 0);
+      await page.waitForFunction(() => window.ct?.loaded === true);
+      assert.equal(calltouchRequests, 1);
       const content = await page.locator(".cookie-banner__content").boundingBox();
       const button = await accept.boundingBox();
       assert.ok(Math.abs(button.x + button.width - (content.x + content.width - 21)) < 2);
@@ -50,7 +51,7 @@ try {
       await summary.click();
       assert.equal(await summary.innerText(), "Скрыть");
       assert.equal(page.url(), origin + "/");
-      assert.equal(calltouchRequests, 0);
+      assert.equal(calltouchRequests, 1);
       assert.equal(await page.locator(".cookie-banner").getByRole("button").count(), 1);
       const policy = page.getByRole("link", { name: "Политика обработки данных", exact: true });
       await policy.click();
@@ -60,18 +61,18 @@ try {
       await page.goBack();
       assert.equal(await page.locator(".cookie-banner").count(), 0);
       await page.reload();
-      assert.equal(calltouchRequests, 0);
+      assert.equal(calltouchRequests, 1);
       await page.getByRole("link", { name: "Настройки cookies", exact: true }).click();
       await page.getByRole("button", { name: "Включить аналитику", exact: true }).click();
       await page.goBack();
       await page.waitForFunction(() => window.ct?.loaded === true);
-      assert.equal(calltouchRequests, 1);
+      assert.equal(calltouchRequests, 2);
       await page.reload();
       await page.waitForFunction(() => window.ct?.loaded === true);
-      assert.equal(calltouchRequests, 2);
+      assert.equal(calltouchRequests, 3);
       assert.equal(await page.locator(".cookie-banner").count(), 0);
       assert.equal(requests.some(url => url.endsWith("/api/leads/")), false);
-      console.log(`PASS ${width}px: layout, details, policy refusal, persistence, tools after acceptance`);
+      console.log(`PASS ${width}px: layout, details, policy refusal, persistence, autostart and tools stopped after refusal`);
     } finally {
       await context.close();
     }

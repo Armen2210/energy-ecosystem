@@ -150,6 +150,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
       analytics.rememberSubmission(submission, snapshot);
       if (attribution) formData.set("campaign_attribution", JSON.stringify(attribution));
       formData.set("submission_id", submission.id);
+      const calltouch = analytics.calltouchMetadata(snapshot);
+      if (calltouch) formData.set("calltouch_tracking", JSON.stringify(calltouch));
       await createLead(formData);
       leadDraft.update({ indeterminate: false });
       analytics.success(submission.id, snapshot);
@@ -174,7 +176,7 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
   }
 
   return (
-    <form className="lead-form" method="post" onSubmit={handleSubmit} aria-busy={!ready}>
+    <form className="lead-form ym-hide-content ym-disable-keys ym-disable-submit" method="post" onSubmit={handleSubmit} aria-busy={!ready}>
       <noscript><p>Для заполнения и отправки заявки включите JavaScript. Основное содержание сайта и ссылки доступны без него.</p></noscript>
       <fieldset className="lead-form__fieldset" disabled={!ready || isSubmitting}>
       <div className="lead-form__grid">

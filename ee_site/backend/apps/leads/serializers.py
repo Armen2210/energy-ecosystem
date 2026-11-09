@@ -7,10 +7,20 @@ from .attribution import CampaignField, PRODUCTS, SERVICES
 
 
 class LeadSerializer(serializers.ModelSerializer):
+    calltouch_tracking = serializers.JSONField(required=False, write_only=True)
     questionnaires = QuestionnairesField(required=False, write_only=True)
     campaign_attribution = CampaignField(required=False, write_only=True)
     direction_type = serializers.ChoiceField(choices=("", "product", "service"), required=False, write_only=True)
     direction_slug = serializers.CharField(max_length=40, required=False, allow_blank=True, write_only=True)
+
+    def validate_calltouch_tracking(self, value):
+        import re
+        if (not isinstance(value, dict) or set(value) - {"enabled", "session_id"}
+                or type(value.get("enabled")) is not bool
+                or not isinstance(value.get("session_id", ""), str)
+                or not re.fullmatch(r"(?:[1-9][0-9]{0,19})?", value.get("session_id", ""))):
+            raise serializers.ValidationError("Некорректные параметры аналитики.")
+        return value
 
     def validate(self, attrs):
         if "questionnaires" in attrs and not getattr(settings, "QUESTIONNAIRES_ENABLED", False):
@@ -30,6 +40,7 @@ class LeadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lead
         fields = (
+            "calltouch_tracking",
             "questionnaires",
             "id",
             "name",

@@ -1,9 +1,10 @@
 import { CONSENT_DAYS, DAY, GOALS, KEYS, ORIGIN, campaign, pageParams, permittedEnvironment, safeParams, safePath, safeReferrer, validTouch } from "./policy.js";
 import { createStore } from "./store.js";
 import { installCalltouch } from "./calltouch.js";
+import { installMetrika } from "./metrika.js";
 import { createPending } from "./pending.js";
 
-export function createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now = Date.now }) {
+export function createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now = Date.now, trackerFactory = installMetrika }) {
   let storage;
   try { storage = win?.localStorage; } catch { /* fail closed */ }
   const store = createStore(storage, now);
@@ -14,7 +15,7 @@ export function createAnalytics({ window: win, document: doc, production, enable
   let choiceExpires = store.consentExpiresAt() || now() + CONSENT_DAYS * DAY;
   let expiryTimer;
   let sessionOnly = false;
-  let frame = null, ready = false, generation = 0, timeout = null;
+  let tracker = null, ready = false, generation = 0, timeout = null;
   const pendingSuccesses = new Map();
   const SUCCESS_LIMIT = 20, SUCCESS_TTL = 10000;
   let successTimer;
@@ -23,13 +24,16 @@ export function createAnalytics({ window: win, document: doc, production, enable
   const listeners = new Set(), snapshots = new Set();
   const eligible = permittedEnvironment(production, enabled, win?.location);
   const calltouchAvailable = eligible && calltouchEnabled === "true";
-  const blockedKey = "ee_calltouch_blocked";
   let calltouchStarted = false;
-  function calltouchAllowed() {
-    if (!calltouchAvailable || !allowed() || !store.calltouchConsent()) return false;
-    try { return sessionStorage?.getItem(blockedKey) !== "1"; }
-    catch { return false; }
-  }
+  let metrikaStarted = false;
+  const blockedKeyAll = "ee_analytics_blocked";
+  try {
+    if (sessionStorage?.getItem(blockedKeyAll) === "1" || sessionStorage?.getItem("ee_calltouch_blocked") === "1") {
+      choice = "denied";
+      sessionOnly = true;
+    }
+  } catch { /* memory choice */ }
+  function calltouchAllowed() { return calltouchAvailable && allowed(); }
   function syncCalltouch() {
     if (!calltouchAllowed()) {
       // Removing a script element cannot stop code already running in this page.
@@ -41,10 +45,10 @@ export function createAnalytics({ window: win, document: doc, production, enable
     catch { /* Optional script must not interrupt the site. */ }
   }
   const notify = () => { for (const fn of listeners) { try { fn(); } catch { /* isolated subscriber */ } } };
-  const allowed = () => eligible && choice === "allowed" && now() < choiceExpires;
+  const allowed = () => eligible && choice !== "denied";
   const post = data => {
-    if (!allowed() || !ready || !frame) return false;
-    try { frame.contentWindow.postMessage({ eeAnalytics: true, generation, ...data }, win.location.origin); return true; }
+    if (!allowed() || !ready || !tracker) return false;
+    try { return tracker.send(data); }
     catch { return false; }
   };
   function scheduleSuccessExpiry() {
@@ -60,7 +64,7 @@ export function createAnalytics({ window: win, document: doc, production, enable
     if (!allowed() || !ready) return;
     for (const [id, item] of pendingSuccesses) {
       if (item.generation === generation && item.expires > now() && !store.hasSuccess(id)) {
-        // Local stage only: postMessage returned without throwing, NOT delivery ACK.
+        // Local stage only: vendor API returned without throwing, NOT delivery ACK.
         if (post({ type: "goal", name: "lead_success", params: item.params })) store.markSuccess(id);
         else item.snapshot.successSeen = false;
       }
@@ -73,9 +77,9 @@ export function createAnalytics({ window: win, document: doc, production, enable
     pendingSuccesses.clear(); win?.clearTimeout(successTimer);
     generation++;
     win?.clearTimeout(timeout);
-    // Supported API, called synchronously before destroying the browsing context.
-    try { frame?.contentWindow?.eeAnalyticsStop?.(); } catch { /* still remove context */ }
-    frame?.remove(); frame = null;
+    // Destruct stops the counter; explicit refusal also reloads the vendor context.
+    try { tracker?.stop(); } catch { /* denial also reloads the document */ }
+    tracker = null;
     previousPath = null; previousModal = null; initial = true;
     pendingPages = []; lastScheduledPath = null;
   }
@@ -84,7 +88,7 @@ export function createAnalytics({ window: win, document: doc, production, enable
     try {
       for (const part of doc.cookie.split(";")) {
         const name = part.split("=")[0].trim();
-        if (!/^_ym_/.test(name)) continue;
+        if (!/^(_ym_|_ct(?:_|$)|cted$|call_s$)/.test(name)) continue;
         for (const domain of ["", win.location.hostname, "energoeffekt-rostov.ru"]) {
           doc.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax; Secure${domain ? `; Domain=${domain}` : ""}`;
         }
@@ -116,45 +120,45 @@ export function createAnalytics({ window: win, document: doc, production, enable
     flushPage();
   }
   function start() {
-    if (!eligible || !allowed() || frame || !currentPage) return;
+    if (!allowed() || tracker || !currentPage) return;
     const token = ++generation;
     try {
-      frame = doc.createElement("iframe");
-      frame.hidden = true;
-      frame.title = "Служебная аналитика";
-      frame.setAttribute("aria-hidden", "true");
-      frame.setAttribute("tabindex", "-1");
-      frame.referrerPolicy = "no-referrer";
-      frame.src = `/analytics-frame.html#g=${token}`;
-      frame.onload = () => {
-        if (!allowed() || generation !== token || !frame) return;
-        try { frame.contentWindow.postMessage({ eeAnalytics: true, generation: token, type: "start" }, win.location.origin); } catch { stop(); }
-      };
-      doc.body.append(frame);
+      tracker = trackerFactory(win, doc, {
+        generation: token,
+        ready() {
+          if (!allowed() || token !== generation) return;
+          ready = true; win.clearTimeout(timeout); flushPage(); flushSuccesses();
+        },
+        failed() { if (token === generation) stop(); },
+      });
+      metrikaStarted = true;
       timeout = win.setTimeout(() => { if (generation === token && !ready) stop(); }, 10000);
     } catch { stop(); }
   }
   function setChoice(next, persist = true) {
     if (!["allowed", "denied", "unknown"].includes(next)) next = "unknown";
+    const wasAllowed = allowed();
     const changed = choice !== next;
     choice = next;
     choiceExpires = persist ? now() + CONSENT_DAYS * DAY : store.consentExpiresAt() || 0;
-    sessionOnly = persist && !store.choose(next, calltouchAvailable);
-    if (persist && calltouchAvailable) {
+    sessionOnly = persist && !store.choose(next);
+    if (persist) {
       try {
-        if (!sessionOnly) sessionStorage?.removeItem(blockedKey);
-        else if (next !== "allowed") sessionStorage?.setItem(blockedKey, "1");
-      } catch { /* Consent is also checked in the primary store. */ }
+        if (next === "denied" && sessionOnly) sessionStorage?.setItem(blockedKeyAll, "1");
+        else sessionStorage?.removeItem(blockedKeyAll);
+        sessionStorage?.removeItem("ee_calltouch_blocked");
+      } catch { /* localStorage remains primary */ }
     }
     if (!allowed()) {
       stop(); store.clearOptional(); pending.clearOptional(); clearLibraryData();
       for (const snapshot of snapshots) { snapshot.attribution = null; snapshot.consentAt = null; snapshot.trackingEligible = false; }
-    } else if (changed) {
+    } else if (changed && !wasAllowed) {
       if (currentPage) currentPage.search = win.location.search;
       store.capture(win.location.search); start(); schedulePage();
     }
     notify();
     scheduleExpiry();
+    if (!allowed() && metrikaStarted && !calltouchStarted) win.location.reload();
     syncCalltouch();
   }
   function scheduleExpiry() {
@@ -165,20 +169,16 @@ export function createAnalytics({ window: win, document: doc, production, enable
       else scheduleExpiry();
     }, Math.min(DAY, Math.max(0, choiceExpires - now())));
   }
-  win?.addEventListener("message", event => {
-    if (!allowed() || !frame || event.source !== frame.contentWindow || event.origin !== win.location.origin
-      || event.data?.eeAnalytics !== true || event.data.generation !== generation) return;
-    if (event.data.type === "ready") {
-      ready = true; win.clearTimeout(timeout); flushPage(); flushSuccesses();
-    } else if (event.data.type === "failed") stop();
-  });
   win?.addEventListener("storage", event => {
     if (event.key === KEYS.consent || event.key === null) {
       const persisted = store.consent();
       // A failed local denial remains authoritative in this document even if
       // an undeletable old permission is still visible through another event.
       if (sessionOnly && choice !== "allowed") return;
-      setChoice(persisted, false);
+      if (persisted !== choice) {
+        try { sessionStorage?.removeItem(blockedKeyAll); } catch { /* memory */ }
+        setChoice(persisted, false);
+      }
     }
   });
   win?.addEventListener("focus", () => {
@@ -191,8 +191,16 @@ export function createAnalytics({ window: win, document: doc, production, enable
     subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
     getChoice: () => choice,
     calltouchAvailable: () => calltouchAvailable,
-    needsCalltouchChoice: () => calltouchAvailable && choice === "allowed" && !sessionOnly && !calltouchAllowed(),
     choose: setChoice,
+    calltouchMetadata(snapshot) {
+      if (!calltouchAllowed() || !snapshot?.trackingEligible || snapshot.generation !== generation) return null;
+      let sessionId = "";
+      try {
+        const value = win.ct?.("calltracking_params", "q0fhtb2e")?.sessionId;
+        if ((typeof value === "string" || Number.isSafeInteger(value)) && /^[1-9][0-9]{0,19}$/.test(String(value))) sessionId = String(value);
+      } catch { /* missing/blocked vendor session: journal entry has unknown source */ }
+      return { enabled: true, session_id: sessionId };
+    },
     visit({ path, search = "", title, modal = null, key }) {
       if (modal && previousModal !== key && allowed()) this.goal("case_open", { ...pageParams(path), case: modal });
       previousModal = modal ? key : null;

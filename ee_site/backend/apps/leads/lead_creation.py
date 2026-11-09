@@ -140,6 +140,7 @@ def create_lead(validated_data, attachments=()):
     # records.  Calculate the legacy fingerprint above before removing it.
     lead_data = dict(validated_data)
     lead_data.pop("attachment", None)
+    tracking = lead_data.pop("calltouch_tracking", None)
     questionnaires = lead_data.pop("questionnaires", None)
     lead = Lead(
         **lead_data,
@@ -164,6 +165,13 @@ def create_lead(validated_data, attachments=()):
             if questionnaires:
                 from .questionnaire_jobs import create_questionnaire_job
                 create_questionnaire_job(lead, questionnaires)
+            # A savepoint isolates optional queue errors from the accepted lead.
+            try:
+                with transaction.atomic():
+                    from .calltouch_delivery import enqueue
+                    enqueue(lead, tracking)
+            except Exception:
+                logger.error("Calltouch queue failed lead_id=%s code=enqueue_failed", lead.pk)
             schedule_lead_notification(lead.id)
     except IntegrityError:
         _cleanup_files(stored_files)

@@ -10,7 +10,7 @@ function storage() {
   const data = new Map();
   return { getItem: key => data.get(key) || null, setItem: (key, value) => data.set(key, value), removeItem: key => data.delete(key), key: i => [...data.keys()][i], get length() { return data.size; } };
 }
-function platform({ saved, failStorage = false, production = true, enabled = 'true', calltouchEnabled, hostname = 'www.energoeffekt-rostov.ru' } = {}) {
+function platform({ saved, failStorage = false, production = true, enabled = 'true', calltouchEnabled, sessionSaved, hostname = 'www.energoeffekt-rostov.ru' } = {}) {
   const events = {}, commands = [], frames = [], scripts = [], timers = new Map(), delays = new Map();
   let reloads = 0, timerId = 0, time = 1800000000000;
   const localStorage = saved || storage();
@@ -21,10 +21,18 @@ function platform({ saved, failStorage = false, production = true, enabled = 'tr
   const doc = { referrer: 'https://google.com/search?email=secret', cookie: '', head: { append: s => scripts.push(s) }, body: { append: f => frames.push(f) }, createElement() {
     return { setAttribute() {}, contentWindow: { postMessage: data => commands.push(data), eeAnalyticsStop: () => commands.push({ type: 'destruct' }) }, remove() { this.removed = true; } };
   } };
-  const app = createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now: () => time });
+  win.sessionStorage = sessionSaved || storage();
+  const trackerFactory = (_win, _doc, handlers) => {
+    const context = { src: `#g=${handlers.generation}`, ready: handlers.ready, removed: false,
+      contentWindow: { postMessage: data => { commands.push(data); return true; } } };
+    frames.push(context);
+    return { send: data => context.contentWindow.postMessage(data),
+      stop() { context.removed = true; commands.push({type:'destruct'}); } };
+  };
+  const app = createAnalytics({ window: win, document: doc, production, enabled, calltouchEnabled, now: () => time, trackerFactory });
   return { app, win, events, commands, frames, scripts, reloads: () => reloads, localStorage, setTime: t => { time = t; }, time: () => time,
     fireTimers(delay) { for (const [id, fn] of [...timers]) if (delays.get(id) === delay) { timers.delete(id); fn(); } },
-    ready(frame = frames.at(-1), token = Number(frame.src.split('=')[1])) { events.message({ source: frame.contentWindow, origin: win.location.origin, data: { eeAnalytics: true, generation: token, type: 'ready' } }); },
+    ready(frame = frames.at(-1)) { frame.ready(); },
     visit(path = '/', extras = {}) { app.visit({ path, title: path === '/' ? 'Home' : 'BTP', search: win.location.search, key: path, ...extras }); } };
 }
 
@@ -46,7 +54,7 @@ test('URL, referrer and event parameter allowlists reject personal/freeform valu
   assert.deepEqual(campaign('?utm_source=yandex&yclid=123456789012345678&email=private'), { utm_source: 'yandex', yclid: '123456789012345678' });
   for (const query of ['?utm_source=a@b.ru', '?utm_source=ivan%20ivanov', '?utm_source=a&ut m_medium=cpc&utm_term=+79999999999', '?utm_source=' + 'a'.repeat(65), '?utm_source=abc1234567', '?yclid=abc', '?utm_source=x&utm_source=y']) assert.equal(campaign(query), null);
 });
-test('consent legacy value, corrupt value, version and expiry fail closed', () => {
+test('legacy, corrupt and expired settings return unknown', () => {
   const s = storage(); s.setItem('ee_cookie_consent', 'accepted');
   const store = createStore(s, () => 1800000000000);
   assert.equal(store.consent(), 'unknown');
@@ -71,12 +79,15 @@ test('first and last marked touch, internal transitions, new entry, expiry', () 
   assert.equal(store.capture(''), null);
   assert.equal(s.getItem(KEYS.attribution), null);
 });
-test('no attribution, script or events before permission / after denial', () => {
-  const p = platform(); p.visit(); p.app.goal('contact_phone_click');
-  assert.equal(p.localStorage.getItem(KEYS.attribution), null);
-  assert.equal(p.frames.length, 0);
+test('autostart captures the first visit; saved denial blocks tracking on reload', () => {
+  const p = platform(); p.visit(); p.ready();
+  assert.ok(p.localStorage.getItem(KEYS.attribution));
+  assert.equal(p.frames.length, 1);
+  assert.equal(p.commands.filter(c=>c.type==='hit').length, 1);
   p.app.choose('denied'); p.visit('/solutions/btp');
-  assert.equal(p.frames.length, 0); assert.equal(p.commands.length, 0);
+  assert.equal(p.frames.length, 1); assert.equal(p.frames[0].removed, true);
+  const reload = platform({saved:p.localStorage}); reload.visit();
+  assert.equal(reload.frames.length, 0);
 });
 test('one init context and page hit, anchors/rerenders do not duplicate; Back/Forward count', () => {
   const p = platform(); p.visit(); p.app.choose('allowed'); p.ready();
@@ -108,12 +119,12 @@ test('loading/revoke/late callback/reallow destroys old context and no event bac
   assert.equal(p.frames.length, 2); assert.equal(p.commands.filter(c => c.type === 'hit').length, 1);
   assert.equal(p.commands.filter(c => c.type === 'goal').length, 0);
 });
-test('storage event revoke stops and clears snapshots; corrupted cross-tab data fails closed', () => {
+test('cross-tab denial stops counters and invalidates old snapshots', () => {
   const p = platform(); p.visit(); p.app.choose('allowed'); p.ready();
   const snapshot = p.app.snapshot({ product: 'btp' });
   assert.ok(p.app.payload(snapshot));
-  p.localStorage.setItem(KEYS.consent, 'broken'); p.events.storage({ key: KEYS.consent });
-  assert.equal(p.app.getChoice(), 'unknown'); assert.equal(p.app.payload(snapshot), null);
+  p.localStorage.setItem(KEYS.consent, JSON.stringify({version:1,choice:'denied',at:p.time()})); p.events.storage({ key: KEYS.consent });
+  assert.equal(p.app.getChoice(), 'denied'); assert.equal(p.app.payload(snapshot), null);
   assert.equal(p.frames[0].removed, true);
   p.app.choose('allowed'); p.ready();
   assert.equal(p.app.payload(snapshot), null);
@@ -218,12 +229,11 @@ test('confirmed success waits for ready once, without a premature sent marker', 
   assert.equal(p.commands.filter(c => c.name === 'lead_success').length, 1);
   assert.equal(JSON.parse(p.localStorage.getItem(KEYS.successes))[0].id, successId);
 });
-test('pending successes cleared on revoke, consent expiry, load timeout and generation change', () => {
-  for (const reason of ['revoke', 'expiry', 'timeout']) {
+test('pending successes cleared on revoke, load timeout and generation change', () => {
+  for (const reason of ['revoke', 'timeout']) {
     const p = platform(); p.visit(); p.app.choose('allowed'); const old = p.frames[0];
     p.app.success(successId, p.app.snapshot());
     if (reason === 'revoke') p.app.choose('denied');
-    if (reason === 'expiry') { p.setTime(p.time() + CONSENT_DAYS * DAY); p.events.focus(); }
     if (reason === 'timeout') p.fireTimers(10000);
     p.ready(old); p.app.choose('denied'); p.app.choose('allowed'); p.ready();
     assert.equal(p.commands.filter(c => c.name === 'lead_success').length, 0, reason);
@@ -248,17 +258,12 @@ test('failed postMessage does not mark sent and repeated success can try local t
   p.app.success(successId, snapshot); p.app.success(successId, snapshot);
   assert.equal(p.commands.filter(c => c.name === 'lead_success').length, 1);
 });
-test('failed decision write removes old allowed: revoke, reload, reallow and other tab', () => {
-  const s = storage(); const first = platform({ saved: s }); first.visit(); first.app.choose('allowed'); first.ready();
-  const other = platform({ saved: s }); other.visit(); other.ready();
-  const original = s.setItem; s.setItem = () => { throw Error('quota'); };
-  first.app.choose('denied'); assert.equal(s.getItem(KEYS.consent), null);
-  other.events.storage({ key: KEYS.consent }); assert.equal(other.frames[0].removed, true);
-  const reload = platform({ saved: s }); reload.visit(); assert.equal(reload.frames.length, 0);
-  reload.app.choose('allowed'); reload.ready(); assert.equal(reload.frames.length, 1);
-  assert.equal(s.getItem(KEYS.consent), null); reload.events.focus(); assert.equal(reload.app.getChoice(), 'allowed');
-  s.setItem = original; reload.app.choose('denied'); reload.app.choose('allowed');
-  const savedAgain = platform({ saved: s }); savedAgain.visit(); assert.equal(savedAgain.frames.length, 1);
+test('failed persistent denial is retained in this tab session across reload', () => {
+  const s=storage();const p=platform({saved:s});p.visit();p.ready();
+  s.setItem=()=>{throw Error('quota');};p.app.choose('denied');
+  const reload=platform({saved:s,sessionSaved:p.win.sessionStorage});reload.visit();reload.events.focus();
+  assert.equal(reload.app.getChoice(),'denied');assert.equal(reload.frames.length,0);
+  reload.app.choose('allowed');reload.ready();assert.equal(reload.frames.length,1);
 });
 test('failed write and delete keeps current document denied, but old allowed can survive reload', () => {
   const s = storage(); const p = platform({ saved: s }); p.visit(); p.app.choose('allowed'); p.ready();
@@ -303,37 +308,37 @@ test('privacy form entry marker never enters analytics URLs, attribution or para
   assert.ok(!JSON.stringify(p.commands).includes('lead-form'));
 });
 
-test('Calltouch requires fresh consent; legacy permission still runs Metrika', () => {
-  const old = platform();
-  old.app.choose('allowed');
-  const p = platform({ saved: old.localStorage, calltouchEnabled: 'true' });
-  p.visit();
-  assert.equal(p.frames.length, 1);
-  assert.equal(p.scripts.length, 0);
-  assert.equal(p.app.needsCalltouchChoice(), true);
-  p.app.choose('allowed');
-  p.visit('/solutions/bmk');
-  assert.equal(p.app.needsCalltouchChoice(), false);
-  assert.deepEqual(p.scripts.map(script => script.src), ['https://mod.calltouch.ru/init-min.js?id=q0fhtb2e']);
-  p.app.choose('denied');
-  assert.equal(p.reloads(), 1);
-  const reloaded = platform({ saved: p.localStorage, calltouchEnabled: 'true' });
-  reloaded.visit();
-  assert.equal(reloaded.frames.length, 0);
-  assert.equal(reloaded.scripts.length, 0);
+test('Calltouch autostarts once with q0fhtb2e, including legacy Metrika choice', () => {
+  for (const saved of [undefined, (()=>{const s=storage();createStore(s,()=>1800000000000).choose('allowed');return s;})()]) {
+    const p=platform({saved,calltouchEnabled:'true'}); p.visit(); p.visit('/solutions/bmk');
+    assert.deepEqual(p.scripts.map(s=>s.src),['https://mod.calltouch.ru/init-min.js?id=q0fhtb2e']);
+    const snapshot=p.app.snapshot();
+    p.win.ct=()=>({sessionId:123});
+    assert.deepEqual(p.app.calltouchMetadata(snapshot),{enabled:true,session_id:'123'});
+    p.app.choose('denied');
+    assert.equal(p.app.calltouchMetadata(snapshot),null);
+    assert.equal(p.reloads(),1);
+    const reload=platform({saved:p.localStorage,calltouchEnabled:'true'});reload.visit();
+    assert.equal(reload.scripts.length,0);assert.equal(reload.frames.length,0);
+  }
+});
+test('Calltouch off outside production and malformed vendor session never enters payload', () => {
+  const p=platform({calltouchEnabled:'true'});p.visit();
+  p.win.ct=()=>({sessionId:'private@example.com'});
+  assert.deepEqual(p.app.calltouchMetadata(p.app.snapshot()),{enabled:true,session_id:''});
+  for(const options of [{},{calltouchEnabled:'true',hostname:'localhost'}]) {
+    const other=platform(options);other.visit();assert.equal(other.scripts.length,0);
+  }
+});
+test('accepting the notice does not reinitialize counters or duplicate the first hit', () => {
+  const p=platform({calltouchEnabled:'true'});p.visit();p.ready();p.app.choose('allowed');
+  assert.equal(p.frames.length,1);assert.equal(p.scripts.length,1);
+  assert.equal(p.commands.filter(c=>c.type==='hit').length,1);
 });
 
-test('Calltouch stays off without a choice, on first denial and off the production host', () => {
-  const p = platform({ calltouchEnabled: 'true' });
-  p.visit();
-  assert.equal(p.scripts.length, 0);
-  p.app.choose('denied');
-  assert.equal(p.scripts.length, 0);
-  assert.equal(p.reloads(), 0);
-  for (const options of [{}, { calltouchEnabled: 'true', hostname: 'localhost' }, { calltouchEnabled: 'true', failStorage: true }]) {
-    const other = platform(options);
-    other.visit();
-    other.app.choose('allowed');
-    assert.equal(other.scripts.length, 0);
-  }
+test('expired denial returns to autostart without reviving pre-denial snapshots',()=>{
+  const p=platform();p.visit();p.ready();const snapshot=p.app.snapshot();p.app.choose('denied');
+  p.setTime(p.time()+CONSENT_DAYS*DAY);p.events.focus();p.ready();
+  assert.equal(p.app.getChoice(),'unknown');assert.equal(p.frames.length,2);
+  p.app.success(successId,snapshot);assert.equal(p.commands.filter(c=>c.name==='lead_success').length,0);
 });
