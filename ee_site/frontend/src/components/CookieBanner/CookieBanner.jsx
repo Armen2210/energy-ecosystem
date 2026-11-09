@@ -8,8 +8,7 @@ export default function CookieBanner() {
   const ready = useClientReady();
   const choice = useSyncExternalStore(analytics.subscribe, analytics.getChoice, () => "unknown");
   const calltouch = analytics.calltouchAvailable();
-  const needsChoice = useSyncExternalStore(analytics.subscribe, analytics.needsCalltouchChoice, () => false);
-  if (!ready || (choice !== "unknown" && !needsChoice) || pathname === "/privacy") return null;
+  if (!ready || choice !== "unknown" || pathname === "/privacy") return null;
 
   return (
     <section className="cookie-banner" aria-label="Файлы cookies и аналитика">
@@ -27,10 +26,9 @@ export default function CookieBanner() {
             <div className="cookie-banner__explanation">
               <p>
                 Техническое хранение помогает сайту работать и сохранять черновик заявки.
-                После нажатия «Принять» включается {calltouch ? "аналитика Яндекс Метрики и Calltouch" : "Яндекс Метрика"} для
+                При открытии сайта работает {calltouch ? "аналитика Яндекс Метрики и Calltouch" : "Яндекс Метрика"} для
                 оценки посещений и источников обращений.
               </p>
-              {needsChoice && <p>Метрика уже разрешена. Для Calltouch нужен новый выбор.</p>}
               <Link to="/privacy#cookies">Политика обработки данных</Link>
             </div>
           </details>

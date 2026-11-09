@@ -219,3 +219,19 @@ class QuestionnaireJob(models.Model):
     next_run = models.DateTimeField(null=True,blank=True)
     error_code = models.CharField(max_length=50,blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class CalltouchDelivery(models.Model):
+    """One export per committed lead; ambiguous outcomes need reconciliation."""
+
+    class State(models.TextChoices):
+        PENDING = "pending", "Ожидает отправки"
+        SENDING = "sending", "Отправляется"
+        SENT = "sent", "Принято Calltouch"
+        UNCERTAIN = "uncertain", "Требуется сверка"
+
+    lead = models.OneToOneField(Lead, on_delete=models.CASCADE, related_name="calltouch_delivery")
+    site_id = models.CharField(max_length=16)
+    session_id = models.CharField(max_length=20, blank=True)
+    state = models.CharField(max_length=12, choices=State.choices, default=State.PENDING, db_index=True)
+    request_id = models.PositiveBigIntegerField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)

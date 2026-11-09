@@ -251,7 +251,7 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
   const rowFields = sheet.outletFields;
   const rows = data.outlets || [{ id: "outlet-1" }];
   return (
-    <div className="ql-content" ref={container}>
+    <div className="ql-content ym-hide-content ym-disable-keys" ref={container}>
       <dialog
         open
         role={fullscreen ? undefined : "presentation"}

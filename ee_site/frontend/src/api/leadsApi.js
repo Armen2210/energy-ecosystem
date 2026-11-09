@@ -116,7 +116,7 @@ async function sha256Hex(value) {
 export async function createSubmissionSignature(formData) {
   const fields = [];
   for (const [name, value] of formData.entries()) {
-    if (["submission_id", "campaign_attribution", "direction_type", "direction_slug"].includes(name)) continue;
+    if (["submission_id", "campaign_attribution", "direction_type", "direction_slug", "calltouch_tracking"].includes(name)) continue;
     if (value instanceof File) {
       fields.push([
         name,

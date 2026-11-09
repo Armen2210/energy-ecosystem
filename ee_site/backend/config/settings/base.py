@@ -306,3 +306,8 @@ QUESTIONNAIRE_MAX_PDF_BYTES = int(os.getenv('QUESTIONNAIRE_MAX_PDF_BYTES', '5242
 QUESTIONNAIRE_MAX_ATTEMPTS = int(os.getenv('QUESTIONNAIRE_MAX_ATTEMPTS', '3'))
 QUESTIONNAIRE_PDF_TIMEOUT = int(os.getenv('QUESTIONNAIRE_PDF_TIMEOUT', '45'))
 QUESTIONNAIRE_FONT_PATH = os.getenv('QUESTIONNAIRE_FONT_PATH', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
+
+# Calltouch journal delivery is enabled explicitly on the server after migration.
+# The project ID is server-owned; public requests cannot select a destination.
+CALLTOUCH_DELIVERY_ENABLED = os.getenv("CALLTOUCH_DELIVERY_ENABLED", "false").lower() == "true"
+CALLTOUCH_SITE_ID = os.getenv("CALLTOUCH_SITE_ID", "86299")

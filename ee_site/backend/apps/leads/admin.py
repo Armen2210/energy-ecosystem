@@ -11,7 +11,7 @@ from django.utils.html import format_html
 from django.utils.text import get_valid_filename
 
 from .email_notifications import NotificationAttemptResult, send_lead_notification
-from .models import Lead, LeadAttachment
+from .models import Lead, LeadAttachment, CalltouchDelivery
 from .questionnaire_admin import QuestionnaireInline, download_questionnaire
 
 
@@ -227,3 +227,16 @@ class LeadAdmin(admin.ModelAdmin):
                 f"с ошибкой — {failed_count}, пропущено — {skipped_count}."
             ),
         )
+
+
+@admin.register(CalltouchDelivery)
+class CalltouchDeliveryAdmin(admin.ModelAdmin):
+    list_display = ("lead_id", "site_id", "state", "request_id", "updated_at")
+    list_filter = ("state",)
+    readonly_fields = ("lead", "site_id", "session_id", "state", "request_id", "updated_at")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
