@@ -14,15 +14,15 @@ export const navigation = [
     url: "/#services",
   },
   {
-    title: "Объекты",
+    title: "Портфолио",
     url: "/#cases",
-  },
-  {
-    title: "О нас",
-    url: "/about",
   },
   {
     title: "Контакты",
     url: "/#contacts",
+  },
+  {
+    title: "О нас",
+    url: "/about",
   },
 ];
