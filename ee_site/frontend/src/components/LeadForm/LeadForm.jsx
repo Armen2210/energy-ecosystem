@@ -6,6 +6,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { normalizeLeadPhone } from "../../api/leadPhone.js";
+import PhoneInput from "./PhoneInput.jsx";
 import { leadDraft } from "../../api/leadDraft.js";
 import { hasDraftContent } from "../../api/leadDraftContent.js";
 import { Link, useLocation } from "react-router-dom";
@@ -99,6 +100,13 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     const formData = new FormData(event.currentTarget);
     // Read the DOM value as well: browser autofill may not dispatch React change.
     formData.set("phone", normalizeLeadPhone(formData.get("phone")));
+    if (!/^\+7\d{10}$/.test(formData.get("phone"))) {
+      const phoneInput = event.currentTarget.elements.namedItem("phone");
+      phoneInput.setCustomValidity("Введите телефон полностью: +7 и 10 цифр номера.");
+      phoneInput.reportValidity();
+      leadDraft.update({ status: "error", message: "Введите телефон полностью: +7 и 10 цифр номера." });
+      return;
+    }
     const submittedTopic = formData.get("description_topic");
     const description = formData.get("description");
     if (!formData.get("consent")) {
@@ -208,22 +216,15 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
 
         <label>
           Телефон
-          <input
-            type="tel"
-            name="phone"
-            autoComplete="tel"
-            onBlur={(event) => {
+          <PhoneInput
+            onChange={(phone) => {
               if (!ready || leadDraft.get().submitting) return;
-              const phone = normalizeLeadPhone(event.currentTarget.value);
               if (phone !== leadDraft.get().fields.phone) {
                 markStart();
                 leadDraft.update({ fields: { ...leadDraft.get().fields, phone } });
               }
             }}
             value={draft.fields.phone}
-            onChange={handleFieldChange}
-            placeholder="+7 (___) ___-__-__"
-            required
           />
         </label>
 

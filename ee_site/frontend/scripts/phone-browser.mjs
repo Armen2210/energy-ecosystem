@@ -34,6 +34,56 @@ try {
     await page.goto(origin);
     await page.getByRole('button', { name: 'Принять', exact: true }).click();
     const form = page.locator('.lead-form');
+    const phone = form.locator('[name=phone]');
+    async function clearPhone() {
+      await phone.fill('');
+      await phone.focus();
+    }
+    async function pastePhone(text) {
+      await phone.evaluate((field, value) => {
+        const clipboardData = new DataTransfer();
+        clipboardData.setData('text', value);
+        field.dispatchEvent(new ClipboardEvent('paste', { clipboardData, bubbles: true, cancelable: true }));
+      }, text);
+    }
+    for (const text of ['9183106888', '89183106888', '79183106888', '+79183106888']) {
+      await clearPhone();
+      await phone.press('End');
+      await phone.pressSequentially(text);
+      assert.equal(await phone.inputValue(), '+79183106888', text);
+      await phone.pressSequentially('12345');
+      assert.equal(await phone.inputValue(), '+79183106888', 'extra typing is blocked');
+    }
+    await phone.evaluate(field => field.setSelectionRange(5, 5));
+    await phone.pressSequentially('5');
+    assert.equal(await phone.inputValue(), '+79183106888', 'full-number middle insertion is blocked');
+    await phone.evaluate(field => field.setSelectionRange(5, 6));
+    await phone.pressSequentially('5');
+    assert.equal(await phone.inputValue(), '+79185106888', 'selected digit can be replaced');
+    await phone.press('Backspace');
+    assert.equal(await phone.inputValue(), '+7918106888');
+    await phone.pressSequentially('3');
+    assert.equal(await phone.inputValue(), '+79183106888');
+    await phone.evaluate(field => field.setSelectionRange(2, 2));
+    await phone.press('Backspace');
+    assert.equal(await phone.inputValue(), '+79183106888', 'prefix is protected');
+    for (const text of ['9183106888', '8 (918) 310-68-88', '+7 (918) 310-68-88', '891831068881234']) {
+      await clearPhone();
+      await pastePhone(text);
+      assert.equal(await phone.inputValue(), '+79183106888', text);
+    }
+    await clearPhone();
+    await pastePhone('+441234567890');
+    assert.equal(await phone.inputValue(), '+7');
+    assert.equal(await phone.evaluate(field => field.validity.customError), true);
+    await phone.fill('918');
+    await form.locator('[name=name]').fill('Synthetic incomplete phone check');
+    await form.locator('[name=consent]').check();
+    await form.locator('button[type=submit]').click();
+    assert.equal(phones.length, 0, 'incomplete phone never reaches API');
+    assert.equal(await phone.evaluate(field => field.validity.customError), true);
+    await phone.fill('9183106888');
+    assert.equal(await phone.evaluate(field => field.validity.customError), false);
     for (const input of ['(918) 310-68-88', '89183106888', '+7 (918) 310-68-88']) {
       await form.locator('[name=name]').fill('Synthetic phone check');
       await form.locator('[name=phone]').fill(input);
@@ -55,7 +105,7 @@ try {
     await page.waitForFunction(() => !document.querySelector('[name=phone]').value);
     assert.deepEqual(phones, Array(4).fill('+79183106888'));
     assert.deepEqual(errors, []);
-    console.log(`PASS ${width}px: 10 digits, 8 prefix, +7 prefix and eventless autofill`);
+    console.log(`PASS ${width}px: typing, prefixes, overflow, selection, deletion, paste, validation and eventless autofill`);
     await page.goto(origin + '/documents');
     await page.screenshot({ path: `/tmp/ee-phone-documents-${width}.png`, fullPage: true });
     await context.close();
