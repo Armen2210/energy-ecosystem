@@ -18,5 +18,4 @@
 | Сертификат.pdf | `/documents/certificates/products/ee-energoline-controls-2026.pdf` |
 | Серт Энерголайн ШУ до 28.03.27.pdf | `/documents/certificates/products/ee-energoline-controls-2022.pdf` |
 | Сертификат сейсмостойкости.pdf | `/documents/certificates/products/asta-valves-seismic.pdf` |
-| Сертификаты трубопроводы 09_2022.pdf | `/documents/certificates/products/pipes-certificates-2022.pdf` |
 | Свидетельство ГС1 РУС.pdf | `/documents/other/ee-gs1-2026.pdf` |
