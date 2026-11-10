@@ -4,7 +4,7 @@ Run as root on the existing EE VPS after preparing the pinned release.
 No database migrations or lead submissions are performed.
 """
 
-import json, os, re, shutil, subprocess, tempfile, time
+import hashlib, json, os, re, shutil, subprocess, tempfile, time
 from pathlib import Path
 
 old = '8b9cbb0448f70ad007a5f1d91eef9584a51c40eb'
@@ -45,6 +45,28 @@ def get(route, expected=200):
         if attempt < 5:
             time.sleep(1)
     raise RuntimeError(f'GET {route}: status={status!r}, curl={result.returncode}')
+
+def expect_file(route, file, status=200):
+    expected = file.read_bytes()
+    # nginx reload is asynchronous: a successful signal can precede the new
+    # workers accepting connections. Retain exact byte checks while waiting.
+    for attempt in range(20):
+        actual = get(route, status)
+        if actual == expected:
+            return
+        if attempt == 0:
+            print(f'Ожидание обновления nginx: {route}', flush=True)
+        if attempt < 19:
+            time.sleep(1)
+    probe = backup / ('mismatch-' + hashlib.sha256(route.encode()).hexdigest()[:12] + '.html')
+    probe.write_bytes(actual)
+    raise RuntimeError(
+        f'{route}: HTML/файл не соответствует релизу; '
+        f'expected_sha256={hashlib.sha256(expected).hexdigest()}, '
+        f'actual_sha256={hashlib.sha256(actual).hexdigest()}, '
+        f'old_index={actual == (old_dist / "index.html").read_bytes()}, '
+        f'ответ сохранён: {probe}'
+    )
 
 assert os.geteuid() == 0, 'Нужен root'
 assert (backend / '.env').is_file() and (backend / '.venv/bin/python').is_file()
@@ -97,18 +119,18 @@ try:
     run('systemctl', 'restart', *units[:2])
     run('systemctl', 'reload', 'nginx')
     for row in pages:
-        assert get(row['route'], 404 if row['route'] == '/404' else 200) == (dist / row['file']).read_bytes(), row['route']
+        expect_file(row['route'], dist / row['file'], 404 if row['route'] == '/404' else 200)
     print('OK: 20 страниц и 404', flush=True)
     index = (dist / 'index.html').read_bytes()
     for url in set(re.findall(rb'(?:src|href)="(/assets/[^"<>]+)"', index)):
         route = url.decode()
-        assert get(route) == (dist / route.lstrip('/')).read_bytes(), route
+        expect_file(route, dist / route.lstrip('/'))
     documents = list((dist / 'documents/certificates/products').glob('*'))
     documents.append(dist / 'documents/other/ee-gs1-2026.pdf')
     documents = [file for file in documents if file.is_file() and file.suffix in ('.pdf', '.docx')]
     assert len(documents) >= 12
     for file in documents:
-        assert get('/' + str(file.relative_to(dist))) == file.read_bytes(), file.name
+        expect_file('/' + str(file.relative_to(dist)), file)
     print(f'OK: assets и {len(documents)} документов', flush=True)
     assert json.loads(get('/api/leads/questionnaire-capabilities/')) == before, 'Настройки ОЛ изменились'
     get('/api/leads/', 405)
@@ -143,7 +165,7 @@ except BaseException as error:
         for unit in units[:2]:
             run('systemctl', 'is-active', '--quiet', unit)
         assert json.loads(get('/api/leads/questionnaire-capabilities/')) == before
-        assert get('/') == (old_dist / 'index.html').read_bytes()
+        expect_file('/', old_dist / 'index.html')
     except Exception as failure:
         rollback_errors.append(str(failure))
     if rollback_errors:
