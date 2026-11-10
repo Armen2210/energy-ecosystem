@@ -8,13 +8,13 @@ import { documents, documentCategories, populatedDocumentCategories, formatDocum
 import { documentFiles, validateDocumentFile, validateDocumentFiles } from './document-files.mjs';
 import { safePath, pageParams, safeParams } from '../src/analytics/policy.js';
 
-test('registry has ordered questionnaires, partners and SOUT with exactly fourteen published files', () => {
+test('registry has ordered questionnaires, partners and SOUT with all published files', () => {
   const questionnaires = documents.filter(item => item.categoryId === 'questionnaires');
   assert.deepEqual(questionnaires.map(item => item.productSlug), ['bmk', 'btp', 'vns', 'pns']);
-  assert.equal(new Set(documents.map(item => item.id)).size, 10);
-  assert.deepEqual(populatedDocumentCategories().map(category => category.id), ['questionnaires', 'partner-certificates', 'sout']);
+  assert.equal(new Set(documents.map(item => item.id)).size, 22);
+  assert.deepEqual(populatedDocumentCategories().map(category => category.id), ['questionnaires', 'product-certificates', 'partner-certificates', 'sout', 'other']);
   assert.equal(documentCategories.length, 7);
-  assert.equal(documentFiles.length, 14);
+  assert.equal(documentFiles.length, 26);
   const root = fileURLToPath(new URL('../public/', import.meta.url));
   const actual = readdirSync(path.join(root, 'documents'), { recursive: true, withFileTypes: true })
     .filter(entry => entry.isFile()).map(entry => path.relative(root, path.join(entry.parentPath, entry.name))).sort();

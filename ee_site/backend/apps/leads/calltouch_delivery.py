@@ -9,6 +9,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from .models import CalltouchDelivery
+from .phone import normalize_lead_phone
 
 from .attribution import PRODUCTS, SERVICES
 
@@ -41,7 +42,7 @@ class NoRedirect(HTTPRedirectHandler):
 
 def send(job):
     lead = job.lead
-    phone = re.sub(r"[^0-9]", "", lead.phone)
+    phone = re.sub(r"[^0-9]", "", normalize_lead_phone(lead.phone))
     if len(phone) == 11 and phone.startswith("8"):
         phone = "7" + phone[1:]
     slug = lead.direction_slug

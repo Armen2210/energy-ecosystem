@@ -8,6 +8,7 @@ from django.db import IntegrityError, transaction
 
 from .email_notifications import schedule_lead_notification
 from .models import Lead, LeadAttachment
+from .phone import normalize_lead_phone
 
 
 logger = logging.getLogger(__name__)
@@ -139,6 +140,8 @@ def create_lead(validated_data, attachments=()):
     # compatibility, but new public uploads must use the private attachment
     # records.  Calculate the legacy fingerprint above before removing it.
     lead_data = dict(validated_data)
+    # Normalize after fingerprinting to preserve retries from older site versions.
+    lead_data["phone"] = normalize_lead_phone(lead_data.get("phone", ""))
     lead_data.pop("attachment", None)
     tracking = lead_data.pop("calltouch_tracking", None)
     questionnaires = lead_data.pop("questionnaires", None)

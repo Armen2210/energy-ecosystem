@@ -5,6 +5,7 @@
 // =========================================================
 
 import { useEffect, useSyncExternalStore } from "react";
+import { normalizeLeadPhone } from "../../api/leadPhone.js";
 import { leadDraft } from "../../api/leadDraft.js";
 import { hasDraftContent } from "../../api/leadDraftContent.js";
 import { Link, useLocation } from "react-router-dom";
@@ -96,6 +97,8 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
     event.preventDefault();
     if (!ready || leadDraft.get().submitting) return;
     const formData = new FormData(event.currentTarget);
+    // Read the DOM value as well: browser autofill may not dispatch React change.
+    formData.set("phone", normalizeLeadPhone(formData.get("phone")));
     const submittedTopic = formData.get("description_topic");
     const description = formData.get("description");
     if (!formData.get("consent")) {
@@ -208,6 +211,15 @@ function LeadForm({ products = [], services = [], initialTopic = "" }) {
           <input
             type="tel"
             name="phone"
+            autoComplete="tel"
+            onBlur={(event) => {
+              if (!ready || leadDraft.get().submitting) return;
+              const phone = normalizeLeadPhone(event.currentTarget.value);
+              if (phone !== leadDraft.get().fields.phone) {
+                markStart();
+                leadDraft.update({ fields: { ...leadDraft.get().fields, phone } });
+              }
+            }}
             value={draft.fields.phone}
             onChange={handleFieldChange}
             placeholder="+7 (___) ___-__-__"

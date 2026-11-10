@@ -74,7 +74,18 @@ try {
   assert.equal(results.downloads.filter(file => file.format === 'pdf').length, 4);
   assert.equal(results.downloads.filter(file => file.format === 'xlsx').length, 4);
   pass('all four PDF and four XLSX download with exact names and bytes, accessible names and no new tabs');
-  assert.equal(previews.length, 6);
+  assert.equal(previews.length, 16);
+  for (const { document, file } of variants.filter(({ file }) => file.format === 'docx')) {
+    const downloadEvent = page.waitForEvent('download');
+    await page.getByRole('link', { name: `Скачать DOCX — ${document.title}`, exact: true }).click();
+    const download = await downloadEvent;
+    assert.equal(await download.failure(), null);
+    const bytes = await readFile(await download.path());
+    assert.equal(bytes.length, file.sizeBytes);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
+  }
+  pass('both Word declarations download with original content');
+
   for (const [index, { document, file }] of previews.entries()) {
     const link = page.getByRole('link', { name: `Открыть PDF — ${document.title}, в новой вкладке`, exact: true });
     const popupEvent = page.waitForEvent('popup');
@@ -100,11 +111,8 @@ try {
     assert.equal(await page.locator('main h1').count(), 1);
     assert.deepEqual(await page.locator('main h2').allTextContents(), categories.map(category => category.title));
     assert.deepEqual(await page.locator('main h3').allTextContents(), orderedDocuments.map(item => item.title));
-    assert.equal(await files().count(), 14);
-    assert.deepEqual(await page.locator('.documents-page__document-description').allTextContents(), [
-      'Сводная ведомость результатов и перечень рекомендуемых мероприятий',
-      'Сводная ведомость результатов и перечень рекомендуемых мероприятий',
-    ]);
+    assert.equal(await files().count(), variants.length);
+    assert.deepEqual(await page.locator('.documents-page__document-description').allTextContents(), orderedDocuments.filter(document => document.description).map(document => document.description));
     const appearances = await page.locator('.documents-page__category').evaluateAll(elements => elements.map(category => ({
       site: getComputedStyle(document.querySelector('.site')).backgroundColor,
       background: getComputedStyle(category).backgroundColor,
@@ -126,10 +134,10 @@ try {
       assert.ok(box.label.includes(document.title));
       assert.ok(box.text.includes(file.format.toUpperCase()));
       if (file.behavior === 'download') {
-        assert.ok(box.label.startsWith(file.format === 'pdf' ? 'Скачать PDF' : 'Скачать Excel'));
+        assert.ok(box.label.startsWith(`Скачать ${file.format === 'xlsx' ? 'Excel' : file.format.toUpperCase()}`));
         assert.equal(box.download, true); assert.equal(box.target, ''); assert.equal(box.rel, '');
         assert.ok(!box.label.includes('вкладке') && !box.text.includes('вкладке'));
-        assert.ok(box.text.includes(file.purpose)); assert.ok(box.description.includes(file.purpose));
+        if (file.purpose) { assert.ok(box.text.includes(file.purpose)); assert.ok(box.description.includes(file.purpose)); }
       } else {
         assert.ok(box.label.startsWith('Открыть PDF') && box.label.includes('в новой вкладке'));
         assert.ok(box.text.includes('в новой вкладке'));
@@ -149,14 +157,14 @@ try {
     for (let i = 2; i < variants.length; i++) { await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement.getAttribute('href')), variants[i].file.url); }
     assert.notEqual(await files().last().evaluate(link => getComputedStyle(link).outlineStyle), 'none');
     if ([390, 1440].includes(width)) { await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo({ top: 0, behavior: 'instant' }); }); await page.screenshot({ path: path.join(output, `documents-${width}.png`), fullPage: true }); }
-    results.widths.push({ width, appearances });pass(`${width}px: three categories, ten documents, fourteen accessible links, focus, no overflow`);
+    results.widths.push({ width, appearances });pass(`${width}px: registered categories, documents and accessible links, focus, no overflow`);
   }
   await page.setViewportSize({ width: 390, height: 1000 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; }); await settle();
   await noOverflow();pass('390px: enlarged text reflows without clipping');
   await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.reload(); await settle(); assert.equal(await files().count(), 14);pass('direct /documents and reload hydrate without losing content or SEO');
+  await page.reload(); await settle(); assert.equal(await files().count(), variants.length);pass('direct /documents and reload hydrate without losing content or SEO');
   assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'), 'https://www.energoeffekt-rostov.ru/documents');
 
   // Explicit direct return and ordinary browser Back/Forward both restore the footer.
@@ -185,7 +193,7 @@ try {
   const noJs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 1000 } });
   await noJs.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
   const staticPage = await noJs.newPage();const response = await staticPage.goto(origin + '/documents');
-  assert.equal(response.status(), 200);assert.equal(await staticPage.locator('main .documents-page__file').count(), 14);
+  assert.equal(response.status(), 200);assert.equal(await staticPage.locator('main .documents-page__file').count(), variants.length);
   assert.equal(await staticPage.locator('.page-navigation__back').getAttribute('href'), '/#footer-documents');
   await staticPage.locator('.page-navigation__back').click();
   // With JavaScript disabled, page-side rAF polling does not run. Poll the

@@ -6,7 +6,7 @@ import { formatDocumentSize, populatedDocumentCategories } from '../../data/docu
 export default function DocumentsPage() {
   return <main className="documents-page">
     <Seo title="Документы — Энергоэффект" path="/documents"
-      description="Опросные листы БМК, БТП, ВНС и ПНС, сертификаты партнёрства и результаты СОУТ ООО «Энергоэффект»: скачать бланки или открыть PDF." />
+      description="Опросные листы БМК, БТП, ВНС и ПНС, сертификаты и декларации на продукцию, сертификаты партнёрства и результаты СОУТ ООО «Энергоэффект»: скачать бланки или открыть PDF и скачать декларации Word." />
     <div className="container">
       <PageNavigation backLabel="На главную" backTo="/#footer-documents"
         breadcrumbItems={[{ label: 'Главная', to: '/' }, { label: 'Документы' }]} />
