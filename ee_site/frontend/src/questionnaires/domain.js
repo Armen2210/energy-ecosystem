@@ -50,43 +50,56 @@ export function activeSheets(product, answers) {
     (s) => !s.optional || answers.selectedSections?.includes(s.key),
   );
 }
-// Count fields marked «Обязательно», across all currently applicable sections.
-export function requiredFieldCount(product, answers) {
-  return activeSheets(product, answers).reduce((total, sheet) => {
-    const data = answers[sheet.key] || {};
-    return total + sheet.fields.filter((field) => field.required && applicable(field, data)).length;
-  }, 0);
+function fieldError(field, value) {
+  if (blank(value)) return field.required ? "Обязательное поле." : undefined;
+  if (field.type === "number") {
+    const n = numberValue(field.units ? value.value : value);
+    if (
+      n === null ||
+      Math.abs(n) > 1e15 ||
+      (field.integer && !Number.isInteger(n)) ||
+      (field.min != null && (n < field.min || (field.exclusiveMin && n === field.min))) ||
+      (field.max != null && n > field.max)
+    )
+      return "Проверьте число и допустимый диапазон.";
+  } else if (field.type === "choice" && !field.options.includes(value))
+    return "Выберите вариант.";
+  else if (value.length > contract.limits.text)
+    return "Не более " + contract.limits.text + " символов.";
 }
+
+function serializeAnswers(product, draftAnswers) {
+  const answers = {};
+  if (product === "btp")
+    answers.selectedSections = [...(draftAnswers.selectedSections || [])].sort();
+  for (const sheet of activeSheets(product, draftAnswers)) {
+    const data = draftAnswers[sheet.key] || {};
+    const output = {};
+    for (const f of sheet.fields) {
+      const v = data[f.key];
+      if (!applicable(f, data) || blank(v)) continue;
+      output[f.key] = f.units ? quantityPair(v) : v;
+    }
+    if (sheet.outletFields)
+      output.outlets = (data.outlets || [])
+        .filter((row) => sheet.outletFields.some((f) => !blank(row[f.key])))
+        .map((row) => {
+          const result = { id: row.id };
+          for (const f of sheet.outletFields)
+            if (!blank(row[f.key]))
+              result[f.key] = f.units ? quantityPair(row[f.key]) : row[f.key];
+          return result;
+        });
+    answers[sheet.key] = output;
+  }
+  return answers;
+}
+
 export function serializeQuestionnaires(drafts) {
   const items = [];
   for (const [product, draft] of Object.entries(drafts || {})) {
     if (!draft.enabled || !contract.products[product]) continue;
-    const answers = {};
-    if (product === "btp")
-      answers.selectedSections = [
-        ...(draft.answers.selectedSections || []),
-      ].sort();
-    for (const sheet of activeSheets(product, draft.answers)) {
-      const data = draft.answers[sheet.key] || {};
-      const output = {};
-      for (const f of sheet.fields) {
-        const v = data[f.key];
-        if (!applicable(f, data) || blank(v)) continue;
-        output[f.key] = f.units ? quantityPair(v) : v;
-      }
-      if (sheet.outletFields)
-        output.outlets = (data.outlets || [])
-          .filter((row) => sheet.outletFields.some((f) => !blank(row[f.key])))
-          .map((row) => {
-            const result = { id: row.id };
-            for (const f of sheet.outletFields)
-              if (!blank(row[f.key]))
-                result[f.key] = f.units ? quantityPair(row[f.key]) : row[f.key];
-            return result;
-          });
-      answers[sheet.key] = output;
-    }
-    items.push({ product, schemaVersion: 1, answers });
+    items.push({ product, schemaVersion: 1, answers: serializeAnswers(product, draft.answers) });
   }
   return items.length
     ? {
@@ -95,73 +108,67 @@ export function serializeQuestionnaires(drafts) {
       }
     : null;
 }
+function checkQuestionnaire(product, answers) {
+  const errors = {};
+  const required = new Set();
+  function check(path, error, mandatory = true) {
+    if (error) errors[path] = error;
+    if (mandatory || error) required.add(path);
+  }
+  function fields(data, definitions, path) {
+    for (const f of definitions) {
+      if (!applicable(f, data)) continue;
+      check(path + "." + f.key, fieldError(f, data[f.key]), f.required === true);
+    }
+  }
+  if (product === "btp") {
+    check("btp.common.selectedSections", answers.selectedSections.length
+      ? undefined : "Выберите хотя бы одну систему или коллектор.");
+  }
+  for (const sheet of activeSheets(product, answers)) {
+    const data = answers[sheet.key] || {};
+    const path = product + "." + sheet.key;
+    fields(data, sheet.fields, path);
+    if (sheet.outletFields) {
+      if (!data.outlets?.length)
+        check(path + ".outlets", "Добавьте хотя бы один заполненный выход.");
+      for (const row of data.outlets || []) {
+        const rowPath = path + ".outlets." + row.id;
+        fields(row, sheet.outletFields, rowPath);
+        const dimension = ["power", "flow", "diameter"].find((k) => !blank(row[k]));
+        check(rowPath + "." + (dimension || "power"),
+          dimension ? undefined : "Укажите мощность, расход или Ду.");
+      }
+    }
+  }
+  if (product === "bmk") {
+    const loads = answers.loads || {};
+    const dhw = !blank(loads.dhw_max) || !blank(loads.dhw_average);
+    if (dhw) {
+      for (const k of ["dhw_max", "dhw_average"])
+        check("bmk.loads." + k, blank(loads[k]) ? "Для ГВС нужны обе нагрузки." : undefined);
+    } else {
+      const load = ["heating", "ventilation"].find((k) => !blank(loads[k]));
+      check("bmk.loads." + (load || "heating"),
+        load ? undefined : "Укажите хотя бы одну полезную нагрузку.");
+    }
+    if (answers.scheme?.pipes === "Четырёхтрубная" && !dhw)
+      check("bmk.scheme.pipes", "Четырёхтрубная схема — только с ГВС.");
+  }
+  return { total: required.size, errors };
+}
+
+export function requiredFieldProgress(product, answers) {
+  const { total, errors } = checkQuestionnaire(product, serializeAnswers(product, answers));
+  return { total, remaining: Object.keys(errors).length };
+}
+
 export function validateQuestionnaires(drafts) {
   const errors = {};
   const payload = serializeQuestionnaires(drafts);
   if (!payload) return errors;
-  for (const item of payload.items) {
-    const { product, answers } = item;
-    if (product === "btp" && !answers.selectedSections.length)
-      errors["btp.common.selectedSections"] =
-        "Выберите хотя бы одну систему или коллектор.";
-    function fields(data, definitions, path) {
-      for (const f of definitions) {
-        if (!applicable(f, data)) continue;
-        const v = data[f.key];
-        const key = path + "." + f.key;
-        if (blank(v)) {
-          if (f.required) errors[key] = "Обязательное поле.";
-          continue;
-        }
-        if (f.type === "number") {
-          const n = numberValue(f.units ? v.value : v);
-          if (
-            n === null ||
-            Math.abs(n) > 1e15 ||
-            (f.integer && !Number.isInteger(n)) ||
-            (f.min != null && (n < f.min || (f.exclusiveMin && n === f.min))) ||
-            (f.max != null && n > f.max)
-          )
-            errors[key] = "Проверьте число и допустимый диапазон.";
-        } else if (f.type === "choice" && !f.options.includes(v))
-          errors[key] = "Выберите вариант.";
-        else if (v.length > contract.limits.text)
-          errors[key] = "Не более " + contract.limits.text + " символов.";
-      }
-    }
-    for (const sheet of activeSheets(product, answers)) {
-      const data = answers[sheet.key] || {};
-      const path = product + "." + sheet.key;
-      fields(data, sheet.fields, path);
-      if (sheet.outletFields) {
-        if (!data.outlets?.length)
-          errors[path + ".outlets"] =
-            "Добавьте хотя бы один заполненный выход.";
-        for (const row of data.outlets || []) {
-          fields(row, sheet.outletFields, path + ".outlets." + row.id);
-          if (!["power", "flow", "diameter"].some((k) => !blank(row[k])))
-            errors[path + ".outlets." + row.id + ".power"] =
-              "Укажите мощность, расход или Ду.";
-        }
-      }
-    }
-    if (product === "bmk") {
-      const loads = answers.loads || {};
-      const dhw = !blank(loads.dhw_max) || !blank(loads.dhw_average);
-      if (
-        !["heating", "ventilation", "dhw_max", "dhw_average"].some(
-          (k) => !blank(loads[k]),
-        )
-      )
-        errors["bmk.loads.heating"] = "Укажите хотя бы одну полезную нагрузку.";
-      if (dhw)
-        for (const k of ["dhw_max", "dhw_average"])
-          if (blank(loads[k]))
-            errors["bmk.loads." + k] = "Для ГВС нужны обе нагрузки.";
-      if (answers.scheme?.pipes === "Четырёхтрубная" && !dhw)
-        errors["bmk.scheme.pipes"] = "Четырёхтрубная схема — только с ГВС.";
-    }
-  }
+  for (const { product, answers } of payload.items)
+    Object.assign(errors, checkQuestionnaire(product, answers).errors);
   if (
     new TextEncoder().encode(JSON.stringify(payload)).length >
     contract.limits.bytes

@@ -48,6 +48,29 @@ import btpKamenskyPlantCover from "../assets/cases/btp-industrial-facility/cover
 import btpKamenskyPlant01 from "../assets/cases/btp-industrial-facility/01.webp";
 import btpKamenskyPlant02 from "../assets/cases/btp-industrial-facility/02.webp";
 
+import btpMelitopolCover from "../assets/cases/btp-block-box-melitopol/cover.webp";
+import btpMelitopol01 from "../assets/cases/btp-block-box-melitopol/01.webp";
+import btpMelitopol02 from "../assets/cases/btp-block-box-melitopol/02.webp";
+import btpMelitopol03 from "../assets/cases/btp-block-box-melitopol/03.webp";
+import btpMelitopol04 from "../assets/cases/btp-block-box-melitopol/04.webp";
+import btpMelitopol05 from "../assets/cases/btp-block-box-melitopol/05.webp";
+
+import aquarusRostovCover from "../assets/cases/vns-aquarus-rostov/cover.webp";
+import aquarusRostov01 from "../assets/cases/vns-aquarus-rostov/01.webp";
+import aquarusRostov02 from "../assets/cases/vns-aquarus-rostov/02.webp";
+import aquarusRostov03 from "../assets/cases/vns-aquarus-rostov/03.webp";
+import aquarusRostov04 from "../assets/cases/vns-aquarus-rostov/04.webp";
+import aquarusRostov05 from "../assets/cases/vns-aquarus-rostov/05.webp";
+import aquarusRostov06 from "../assets/cases/vns-aquarus-rostov/06.webp";
+import aquarusRostov07 from "../assets/cases/vns-aquarus-rostov/07.webp";
+import aquarusRostov08 from "../assets/cases/vns-aquarus-rostov/08.webp";
+import aquarusRostov09 from "../assets/cases/vns-aquarus-rostov/09.webp";
+
+import aquarusIndustrialCover from "../assets/cases/vns-industrial-block-box/cover.webp";
+import aquarusIndustrial01 from "../assets/cases/vns-industrial-block-box/01.webp";
+import aquarusIndustrial02 from "../assets/cases/vns-industrial-block-box/02.webp";
+import aquarusIndustrial03 from "../assets/cases/vns-industrial-block-box/03.webp";
+
 export const cases = [
     {
     // =====================================================
@@ -1067,6 +1090,339 @@ export const cases = [
       buttonText: "Обсудить похожую задачу",
     },
   },
+  {
+    slug: "btp-block-box-melitopol",
+    type: "БТП",
+    title: "БТП в блок-боксе для Мелитопольской областной больницы",
+    description:
+      "Отдельно стоящий БТП «Энерголайн» для отопления и горячего водоснабжения патологоанатомического отделения больницы.",
+    previewDescription:
+      "Проектирование, изготовление, монтаж и пусконаладка теплового пункта под ключ.",
+    category: "Блочные тепловые пункты",
+    coverImage: btpMelitopolCover,
+    coverImageAlt: "Отдельно стоящий блок-бокс теплового пункта «Энерголайн»",
+    url: "/cases/btp-block-box-melitopol",
+    isFeatured: false,
+    hasDetailPage: true,
+
+    year: "2026",
+    location: "Мелитополь",
+    objectType:
+      "Эргономический модуль патологоанатомического отделения Мелитопольской областной больницы",
+    solutionType: "БТП «Энерголайн» в отдельно стоящем блок-боксе",
+    projectDuration: "Изготовление за 3 месяца",
+    suppliedSystems: ["Отопление", "Горячее водоснабжение"],
+
+    seo: {
+      title: "БТП в блок-боксе для больницы в Мелитополе — кейс Энергоэффект",
+      description:
+        "БТП «Энерголайн» для отопления и ГВС отделения Мелитопольской областной больницы. Проектирование, изготовление, монтаж и пусконаладка.",
+    },
+
+    heroTitle: "БТП в блок-боксе для Мелитопольской областной больницы",
+    heroSubtitle:
+      "Отдельно стоящий тепловой пункт «Энерголайн» для отопления и горячего водоснабжения патологоанатомического отделения.",
+
+    aiSummary: {
+      label: "Кейс: БТП в блок-боксе",
+      lead:
+        "ООО «Энергоэффект» спроектировало и изготовило тепловой пункт, смонтировало его на объекте и выполнило пусконаладку.",
+      items: [
+        { label: "Объект", text: "Мелитопольская областная больница." },
+        { label: "Назначение", text: "Отопление и горячее водоснабжение." },
+        { label: "Габариты блок-бокса", text: "4660 × 2260 × 2800 мм (Д × Ш × В)." },
+        { label: "Срок изготовления", text: "3 месяца." },
+      ],
+    },
+
+    task: {
+      title: "Задача",
+      paragraphs: [
+        "Обеспечить отопление и горячее водоснабжение модульного здания патологоанатомического отделения Мелитопольской областной больницы.",
+        "На объекте не было места для размещения теплового пункта. БТП «Энерголайн» разместили в отдельно стоящем блок-боксе габаритами 4660 × 2260 × 2800 мм (Д × Ш × В).",
+      ],
+    },
+
+    completedWorks: {
+      title: "Что выполнил Энергоэффект",
+      items: [
+        "Спроектировали тепловой пункт в отдельно стоящем блок-боксе.",
+        "Изготовили БТП «Энерголайн» в блочно-модульном здании за 3 месяца.",
+        "Смонтировали тепловой пункт на объекте.",
+        "Выполнили пусконаладочные работы.",
+      ],
+    },
+
+    solutionFeatures: {
+      title: "Особенности решения",
+      items: [
+        "Отдельно стоящий блок-бокс габаритами 4660 × 2260 × 2800 мм.",
+        "БТП «Энерголайн» для отопления и горячего водоснабжения.",
+        "Работы под ключ силами ООО «Энергоэффект».",
+      ],
+    },
+
+    gallery: [
+      {
+        image: btpMelitopolCover,
+        alt: "Блок-бокс теплового пункта «Энерголайн» снаружи",
+        caption: "Общий вид блок-бокса",
+      },
+      {
+        image: btpMelitopol01,
+        alt: "Теплообменники и трубопроводная обвязка внутри блок-бокса",
+        caption: "Оборудование БТП внутри модуля",
+      },
+      {
+        image: btpMelitopol02,
+        alt: "Проход между оборудованием теплового пункта",
+        caption: "Компоновка оборудования внутри блок-бокса",
+      },
+      {
+        image: btpMelitopol03,
+        alt: "Трубопроводная обвязка, приборы и шкаф управления",
+        caption: "Приборы и шкаф управления «Энерголайн»",
+      },
+      {
+        image: btpMelitopol04,
+        alt: "Блок-бокс теплового пункта на транспортной платформе",
+        caption: "Блок-бокс на транспортной платформе",
+      },
+      {
+        image: btpMelitopol05,
+        alt: "Торец блок-бокса с окном",
+        caption: "Вид блок-бокса со стороны окна",
+      },
+    ],
+
+    relatedProductSlug: "btp",
+    relatedServiceSlugs: ["design", "construction-installation", "commissioning"],
+    cta: {
+      title: "Нужен тепловой пункт для вашего объекта?",
+      text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
+      buttonText: "Обсудить похожую задачу",
+    },
+  },
+  {
+    slug: "vns-aquarus-rostov",
+    type: "ВНС",
+    title: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+    description:
+      "Станция повышения давления для системы водоснабжения многоквартирного дома при капитальном ремонте.",
+    previewDescription:
+      "Заказчик смонтировал станцию. «Энергоэффект» выполнил пусконаладку.",
+    category: "Водопроводные насосные станции",
+    coverImage: aquarusRostovCover,
+    coverImageAlt: "Три насоса станции «Акварус» на общей раме",
+    coverPosition: "center 70%",
+    url: "/cases/vns-aquarus-rostov",
+    isFeatured: false,
+    hasDetailPage: true,
+
+    location: "Ростов-на-Дону",
+    year: "2026",
+    objectType: "Капитальный ремонт многоквартирного дома",
+    solutionType: "Насосная станция повышения давления «Акварус»",
+    suppliedSystems: ["Водоснабжение"],
+
+    seo: {
+      title: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+      description:
+        "Станция повышения давления «Акварус» для водоснабжения многоквартирного дома в Ростове-на-Дону. Пусконаладка силами «Энергоэффекта».",
+    },
+
+    heroTitle: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+    heroSubtitle:
+      "Станция повышения давления для водоснабжения многоквартирного дома. «Энергоэффект» выполнил пусконаладку после монтажа заказчиком.",
+
+    aiSummary: {
+      label: "Кейс: насосная станция «Акварус»",
+      lead: "Станция предназначена для поддержания давления воды при недостаточном давлении на входе или росте водоразбора.",
+      items: [
+        { label: "Объект", text: "Многоквартирный дом в Ростове-на-Дону." },
+        { label: "Система", text: "Водоснабжение." },
+        { label: "Работы", text: "Заказчик выполнил монтаж, «Энергоэффект» — пусконаладку." },
+      ],
+    },
+
+    task: {
+      title: "Задача",
+      paragraphs: [
+        "При капитальном ремонте многоквартирного дома требовалось обеспечить подачу воды в необходимом объёме и с требуемым давлением при расчётных режимах работы системы.",
+        "Для этого применили станцию повышения давления «Акварус». Она предназначена для поддержания давления при недостаточном напоре на входе и при увеличении водоразбора.",
+      ],
+    },
+
+    completedWorks: {
+      title: "Что выполнил Энергоэффект",
+      items: ["Выполнили пусконаладку насосной станции после монтажа силами заказчика."],
+    },
+
+    solutionFeatures: {
+      title: "Особенности решения",
+      items: ["Три насоса на общей раме.", "Шкаф управления с частотными преобразователями и панелью оператора."],
+    },
+
+    gallery: [
+      {
+        image: aquarusRostovCover,
+        alt: "Насосная станция «Акварус» с коллекторами и манометрами",
+        caption: "Насосная группа станции «Акварус»",
+      },
+      {
+        image: aquarusRostov09,
+        alt: "Насосная станция на раме, гидроаккумулятор и шкаф управления",
+        caption: "Общий вид насосной станции на объекте",
+      },
+      {
+        image: aquarusRostov01,
+        alt: "Установленная насосная станция со шкафом управления",
+        caption: "Станция и шкаф управления на объекте",
+      },
+      {
+        image: aquarusRostov02,
+        alt: "Три насоса и гидроаккумулятор",
+        caption: "Компоновка насосной группы",
+      },
+      {
+        image: aquarusRostov03,
+        alt: "Шкаф управления «Энерголайн» с панелью оператора",
+        caption: "Шкаф управления насосами",
+      },
+      {
+        image: aquarusRostov04,
+        alt: "Частотные преобразователи внутри шкафа управления",
+        caption: "Компоненты шкафа управления",
+      },
+      {
+        image: aquarusRostov05,
+        alt: "Схема насосной станции на панели оператора",
+        caption: "Панель оператора",
+      },
+      {
+        image: aquarusRostov06,
+        alt: "Подключённая насосная станция и трубопроводы",
+        caption: "Общий вид подключения на объекте",
+      },
+      {
+        image: aquarusRostov07,
+        alt: "Шкаф управления станции, вид сбоку",
+        caption: "Шкаф управления на объекте",
+      },
+      {
+        image: aquarusRostov08,
+        alt: "Маркировка «Энерголайн» на шкафу управления",
+        caption: "Маркировка шкафа управления",
+      },
+    ],
+
+    relatedProductSlug: "vns",
+    relatedServiceSlugs: ["commissioning"],
+    cta: {
+      title: "Нужна насосная станция для вашего объекта?",
+      text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
+      buttonText: "Обсудить похожую задачу",
+    },
+  },
+  {
+    slug: "vns-industrial-block-box",
+    type: "ВНС",
+    title: "Насосная станция «Акварус» для производственного объекта",
+    description:
+      "Станция повышения давления «Акварус» серии NBW в блок-боксе для системы водоснабжения производственного объекта.",
+    previewDescription:
+      "Поставка, монтаж и пусконаладка насосной станции в блок-боксе.",
+    category: "Водопроводные насосные станции",
+    coverImage: aquarusIndustrialCover,
+    coverImageAlt: "Насосная группа, трубопроводы и шкаф управления внутри блок-бокса",
+    coverPosition: "44% center",
+    url: "/cases/vns-industrial-block-box",
+    isFeatured: false,
+    hasDetailPage: true,
+
+    location: "Ростовская обл.",
+    year: "2025",
+    objectType: "Реконструкция и техническое перевооружение производственного объекта",
+    solutionType: "Насосная станция повышения давления «Акварус» NBW в блок-боксе",
+    suppliedSystems: ["Водоснабжение"],
+
+    seo: {
+      title: "Насосная станция «Акварус» в блок-боксе — кейс Энергоэффект",
+      description:
+        "Насосная станция повышения давления «Акварус» NBW для производственного объекта в Ростовской области. Поставка, монтаж и пусконаладка.",
+    },
+
+    heroTitle: "Насосная станция «Акварус» в блок-боксе для производственного объекта",
+    heroSubtitle:
+      "Станция серии NBW для повышения давления в системе водоснабжения производственного объекта.",
+
+    aiSummary: {
+      label: "Кейс: «Акварус» в блок-боксе",
+      lead:
+        "ООО «Энергоэффект» поставило насосную станцию повышения давления в блок-боксе, выполнило монтаж и пусконаладку.",
+      items: [
+        { label: "Объект", text: "Производственный объект в Ростовской области." },
+        { label: "Назначение", text: "Повышение давления в системе водоснабжения." },
+        { label: "Оборудование", text: "Насосная установка «Акварус» NBW в блок-боксе." },
+      ],
+    },
+
+    task: {
+      title: "Задача",
+      paragraphs: [
+        "При реконструкции производственного объекта требовалось повысить давление в системе водоснабжения.",
+        "Насосную установку «Акварус» серии NBW разместили в блок-боксе вместе с трубопроводной обвязкой и шкафом управления.",
+      ],
+    },
+
+    completedWorks: {
+      title: "Что выполнил Энергоэффект",
+      items: [
+        "Поставили насосную станцию «Акварус» в блок-боксе.",
+        "Выполнили монтаж на объекте.",
+        "Провели пусконаладочные работы.",
+      ],
+    },
+
+    solutionFeatures: {
+      title: "Особенности решения",
+      items: [
+        "Насосная установка повышения давления серии NBW.",
+        "Насосная группа, трубопроводная обвязка и шкаф управления в одном блок-боксе.",
+      ],
+    },
+
+    gallery: [
+      {
+        image: aquarusIndustrialCover,
+        alt: "Насосы, трубопроводная обвязка и шкаф управления в блок-боксе",
+        caption: "Насосная станция и шкаф управления",
+      },
+      {
+        image: aquarusIndustrial01,
+        alt: "Фронтальный вид оборудования внутри модуля",
+        caption: "Компоновка оборудования внутри блок-бокса",
+      },
+      {
+        image: aquarusIndustrial02,
+        alt: "Насосная группа, трубопроводы и проход внутри модуля",
+        caption: "Внутренний вид блок-бокса",
+      },
+      {
+        image: aquarusIndustrial03,
+        alt: "Блок-бокс насосной станции на транспортной платформе",
+        caption: "Блок-бокс на транспортной платформе",
+      },
+    ],
+
+    relatedProductSlug: "vns",
+    relatedServiceSlugs: ["construction-installation", "commissioning"],
+    cta: {
+      title: "Нужна насосная станция для вашего объекта?",
+      text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
+      buttonText: "Обсудить похожую задачу",
+    },
+  },
 ];
 
 export const featuredCases = cases.filter((caseItem) => caseItem.isFeatured);
@@ -1082,8 +1438,9 @@ const homeDesktopCaseSlugs = [
   "bmk-sports-complex",
   "btp-hotel-complex",
   "btp-residential-complex",
-  "btp-food-production",
-  "btp-industrial-facility",
+  "vns-aquarus-rostov",
+  "vns-industrial-block-box",
+  "btp-block-box-melitopol",
 ];
 
 export const homeDesktopCases = homeDesktopCaseSlugs
