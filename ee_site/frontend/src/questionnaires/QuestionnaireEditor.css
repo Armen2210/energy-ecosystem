@@ -648,9 +648,17 @@
 .ql-downloads a:focus-visible { outline: 2px solid #9C3C0A; outline-offset: 3px; border-radius: 3px; }
 
 .ql-required-count {
-  display: inline-block;
-  min-inline-size: 2ch;
+  color: var(--color-accent-text);
+  color: color-mix(in oklab, var(--color-accent-text), var(--color-action-bg) var(--ql-required-filled));
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+  transition: color 220ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ql-required-count {
+    transition: none;
+  }
 }
 
 .ql-workspace[open] {

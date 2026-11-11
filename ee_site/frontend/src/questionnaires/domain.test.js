@@ -7,7 +7,7 @@ import {
   serializeQuestionnaires,
   validateQuestionnaires,
   numberValue,
-  requiredFieldCount,
+  requiredFieldProgress,
 } from "./domain.js";
 import {
   saveDraft,
@@ -192,13 +192,39 @@ test("unit toggles serialize exact source pairs in fields and outlets, including
   assert.notDeepEqual(changed, baseline);
 });
 
-test("required field totals follow applicable sections and choices, not completion", () => {
-  assert.equal(requiredFieldCount("pns", {}), 3);
-  assert.equal(requiredFieldCount("pns", { technical: { jockey: "Да", flow: "1" } }), 5);
-  assert.equal(requiredFieldCount("pns", { technical: { jockey: "Нет", jockey_flow: "1" } }), 3);
-  assert.equal(requiredFieldCount("vns", {}), 2);
-  assert.equal(requiredFieldCount("bmk", {}), 11);
-  assert.equal(requiredFieldCount("bmk", { fuel: { main: "Газ" } }), 12);
-  assert.equal(requiredFieldCount("btp", { selectedSections: ["heating"] }), 13);
-  assert.equal(requiredFieldCount("btp", { heating: { power: "1" } }), 7);
+test("required field progress follows current sections and choices", () => {
+  assert.deepEqual(requiredFieldProgress("pns", {}), { total: 3, remaining: 3 });
+  assert.deepEqual(
+    requiredFieldProgress("pns", { technical: { jockey: "Да", flow: "1" } }),
+    { total: 5, remaining: 3 },
+  );
+  assert.deepEqual(
+    requiredFieldProgress("pns", { technical: { jockey: "Нет", jockey_flow: "1" } }),
+    { total: 3, remaining: 2 },
+  );
+  assert.deepEqual(requiredFieldProgress("vns", {}), { total: 2, remaining: 2 });
+  assert.deepEqual(requiredFieldProgress("bmk", {}), { total: 11, remaining: 11 });
+  assert.deepEqual(
+    requiredFieldProgress("bmk", { fuel: { main: "Газ" } }),
+    { total: 12, remaining: 11 },
+  );
+  assert.deepEqual(
+    requiredFieldProgress("btp", { selectedSections: ["heating"] }),
+    { total: 13, remaining: 13 },
+  );
+  assert.deepEqual(
+    requiredFieldProgress("btp", { heating: { power: "1" } }),
+    { total: 7, remaining: 7 },
+  );
+});
+
+test("required field progress counts only valid answers and responds to clearing", () => {
+  const { vns } = drafts();
+  assert.deepEqual(requiredFieldProgress("vns", vns.answers), { total: 2, remaining: 0 });
+  vns.answers.technical.flow = "-";
+  assert.deepEqual(requiredFieldProgress("vns", vns.answers), { total: 2, remaining: 1 });
+  assert.ok(validateQuestionnaires({ vns })["vns.technical.flow"]);
+  vns.answers.technical.head = "";
+  assert.deepEqual(requiredFieldProgress("vns", vns.answers), { total: 2, remaining: 2 });
+  assert.ok(validateQuestionnaires({ vns })["vns.technical.head"]);
 });

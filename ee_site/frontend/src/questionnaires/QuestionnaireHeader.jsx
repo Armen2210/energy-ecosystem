@@ -1,8 +1,9 @@
 import { downloadWorkbook } from "../data/downloadWorkbook.js";
 import { documents } from "../data/documents.js";
-import { contract, initialQuestionnaire, requiredFieldCount } from "./domain.js";
+import { contract, initialQuestionnaire } from "./domain.js";
 import { updateQuestionnaire } from "./state.js";
 import { QuestionnaireSwitch } from "./QuestionnaireControls.jsx";
+import QuestionnaireProgress from "./QuestionnaireProgress.jsx";
 
 // This shell belongs to the initial page bundle and prerender, not the deferred
 // field renderer. Downloads never depend on backend or editor availability.
@@ -18,7 +19,10 @@ export default function QuestionnaireHeader({ product, backend, draft, anchor })
       <strong>Опросный лист {definition.title}</strong>
       <div className="ql-online">
         {q.enabled ? (
-          <small>Включён в заявку · обязательных полей: <span className="ql-required-count">{requiredFieldCount(product, q.answers)}</span></small>
+          <small>
+            Включён в заявку ·{" "}
+            <QuestionnaireProgress product={product} answers={q.answers} />
+          </small>
         ) : (
           <button
             type="button"

@@ -50,12 +50,39 @@ export function activeSheets(product, answers) {
     (s) => !s.optional || answers.selectedSections?.includes(s.key),
   );
 }
+function fieldError(field, value) {
+  if (blank(value)) return field.required ? "Обязательное поле." : undefined;
+  if (field.type === "number") {
+    const n = numberValue(field.units ? value.value : value);
+    if (
+      n === null ||
+      Math.abs(n) > 1e15 ||
+      (field.integer && !Number.isInteger(n)) ||
+      (field.min != null && (n < field.min || (field.exclusiveMin && n === field.min))) ||
+      (field.max != null && n > field.max)
+    )
+      return "Проверьте число и допустимый диапазон.";
+  } else if (field.type === "choice" && !field.options.includes(value))
+    return "Выберите вариант.";
+  else if (value.length > contract.limits.text)
+    return "Не более " + contract.limits.text + " символов.";
+}
+
 // Count fields marked «Обязательно», across all currently applicable sections.
-export function requiredFieldCount(product, answers) {
-  return activeSheets(product, answers).reduce((total, sheet) => {
+export function requiredFieldProgress(product, answers) {
+  let total = 0;
+  let remaining = 0;
+  for (const sheet of activeSheets(product, answers)) {
     const data = answers[sheet.key] || {};
-    return total + sheet.fields.filter((field) => field.required && applicable(field, data)).length;
-  }, 0);
+    for (const field of sheet.fields) {
+      if (!field.required || !applicable(field, data)) continue;
+      const value = data[field.key];
+      total += 1;
+      if (fieldError(field, field.units && !blank(value) ? quantityPair(value) : value))
+        remaining += 1;
+    }
+  }
+  return { total, remaining };
 }
 export function serializeQuestionnaires(drafts) {
   const items = [];
@@ -107,26 +134,8 @@ export function validateQuestionnaires(drafts) {
     function fields(data, definitions, path) {
       for (const f of definitions) {
         if (!applicable(f, data)) continue;
-        const v = data[f.key];
-        const key = path + "." + f.key;
-        if (blank(v)) {
-          if (f.required) errors[key] = "Обязательное поле.";
-          continue;
-        }
-        if (f.type === "number") {
-          const n = numberValue(f.units ? v.value : v);
-          if (
-            n === null ||
-            Math.abs(n) > 1e15 ||
-            (f.integer && !Number.isInteger(n)) ||
-            (f.min != null && (n < f.min || (f.exclusiveMin && n === f.min))) ||
-            (f.max != null && n > f.max)
-          )
-            errors[key] = "Проверьте число и допустимый диапазон.";
-        } else if (f.type === "choice" && !f.options.includes(v))
-          errors[key] = "Выберите вариант.";
-        else if (v.length > contract.limits.text)
-          errors[key] = "Не более " + contract.limits.text + " символов.";
+        const error = fieldError(f, data[f.key]);
+        if (error) errors[path + "." + f.key] = error;
       }
     }
     for (const sheet of activeSheets(product, answers)) {

@@ -12,13 +12,13 @@ import {
   applicable,
   activeSheets,
   initialQuestionnaire,
-  requiredFieldCount,
   changeUnit,
   blank,
 } from "./domain.js";
 import { updateQuestionnaire } from "./state.js";
 import { selectedProduct } from "./state.js";
 import NumericInput from "./NumericInput.jsx";
+import QuestionnaireProgress from "./QuestionnaireProgress.jsx";
 import { fieldHint } from "./hints.js";
 
 function Quantity({ field, value, onChange, invalid, id, describedBy, placeholder }) {
@@ -267,7 +267,9 @@ export default function QuestionnaireEditor({ products, initialTopic }) {
         <header className="ql-workspace__header">
           <div>
             <h2 id={titleId}>Опросный лист {definition.title}</h2>
-            <small>Обязательных полей: <span className="ql-required-count">{requiredFieldCount(product, answers)}</span></small>
+            <small>
+              <QuestionnaireProgress product={product} answers={answers} />
+            </small>
           </div>
           <button ref={closeButton} type="button" className="ql-workspace__close"
             aria-label="Свернуть опросный лист" onClick={closeWorkspace}>
