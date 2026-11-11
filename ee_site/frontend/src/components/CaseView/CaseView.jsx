@@ -248,8 +248,8 @@ function CaseView({
           <div className="case-modal__meta">
             <span>{caseItem.type}</span>
             <span>{caseItem.location}</span>
-            <span>{caseItem.year}</span>
-            <span>{caseItem.projectDuration}</span>
+            {caseItem.year && <span>{caseItem.year}</span>}
+            {caseItem.projectDuration && <span>{caseItem.projectDuration}</span>}
           </div>
 
           {showTopCta && onCtaClick && (

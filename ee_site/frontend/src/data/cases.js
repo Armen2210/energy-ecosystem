@@ -55,6 +55,16 @@ import btpMelitopol03 from "../assets/cases/btp-block-box-melitopol/03.webp";
 import btpMelitopol04 from "../assets/cases/btp-block-box-melitopol/04.webp";
 import btpMelitopol05 from "../assets/cases/btp-block-box-melitopol/05.webp";
 
+import aquarusRostovCover from "../assets/cases/vns-aquarus-rostov/cover.webp";
+import aquarusRostov01 from "../assets/cases/vns-aquarus-rostov/01.webp";
+import aquarusRostov02 from "../assets/cases/vns-aquarus-rostov/02.webp";
+import aquarusRostov03 from "../assets/cases/vns-aquarus-rostov/03.webp";
+import aquarusRostov04 from "../assets/cases/vns-aquarus-rostov/04.webp";
+import aquarusRostov05 from "../assets/cases/vns-aquarus-rostov/05.webp";
+import aquarusRostov06 from "../assets/cases/vns-aquarus-rostov/06.webp";
+import aquarusRostov07 from "../assets/cases/vns-aquarus-rostov/07.webp";
+import aquarusRostov08 from "../assets/cases/vns-aquarus-rostov/08.webp";
+
 export const cases = [
     {
     // =====================================================
@@ -1183,6 +1193,120 @@ export const cases = [
     relatedServiceSlugs: ["design", "construction-installation", "commissioning"],
     cta: {
       title: "Нужен тепловой пункт для вашего объекта?",
+      text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
+      buttonText: "Обсудить похожую задачу",
+    },
+  },
+  {
+    slug: "vns-aquarus-rostov",
+    type: "ВНС",
+    title: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+    description:
+      "Станция повышения давления для системы водоснабжения многоквартирного дома при капитальном ремонте.",
+    previewDescription:
+      "Заказчик смонтировал станцию. «Энергоэффект» выполнил пусконаладку.",
+    category: "Водопроводные насосные станции",
+    coverImage: aquarusRostovCover,
+    coverImageAlt: "Три насоса станции «Акварус» на общей раме",
+    url: "/cases/vns-aquarus-rostov",
+    isFeatured: false,
+    hasDetailPage: true,
+
+    location: "Ростов-на-Дону",
+    objectType: "Капитальный ремонт многоквартирного дома",
+    solutionType: "Насосная станция повышения давления «Акварус»",
+    suppliedSystems: ["Водоснабжение"],
+
+    seo: {
+      title: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+      description:
+        "Станция повышения давления «Акварус» для водоснабжения многоквартирного дома в Ростове-на-Дону. Пусконаладка силами «Энергоэффекта».",
+    },
+
+    heroTitle: "Насосная станция «Акварус» для жилого дома в Ростове-на-Дону",
+    heroSubtitle:
+      "Станция повышения давления для водоснабжения многоквартирного дома. «Энергоэффект» выполнил пусконаладку после монтажа заказчиком.",
+
+    aiSummary: {
+      label: "Кейс: насосная станция «Акварус»",
+      lead: "Станция предназначена для поддержания давления воды при недостаточном давлении на входе или росте водоразбора.",
+      items: [
+        { label: "Объект", text: "Многоквартирный дом в Ростове-на-Дону." },
+        { label: "Система", text: "Водоснабжение." },
+        { label: "Работы", text: "Заказчик выполнил монтаж, «Энергоэффект» — пусконаладку." },
+      ],
+    },
+
+    task: {
+      title: "Задача",
+      paragraphs: [
+        "При капитальном ремонте многоквартирного дома требовалось обеспечить подачу воды в необходимом объёме и с требуемым давлением при расчётных режимах работы системы.",
+        "Для этого применили станцию повышения давления «Акварус». Она предназначена для поддержания давления при недостаточном напоре на входе и при увеличении водоразбора.",
+      ],
+    },
+
+    completedWorks: {
+      title: "Что выполнил Энергоэффект",
+      items: ["Выполнили пусконаладку насосной станции после монтажа силами заказчика."],
+    },
+
+    solutionFeatures: {
+      title: "Особенности решения",
+      items: ["Три насоса на общей раме.", "Шкаф управления с частотными преобразователями и панелью оператора."],
+    },
+
+    gallery: [
+      {
+        image: aquarusRostovCover,
+        alt: "Насосная станция «Акварус» с коллекторами и манометрами",
+        caption: "Насосная группа станции «Акварус»",
+      },
+      {
+        image: aquarusRostov01,
+        alt: "Установленная насосная станция со шкафом управления",
+        caption: "Станция и шкаф управления на объекте",
+      },
+      {
+        image: aquarusRostov02,
+        alt: "Три насоса и гидроаккумулятор",
+        caption: "Компоновка насосной группы",
+      },
+      {
+        image: aquarusRostov03,
+        alt: "Шкаф управления «Энерголайн» с панелью оператора",
+        caption: "Шкаф управления насосами",
+      },
+      {
+        image: aquarusRostov04,
+        alt: "Частотные преобразователи внутри шкафа управления",
+        caption: "Компоненты шкафа управления",
+      },
+      {
+        image: aquarusRostov05,
+        alt: "Схема насосной станции на панели оператора",
+        caption: "Панель оператора",
+      },
+      {
+        image: aquarusRostov06,
+        alt: "Подключённая насосная станция и трубопроводы",
+        caption: "Общий вид подключения на объекте",
+      },
+      {
+        image: aquarusRostov07,
+        alt: "Шкаф управления станции, вид сбоку",
+        caption: "Шкаф управления на объекте",
+      },
+      {
+        image: aquarusRostov08,
+        alt: "Маркировка «Энерголайн» на шкафу управления",
+        caption: "Маркировка шкафа управления",
+      },
+    ],
+
+    relatedProductSlug: "vns",
+    relatedServiceSlugs: ["commissioning"],
+    cta: {
+      title: "Нужна насосная станция для вашего объекта?",
       text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
       buttonText: "Обсудить похожую задачу",
     },
