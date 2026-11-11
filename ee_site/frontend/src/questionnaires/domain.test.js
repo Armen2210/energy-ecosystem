@@ -203,18 +203,18 @@ test("required field progress follows current sections and choices", () => {
     { total: 3, remaining: 2 },
   );
   assert.deepEqual(requiredFieldProgress("vns", {}), { total: 2, remaining: 2 });
-  assert.deepEqual(requiredFieldProgress("bmk", {}), { total: 11, remaining: 11 });
+  assert.deepEqual(requiredFieldProgress("bmk", {}), { total: 12, remaining: 12 });
   assert.deepEqual(
     requiredFieldProgress("bmk", { fuel: { main: "Газ" } }),
-    { total: 12, remaining: 11 },
+    { total: 13, remaining: 12 },
   );
   assert.deepEqual(
     requiredFieldProgress("btp", { selectedSections: ["heating"] }),
-    { total: 13, remaining: 13 },
+    { total: 14, remaining: 13 },
   );
   assert.deepEqual(
     requiredFieldProgress("btp", { heating: { power: "1" } }),
-    { total: 7, remaining: 7 },
+    { total: 8, remaining: 8 },
   );
 });
 
@@ -227,4 +227,44 @@ test("required field progress counts only valid answers and responds to clearing
   vns.answers.technical.head = "";
   assert.deepEqual(requiredFieldProgress("vns", vns.answers), { total: 2, remaining: 2 });
   assert.ok(validateQuestionnaires({ vns })["vns.technical.head"]);
+});
+
+test("BMK progress and validation agree on missing useful loads and partial DHW", () => {
+  const { bmk } = drafts();
+  const { heating, ventilation, dhw_max, dhw_average, losses } = bmk.answers.loads;
+  bmk.answers.loads = { losses };
+  assert.deepEqual(requiredFieldProgress("bmk", bmk.answers), { total: 13, remaining: 1 });
+  assert.deepEqual(Object.keys(validateQuestionnaires({ bmk })), ["bmk.loads.heating"]);
+
+  for (const loads of [{ heating }, { ventilation }, { dhw_max, dhw_average }]) {
+    bmk.answers.loads = loads;
+    assert.equal(requiredFieldProgress("bmk", bmk.answers).remaining, 0);
+    assert.deepEqual(validateQuestionnaires({ bmk }), {});
+  }
+
+  bmk.answers.loads = { dhw_max };
+  assert.deepEqual(requiredFieldProgress("bmk", bmk.answers), { total: 14, remaining: 1 });
+  assert.deepEqual(Object.keys(validateQuestionnaires({ bmk })), ["bmk.loads.dhw_average"]);
+
+  bmk.answers.loads = { heating };
+  bmk.answers.scheme.pipes = "Четырёхтрубная";
+  assert.deepEqual(requiredFieldProgress("bmk", bmk.answers), { total: 13, remaining: 1 });
+  assert.deepEqual(Object.keys(validateQuestionnaires({ bmk })), ["bmk.scheme.pipes"]);
+});
+
+test("BTP progress includes the selection and the selected collector's outlet requirements", () => {
+  const { btp } = drafts();
+  btp.answers.selectedSections = [];
+  assert.deepEqual(requiredFieldProgress("btp", btp.answers), { total: 8, remaining: 1 });
+  assert.deepEqual(Object.keys(validateQuestionnaires({ btp })), ["btp.common.selectedSections"]);
+
+  btp.answers.selectedSections = ["collector_heating"];
+  const [outlet] = btp.answers.collector_heating.outlets;
+  btp.answers.collector_heating.outlets = [{ id: outlet.id }];
+  assert.deepEqual(requiredFieldProgress("btp", btp.answers), { total: 9, remaining: 1 });
+  assert.deepEqual(Object.keys(validateQuestionnaires({ btp })), ["btp.collector_heating.outlets"]);
+
+  btp.answers.collector_heating.outlets = [outlet];
+  assert.deepEqual(requiredFieldProgress("btp", btp.answers), { total: 9, remaining: 0 });
+  assert.deepEqual(validateQuestionnaires({ btp }), {});
 });

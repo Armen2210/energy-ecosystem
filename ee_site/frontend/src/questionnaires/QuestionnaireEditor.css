@@ -649,7 +649,7 @@
 
 .ql-required-count {
   color: var(--color-accent-text);
-  color: color-mix(in oklab, var(--color-accent-text), var(--color-action-bg) var(--ql-required-filled));
+  color: color-mix(in oklab, var(--color-accent-text), #ff8500 var(--ql-required-filled));
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   transition: color 220ms ease;

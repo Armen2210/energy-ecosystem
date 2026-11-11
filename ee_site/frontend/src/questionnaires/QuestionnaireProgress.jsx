@@ -6,7 +6,7 @@ export default function QuestionnaireProgress({ product, answers }) {
 
   return (
     <span role="status">
-      Осталось обязательных полей:{" "}
+      Осталось заполнить:{" "}
       <span
         className="ql-required-count"
         style={{ "--ql-required-filled": `${filledPercent}%` }}
