@@ -11,10 +11,10 @@ import { safePath, pageParams, safeParams } from '../src/analytics/policy.js';
 test('registry has ordered questionnaires, partners and SOUT with all published files', () => {
   const questionnaires = documents.filter(item => item.categoryId === 'questionnaires');
   assert.deepEqual(questionnaires.map(item => item.productSlug), ['bmk', 'btp', 'vns', 'pns']);
-  assert.equal(new Set(documents.map(item => item.id)).size, 21);
+  assert.equal(new Set(documents.map(item => item.id)).size, 20);
   assert.deepEqual(populatedDocumentCategories().map(category => category.id), ['questionnaires', 'product-certificates', 'partner-certificates', 'sout', 'other']);
   assert.equal(documentCategories.length, 7);
-  assert.equal(documentFiles.length, 25);
+  assert.equal(documentFiles.length, 24);
   const root = fileURLToPath(new URL('../public/', import.meta.url));
   const actual = readdirSync(path.join(root, 'documents'), { recursive: true, withFileTypes: true })
     .filter(entry => entry.isFile()).map(entry => path.relative(root, path.join(entry.parentPath, entry.name))).sort();

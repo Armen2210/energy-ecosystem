@@ -377,22 +377,6 @@ export const documents = [
     ]
   },
   {
-    "id": "asta-valves-seismic",
-    "categoryId": "product-certificates",
-    "title": "Сертификат сейсмостойкости трубопроводной арматуры АСТА — 9 баллов",
-    "description": "Изготовитель — ООО «НПО АСТА». Срок действия по 11.04.2027.",
-    "order": 10,
-    "files": [
-      {
-        "format": "pdf",
-        "url": "/documents/certificates/products/asta-valves-seismic.pdf",
-        "sizeBytes": 963390,
-        "behavior": "open",
-        "sha256": "f80a9e154839c7bebb9ead6f3e0b143c100c4e89e38f27270323ca40165afcc1"
-      }
-    ]
-  },
-  {
     "id": "ee-gs1-2026",
     "categoryId": "other",
     "title": "Свидетельство о членстве в Ассоциации «ГС1 РУС»",
