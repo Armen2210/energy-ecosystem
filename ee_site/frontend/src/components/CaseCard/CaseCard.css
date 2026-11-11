@@ -312,13 +312,11 @@
      КОМПАКТНЫЕ ПЛИТКИ
      --------------------------------------------------------- */
 
-  .cases-grid--home > :nth-child(2) .case-card__body,
-  .cases-grid--home > :nth-child(3) .case-card__body {
+  .cases-grid--home > :nth-child(n + 2):nth-child(-n + 5) .case-card__body {
     padding: 42px 14px 14px;
   }
 
-  .cases-grid--home > :nth-child(2) .case-card :is(h2, h3),
-  .cases-grid--home > :nth-child(3) .case-card :is(h2, h3) {
+  .cases-grid--home > :nth-child(n + 2):nth-child(-n + 5) .case-card :is(h2, h3) {
     font-size: 14px;
     line-height: 1.06;
   }

@@ -65,6 +65,11 @@ import aquarusRostov06 from "../assets/cases/vns-aquarus-rostov/06.webp";
 import aquarusRostov07 from "../assets/cases/vns-aquarus-rostov/07.webp";
 import aquarusRostov08 from "../assets/cases/vns-aquarus-rostov/08.webp";
 
+import aquarusIndustrialCover from "../assets/cases/vns-industrial-block-box/cover.webp";
+import aquarusIndustrial01 from "../assets/cases/vns-industrial-block-box/01.webp";
+import aquarusIndustrial02 from "../assets/cases/vns-industrial-block-box/02.webp";
+import aquarusIndustrial03 from "../assets/cases/vns-industrial-block-box/03.webp";
+
 export const cases = [
     {
     // =====================================================
@@ -1311,6 +1316,103 @@ export const cases = [
       buttonText: "Обсудить похожую задачу",
     },
   },
+  {
+    slug: "vns-industrial-block-box",
+    type: "ВНС",
+    title: "Насосная станция «Акварус» для производственного объекта",
+    description:
+      "Станция повышения давления «Акварус» серии NBW в блок-боксе для системы водоснабжения производственного объекта.",
+    previewDescription:
+      "Поставка, монтаж и пусконаладка насосной станции в блок-боксе.",
+    category: "Водопроводные насосные станции",
+    coverImage: aquarusIndustrialCover,
+    coverImageAlt: "Насосная группа, трубопроводы и шкаф управления внутри блок-бокса",
+    url: "/cases/vns-industrial-block-box",
+    isFeatured: false,
+    hasDetailPage: true,
+
+    location: "Ростовская обл.",
+    objectType: "Реконструкция и техническое перевооружение производственного объекта",
+    solutionType: "Насосная станция повышения давления «Акварус» NBW в блок-боксе",
+    suppliedSystems: ["Водоснабжение"],
+
+    seo: {
+      title: "Насосная станция «Акварус» в блок-боксе — кейс Энергоэффект",
+      description:
+        "Насосная станция повышения давления «Акварус» NBW для производственного объекта в Ростовской области. Поставка, монтаж и пусконаладка.",
+    },
+
+    heroTitle: "Насосная станция «Акварус» в блок-боксе для производственного объекта",
+    heroSubtitle:
+      "Станция серии NBW для повышения давления в системе водоснабжения производственного объекта.",
+
+    aiSummary: {
+      label: "Кейс: «Акварус» в блок-боксе",
+      lead:
+        "ООО «Энергоэффект» поставило насосную станцию повышения давления в блок-боксе, выполнило монтаж и пусконаладку.",
+      items: [
+        { label: "Объект", text: "Производственный объект в Ростовской области." },
+        { label: "Назначение", text: "Повышение давления в системе водоснабжения." },
+        { label: "Оборудование", text: "Насосная установка «Акварус» NBW в блок-боксе." },
+      ],
+    },
+
+    task: {
+      title: "Задача",
+      paragraphs: [
+        "При реконструкции производственного объекта требовалось повысить давление в системе водоснабжения.",
+        "Насосную установку «Акварус» серии NBW разместили в блок-боксе вместе с трубопроводной обвязкой и шкафом управления.",
+      ],
+    },
+
+    completedWorks: {
+      title: "Что выполнил Энергоэффект",
+      items: [
+        "Поставили насосную станцию «Акварус» в блок-боксе.",
+        "Выполнили монтаж на объекте.",
+        "Провели пусконаладочные работы.",
+      ],
+    },
+
+    solutionFeatures: {
+      title: "Особенности решения",
+      items: [
+        "Насосная установка повышения давления серии NBW.",
+        "Насосная группа, трубопроводная обвязка и шкаф управления в одном блок-боксе.",
+      ],
+    },
+
+    gallery: [
+      {
+        image: aquarusIndustrialCover,
+        alt: "Насосы, трубопроводная обвязка и шкаф управления в блок-боксе",
+        caption: "Насосная станция и шкаф управления",
+      },
+      {
+        image: aquarusIndustrial01,
+        alt: "Фронтальный вид оборудования внутри модуля",
+        caption: "Компоновка оборудования внутри блок-бокса",
+      },
+      {
+        image: aquarusIndustrial02,
+        alt: "Насосная группа, трубопроводы и проход внутри модуля",
+        caption: "Внутренний вид блок-бокса",
+      },
+      {
+        image: aquarusIndustrial03,
+        alt: "Блок-бокс насосной станции на транспортной платформе",
+        caption: "Блок-бокс на транспортной платформе",
+      },
+    ],
+
+    relatedProductSlug: "vns",
+    relatedServiceSlugs: ["construction-installation", "commissioning"],
+    cta: {
+      title: "Нужна насосная станция для вашего объекта?",
+      text: "Направьте проект, техническое задание или исходные данные для предварительной оценки решения.",
+      buttonText: "Обсудить похожую задачу",
+    },
+  },
 ];
 
 export const featuredCases = cases.filter((caseItem) => caseItem.isFeatured);
@@ -1326,8 +1428,9 @@ const homeDesktopCaseSlugs = [
   "bmk-sports-complex",
   "btp-hotel-complex",
   "btp-residential-complex",
-  "btp-food-production",
-  "btp-industrial-facility",
+  "vns-aquarus-rostov",
+  "vns-industrial-block-box",
+  "btp-block-box-melitopol",
 ];
 
 export const homeDesktopCases = homeDesktopCaseSlugs

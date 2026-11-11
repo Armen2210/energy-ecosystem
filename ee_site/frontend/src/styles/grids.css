@@ -151,7 +151,7 @@
 
   /* =========================================================
      HOME CASES / DESKTOP VISIBILITY
-     На desktop показываем расширенную галерею из 5 кейсов.
+     На desktop показываем галерею из 6 кейсов.
      Tablet/mobile-набор скрываем.
      ========================================================= */
 
@@ -166,16 +166,7 @@
 
   /* =========================================================
      HOME CASES / DESKTOP COMPOSITION
-     Компактная асимметричная фотогалерея.
-
-     Первый ряд:
-     4 + 3 + 3
-
-     Второй ряд:
-     5 + 5
-
-     Такой ритм делает второй ряд отличным от первого,
-     не создавая искусственной иерархии "главный / второстепенный".
+     Зеркальные ряды: 4 + 3 + 3 и 3 + 3 + 4.
      ========================================================= */
 
   .cases-grid--home {
@@ -183,28 +174,12 @@
     gap: 12px;
   }
 
-  /*
-    Первый ряд:
-    4 + 3 + 3.
-  */
-
-  .cases-grid--home > :nth-child(1) {
-    grid-column: span 4;
-  }
-
-  .cases-grid--home > :nth-child(2),
-  .cases-grid--home > :nth-child(3) {
+  .cases-grid--home > * {
     grid-column: span 3;
   }
 
-  /*
-    Второй ряд:
-    две равнозначные карточки 5 + 5.
-  */
-
-  .cases-grid--home > :nth-child(4),
-  .cases-grid--home > :nth-child(5) {
-    grid-column: span 5;
+  .cases-grid--home > :is(:first-child, :nth-child(6)) {
+    grid-column: span 4;
   }
 }
 .catalog-page .section { padding-top: 24px; }
