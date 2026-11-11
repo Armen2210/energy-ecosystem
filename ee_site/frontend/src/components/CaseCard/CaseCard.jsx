@@ -59,6 +59,7 @@ function CaseCard({ caseItem, headingLevel = 3 }) {
   const cardClassName = [
     "case-card",
     caseItem.coverImage ? "case-card--has-image" : "",
+    caseItem.showFullPhoto ? "case-card--full-photo" : "",
     caseItem.hasDetailPage ? "case-card--interactive" : "",
   ]
     .filter(Boolean)

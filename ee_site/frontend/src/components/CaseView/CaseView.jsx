@@ -193,7 +193,9 @@ function CaseView({
       <div className="case-modal__gallery-column">
         {activeImage && (
           <div
-            className="case-modal__gallery"
+            className={caseItem.showFullPhoto
+              ? "case-modal__gallery case-modal__gallery--full-photo"
+              : "case-modal__gallery"}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
