@@ -64,6 +64,7 @@ import aquarusRostov05 from "../assets/cases/vns-aquarus-rostov/05.webp";
 import aquarusRostov06 from "../assets/cases/vns-aquarus-rostov/06.webp";
 import aquarusRostov07 from "../assets/cases/vns-aquarus-rostov/07.webp";
 import aquarusRostov08 from "../assets/cases/vns-aquarus-rostov/08.webp";
+import aquarusRostov09 from "../assets/cases/vns-aquarus-rostov/09.webp";
 
 import aquarusIndustrialCover from "../assets/cases/vns-industrial-block-box/cover.webp";
 import aquarusIndustrial01 from "../assets/cases/vns-industrial-block-box/01.webp";
@@ -1214,7 +1215,6 @@ export const cases = [
     coverImage: aquarusRostovCover,
     coverImageAlt: "Три насоса станции «Акварус» на общей раме",
     coverPosition: "center 70%",
-    showFullPhoto: true,
     url: "/cases/vns-aquarus-rostov",
     isFeatured: false,
     hasDetailPage: true,
@@ -1268,6 +1268,11 @@ export const cases = [
         image: aquarusRostovCover,
         alt: "Насосная станция «Акварус» с коллекторами и манометрами",
         caption: "Насосная группа станции «Акварус»",
+      },
+      {
+        image: aquarusRostov09,
+        alt: "Насосная станция на раме, гидроаккумулятор и шкаф управления",
+        caption: "Общий вид насосной станции на объекте",
       },
       {
         image: aquarusRostov01,
@@ -1331,7 +1336,6 @@ export const cases = [
     coverImage: aquarusIndustrialCover,
     coverImageAlt: "Насосная группа, трубопроводы и шкаф управления внутри блок-бокса",
     coverPosition: "44% center",
-    showFullPhoto: true,
     url: "/cases/vns-industrial-block-box",
     isFeatured: false,
     hasDetailPage: true,
