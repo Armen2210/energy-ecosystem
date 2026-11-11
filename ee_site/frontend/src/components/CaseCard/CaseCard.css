@@ -34,7 +34,7 @@
   transition: transform 0.35s ease;
 }
 
-.case-card--interactive:not(.case-card--full-photo):hover .case-card__media img {
+.case-card--interactive:not(.case-card--fixed-cover):hover .case-card__media img {
   transform: scale(1.035);
 }
 
@@ -49,12 +49,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: var(--case-card-photo-fit, cover);
+  object-fit: cover;
   object-position: center;
-}
-
-.case-card--full-photo {
-  --case-card-photo-fit: contain;
 }
 
 .case-card__body {
@@ -304,32 +300,13 @@
      КОМПАКТНЫЕ ПЛИТКИ
      --------------------------------------------------------- */
 
-  .cases-grid--home > :nth-child(n + 2):nth-child(-n + 5) .case-card:not(.case-card--full-photo) .case-card__body {
+  .cases-grid--home > :nth-child(n + 2):nth-child(-n + 5) .case-card__body {
     padding: 42px 14px 14px;
   }
 
   .cases-grid--home > :nth-child(n + 2):nth-child(-n + 5) .case-card :is(h2, h3) {
     font-size: 14px;
     line-height: 1.06;
-  }
-
-  .cases-grid--home .case-card--full-photo {
-    display: flex;
-  }
-
-  .cases-grid--home .case-card--full-photo .case-card__media {
-    flex: 1;
-    height: auto;
-    min-height: 0;
-    background: inherit;
-  }
-
-  .cases-grid--home .case-card--full-photo .case-card__body {
-    position: static;
-    flex: 0 0 auto;
-    min-height: 0;
-    padding: 12px 14px 14px;
-    background: none;
   }
 
   /* ---------------------------------------------------------
@@ -341,7 +318,7 @@
     box-shadow: 0 22px 48px rgba(17, 17, 17, 0.16);
   }
 
-  .cases-grid--home .case-card--interactive:not(.case-card--full-photo):hover .case-card__media img {
+  .cases-grid--home .case-card--interactive:not(.case-card--fixed-cover):hover .case-card__media img {
     transform: scale(1.025);
   }
 }

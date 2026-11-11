@@ -59,7 +59,7 @@ function CaseCard({ caseItem, headingLevel = 3 }) {
   const cardClassName = [
     "case-card",
     caseItem.coverImage ? "case-card--has-image" : "",
-    caseItem.showFullPhoto ? "case-card--full-photo" : "",
+    caseItem.coverPosition ? "case-card--fixed-cover" : "",
     caseItem.hasDetailPage ? "case-card--interactive" : "",
   ]
     .filter(Boolean)
@@ -72,6 +72,7 @@ function CaseCard({ caseItem, headingLevel = 3 }) {
           <img
             src={caseItem.coverImage}
             alt={caseItem.coverImageAlt || caseItem.title}
+            style={caseItem.coverPosition ? { objectPosition: caseItem.coverPosition } : undefined}
             loading="lazy"
           />
         </div>
